@@ -280,21 +280,21 @@ class Migration_inicio extends CI_Migration {
         public function down()
         {
         	$this->db->query("SET FOREIGN_KEY_CHECKS=0");
-	        $this->db->query("DROP TABLE login");
-	        $this->db->query("DROP TABLE alumno");
-	        $this->db->query("DROP TABLE empresa");
-	        $this->db->query("DROP TABLE profesor");
-	        $this->db->query("DROP TABLE nivel");
-	        $this->db->query("DROP TABLE idioma");
-	        $this->db->query("DROP TABLE curso");
-	        $this->db->query("DROP TABLE alumno_curso");
-			$this->db->query("DROP TABLE familia_laboral");
-			$this->db->query("DROP TABLE oferta");
-			$this->db->query("DROP TABLE etiqueta");
-			$this->db->query("DROP TABLE etiqueta_oferta");
-			$this->db->query("DROP TABLE oferta_alumno");
-	        $this->db->query("DROP TABLE experiencia");
-	        $this->db->query("DROP TABLE reporte");
+	        $this->db->query("DROP TABLE IF EXISTS login");
+	        $this->db->query("DROP TABLE IF EXISTS alumno");
+	        $this->db->query("DROP TABLE IF EXISTS empresa");
+	        $this->db->query("DROP TABLE IF EXISTS profesor");
+	        $this->db->query("DROP TABLE IF EXISTS nivel");
+	        $this->db->query("DROP TABLE IF EXISTS idioma");
+	        $this->db->query("DROP TABLE IF EXISTS curso");
+	        $this->db->query("DROP TABLE IF EXISTS alumno_curso");
+			$this->db->query("DROP TABLE IF EXISTS familia_laboral");
+			$this->db->query("DROP TABLE IF EXISTS oferta");
+			$this->db->query("DROP TABLE IF EXISTS etiqueta");
+			$this->db->query("DROP TABLE IF EXISTS etiqueta_oferta");
+			$this->db->query("DROP TABLE IF EXISTS oferta_alumno");
+	        $this->db->query("DROP TABLE IF EXISTS experiencia");
+	        $this->db->query("DROP TABLE IF EXISTS reporte");
 	        $this->db->query("SET FOREIGN_KEY_CHECKS=1");
         }
 }
