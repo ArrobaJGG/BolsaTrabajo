@@ -42,4 +42,5 @@ Año Inicio: <input type="number" name="ano_inicio" value="" min="1960" max="201
 Año Fin: <input type="number" name="ano_fin" value="" min="1980" max="2017"></br>
 Expiriencia: <textarea name="Expiriencia" placeholder="experiencia..."></textarea></br>
 Foto: <input type="file" name="" value=""></br>
+<input type="submit" value="Enviar"/>
 </form>	
