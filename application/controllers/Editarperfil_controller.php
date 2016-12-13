@@ -9,7 +9,8 @@ $this->load->helper('url_helper');
 }
 		
 public function index(){
-	$this->load->view("includes/header");
+	$data['titulo'] = "Editar Perfil";
+	$this->load->view("includes/header", $data);
 	$this->load->view("EditarPerfil_view");
 	$this->load->view("includes/footer");
 	
