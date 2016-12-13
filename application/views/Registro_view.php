@@ -4,9 +4,9 @@ $this->load->helper('form');
 
 	
 	<?php 
-	echo form_open('registro_controller');
+	echo form_open('Registro_controller');
 	?>
-		<table title="registro">
+		<table title="Registro">
 			<tr>
 				<td>Usuario: </td>
 				<td><input type="text" name="usuario" /></td>
