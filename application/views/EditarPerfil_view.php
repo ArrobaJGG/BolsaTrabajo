@@ -1,5 +1,12 @@
+<?php 
+$this->load->helper('form');
+ ?>
 
-<body>
+	
+	<?php 
+	echo form_open('EditarPerfil_controller');
+	?>
+
 Nombre: <input type="text" name="nombre" value="">
 Apellido: <input type="text" name="apellido" value="">
 Telefono: <input type="text" name="telefono" value="">
@@ -35,6 +42,4 @@ Año Inicio: <input type="number" name="ano_inicio" value="" min="1960" max="201
 Año Fin: <input type="number" name="ano_fin" value="" min="1980" max="2017">
 Expiriencia: <textarea name="Expiriencia"></textarea>
 Foto: <input type="file" name="" value="">
-	
-</body>
-</html>
+</form>	
