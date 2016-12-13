@@ -9,7 +9,7 @@ public function __construct(){
 }
 //	
 public function index(){
-	$data["titulo"]="login";
+	$data["titulo"]="Login";
 	$this->load->view("includes/header",$data);
 	$this->load->view("login_view");
 	$this->load->view("includes/footer");
