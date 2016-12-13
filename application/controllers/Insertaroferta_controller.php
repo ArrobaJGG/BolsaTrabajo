@@ -1,5 +1,5 @@
 <?php
-class Editarempresa_controller extends CI_Controller{
+class Insertaroferta_controller extends CI_Controller{
 	
 public function __construct(){
 parent::__construct();
@@ -9,9 +9,9 @@ $this->load->helper('url_helper');
 }
 		
 public function index(){
-	$data['titulo'] = "Editar Empresa";
-	$this->load->view("includes/header", $data);
-	$this->load->view("Editarempresa_view");
+	$data['titulo'] = "Insertar Oferta";
+	$this->load->view("includes/header",$data);
+	$this->load->view("Insertaroferta_view");
 	$this->load->view("includes/footer");
 	
 }

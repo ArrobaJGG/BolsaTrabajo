@@ -9,7 +9,8 @@ public function __construct(){
 }
 	
 public function index(){
-	$this->load->view("includes/header");
+	$data['titulo'] = "Registrarse";
+	$this->load->view("includes/header", $data);
 	$this->load->view("registro_view");
 	$this->load->view("includes/footer");
 }

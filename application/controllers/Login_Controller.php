@@ -9,10 +9,10 @@ public function __construct(){
 }
 //	
 public function index(){
-	$this->load->view("includes/header");
+	$data["titulo"]="Login";
+	$this->load->view("includes/header",$data);
 	$this->load->view("login_view");
 	$this->load->view("includes/footer");
-	$this->load->view("Editarempresa_view");
 }
 }
 ?>
