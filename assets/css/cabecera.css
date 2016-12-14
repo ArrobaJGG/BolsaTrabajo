@@ -1,0 +1,21 @@
+*{
+	border:0;
+	padding: 0;
+}
+header{
+	display: flex;
+}
+#logo{
+	background-image: url(../imgs/Logo_cabecera.png);
+	min-width: 358px;
+	height: 126px;
+}
+#eslogan{
+	background-image: url(../imgs/eslogan.png);
+	background-position: -400px 40px;
+	width: 500px;
+	height: 153px;
+}
+#idiomas a{
+	text-decoration: none;
+}
