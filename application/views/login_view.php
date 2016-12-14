@@ -4,7 +4,7 @@ $this->load->helper('form');
 
 	
 	<?php 
-	echo form_open('login_controller');
+	echo form_open('Login_controller');
 	?>
 		<table title="login">
 			<tr>

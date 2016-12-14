@@ -1,5 +1,5 @@
 <?php
-class registro_controller extends CI_Controller{
+class Registro_controller extends CI_Controller{
 	
 public function __construct(){
     parent::__construct();
@@ -9,7 +9,8 @@ public function __construct(){
 }
 	
 public function index(){
-	$this->load->view("includes/header");
+	$data['titulo'] = "Registrarse";
+	$this->load->view("includes/header", $data);
 	$this->load->view("registro_view");
 	$this->load->view("includes/footer");
 }

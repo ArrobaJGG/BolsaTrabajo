@@ -1,5 +1,5 @@
 <?php
-class EditarPerfil_controller extends CI_Controller{
+class Editarempresa_controller extends CI_Controller{
 	
 public function __construct(){
 parent::__construct();
@@ -9,8 +9,9 @@ $this->load->helper('url_helper');
 }
 		
 public function index(){
-	$this->load->view("includes/header");
-	$this->load->view("EditarPerfil_view");
+	$data['titulo'] = "Editar Empresa";
+	$this->load->view("includes/header", $data);
+	$this->load->view("Editarempresa_view");
 	$this->load->view("includes/footer");
 	
 }
