@@ -12,7 +12,7 @@ $this->load->helper('url_helper');
 public function index(){
 	$data['titulo'] = "Editar Empresa";
 	$this->load->view("includes/header", $data);
-	$this->load->view("Editarempresa_view");
+	//$this->load->view("Editarempresa_view");
 	$this->load->view("includes/footer");
 	
 	$this->load->library('form_validation');
