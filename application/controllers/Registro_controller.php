@@ -17,18 +17,24 @@ class Registro_controller extends CI_Controller{
 			$this->form_validation->set_rules('contrasena','Contraseña','required');
 			$this->form_validation->set_rules('rol','Rol','required');
 			if($this->form_validation->run()!=false){
-				$datos = array(
-				'correo' => $this->input->post('usuario'),
-				'rol' => $this->input->post('rol'),
-				'contrasena' => password_hash($this->input->post('contrasena'), PASSWORD_DEFAULT),
-				'ultimo_login' => date("Y/m/d")
-				);
-				if($this->login_model->crear_usuario($datos)){
-					echo "todo guay";
+				if(!$this->login_model->get_correo($this->input->post('usuario'))){
+					$datos = array(
+					'correo' => $this->input->post('usuario'),
+					'rol' => $this->input->post('rol'),
+					'contrasena' => password_hash($this->input->post('contrasena'), PASSWORD_DEFAULT),
+					'ultimo_login' => date("Y/m/d")
+					);
+					if($this->login_model->crear_usuario($datos)){
+						echo "todo guay";
+					}
+					else{
+						echo "todo no guay";
+					}
 				}
 				else{
-					echo "todo no guay";
+					echo "Correo repetido";
 				}
+				
 			}
 			
 		}

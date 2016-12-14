@@ -27,6 +27,13 @@ class Login_model extends CI_Model{
 		return $devolver;
 		
 	}
+	public function get_correo($correo){
+		$sql = "SELECT correo FROM login WHERE correo='$correo'";
+		$query = $this->db->query($sql);
+		$row = $query->row();
+		$devolver = isset($row) ? $row->correo : false;
+		return $devolver;
+	}
 	public function actualizar_ultimo_login($correo,$fecha){
 		$sql = "UPDATE login SET ultimo_login = '$fecha' where id_login='$correo'";
 		return $this->db->query($sql);
