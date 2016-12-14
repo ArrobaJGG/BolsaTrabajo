@@ -28,8 +28,8 @@ $this->load->helper('form');
 				<td><input type="text" name="ncontacto" /></td>
 			</tr>
 			<tr>
-				<td>logo:</td>
-				<td><<input type="file" name="" value="" /></td>
+				<td>Logo:</td>
+				<td><input type="file" name="" value="" /></td>
 			</tr>
 
 			

@@ -26,5 +26,6 @@ $this->load->helper('form');
 		</table>
 		<input type="submit" name="Enviar" value="Enviar" />
 		<button type="reset" name="Cancelar" value="Cancelar"/>Cancelar</button>
+	
 		<!--<button type="cancel" onclick="javascript:window.location='http://stackoverflow.com';">Cancel</button>-->
 	</form>
