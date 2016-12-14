@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>login</title>
+	<title><?php echo $titulo; ?></title>
 	<link rel="stylesheet" href="<?php echo base_url('assets/css/cabecera.css')?>">
 	<title><?php echo $titulo; ?></title>
 	<link rel="stylesheet" href="">
