@@ -3,7 +3,8 @@ $this->load->helper('form');
  ?>
 
 	
-	<?php 
+	<?php
+	echo validation_errors(); 
 	echo form_open('Registro_controller');
 	?>
 		<table title="Registro">
@@ -13,15 +14,15 @@ $this->load->helper('form');
 			</tr>
 			<tr>
 				<td>Contraseña</td>
-				<td><input type="password" name="password" /></td>
+				<td><input type="password" name="contrasena" /></td>
 			</tr>
 			<tr>
 				<td>Confirmar</td>
-				<td><input type="password" name="rpassword" /></td>
+				<td><input type="password" name="rcontrasena" /></td>
 			</tr>
 			<tr>
-				<td>Alumno<input type="checkbox" name="Alumno" /></td>
-				<td>Empresa<input type="checkbox" name="Alumno" /></td>
+				<td>Alumno<input type="radio" name="rol" value="alumno" /></td>
+				<td>Empresa<input type="radio" name="rol" value="empresa" /></td>
 			</tr>
 		</table>
 		<input type="submit" name="Enviar" value="Enviar" />
