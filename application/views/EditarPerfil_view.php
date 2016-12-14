@@ -10,9 +10,9 @@ $this->load->helper('form');
 Nombre: <input type="text" name="nombre" value="" placeholder="nombre"></br>
 Apellido: <input type="text" name="apellido" value="" placeholder="apellido"></br>
 Telefono: <input type="text" name="telefono" value="" placeholder="telefono"></br>
-DNI: <input type="text" name="" value="" placeholder="dni"></br>
-Fecha Nacimiento: <input type="date" name="" value="" placeholder="fecha nacimiento"></br>
-Codigo Postal: <input type="text" name="" value="" placeholder="38587"></br>
+DNI: <input type="text" name="DNI" value="" placeholder="dni"></br>
+Fecha Nacimiento: <input type="date" name="fecha" value="" placeholder="fecha nacimiento"></br>
+Codigo Postal: <input type="text" name="codigopostal" value="" placeholder="38587"></br>
 Descripcion: <textarea name="Descripcion" placeholder="introduce aqui..."></textarea></br>
 Familia: <select name="familia">
              	<option value=informatica>Informatica</option>
