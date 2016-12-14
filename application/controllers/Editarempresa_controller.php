@@ -23,7 +23,7 @@ public function index(){
 				$this->form_validation->set_rules('Contacto', 'Contacto');
 				$this->form_validation->set_rules('Archivo', 'Archivo');
 
-                if ($this->form_validation->run() == FALSE){
+                if ($this->form_validation->run() == TRUE){
                        $nombre = $this->input->post('Nombre');
 					   $cif = $this->input->post('Cif');
 					   $telefono = $this->input->post('Telefono');
@@ -31,13 +31,13 @@ public function index(){
 					   $contacto = $this->input->post('Contacto');
 					   $archivo = $this->input->post('Archivo');
 					   
-					   $this->load->model('editarempresa_model');
-					   $this->editarempresa_model->actualizar($nombre,$cif,$telefono,$telefono2,$contacto,$archivo);
+					   $this->load->model('Login_model');
+					   $this->Login_model->update($nombre,$cif,$telefono,$telefono2,$contacto,$archivo);
 					   
                 }
                 else{
 					
-                      $this->load->view('formsuccess');
+                      $this->load->view('Editarempresa_view');
                 }
 }
 }
