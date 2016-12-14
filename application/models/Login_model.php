@@ -13,12 +13,12 @@ class Login_model extends CI_Model{
 		return $this->db->query($sql);
 	}	
 	public function get_contrasena($correo){
-		$slq = "SELECT contrasena FROM login WHERE correo='$correo'";
+		$sql = "SELECT contrasena FROM login WHERE correo='$correo'";
 		$query = $this->db->query($sql);
 		return $query->row();
 	}
 	public function get_rol($correo){
-		$slq = "SELECT rol FROM login WHERE correo='$correo'";
+		$sql = "SELECT rol FROM login WHERE correo='$correo'";
 		$query = $this->db->query($sql);
 		return $query->row();
 		

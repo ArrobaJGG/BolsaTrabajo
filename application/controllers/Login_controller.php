@@ -8,6 +8,7 @@ public function __construct(){
 	//para poder ir de un controlador a otro facilmente
     $this->load->helper(array('form','url'));
 	$this->load->library('form_validation');
+	$this->load->library('session');
 }
 //	
 public function index(){
