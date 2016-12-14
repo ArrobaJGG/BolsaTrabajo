@@ -16,6 +16,10 @@ class Login_model extends CI_Model{
 		$slq = "SELECT contrasena FROM login WHERE correo='$correo'";
 		return $this->db->query($sql);
 	}
+	public function actualizar_ultimo_login($id_login,$fecha){
+		$sql = "UPDATE login SET ultimo_login = '$fecha' where id_login='$id_login'";
+		return $this->db->query($sql);
+	}
 }
 
 
