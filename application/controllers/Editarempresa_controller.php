@@ -31,7 +31,7 @@ public function index(){
 					   $contacto = $this->input->post('Contacto');
 					   $archivo = $this->input->post('Archivo');
 					   
-					   $this->load->model('Login_model');
+					   $this->load->model('Login_model/actualizarempresa');
 					   $this->Login_model->update($nombre,$cif,$telefono,$telefono2,$contacto,$archivo);
 					   
                 }
