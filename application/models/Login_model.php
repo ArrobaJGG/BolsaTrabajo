@@ -15,13 +15,16 @@ class Login_model extends CI_Model{
 	public function get_contrasena($correo){
 		$sql = "SELECT contrasena FROM login WHERE correo='$correo'";
 		$query = $this->db->query($sql);
-		return $query->row();
+		$row = $query->row();
+		$devolver = isset($row) ? $row->contrasena : false;
+		return $devolver;
 	}
 	public function get_rol($correo){
 		$sql = "SELECT rol FROM login WHERE correo='$correo'";
 		$query = $this->db->query($sql);
-		return $query->row();
-		echo "hola";
+		$row = $query->row();
+		$devolver = isset($row) ? $row->rol : false;
+		return $devolver;
 		
 	}
 	public function actualizar_ultimo_login($correo,$fecha){
