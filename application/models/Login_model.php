@@ -21,6 +21,7 @@ class Login_model extends CI_Model{
 		$sql = "SELECT rol FROM login WHERE correo='$correo'";
 		$query = $this->db->query($sql);
 		return $query->row();
+		echo "hola";
 		
 	}
 	public function actualizar_ultimo_login($correo,$fecha){
