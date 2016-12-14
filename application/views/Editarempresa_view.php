@@ -17,19 +17,19 @@ $this->load->helper('form');
 			</tr>
 			<tr>
 				<td>Telefono:</td>
-				<td><input type="number" name="telefono" /></td>
+				<td><input type="number" name="Telefono" /></td>
 			</tr>
 			<tr>
 				<td>telefono2:</td>
-				<td><input type="number" name="telefono2" /></td>
+				<td><input type="number" name="Telefono2" /></td>
 			</tr>
 			<tr>
 				<td>Nombre contacto:</td>
-				<td><input type="text" name="ncontacto" /></td>
+				<td><input type="text" name="Contacto" /></td>
 			</tr>
 			<tr>
-				<td>logo:</td>
-				<td><<input type="file" name="" value="" /></td>
+				<td>Logo:</td>
+				<td><input type="file" name="Archivo" value="" /></td>
 			</tr>
 
 			

@@ -10,8 +10,10 @@
 
 </head>
 <body>
+	<h1> <?php echo $titulo; ?></h1>
 	<header id="header" class="">
 		<div id="logo"></div>
 		<div id="eslogan"></div>
 		<div id="idiomas"><a href="#">ES</a>|<a href="#">EU</a></div>
-	</header><!-- /header -->
+	</header>
+

@@ -10,8 +10,13 @@ $this->load->helper('form');
 Nombre: <input type="text" name="nombre" value="" placeholder="nombre"></br>
 Apellido: <input type="text" name="apellido" value="" placeholder="apellido"></br>
 Telefono: <input type="text" name="telefono" value="" placeholder="telefono"></br>
+<<<<<<< HEAD
 DNI: <input type="text" name="DNI" value="" placeholder="dni"></br>
 Fecha Nacimiento: <input type="date" name="fecha" value="" placeholder="fecha nacimiento"></br>
+=======
+DNI: <input type="text" name="dni" value="" placeholder="dni"></br>
+Fecha Nacimiento: <input type="date" name="fechan" value="" placeholder="fecha nacimiento"></br>
+>>>>>>> a5e7776ce8b8d497f9dff4a1ec6ad058de555d9e
 Codigo Postal: <input type="text" name="codigopostal" value="" placeholder="38587"></br>
 Descripcion: <textarea name="Descripcion" placeholder="introduce aqui..."></textarea></br>
 Familia: <select name="familia">
@@ -41,6 +46,6 @@ Curso: <select name="Curso">
 Año Inicio: <input type="number" name="ano_inicio" value="" min="1960" max="2016"></br>
 Año Fin: <input type="number" name="ano_fin" value="" min="1980" max="2017"></br>
 Expiriencia: <textarea name="Expiriencia" placeholder="experiencia..."></textarea></br>
-Foto: <input type="file" name="" value=""></br>
+Foto: <input type="file" name="foto" value=""></br>
 <input type="submit" value="Enviar"/>
 </form>	

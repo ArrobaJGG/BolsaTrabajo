@@ -28,9 +28,13 @@ public function index(){
              }else{
                 $datos["mensaje"]="Validación correcta";
 				//verificar contraseña con la contraseña del has code, el conector final es debido a que en el model es un array y tiene que coger solamente la contraseña
+
               if (password_verify ( $this->input->post("contrasena") , $this->login_model->get_contrasena($this->input->post("usuario"))->contrasena)){
+
+             if (password_verify ( $this->input->post("contrasena") , $this->login_model->get_contrasena($this->input->post("usuario")))){
+
              	$correo=$this->input->post('usuario');
-				$rol=$this->login_model->get_rol($this->input->post("usuario"))->rol;
+				$rol=$this->login_model->get_rol($this->input->post("usuario"));
 				$usuario_data=array("correo"=>$correo,"rol"=>$rol);
 				$this->session->set_userdata($usuario_data);
 				switch ($rol){

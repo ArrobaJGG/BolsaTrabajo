@@ -18,7 +18,7 @@ $this->load->helper('form');
 			</tr>
 			<tr>
 				<td>Confirmar</td>
-				<td><input type="password" name="rcontrasena" /></td>
+				<td><input type="password" name="contrasenaC" /></td>
 			</tr>
 			<tr>
 				<td>Alumno<input type="radio" name="rol" value="alumno" /></td>
@@ -27,5 +27,6 @@ $this->load->helper('form');
 		</table>
 		<input type="submit" name="Enviar" value="Enviar" />
 		<button type="reset" name="Cancelar" value="Cancelar"/>Cancelar</button>
+	
 		<!--<button type="cancel" onclick="javascript:window.location='http://stackoverflow.com';">Cancel</button>-->
 	</form>
