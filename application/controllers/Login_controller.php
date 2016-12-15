@@ -9,6 +9,7 @@ public function __construct(){
     $this->load->helper(array('form','url'));
 	$this->load->library('form_validation');
 	$this->load->library('session');
+	//gorkalanderguapo
 }
 //	
 public function index(){
