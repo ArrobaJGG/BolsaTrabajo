@@ -15,12 +15,11 @@ class Registro_controller extends CI_Controller{
 		if($this->input->post('Enviar')){
 			$this->form_validation->set_rules('usuario','Usuario','required|valid_email|trim');
 			$this->form_validation->set_rules('contrasena','Contraseña','required');
-			$this->form_validation->set_rules('rol','Rol','required');
 			if($this->form_validation->run()!=false){
 				if(!$this->login_model->get_correo($this->input->post('usuario'))){
 					$datos = array(
 					'correo' => $this->input->post('usuario'),
-					'rol' => $this->input->post('rol'),
+					'rol' => 'empresa',
 					'contrasena' => password_hash($this->input->post('contrasena'), PASSWORD_DEFAULT),
 					'ultimo_login' => date("Y/m/d")
 					);
