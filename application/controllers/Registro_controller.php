@@ -9,7 +9,7 @@ class Registro_controller extends CI_Controller{
 	}
 		
 	public function index(){
-		
+		//Gorka es gayyy mutyyyyy gayyyy gayy ygayyyyag ayyyyyygggggggggayyyyy
 		$this->load->helper('form');
 		$this->load->library('form_validation');
 		if($this->input->post('Enviar')){
