@@ -5,8 +5,8 @@ $this->load->helper('form');
 	
 	<?php
 	echo validation_errors(); 
-	echo form_open('Registro_controller');
 	?>
+	<form ng-submit="validar($event)"ng-controller = "formulario" action="./Registro_controller" method="post" accept-charset="utf-8">
 		<table id="registro" title="Registro">
 			<tr>
 				<td>Usuario: </td>
@@ -14,11 +14,11 @@ $this->load->helper('form');
 			</tr>
 			<tr>
 				<td>Contraseña</td>
-				<td><input class = "confirmar" ng-model="usuario.contraseña1" type="password" name="contrasena" /></td>
+				<td><input class = "confirmar" ng-model="usuario.contrasena1" type="password" name="contrasena" /></td>
 			</tr>
 			<tr>
 				<td>Confirmar</td>
-				<td><input class="confirmar" ng-model="usuario.contraseña2" type="password" name="contrasenaC" /></td>
+				<td><input class="confirmar" ng-model="usuario.contrasena2" type="password" name="contrasenaC" /></td>
 			</tr>
 		</table>
 		<input type="submit" id="Enviar" name="Enviar" value="Enviar" />

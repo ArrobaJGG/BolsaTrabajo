@@ -1,17 +1,12 @@
-//alert("holla!!");
-$(function(){
-	$('#Enviar').click(function(event){
-		var contrasenas = $('.confirmar');
-		if(contrasenas[0].value!=contrasenas[1].value){
-			event.preventDefault();	
+var app = angular.module("my-app",[]);
+app.controller("formulario",['$scope',function($scope){
+	$scope.validar = function($event){
+		var contrasena1 = $scope.usuario.contrasena1;
+		var contrasena2 = $scope.usuario.contrasena2;
+		alert("hooolalaaa");
+		if(contrasena1!=contrasena2){
+			$event.preventDefault();
+			alert("adios");
 		}
-		if(!validateEmail($('#usuario').val())){
-			$('#registro').prepend("<p>correo invalido</p>");
-			event.preventDefault();
-		}
-	});
-});
- function validateEmail($email) {
-  var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
-  return emailReg.test( $email );
-}
+	} ;
+}]);
