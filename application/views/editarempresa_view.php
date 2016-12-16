@@ -4,7 +4,7 @@ $this->load->helper('form');
 
 	
 	<?php 
-	echo form_open('Editarempresa_controller');
+	echo form_open('editarempresa_controller');
 	?>
 		<table title="registro">
 			<tr>
@@ -30,12 +30,11 @@ $this->load->helper('form');
 			<tr>
 				<td>Logo:</td>
 				<td><input type="file" name="Archivo" value="" /></td>
-			</tr>
-
-			
-			
+			</tr>			
 		</table>
-		<input type="submit" name="Actualizar" value="Actulizar" />
-		<button type="reset" name="Cancelar" value="Cancelar"/>Cancelar</button>
+		<input type="submit" name="Actualizar" value="Actualizar" />
+		<input type="reset" name="Cancelar" value="Cancelar"/>
+		<?php if (isset($mensaje)) echo $mensaje ?>
+		<?php echo validation_errors(); ?>
 		<!--<button type="cancel" onclick="javascript:window.location='http://stackoverflow.com';">Cancel</button>-->
 	</form>
