@@ -16,14 +16,14 @@ class Migration_inicio extends CI_Migration {
 			  `ultimo_login` DATE NOT NULL,
 			  PRIMARY KEY (`id_login`),
 			  UNIQUE INDEX `correo_UNIQUE` (`correo` ASC))
-			ENGINE = InnoDB;");
+			ENGINE = InnoDB");
 		
 		$this->db->query("
 			CREATE TABLE IF NOT EXISTS `bolsa_trabajo`.`alumno` (
 			  `id_login` INT NOT NULL,
-			  `dni` VARCHAR(9) NOT NULL,
-			  `nombre` VARCHAR(20) NOT NULL,
-			  `apellidos` VARCHAR(20) NOT NULL,
+			  `dni` VARCHAR(9) NULL,
+			  `nombre` VARCHAR(20) NULL,
+			  `apellidos` VARCHAR(20) NULL,
 			  `telefono1` VARCHAR(14) NULL,
 			  `telefono2` VARCHAR(14) NULL,
 			  `estado` TINYINT(1) NOT NULL,
@@ -33,7 +33,6 @@ class Migration_inicio extends CI_Migration {
 			  `perfil_oculto` TEXT NULL,
 			  `experiencia` TEXT NULL,
 			  PRIMARY KEY (`id_login`),
-			  UNIQUE INDEX `dni_UNIQUE` (`dni` ASC),
 			  CONSTRAINT `id_login_alumno`
 			    FOREIGN KEY (`id_login`)
 			    REFERENCES `bolsa_trabajo`.`login` (`id_login`)
@@ -49,6 +48,7 @@ class Migration_inicio extends CI_Migration {
 			  `telefono2` VARCHAR(14) NULL,
 			  `persona_contacto` VARCHAR(20) NULL,
 			  `nombre` VARCHAR(45) NULL,
+			  `estado` TINYINT(1) NOT NULL,
 			  PRIMARY KEY (`id_login`),
 			  CONSTRAINT `id_login_empresa`
 			    FOREIGN KEY (`id_login`)
@@ -71,7 +71,7 @@ class Migration_inicio extends CI_Migration {
 			  `apellidos` VARCHAR(20) NOT NULL,
 			  `id_familia_laboral` INT NOT NULL,
 			  `activo` TINYINT(1) NOT NULL,
-			  PRIMARY KEY (`id_login`, `id_familia_laboral`),
+			  PRIMARY KEY (`id_login`),
 			  INDEX `id_familia_laboral_idx` (`id_familia_laboral` ASC),
 			  CONSTRAINT `id_login_profesor`
 			    FOREIGN KEY (`id_login`)
@@ -164,7 +164,7 @@ class Migration_inicio extends CI_Migration {
 		$this->db->query("
 			CREATE TABLE IF NOT EXISTS `bolsa_trabajo`.`oferta` (
 			  `id_oferta` INT NOT NULL AUTO_INCREMENT,
-			  `id_login` INT NOT NULL,
+			  `id_login` INT NULL,
 			  `id_familia` INT NOT NULL,
 			  `nombre_empresa` VARCHAR(45) NOT NULL,
 			  `fecha_creacion` DATE NOT NULL,
@@ -177,7 +177,10 @@ class Migration_inicio extends CI_Migration {
 			  `requisitos` TEXT NULL,
 			  `horario` VARCHAR(45) NULL,
 			  `titulo` VARCHAR(45) NULL,
-			  PRIMARY KEY (`id_oferta`, `id_login`, `id_familia`),
+			  `correo` VARCHAR(45) NULL,
+			  `telefono` VARCHAR(45) NULL,
+			  `oculto` TINYINT(1) NOT NULL,
+			  PRIMARY KEY (`id_oferta`, `id_familia`),
 			  INDEX `id_login_idx` (`id_login` ASC),
 			  INDEX `id_familia_idx` (`id_familia` ASC),
 			  CONSTRAINT `id_login_oferta`
@@ -196,7 +199,14 @@ class Migration_inicio extends CI_Migration {
 			CREATE TABLE IF NOT EXISTS `bolsa_trabajo`.`etiqueta` (
 			  `id_etiqueta` INT NOT NULL AUTO_INCREMENT,
 			  `nombre` VARCHAR(45) NOT NULL,
-			  PRIMARY KEY (`id_etiqueta`))
+			  `id_famila_laboral` INT NOT NULL,
+			  PRIMARY KEY (`id_etiqueta`, `id_famila_laboral`),
+			  INDEX `id_familia_laboral_fk_idx` (`id_famila_laboral` ASC),
+			  CONSTRAINT `id_familia_laboral_fk`
+			    FOREIGN KEY (`id_famila_laboral`)
+			    REFERENCES `bolsa_trabajo`.`familia_laboral` (`id_familia_laboral`)
+			    ON DELETE NO ACTION
+			    ON UPDATE NO ACTION)
 			ENGINE = InnoDB");
 		
 		$this->db->query("
@@ -266,19 +276,21 @@ class Migration_inicio extends CI_Migration {
 			CREATE TABLE IF NOT EXISTS `bolsa_trabajo`.`experiencia` (
 			  `id_login` INT NOT NULL,
 			  `nombre_empresa` VARCHAR(45) NOT NULL,
-			  `duracion` VARCHAR(45) NOT NULL,
 			  `trabajo_realizado` VARCHAR(45) NOT NULL,
+			  `fecha_inicio` DATE NOT NULL,
+			  `fecha_fin` DATE NULL,
 			  PRIMARY KEY (`id_login`),
 			  CONSTRAINT `id_login_experiencia`
 			    FOREIGN KEY (`id_login`)
 			    REFERENCES `bolsa_trabajo`.`alumno` (`id_login`)
 			    ON DELETE NO ACTION
 			    ON UPDATE NO ACTION)
-			ENGINE = InnoDB;");
+			ENGINE = InnoDB");
         }
 
         public function down()
         {
+        	
         	$this->db->query("SET FOREIGN_KEY_CHECKS=0");
 	        $this->db->query("DROP TABLE IF EXISTS login");
 	        $this->db->query("DROP TABLE IF EXISTS alumno");
@@ -295,6 +307,8 @@ class Migration_inicio extends CI_Migration {
 			$this->db->query("DROP TABLE IF EXISTS oferta_alumno");
 	        $this->db->query("DROP TABLE IF EXISTS experiencia");
 	        $this->db->query("DROP TABLE IF EXISTS reporte");
+	        $this->db->query("DROP TABLE IF EXISTS alumno_idioma");
+			$this->db->query("DROP TABLE IF EXISTS etiqueta_alumno");
 	        $this->db->query("SET FOREIGN_KEY_CHECKS=1");
         }
 }
