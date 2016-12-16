@@ -13,6 +13,7 @@ public function __construct(){
 }
 //	
 public function index(){
+	$datos=array();
 			 if($this->input->post("Enviar")){
             //Validaciones
             //name del campo, titulo, restricciones
@@ -27,12 +28,10 @@ public function index(){
              if($this->form_validation->run()==false){ //Si la validación es incorrecta
                 $datos["mensaje"]="Validación incorrecta";
              }else{
-                $datos["mensaje"]="Validación correcta";
+           		
 				//verificar contraseña con la contraseña del has code, el conector final es debido a que en el model es un array y tiene que coger solamente la contraseña
-
-             
              if (password_verify ( $this->input->post("contrasena") ,$this->login_model->get_contrasena($this->input->post("usuario")))){
-
+	
              	$correo=$this->input->post('usuario');
 				$rol=$this->login_model->get_rol($this->input->post("usuario"));
 				$usuario_data=array("correo"=>$correo,"rol"=>$rol);
@@ -49,14 +48,17 @@ public function index(){
 						redirect("resumenempresa_controller");
 						break;
 				}
-				 	}
+				}else{
+				$datos["mensaje"]="Usuario o contraseña incorrectos";
+				 		
+				}
 			 }
         }
     $data["titulo"]="Login";
 	$this->load->view("includes/header",$data);
-	$this->load->view("login_view");
+	$this->load->view("login_view",$datos);
 	$this->load->view("includes/footer");
-	    
+	
 	    }
 }
 
