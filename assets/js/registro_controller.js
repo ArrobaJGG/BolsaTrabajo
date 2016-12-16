@@ -5,7 +5,6 @@ $(function(){
 		if(contrasenas[0].value!=contrasenas[1].value){
 			event.preventDefault();	
 		}
-		var usuario = $("#usuario").val();
 		if(!validateEmail($('#usuario').val())){
 			$('#registro').prepend("<p>correo invalido</p>");
 			event.preventDefault();

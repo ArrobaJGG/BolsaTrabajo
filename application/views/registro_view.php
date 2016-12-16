@@ -10,15 +10,15 @@ $this->load->helper('form');
 		<table id="registro" title="Registro">
 			<tr>
 				<td>Usuario: </td>
-				<td><input id="usuario" type="text" name="usuario" /></td>
+				<td><input ng-model="usuario.correo" type="text" name="usuario" /></td>
 			</tr>
 			<tr>
 				<td>Contraseña</td>
-				<td><input class = "confirmar" type="password" name="contrasena" /></td>
+				<td><input class = "confirmar" ng-model="usuario.contraseña1" type="password" name="contrasena" /></td>
 			</tr>
 			<tr>
 				<td>Confirmar</td>
-				<td><input class="confirmar" type="password" name="contrasenaC" /></td>
+				<td><input class="confirmar" ng-model="usuario.contraseña2" type="password" name="contrasenaC" /></td>
 			</tr>
 		</table>
 		<input type="submit" id="Enviar" name="Enviar" value="Enviar" />
