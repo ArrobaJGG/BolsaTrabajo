@@ -13,10 +13,11 @@ public function index(){
 	$data['titulo'] = "Editar Empresa";
 	$this->load->view("includes/header", $data);
 	//$this->load->view("Editarempresa_view");
-	$this->load->view("includes/footer");
 	
-	$this->load->library('form_validation');
+	if ($this->input->post('Actualizar')){
+		$this->load->library('form_validation');
 				$this->form_validation->set_rules('Nombre', 'Nombre');
+				//die ($this->input->post('Nombre'));
 				$this->form_validation->set_rules('Cif', 'Cif');
 				$this->form_validation->set_rules('Telefono', 'Telefono');
 				$this->form_validation->set_rules('Telefono2', 'Telefono2');
@@ -37,8 +38,22 @@ public function index(){
                 }
                 else{
 					
-                      $this->load->view('Editarempresa_view');
+						echo form_error('nombre');
+						echo form_label('Nombre', 'nombre');
+						echo form_input('nombre');echo '<br>';
+						echo form_error('sueldo');
+						echo form_label('Sueldo', 'sueldo');
+						echo form_input('sueldo');echo '<br>';
+						
                 }
+			
+		
+	}
+	else {
+			$this->load->view('Editarempresa_view');
+		}
+				
+		$this->load->view("includes/footer");
 }
 }
 ?>
