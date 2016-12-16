@@ -37,7 +37,7 @@ class Registro_controller extends CI_Controller{
 			}
 			
 		}
-		
+		$data['javascript'] = 'assets/js/registro_controller.js';
 		$data['titulo'] = "Registrarse";
 		$this->load->view("includes/header", $data);
 		$this->load->view("registro_view");

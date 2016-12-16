@@ -38,9 +38,7 @@ class Login_model extends CI_Model{
 		$sql = "UPDATE login SET ultimo_login = '$fecha' where id_login='$correo'";
 		return $this->db->query($sql);
 	}
-	/*public function actualizarempresa(){
-		$sql = "Update empresa Set nombre=$nombre, cif=$cif, telefono=$telefono, telefono2=$telefono2, contacto=$contacto, logo=$logo";
-	}*/
+	
 }
 
 
