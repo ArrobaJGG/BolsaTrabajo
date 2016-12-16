@@ -26,7 +26,7 @@ public function index(){
             $this->form_validation->set_message('valid_email','El campo %s debe ser un email correcto');
              
              if($this->form_validation->run()==false){ //Si la validación es incorrecta
-                $datos["mensaje"]="Validación incorrecta";
+               $datos["mensaje"]="Validación incorrecta";
              }else{
            		
 				//verificar contraseña con la contraseña del has code, el conector final es debido a que en el model es un array y tiene que coger solamente la contraseña
