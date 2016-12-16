@@ -17,7 +17,7 @@ $this->load->helper('form');
 			</tr>
 			 
 		</table>
-		<h2><?php if(isset($mensaje)) echo $mensaje; ?></h2>
+		<p><?php if(isset($mensaje)) echo $mensaje ?></p>
         <?php echo validation_errors(); ?><!--mostrar los errores de validación-->
 		<input type="submit" name="Enviar" value="Enviar" />
 	</form>
