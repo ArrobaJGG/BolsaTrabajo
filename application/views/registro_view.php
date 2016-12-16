@@ -20,10 +20,6 @@ $this->load->helper('form');
 				<td>Confirmar</td>
 				<td><input type="password" name="contrasenaC" /></td>
 			</tr>
-			<tr>
-				<td>Alumno<input type="radio" name="rol" value="alumno" /></td>
-				<td>Empresa<input type="radio" name="rol" value="empresa" /></td>
-			</tr>
 		</table>
 		<input type="submit" name="Enviar" value="Enviar" />
 		<button type="reset" name="Cancelar" value="Cancelar"/>Cancelar</button>
