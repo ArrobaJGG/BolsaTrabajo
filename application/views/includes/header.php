@@ -11,7 +11,7 @@
 	<link rel="stylesheet" href="">
 
 </head>
-<body>
+<body ng-app="my-app">
 	<h1> <?php echo $titulo; ?></h1>
 	<header id="header" class="">
 		<div id="logo"></div>
