@@ -19,3 +19,18 @@ header{
 #idiomas a{
 	text-decoration: none;
 }
+
+.messages {
+ color: #FA787E;
+}
+form.ng-submitted input.ng-invalid{
+border-color: #FA787E;
+} 
+form input.ng-invalid.ng-touched {
+border-color: #FA787E;
+}
+  /*
+    form input.ng-valid.ng-touched {
+      border-color: #78FA89;
+    }
+  */  

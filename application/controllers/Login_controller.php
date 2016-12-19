@@ -55,6 +55,7 @@ public function index(){
 			 }
         }
     $data["titulo"]="Login";
+	$data["javascript"]="assets/js/login_controller.js";
 	$this->load->view("includes/header",$data);
 	$this->load->view("login_view",$datos);
 	$this->load->view("includes/footer");
