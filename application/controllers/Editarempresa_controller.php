@@ -14,7 +14,7 @@ $this->load->helper('form','url_helper');
 public function index(){
 	if ($this->input->post('Actualizar')){
 		$this->load->library('form_validation');
-				$this->form_validation->set_rules('Nombre', 'Nombre', 'required|min_length[3]|alpha');
+				$this->form_validation->set_rules('Nombre', 'Nombre', 'trim|required|min_length[3]|alpha');
 				$this->form_validation->set_rules('Cif', 'Cif');
 				$this->form_validation->set_rules('Telefono', 'Telefono', 'trim|required|numeric|max_length[9]|min_lenght[9]');
 				$this->form_validation->set_rules('Telefono2', 'Telefono2');
@@ -28,9 +28,10 @@ public function index(){
 
                
 			    if($this->form_validation->run() ==false){
+			    	 //$datos["mensaje"] = "Validacion incorrecta";
 					
 				}else{
-					   $nombre = $this->input->post('Nombre');
+					  $nombre = $this->input->post('Nombre');
 					   $cif = $this->input->post('Cif');
 					   $telefono = $this->input->post('Telefono');
 					   $telefono2 = $this->input->post('Telefono2');

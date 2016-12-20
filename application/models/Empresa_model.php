@@ -11,5 +11,11 @@ public function actualizarempresa(){
 		$sql = "Update empresa Set nombre=$nombre, cif=$cif, telefono=$telefono, telefono2=$telefono2, contacto=$contacto, logo=$logo";
 	}
 
+public function traerdatos(){
+	$sql = "SELECT * FROM 'empresa'";
+	$consulta = $this->db->get('empresa');
+	
+}
+
 }
 ?>

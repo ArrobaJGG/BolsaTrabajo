@@ -6,10 +6,16 @@ $this->load->helper('form');
 	<?php 
 	echo form_open('editarempresa_controller');
 	?>
-		<table title="registro">
+		<table title="editar_empresa">
+			<div ng-controller="UserController">
+				<form name="userForm" novalidate>
 			<tr>
 				<td>Nombre: </td>
-				<td><input type="text" name="Nombre" /></td>
+				<td><input type="text" name="Nombre" ng-model="nombre" required />
+				<span class="messages" ng-show="userform.$submitted || userform.Nombre.$touched">
+				<span ng-show="userForm.Nombre.$error.required">El campo es obligatorio.</span>
+       		    </td>
+
 			</tr>
 			<tr>
 				<td>Cif:</td>
@@ -17,7 +23,7 @@ $this->load->helper('form');
 			</tr>
 			<tr>
 				<td>Telefono:</td>
-				<td><input type="number" name="Telefono" /></td>
+				<td><input type="number" name="Telefono" ng-model="telefono"/>
 			</tr>
 			<tr>
 				<td>telefono2:</td>
@@ -30,7 +36,20 @@ $this->load->helper('form');
 			<tr>
 				<td>Logo:</td>
 				<td><input type="file" name="Archivo" value="" /></td>
-			</tr>			
+			</tr>
+			Datos: {{nombre + cif + telefono + telefono2 + contacto + archivo}}
+			<script>
+				var app = angular.module('myApp', []);
+				app.controller('myCtrl', function($scope) {
+				    $scope.nombre = "";
+				    $scope.telefono = "";
+				});
+			</script>
+	
+
+
+
+		
 		</table>
 		<input type="submit" name="Actualizar" value="Actualizar" />
 		<input type="reset" name="Cancelar" value="Cancelar"/>
