@@ -17,7 +17,7 @@ public function index(){
 			 if($this->input->post("Enviar")){
             //Validaciones
             //name del campo, titulo, restricciones
-            $this->form_validation->set_rules('usuario', 'usuario', 'required|valid_email|trim');
+            $this->form_validation->set_rules('email', 'email', 'required|valid_email|trim');
             $this->form_validation->set_rules('contrasena', 'contrasena', 'required|min_length[3]');
             //Mensajes
             // %s es el nombre del campo que ha fallado
@@ -30,10 +30,10 @@ public function index(){
              }else{
            		
 				//verificar contraseña con la contraseña del has code, el conector final es debido a que en el model es un array y tiene que coger solamente la contraseña
-             if (password_verify ( $this->input->post("contrasena") ,$this->login_model->get_contrasena($this->input->post("usuario")))){
+             if (password_verify ( $this->input->post("contrasena") ,$this->login_model->get_contrasena($this->input->post("email")))){
 	
-             	$correo=$this->input->post('usuario');
-				$rol=$this->login_model->get_rol($this->input->post("usuario"));
+             	$correo=$this->input->post('email');
+				$rol=$this->login_model->get_rol($this->input->post("email"));
 				$usuario_data=array("correo"=>$correo,"rol"=>$rol);
 				$this->session->set_userdata($usuario_data);
 				$this->login_model->actualizar_ultimo_login($usuario,date("Y/m/d"));
