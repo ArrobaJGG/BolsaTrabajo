@@ -16,8 +16,9 @@ app.controller("formulario_ctrl",['$scope','$document',function($scope,$document
 		error = true;
 		if($scope.formulario.usuario.$valid&&$scope.formulario.contrasena.$valid&&$scope.contrasenas_iguales()){
 			error = false;
+
 		}
-		
+		alert("hoooola");
 		if(error) $event.preventDefault();
 	} ;
 }]);

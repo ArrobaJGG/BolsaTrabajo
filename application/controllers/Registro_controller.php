@@ -21,7 +21,8 @@ class Registro_controller extends CI_Controller{
 					'correo' => $this->input->post('usuario'),
 					'rol' => 'empresa',
 					'contrasena' => password_hash($this->input->post('contrasena'), PASSWORD_DEFAULT),
-					'ultimo_login' => date("Y/m/d")
+					'ultimo_login' => date("Y/m/d"),
+					'validado' => false
 					);
 					if($this->login_model->crear_usuario($datos)){
 						echo "todo guay";
