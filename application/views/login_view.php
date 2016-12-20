@@ -4,7 +4,7 @@ $this->load->helper('form');
 
 	
 	  <div ng-controller="UserController">
-   		 <form name="userForm" novalidate>
+   		 <form name="userForm" ng-submit="submit($event)" novalidate>
     	
   				<label for="email">Email</label>
      		    <input name="email" type="email" ng-model="user.email" ng-model-options="{ updateOn: 'blur' }" required />
@@ -16,18 +16,20 @@ $this->load->helper('form');
 			</br>
 			<tr>
 				<label for="pasword:">Contraseña:</label>
-				<input type="password" name="contrasena"  ng-model="user.contrasena" ng-model-options="{ updateOn: 'blur' }" required/>
-      			<span class="messages" ng-show="userForm.$submitted || userForm.contrasena.$touched">
-      			<span ng-show="userForm.contrasena.$error.required">El campo es obligatorio.</span>
-        		<span ng-show="userForm.contrasena.$error.contrasena">Formato de contraseña incorrecto.</span></td>
+					<input type="password" name="contrasena"  ng-model="user.contrasena" ng-model-options="{ updateOn: 'blur' }"  ng-minlength="3" ng-maxlength="45" required/>
+      					<span class="messages" ng-show="userForm.$submitted || userForm.contrasena.$touched">
+      						<span ng-show="userForm.contrasena.$error.required">El campo es obligatorio.</span>
+      						<span ng-show="userForm.contrasena.$error.minlength">La contraseña no puede ser menor de 03.</span>
+        					<span ng-show="userForm.contrasena.$error.maxlength">La contraseña no puede exceder de 45.</span></td>
+        				</span>
 			</tr>
 			
 			 
 		</table>
 		<p><?php if(isset($mensaje)) echo $mensaje ?></p>
         <?php echo validation_errors(); ?><!--mostrar los errores de validación-->
-		<input type="submit" name="Enviar" ng-click="submit()" value="Enviar" />
+		<input type="submit" name="Enviar" value="Enviar" />
+		
 	</form>
-	
 	</div>
 
