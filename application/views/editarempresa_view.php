@@ -39,10 +39,21 @@ $this->load->helper('form');
 			</tr>
 			Datos: {{nombre + cif + telefono + telefono2 + contacto + archivo}}
 			<script>
-				var app = angular.module('myApp', []);
+				var pre = angular.module('pre', []);
+				app.controller('myCtrl', function($scope) {
+				    $scope.nombre = "<?php // nombre ?>";
+				    $scope.telefono = "<?php  // telefono ?>";
+				    $scope.telefono2= " <?php // telefono2 ?>";
+				    $scope.contacto=" <?php //contacto ?> ";
+				    $scope.archivo=" <?php  // archivo ?>";
+				});
+					var post = angular.module('post', []);
 				app.controller('myCtrl', function($scope) {
 				    $scope.nombre = "";
 				    $scope.telefono = "";
+				    $scope.telefono2= "";
+				    $scope.contacto="";
+				    $scope.archivo="";
 				});
 			</script>
 	
