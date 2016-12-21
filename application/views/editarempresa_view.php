@@ -11,7 +11,7 @@ $this->load->helper('form');
 				<form name="userForm" novalidate>
 			<tr>
 				<td>Nombre: </td>
-				<td><input type="text" name="Nombre" ng-model="nombre" required />
+				<td><input type="text" name="Nombre" ng-model="nombre" value="<?php  ?>" required />
 				<span class="messages" ng-show="userform.$submitted || userform.Nombre.$touched">
 				<span ng-show="userForm.Nombre.$error.required">El campo es obligatorio.</span>
        		    </td>
@@ -47,14 +47,7 @@ $this->load->helper('form');
 				    $scope.contacto=" <?php //contacto ?> ";
 				    $scope.archivo=" <?php  // archivo ?>";
 				});
-					var post = angular.module('post', []);
-				app.controller('myCtrl', function($scope) {
-				    $scope.nombre = "";
-				    $scope.telefono = "";
-				    $scope.telefono2= "";
-				    $scope.contacto="";
-				    $scope.archivo="";
-				});
+					
 			</script>
 	
 

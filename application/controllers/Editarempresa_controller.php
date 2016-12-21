@@ -7,6 +7,7 @@ $this->load->model('empresa_model');
 //para poder ir de un controlador a otro facilmente
  $this->load->helper(array('form', 'url'));
 $this->load->helper('form','url_helper');
+$this->load->library("session");
 
 
 }
@@ -46,6 +47,7 @@ public function index(){
 			    
 
 }
+				echo($this->session->$correo);
  				$data["titulo"]="Editar Empresa";
 				$this->load->view("includes/header",$data);
 				$this->load->view("editarempresa_view");
