@@ -1,32 +1,23 @@
 <?php 
-
-//$this->load->session('$usuario_data');
 class Empresa_model extends CI_Model{
 	public function __construct()
         {
                 $this->load->database();
         }
-public function get_correo($correo){
-		$sql = "SELECT correo FROM login WHERE correo='$correo'";
-		$query = $this->db->query($sql);
-		$row = $query->row();
-		$devolver = isset($row) ? $row->correo : false;
-		return $devolver;
+	public function crear_empresa($datos){
+		$sql = "INSERT INTO empresa(id_login,nombre) 
+					VALUES ('".$datos['id_login']."','".
+					$datos['nombre'].
+					"')";
+		return $this->db->query($sql);
 	}
-public function cogerid($correo){
-$sql= "select * from e where correo = '$correo'";	
-}
 
-
-public function traerdatos($correo){
-	$sql = "SELECT * FROM empresa WHERE correo = '$correo'";
-	$query = $this->db->query($sql);
-	// para coger el id
-	$row = $query->row();	
-	return $row;
-}
-
-
+	public function datos_empresa($correo){
+		$sql= "select * from login,empresa where empresa.id_login = login.id_login and correo='$correo'";
+		$query = $this->db->query($sql);
+		$row = $query->row();	
+		return row();
+	}
 
 }
 ?>

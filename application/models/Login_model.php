@@ -5,7 +5,6 @@ class Login_model extends CI_Model{
                 $this->load->database();
         }
 	public function crear_usuario($datos){
-		echo $datos['hash_validar'];
 		$sql = "INSERT INTO login(correo,contrasena,rol,ultimo_login,fecha_creacion,hash_validar) 
 				VALUES('".$datos['correo']."','".
 				$datos['contrasena']."','".
@@ -36,6 +35,13 @@ class Login_model extends CI_Model{
 		$query = $this->db->query($sql);
 		$row = $query->row();
 		$devolver = isset($row) ? $row->correo : false;
+		return $devolver;
+	}
+	public function get_id($correo){
+		$sql = "SELECT id_login FROM login WHERE correo='$correo'";
+		$query = $this->db->query($sql);
+		$row = $query->row();
+		$devolver = isset($row) ? $row->id_login : false;
 		return $devolver;
 	}
 	public function actualizar_ultimo_login($correo,$fecha){
