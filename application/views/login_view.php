@@ -12,7 +12,7 @@ $this->load->helper('form');
         		<span ng-show="userForm.email.$error.required">El campo es obligatorio.</span>
        		    <span ng-show="userForm.email.$error.email">Formato de email incorrecto.</span>
       			</span>
-		     
+		    
 			</br>
 			<tr>
 				<label for="password:">Contraseña:</label>
