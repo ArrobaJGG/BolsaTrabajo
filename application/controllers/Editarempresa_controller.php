@@ -11,8 +11,13 @@ $this->load->library("session");
 
 
 }
+
 		
 public function index(){
+	if (isset($this->session->userdata['correo'])) {
+
+		
+	
 	if ($this->input->post('Actualizar')){
 		$this->load->library('form_validation');
 				$this->form_validation->set_rules('Nombre', 'Nombre', 'trim|required|min_length[3]|alpha');
@@ -47,11 +52,17 @@ public function index(){
 			    
 
 }
-				echo($this->session->$correo);
+				//echo($this->session->$correo);
  				$data["titulo"]="Editar Empresa";
 				$this->load->view("includes/header",$data);
 				$this->load->view("editarempresa_view");
 				$this->load->view("includes/footer");
 }
+else{
+	redirect('login_controller');
+}
+
+}
+
 }
 ?>

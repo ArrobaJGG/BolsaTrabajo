@@ -1,6 +1,6 @@
 <?php 
 
-$this->load->session('$usuario_data');
+//$this->load->session('$usuario_data');
 class Empresa_model extends CI_Model{
 	public function __construct()
         {
