@@ -8,7 +8,7 @@
 			error = false;
 			
 			}
-			alert("holaaaaa");
+			
 			if(error) $event.preventDefault();
 				
         };

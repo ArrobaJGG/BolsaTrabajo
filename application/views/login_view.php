@@ -4,10 +4,10 @@ $this->load->helper('form');
 
 	
 	  <div ng-controller="UserController">
-   		 <form name="userForm" ng-submit="submit($event)" novalidate>
+   		 <form name="userForm" ng-submit="submit($event)" action="./Login_controller" method="post" novalidate>
     	
-  				<label for="email">Email</label>
-     		    <input name="email" type="email" ng-model="user.email" ng-model-options="{ updateOn: 'blur' }" required />
+  				<label for="email">Email:</label>
+     		    <input name="email" type="email" ng-model="user.email"  required />
       			<span class="messages" ng-show="userForm.$submitted || userForm.email.$touched">
         		<span ng-show="userForm.email.$error.required">El campo es obligatorio.</span>
        		    <span ng-show="userForm.email.$error.email">Formato de email incorrecto.</span>
@@ -15,8 +15,8 @@ $this->load->helper('form');
 		     
 			</br>
 			<tr>
-				<label for="pasword:">Contraseña:</label>
-					<input type="password" name="contrasena"  ng-model="user.contrasena" ng-model-options="{ updateOn: 'blur' }"  ng-minlength="3" ng-maxlength="45" required/>
+				<label for="password:">Contraseña:</label>
+					<input type="password" name="contrasena"  ng-model="user.contrasena"  ng-minlength="3" ng-maxlength="45" required/>
       					<span class="messages" ng-show="userForm.$submitted || userForm.contrasena.$touched">
       						<span ng-show="userForm.contrasena.$error.required">El campo es obligatorio.</span>
       						<span ng-show="userForm.contrasena.$error.minlength">La contraseña no puede ser menor de 03.</span>
