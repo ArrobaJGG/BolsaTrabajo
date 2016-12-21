@@ -4,11 +4,19 @@ class Empresa_model extends CI_Model{
         {
                 $this->load->database();
         }
+	public function crear_empresa($datos){
+		$sql = "INSERT INTO empresa(id_login,nombre) 
+					VALUES ('".$datos['id_login']."','".
+					$datos['nombre'].
+					"')";
+		return $this->db->query($sql);
+	}
 
-
-
-public function actualizarempresa(){
-		$sql = "Update empresa Set nombre=$nombre, cif=$cif, telefono=$telefono, telefono2=$telefono2, contacto=$contacto, logo=$logo";
+	public function datos_empresa($correo){
+		$sql= "select * from login,empresa where empresa.id_login = login.id_login and correo='$correo'";
+		$query = $this->db->query($sql);
+		$row = $query->row();	
+		return row();
 	}
 
 }

@@ -9,6 +9,13 @@ $this->load->helper('form');
 	<form id="formulario" ng-submit="validar($event)"name="formulario" ng-controller = "formulario_ctrl" action="./Registro_controller" novalidate="" method="post" accept-charset="utf-8">
 		<table id="registro" title="Registro">
 			<tr>
+				<td>Nombre empresa: </td>
+				<td>
+					<input ng-model="usuario.nombre_empresa" pattern=".{3,45}"  type="text" name="nombre_empresa" id="nombre_empresa" required/>
+					<span ng-show="!formulario.nombre_empresa.$valid">Nombre incorrecto</span>
+				</td>
+			</tr>
+			<tr>
 				<td>Usuario: </td>
 				<td>
 					<input ng-model="usuario.correo" pattern=".{3,45}"  type="email" name="usuario" id="usuario" required/>

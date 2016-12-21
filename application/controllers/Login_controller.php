@@ -35,9 +35,12 @@ public function index(){
 	
              	$correo=$this->input->post('email');
 				$rol=$this->login_model->get_rol($this->input->post("email"));
-				$usuario_data=array("correo"=>$correo,"rol"=>$rol);
+				$usuario_data=array(
+					"correo"=>$correo,
+					"rol"=>$rol
+				);
 				$this->session->set_userdata($usuario_data);
-				$this->login_model->actualizar_ultimo_login($usuario,date("Y/m/d"));
+				$this->login_model->actualizar_ultimo_login($correo,date("Y/m/d"));
 				switch ($rol){
 					case 'alumno':
 						redirect("resumenalumno_controller");

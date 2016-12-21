@@ -7,14 +7,19 @@ $this->load->model('empresa_model');
 //para poder ir de un controlador a otro facilmente
  $this->load->helper(array('form', 'url'));
 $this->load->helper('form','url_helper');
+$this->load->library("session");
 
 
 }
+
 		
 public function index(){
+	if (isset($this->session->userdata['correo'])) {		
+		$correo = $this->session->userdata['correo'];
+		$datos_empresa = $this->empresa_model->datos_empresa($correo);
 	if ($this->input->post('Actualizar')){
 		$this->load->library('form_validation');
-				$this->form_validation->set_rules('Nombre', 'Nombre', 'required|min_length[3]|alpha');
+				$this->form_validation->set_rules('Nombre', 'Nombre', 'trim|required|min_length[3]|alpha');
 				$this->form_validation->set_rules('Cif', 'Cif');
 				$this->form_validation->set_rules('Telefono', 'Telefono', 'trim|required|numeric|max_length[9]|min_lenght[9]');
 				$this->form_validation->set_rules('Telefono2', 'Telefono2');
@@ -28,9 +33,10 @@ public function index(){
 
                
 			    if($this->form_validation->run() ==false){
+			    	 //$datos["mensaje"] = "Validacion incorrecta";
 					
 				}else{
-					   $nombre = $this->input->post('Nombre');
+					  $nombre = $this->input->post('Nombre');
 					   $cif = $this->input->post('Cif');
 					   $telefono = $this->input->post('Telefono');
 					   $telefono2 = $this->input->post('Telefono2');
@@ -45,10 +51,17 @@ public function index(){
 			    
 
 }
+				//echo($this->session->$correo);
  				$data["titulo"]="Editar Empresa";
 				$this->load->view("includes/header",$data);
-				$this->load->view("editarempresa_view");
+				$this->load->view("editarempresa_view",$datos_empresa);
 				$this->load->view("includes/footer");
 }
+else{
+	redirect('login_controller');
+}
+
+}
+
 }
 ?>

@@ -5,11 +5,14 @@ class Login_model extends CI_Model{
                 $this->load->database();
         }
 	public function crear_usuario($datos){
-		$sql = "INSERT INTO login(correo,contrasena,rol,ultimo_login) 
+		$sql = "INSERT INTO login(correo,contrasena,rol,ultimo_login,fecha_creacion,hash_validar) 
 				VALUES('".$datos['correo']."','".
 				$datos['contrasena']."','".
 				$datos['rol']."','".
-				$datos['ultimo_login']."')";
+				$datos['ultimo_login']."','".
+				$datos['fecha_creacion']."','".
+				$datos['hash_validar'].
+				"')";
 		return $this->db->query($sql);
 	}	
 	public function get_contrasena($correo){
@@ -34,11 +37,28 @@ class Login_model extends CI_Model{
 		$devolver = isset($row) ? $row->correo : false;
 		return $devolver;
 	}
+	public function get_id($correo){
+		$sql = "SELECT id_login FROM login WHERE correo='$correo'";
+		$query = $this->db->query($sql);
+		$row = $query->row();
+		$devolver = isset($row) ? $row->id_login : false;
+		return $devolver;
+	}
 	public function actualizar_ultimo_login($correo,$fecha){
-		$sql = "UPDATE login SET ultimo_login = '$fecha' where id_login='$correo'";
+		$sql = "UPDATE login SET ultimo_login = '$fecha' where correo='$correo'";
 		return $this->db->query($sql);
 	}
-	
+	public function validar_login($correo){
+		$sql = "UPDATE login SET validado = true WHERE correo = '$correo'";
+		return $this->db->query($sql);
+	}
+	public function existe_correo($hash){
+		$sql = "SELECT correo FROM login WHERE hash_validar='$hash'";
+		$query = $this->db->query($sql);
+		$row = $query->row();
+		$existe = isset($row) ? $row->correo : false;
+		return $existe;
+	}
 }
 
 
