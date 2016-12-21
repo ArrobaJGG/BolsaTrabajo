@@ -38,6 +38,9 @@ class Login_model extends CI_Model{
 		$sql = "UPDATE login SET ultimo_login = '$fecha' where id_login='$correo'";
 		return $this->db->query($sql);
 	}
+	public function validar_login($correo){
+		$sql = "UPDATE login SET validado = 'true' WHERE ";
+	}
 	
 }
 
