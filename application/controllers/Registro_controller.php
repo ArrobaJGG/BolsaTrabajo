@@ -4,6 +4,7 @@ class Registro_controller extends CI_Controller{
 	public function __construct(){
 	    parent::__construct();
 	    $this->load->model('login_model');
+		$this->load->model('empresa_model');
 		//para poder ir de un controlador a otro facilmente
 	    $this->load->helper('url_helper');
 		$this->load->library('email');
@@ -18,6 +19,7 @@ class Registro_controller extends CI_Controller{
 		if($this->input->post('Enviar')){
 			$this->form_validation->set_rules('usuario','Usuario','required|valid_email|trim');
 			$this->form_validation->set_rules('contrasena','Contraseña','required');
+			$this->form_validation->set_rules('nombre_empresa','Nombre empresa','required');
 			if($this->form_validation->run()!=false){
 				if(!$this->login_model->get_correo($this->input->post('usuario'))){
 					$datos = array(
@@ -27,10 +29,16 @@ class Registro_controller extends CI_Controller{
 					'fecha_creacion' => date("Y/m/d"),
 					'ultimo_login' => date("Y/m/d"),
 					'validado' => false,
-					'hash_validar' => str_replace('$','',password_hash(time().$this->input->post('usuario'),PASSWORD_DEFAULT))
+					'hash_validar' => str_replace('/','',str_replace('$','',password_hash(time().$this->input->post('usuario'),PASSWORD_DEFAULT)))
 					);
 					if($this->login_model->crear_usuario($datos)){
-						
+						if($id = $this->login_model->get_id($datos['correo'])){
+							$datos_empresa = Array(
+								'id_login' => $id,
+								'nombre' => $this->input->post('nombre_empresa')
+							);
+							$this->empresa_model->crear_empresa($datos_empresa);
+						}
 						//Montar el mail y enviar					
 						//*
 						$this->email->from('arrobajgg@gmail.com', 'BolsaTrabajoFPTxurdinaga');
@@ -60,6 +68,7 @@ class Registro_controller extends CI_Controller{
 		if($correo = $this->login_model->existe_correo($hash)){
 			if($this->login_model->validar_login($correo)){
 				echo "Validado con exito";
+				
 			}
 			else{
 				echo "ha ocurrido un error";
