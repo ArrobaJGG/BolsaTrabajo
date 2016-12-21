@@ -14,7 +14,7 @@ public function get_correo($correo){
 		return $devolver;
 	}
 public function cogerid($correo){
-$sql= "select * from empresa where correo = '$correo'";	
+$sql= "select * from e where correo = '$correo'";	
 }
 
 

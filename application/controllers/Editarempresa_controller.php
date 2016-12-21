@@ -14,9 +14,7 @@ $this->load->library("session");
 
 		
 public function index(){
-	if (isset($this->session->userdata['correo'])) {
-
-		
+	if (isset($this->session->userdata['correo'])) {		
 	
 	if ($this->input->post('Actualizar')){
 		$this->load->library('form_validation');
