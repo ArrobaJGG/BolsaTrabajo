@@ -18,12 +18,11 @@ public function index(){
             //Validaciones
             //name del campo, titulo, restricciones
             $this->form_validation->set_rules('email', 'email', 'required|valid_email|trim');
-            $this->form_validation->set_rules('contrasena', 'contrasena', 'required|min_length[3]|max_length[45]');
+            $this->form_validation->set_rules('contrasena', 'contrasena', 'required|min_length[3]');
             //Mensajes
             // %s es el nombre del campo que ha fallado
             $this->form_validation->set_message('required','El campo %s es obligatorio'); 
             $this->form_validation->set_message('min_length[3]','El campo %s debe tener mas de 3 caracteres');
-            $this->form_validatiom->set_message('max_length[45]','El campo %s debe tener menos de 45 caracteres');
             $this->form_validation->set_message('valid_email','El campo %s debe ser un email correcto');
              
              if($this->form_validation->run()==false){ //Si la validación es incorrecta
@@ -35,7 +34,7 @@ public function index(){
 	
              	$correo=$this->input->post('email');
 				$rol=$this->login_model->get_rol($correo);
-				$id_login=$thsi->login_model->get_id($correo);
+				$id_login=$this->login_model->get_id($correo);
 				$usuario_data=array(
 					"id_login"=>$id_login,
 					"correo"=>$correo,
