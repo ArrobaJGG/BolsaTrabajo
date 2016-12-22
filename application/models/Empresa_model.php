@@ -12,12 +12,20 @@ class Empresa_model extends CI_Model{
 		return $this->db->query($sql);
 	}
 
-	public function datos_empresa($correo){
-		$sql= "select * from login,empresa where empresa.id_login = login.id_login and correo='$correo'";
+	
+	public function id_login($id_login){
+		$sql= "select * from empresa where id_login='$id_login'";
 		$query = $this->db->query($sql);
 		$row = $query->row();	
-		return row();
+		return $row;
 	}
+	public function actualizar(){
+		$sql = "UPDATE empresa SET cif = $cif, telefono1 = $telefono1, telefono2=$telefono2, persona_contacto= $contacto, nombre = $nombre WHERE id_login = 1";
+		$query = $this->db->query($sql);
+		$row = $query->row();	
+		return $row;
+	}
+	
 
 }
 ?>

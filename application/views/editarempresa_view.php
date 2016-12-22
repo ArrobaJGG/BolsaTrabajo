@@ -23,7 +23,7 @@ $this->load->helper('form');
 			</tr>
 			<tr>
 				<td>Telefono:</td>
-				<td><input type="number" name="Telefono" ng-model="telefono" value="<?php echo $telefono; ?>" />
+				<td><input type="number" name="Telefono" ng-model="telefono" value="<?php echo $telefono1; ?>" />
 			</tr>
 			<tr>
 				<td>telefono2:</td>
@@ -31,7 +31,7 @@ $this->load->helper('form');
 			</tr>
 			<tr>
 				<td>Nombre contacto:</td>
-				<td><input type="text" name="Contacto" value="<?php echo $nombrec; ?>" /></td>
+				<td><input type="text" name="Contacto" value="<?php echo $persona_contacto; ?>" /></td>
 			</tr>
 			<tr>
 				<td>Logo:</td>

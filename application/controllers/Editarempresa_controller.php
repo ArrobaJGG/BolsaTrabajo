@@ -15,8 +15,8 @@ $this->load->library("session");
 		
 public function index(){
 	if (isset($this->session->userdata['correo'])) {		
-		$correo = $this->session->userdata['correo'];
-		$datos_empresa = $this->empresa_model->datos_empresa($correo);
+		$id_login = $this->session->userdata['id_login'];
+		$datos_empresa = $this->empresa_model->id_login($id_login);
 	if ($this->input->post('Actualizar')){
 		$this->load->library('form_validation');
 				$this->form_validation->set_rules('Nombre', 'Nombre', 'trim|required|min_length[3]|alpha');
@@ -43,7 +43,7 @@ public function index(){
 					   $contacto = $this->input->post('Contacto');
 					   $archivo = $this->input->post('Archivo');
 					   
-					   $this->load->model('Empresa_model/actualizarempresa');
+					   $this->load->model('Empresa_model/actualizar');
 					   $this->Login_model->update($nombre,$cif,$telefono,$telefono2,$contacto,$archivo);
 					   $datos["mensaje"] = "Validacion correcta";
 					
