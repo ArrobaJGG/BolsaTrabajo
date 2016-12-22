@@ -29,7 +29,6 @@ $this->load->helper('form');
 		<p><?php if(isset($mensaje)) echo $mensaje ?></p>
         <?php echo validation_errors(); ?><!--mostrar los errores de validación-->
 		<input type="submit" name="Enviar" value="Enviar" />
-		
 	</form>
 	</div>
 

@@ -34,8 +34,10 @@ public function index(){
              if (password_verify ( $this->input->post("contrasena") ,$this->login_model->get_contrasena($this->input->post("email")))){
 	
              	$correo=$this->input->post('email');
-				$rol=$this->login_model->get_rol($this->input->post("email"));
+				$rol=$this->login_model->get_rol($correo);
+				$id_login=$thsi->login_model->get_id($correo);
 				$usuario_data=array(
+					"id_login"=>$id_login,
 					"correo"=>$correo,
 					"rol"=>$rol
 				);
