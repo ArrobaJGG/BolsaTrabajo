@@ -82,7 +82,7 @@ class Migration_llenar_tablas extends CI_Migration {
 						'".$familias['Informatica']."','".
 						$categorias['Grado Medio']."',
 						'técnico en instalaciones microinformáticos y redes'
-					),
+					)
                 ");//*/
         }
 
