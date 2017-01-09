@@ -14,6 +14,8 @@ class Migration_inicio extends CI_Migration {
 			  `contrasena` VARCHAR(128) NOT NULL,
 			  `rol` VARCHAR(20) NOT NULL,
 			  `ultimo_login` DATE NOT NULL,
+			  `fecha_creacion`DATE NOT NULL,
+			  `hash_validar` VARCHAR(128) NOT NULL,
 			  `validado` TINYINT(1) NOT NULL,
 			  PRIMARY KEY (`id_login`),
 			  UNIQUE INDEX `correo_UNIQUE` (`correo` ASC))
@@ -143,7 +145,7 @@ class Migration_inicio extends CI_Migration {
 		
 		$this->db->query("
 			CREATE TABLE IF NOT EXISTS `bolsa_trabajo`.`nivel` (
-			  `id_nivel` INT NOT NULL,
+			  `id_nivel` INT NOT NULL AUTO_INCREMENT,
 			  `titulacion` VARCHAR(45) NOT NULL,
 			  `equivalencia` VARCHAR(45) NOT NULL,
 			  `tipo` VARCHAR(45) NOT NULL,
