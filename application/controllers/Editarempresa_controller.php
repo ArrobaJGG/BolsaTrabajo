@@ -16,15 +16,15 @@ $this->load->library("session");
 public function index(){
 	if (isset($this->session->userdata['correo'])) {		
 		$id_login = $this->session->userdata['id_login'];
-		$datos_empresa = $this->empresa_model->id_login($id_login);
+		
 	if ($this->input->post('Actualizar')){
 		$this->load->library('form_validation');
-				$this->form_validation->set_rules('Nombre', 'Nombre', 'trim|required|min_length[3]|alpha');
-				$this->form_validation->set_rules('Cif', 'Cif');
-				$this->form_validation->set_rules('Telefono', 'Telefono', 'trim|required|numeric|max_length[9]|min_lenght[9]');
-				$this->form_validation->set_rules('Telefono2', 'Telefono2');
-				$this->form_validation->set_rules('Contacto', 'Contacto');
-				$this->form_validation->set_rules('Archivo', 'Archivo');
+				$this->form_validation->set_rules('nombre', 'Nombre', 'required|min_length[3]');
+				$this->form_validation->set_rules('cif', 'Cif');
+				$this->form_validation->set_rules('telefono', 'Telefono', 'trim|required|numeric');
+				$this->form_validation->set_rules('telefono2', 'Telefono2');
+				$this->form_validation->set_rules('contacto', 'Contacto');
+				$this->form_validation->set_rules('archivo', 'Archivo');
 					$this->form_validation->set_message('required','El campo %s es obligatorio'); 
 					$this->form_validation->set_message('alpha','El campo %s debe estar compuesto solo por letras');
 				    $this->form_validation->set_message('min_length', ' %s es muy corto');
@@ -36,21 +36,31 @@ public function index(){
 			    	 //$datos["mensaje"] = "Validacion incorrecta";
 					
 				}else{
-					  $nombre = $this->input->post('Nombre');
-					   $cif = $this->input->post('Cif');
-					   $telefono = $this->input->post('Telefono');
-					   $telefono2 = $this->input->post('Telefono2');
-					   $contacto = $this->input->post('Contacto');
-					   $archivo = $this->input->post('Archivo');
+					   $nombre = $this->input->post('nombre');
+					   $cif = $this->input->post('cif');
+					   $telefono = $this->input->post('telefono');
+					   $telefono2 = $this->input->post('telefono2');
+					   $contacto = $this->input->post('contacto');
+					   $archivo = $this->input->post('archivo');
+					   $parametros = array( "nombre" => $nombre, 
+					   						"cif" => $cif,
+					   						"telefono" => $telefono ,
+					   						"telefono2" => $telefono2,
+					   						"contacto" => $contacto,
+					   						"id_login" => $id_login,
+					   						$archivo);
 					   
-					   $this->load->model('Empresa_model/actualizar');
-					   $this->Login_model->update($nombre,$cif,$telefono,$telefono2,$contacto,$archivo);
+					   $actualizar_empresa = $this->empresa_model->actualizar($parametros,$id_login);
+					   //$this->Empresa_model->update($nombre,$cif,$telefono,$telefono2,$contacto,$archivo);
 					   $datos["mensaje"] = "Validacion correcta";
+					   
 					
 				}
+
 			    
 
 }
+				$datos_empresa = $this->empresa_model->id_login($id_login);
 				//echo($this->session->$correo);
  				$data["titulo"]="Editar Empresa";
 				$this->load->view("includes/header",$data);
