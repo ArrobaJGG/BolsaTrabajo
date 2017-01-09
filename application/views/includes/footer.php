@@ -9,5 +9,6 @@
 Fax: 944731359
 idazkaria@fpTXurdinaga.com</p>
 </footer>
+<script src=" <?php echo base_url($javascript)  ?>"></script>
 </body>
 </html>
