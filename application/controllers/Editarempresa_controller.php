@@ -63,10 +63,10 @@ public function index(){
 				$datos_empresa = $this->empresa_model->id_login($id_login);
 				//echo($this->session->$correo);
  				$data["titulo"]="Editar Empresa";
-				$data["javascipt"]="assets/js/editar_empresa.js";
+				$data["javascript"]="assets/js/editar_empresa.js";
 				$this->load->view("includes/header",$data);
 				$this->load->view("editarempresa_view",$datos_empresa);
-				$this->load->view("includes/footer");
+				$this->load->view("includes/footer", $data);
 }
 else{
 	redirect('login_controller');

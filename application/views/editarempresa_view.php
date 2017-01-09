@@ -3,16 +3,16 @@ $this->load->helper('form');
  ?>
 
 	
-	<?php 
-	echo form_open('editarempresa_controller');
-	?>
+<form name="userForm" ng-submit="submit($event)" action="./Editarempresa_controller" method="post" novalidate>
+    	
 		<table title="editar_empresa">
-			<div ng-controller="myCtrl">
-				<form name="userForm" novalidate>
+			<div ng-controller="myCtrl" >
+				
+				
 			<tr>
 				<td>Nombre: </td>
-				<td><input type="text" name="nombre" ng-model="nombre" value="<?php echo $nombre; ?>" required />
-				<span class="messages" ng-show="userform.$submitted || userform.nombre.$touched">
+				<td><input type="text" name="nombre" ng-init = "nombre='<?php echo $nombre; ?>'"  ng-model="nombre"  required />
+				<span class="messages" ng-show="userForm.$submitted || nombre.$touched"></span>
 				<span ng-show="userForm.nombre.$error.required">El campo es obligatorio.</span>
        		    </td>
 
@@ -42,7 +42,7 @@ $this->load->helper('form');
 				<td>Logo:</td>
 				<td><input type="file" name="archivo" value="" /></td>
 			</tr>
-
+</div>
 		
 		</table>
 		<input type="submit" name="Actualizar" value="Actualizar" />
