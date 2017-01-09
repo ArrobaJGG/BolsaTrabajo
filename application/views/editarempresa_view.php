@@ -34,8 +34,8 @@ $this->load->helper('form');
 			</tr>
 			<tr>
 				<td>Nombre contacto:</td>
-				<td><input type="text" name="contacto" ng-init ="contacto =<?php echo $persona_contacto; ?>" required  />
-					<span class="messages" ng-show="userform.$submitted || userform.contacto.$touched">
+				<td><input type="text" name="contacto" ng-init ="contacto = '<?php echo $persona_contacto; ?>'" required  />
+					<span class="messages" ng-show="userForm.$submitted || contacto.$touched">
 					<span ng-show="userForm.contacto.$error.required">El campo es obligatorio.</span>
 				</td>
 			</tr>
