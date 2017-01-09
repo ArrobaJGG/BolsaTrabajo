@@ -85,6 +85,21 @@ class Migration_llenar_tablas extends CI_Migration {
 						'técnico en instalaciones microinformáticos y redes'
 					)
                 ");//*/
+        		  $this->db->query("
+            		INSERT INTO idioma(nombre)
+            		VALUES
+            		('Euskera'),
+            		('Ingles'),
+            		('Aleman'),
+            		('Frances')	
+                ");
+                  $this->db->query("
+            		INSERT INTO nivel(titulacion,equivalencia)
+            		VALUES
+            		('C1','alto'),
+            		('B1','medio'),
+            		('A1','bajo')	
+                ");
         }
 
         public function down()

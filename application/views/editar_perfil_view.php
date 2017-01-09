@@ -1,6 +1,9 @@
 <?php 
 $this->load->helper('form');
  ?>
+ <?php
+ $mysqli = new mysqli('localhost', 'bolsa', 'trabajo', 'bolsa_trabajo');
+ ?>
   <div ng-controller="UserController">
   	 <form name="userForm" ng-submit="submit($event)" action="./Editar_perfil_controller" method="post" novalidate>
 		Nombre: <input name="nombre" type="text" ng-model="user.nombre"  required />
@@ -40,20 +43,27 @@ $this->load->helper('form');
 		<span ng-show="userForm.descripcion.$error.required">El campo es obligatorio.</span>
 		<span ng-show="userForm.descripcion.$error.maxlength">La descripcion no puede exceder de 1000 caracteres.</span>
 		</span></br>
-		
-		Familia: <select name="familia">
-             	<option value="informatica">Informatica</option>
-	            <option value="quimica">Quimica</option>
-	            <option value="administracion">Administracion</option>
-	            <option value="electronica">Electronica</option>
-        		</select></br>
-		Idiomas: <select name="Idiomas">
-				<option value="Castellano">Castellano</option>
-				<option value="Euskera">Euskera</option>
-				<option value="Ingles">Ingles</option>
-				<option value="Frances">Frances</option>
-				<option value="Aleman">Aleman</option>
-				</select></br>
+		<p>Familia:
+		 <select>
+        <?php
+		$query = $mysqli -> query ("SELECT * FROM familia_laboral");
+		while ($valores = mysqli_fetch_array($query)) {
+		echo '<option value="'.$valores[id_familia_laboral].'">'.$valores[nombre].'</option>';
+		}
+		?>
+		</select>
+		</p>
+	
+		<p>Idiomas: 
+			<select>
+			<?php
+			$query = $mysqli -> query ("SELECT * FROM idioma");
+			while ($valores = mysqli_fetch_array($query)) {
+			echo '<option value="'.$valores[id_idioma].'">'.$valores[nombre].'</option>';
+			}
+			?>
+			</select>
+		</p>
 		Nivel: <select name="nivel">
 				<option value="Alto">Alto</option>
 				<option value="Medio">Medio</option>
