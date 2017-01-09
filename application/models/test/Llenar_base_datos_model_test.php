@@ -15,6 +15,23 @@ class Llenar_base_datos_model_test extends CI_Model{
 				('administrador@hotmail.com', '$2y$10\$qaAjkuI6dFFvVhM4FErfrukgm0RIVWXzof2BvRNSK0v1Zzy3x2IKS', 'administrador', '2016-12-23', '2016-12-23', 0, '2y10UNzuuUoCrcoKnT2wCj8HevGUFY76iPBu1tgNEYGMQZMHwKKuod7S');
 		";
 		  $this->db->query($sql);
+		  $id_alumno = $this->db->query("SELECT id_login FROM login WHERE correo = 'alumno@hotmail.com'")->row()->id_login;
+		  $id_empresa = $this->db->query("SELECT id_login FROM login WHERE correo = 'empresa@hotmail.com'")->row()->id_login;
+
+		  $sql_alumno ="
+		  	INSERT INTO `alumno` 
+		  		(id_login, dni, nombre, apellidos, estado)
+			VALUES
+				('$id_alumno','12345678A','alumno','alumno alumno',true)
+		  ";
+		  $sql_empresa = "
+		  	INSERT INTO `empresa`
+		  		(id_login,estado)
+			VALUES
+				('$id_empresa',true)
+		  ";
+		  $this->db->query($sql_alumno);
+		  $this->db->query($sql_empresa);
 	}
 }
 ?>
