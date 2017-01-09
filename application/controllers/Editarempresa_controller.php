@@ -19,11 +19,11 @@ public function index(){
 		
 	if ($this->input->post('Actualizar')){
 		$this->load->library('form_validation');
-				$this->form_validation->set_rules('nombre', 'Nombre', 'required|min_length[3]');
-				$this->form_validation->set_rules('cif', 'Cif');
+				$this->form_validation->set_rules('nombre', 'Nombre', 'required|min_length[3]|alpha');
+				$this->form_validation->set_rules('cif', 'Cif', 'required|max_length[9]');
 				$this->form_validation->set_rules('telefono', 'Telefono', 'trim|required|numeric');
-				$this->form_validation->set_rules('telefono2', 'Telefono2');
-				$this->form_validation->set_rules('contacto', 'Contacto');
+				$this->form_validation->set_rules('telefono2', 'Telefono2', 'trim|required|numeric');
+				$this->form_validation->set_rules('contacto', 'Contacto', 'required|alpha|trim');
 				$this->form_validation->set_rules('archivo', 'Archivo');
 					$this->form_validation->set_message('required','El campo %s es obligatorio'); 
 					$this->form_validation->set_message('alpha','El campo %s debe estar compuesto solo por letras');
@@ -63,6 +63,7 @@ public function index(){
 				$datos_empresa = $this->empresa_model->id_login($id_login);
 				//echo($this->session->$correo);
  				$data["titulo"]="Editar Empresa";
+				$data["javascipt"]="assets/js/editar_empresa.js";
 				$this->load->view("includes/header",$data);
 				$this->load->view("editarempresa_view",$datos_empresa);
 				$this->load->view("includes/footer");

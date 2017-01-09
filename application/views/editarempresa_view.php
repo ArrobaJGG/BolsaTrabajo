@@ -7,13 +7,13 @@ $this->load->helper('form');
 	echo form_open('editarempresa_controller');
 	?>
 		<table title="editar_empresa">
-			<div ng-controller="UserController">
+			<div ng-controller="myCtrl">
 				<form name="userForm" novalidate>
 			<tr>
 				<td>Nombre: </td>
 				<td><input type="text" name="nombre" ng-model="nombre" value="<?php echo $nombre; ?>" required />
-				<span class="messages" ng-show="userform.$submitted || userform.Nombre.$touched">
-				<span ng-show="userForm.Nombre.$error.required">El campo es obligatorio.</span>
+				<span class="messages" ng-show="userform.$submitted || userform.nombre.$touched">
+				<span ng-show="userForm.nombre.$error.required">El campo es obligatorio.</span>
        		    </td>
 
 			</tr>
@@ -23,7 +23,9 @@ $this->load->helper('form');
 			</tr>
 			<tr>
 				<td>Telefono:</td>
-				<td><input type="number" name="telefono" ng-model="telefono" value="<?php echo $telefono1; ?>" />
+				<td><input type="number" name="telefono" ng-model="telefono" value="<?php echo $telefono1; ?>" required />
+					<span class="messages" ng-show="userform.$submitted || userform.telefono.$touched">
+					<span ng-show="userForm.telefono.$error.required">El campo es obligatorio.</span></td>
 			</tr>
 			<tr>
 				<td>telefono2:</td>
@@ -31,27 +33,15 @@ $this->load->helper('form');
 			</tr>
 			<tr>
 				<td>Nombre contacto:</td>
-				<td><input type="text" name="contacto" value="<?php echo $persona_contacto; ?>" /></td>
+				<td><input type="text" name="contacto" value="<?php echo $persona_contacto; ?>" required  />
+					<span class="messages" ng-show="userform.$submitted || userform.contacto.$touched">
+					<span ng-show="userForm.contacto.$error.required">El campo es obligatorio.</span>
+				</td>
 			</tr>
 			<tr>
 				<td>Logo:</td>
 				<td><input type="file" name="archivo" value="" /></td>
 			</tr>
-			Datos: {{nombre + cif + telefono + telefono2 + contacto + archivo}}
-			<script>
-				var pre = angular.module('pre', []);
-				app.controller('myCtrl', function($scope) {
-				    $scope.nombre = " ";
-				    $scope.telefono = " ";
-				    $scope.telefono2= " ";
-				    $scope.contacto=" ";
-				    $scope.archivo=" ";
-				});
-					
-			</script>
-	
-
-
 
 		
 		</table>
