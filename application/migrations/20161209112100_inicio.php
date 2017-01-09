@@ -211,7 +211,7 @@ class Migration_inicio extends CI_Migration {
 			ENGINE = InnoDB");
 		
 		$this->db->query("
-			CCREATE TABLE IF NOT EXISTS `bolsa_trabajo`.`etiqueta` (
+			CREATE TABLE IF NOT EXISTS `bolsa_trabajo`.`etiqueta` (
 			  `id_etiqueta` INT NOT NULL AUTO_INCREMENT,
 			  `nombre` VARCHAR(45) NOT NULL,
 			  `id_famila_laboral` INT NOT NULL,
