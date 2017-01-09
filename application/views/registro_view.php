@@ -12,6 +12,7 @@ $this->load->helper('form');
 				<td>Nombre empresa: </td>
 				<td>
 					<input ng-model="usuario.nombre_empresa" pattern=".{3,45}"  type="text" name="nombre_empresa" id="nombre_empresa" required/>
+					<?php if(isset($correo_invalido)) echo "<span>$correo_invalido</span><br/>" ?>
 					<span ng-show="!formulario.nombre_empresa.$valid">Nombre incorrecto</span>
 				</td>
 			</tr>

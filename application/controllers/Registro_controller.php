@@ -16,11 +16,14 @@ class Registro_controller extends CI_Controller{
 		
 		$this->load->helper('form');
 		$this->load->library('form_validation');
+		
+		$informacion = array();
 		if($this->input->post('Enviar')){
 			$this->form_validation->set_rules('usuario','Usuario','required|valid_email|trim');
 			$this->form_validation->set_rules('contrasena','Contraseña','required');
 			$this->form_validation->set_rules('nombre_empresa','Nombre empresa','required');
 			if($this->form_validation->run()!=false){
+				$caracteres_invalidos = array('/','$');
 				if(!$this->login_model->get_correo($this->input->post('usuario'))){
 					$datos = array(
 					'correo' => $this->input->post('usuario'),
@@ -29,7 +32,7 @@ class Registro_controller extends CI_Controller{
 					'fecha_creacion' => date("Y/m/d"),
 					'ultimo_login' => date("Y/m/d"),
 					'validado' => false,
-					'hash_validar' => str_replace('/','',str_replace('$','',password_hash(time().$this->input->post('usuario'),PASSWORD_DEFAULT)))
+					'hash_validar' => str_replace($caracteres_invalidos,'',password_hash(time().$this->input->post('usuario'),PASSWORD_DEFAULT))
 					);
 					if($this->login_model->crear_usuario($datos)){
 						if($id = $this->login_model->get_id($datos['correo'])){
@@ -48,11 +51,11 @@ class Registro_controller extends CI_Controller{
 						$this->email->send();//*/
 					}
 					else{
-						echo "todo no guay";
+						echo "esto no deberia estar pasando";
 					}
 				}
 				else{
-					echo "Correo repetido";
+					$informacion['correo_invalido']='Cuenta ya existente.';
 				}
 				
 			}
@@ -61,7 +64,7 @@ class Registro_controller extends CI_Controller{
 		$data['javascript'] = 'assets/js/registro_controller.js';
 		$data['titulo'] = "Registrarse";
 		$this->load->view("includes/header", $data);
-		$this->load->view("registro_view");
+		$this->load->view("registro_view",$informacion);
 		$this->load->view("includes/footer");
 	}
 	public function validar($hash){
