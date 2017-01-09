@@ -25,6 +25,7 @@ class Migration_llenar_tablas extends CI_Migration {
 				$categorias = array();
 				foreach ($tabla->result() as $fila)
 				{
+					
 					$categorias[$fila->nombre]= $fila->id_categoria;
 				}
 				//*
