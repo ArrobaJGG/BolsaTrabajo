@@ -23,7 +23,7 @@ $this->load->helper('form');
 			</tr>
 			<tr>
 				<td>telefono: </td>
-				<td><input type="number" name="telefono" ng-init = "telefono='<?php echo $telefono1; ?>'"  ng-model="telefono"  required />
+				<td><input type="text" name="telefono" ng-init = "telefono='<?php echo $telefono1; ?>'"  ng-model="telefono"  required />
 				<span class="messages" ng-show="userForm.$submitted || telefono.$touched"></span>
 				<span ng-show="userForm.telefono.$error.required">El campo es obligatorio.</span>
        		    </td>
@@ -34,14 +34,14 @@ $this->load->helper('form');
 			</tr>
 			<tr>
 				<td>Nombre contacto:</td>
-				<td><input type="text" name="contacto" ng-init ="contacto = '<?php echo $persona_contacto; ?>'" required  />
-					<span class="messages" ng-show="userForm.$submitted || contacto.$touched">
-					<span ng-show="userForm.contacto.$error.required">El campo es obligatorio.</span>
+				<td><input type="text" name="persona_contacto" ng-init = "persona_contacto = '<?php echo $persona_contacto; ?>'" ng-model="persona_contacto" required  />
+					<span class="messages" ng-show="userForm.$submitted || persona_contacto.$touched">
+					<span ng-show="userForm.persona_contacto.$error.required">El campo es obligatorio.</span>
 				</td>
 			</tr>
 			<tr>
 				<td>Logo:</td>
-				<td><input type="file" name="archivo" value="" /></td>
+				<td><input type="file" name="logo" value="" accept="image/*" /></td>
 			</tr>
 </div>
 		
