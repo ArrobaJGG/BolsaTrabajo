@@ -22,21 +22,22 @@ class Login_model extends CI_Model{
 		$devolver = isset($row) ? $row->contrasena : false;
 		return $devolver;
 	}
-	public function get_rol($correo){
+	public function get_rol($correo)
+		{
 		$sql = "SELECT rol FROM login WHERE correo='$correo'";
 		$query = $this->db->query($sql);
 		$row = $query->row();
 		$devolver = isset($row) ? $row->rol : false;
 		return $devolver;
-		
-	}
-	public function get_correo($correo){
+		}
+	public function get_correo($correo)
+		{
 		$sql = "SELECT correo FROM login WHERE correo='$correo'";
 		$query = $this->db->query($sql);
 		$row = $query->row();
 		$devolver = isset($row) ? $row->correo : false;
 		return $devolver;
-	}
+		}
 	public function get_id($correo){
 		$sql = "SELECT id_login FROM login WHERE correo='$correo'";
 		$query = $this->db->query($sql);
