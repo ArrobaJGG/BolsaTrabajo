@@ -19,7 +19,7 @@ public function index(){
 		
 	if ($this->input->post('Actualizar')){
 		$this->load->library('form_validation');
-				$this->form_validation->set_rules('nombre', 'Nombre', 'trim|required|min_length[3]|alpha');// el trim siempre delante
+				$this->form_validation->set_rules('nombre', 'Nombre', 'alpha|required|min_length[3]');// el trim siempre delante
 				$this->form_validation->set_rules('cif', 'Cif', 'trim|required|max_length[9]'); // max_length solo sirve para letras
 				$this->form_validation->set_rules('telefono', 'Telefono', 'trim|required|numeric|integer');
 				$this->form_validation->set_rules('telefono2', 'Telefono2', 'trim|required|numeric|integer');
@@ -42,7 +42,7 @@ public function index(){
 					   $telefono = $this->input->post('telefono');
 					   $telefono2 = $this->input->post('telefono2');
 					   $persona_contacto = $this->input->post('persona_contacto');
-					   $archivo = $this->input->post('archivo');
+					   $logo = $this->input->post('logo');
 					   $parametros = array( "nombre" => $nombre, 
 					   						"cif" => $cif,
 					   						"telefono" => $telefono ,
@@ -52,27 +52,29 @@ public function index(){
 					   						"logo" => $logo);
 					   
 					   
-  			  function cargar_archivo() {
+  			 
 
-								        $mi_archivo = 'logo';
-								        $config['upload_path'] = "../imagenes";
-								        $config['file_name'] = $id_login;
-								        $config['allowed_types'] = "jpg";
-								        $config['max_size'] = "50000";//kb
-								        $config['max_width'] = "2000"; // kb
-								        $config['max_height'] = "2000";// kb
+						$mi_archivo = 'logo';
+				        $config['upload_path'] = './img/';
+						$config['upload_path'] = FCPATH . './img/';
+						$config['file_name'] = 'holamundo';
+						$config['allowed_types'] = 'jpg';
+						//$config['max_size'] = "50000";//kb
+						//$config['max_width'] = "2000"; // kb
+						//$config['max_height'] = "2000";// kb
 								
-								        $this->load->library('upload', $config);
+						$this->load->library('upload', $config);
+						$this->upload->initialize($config);
 								        
-								        if (!$this->upload->do_upload($mi_archivo)) {
-								            //*** ocurrio un error
-								            $data['uploadError'] = $this->upload->display_errors();
-								            echo $this->upload->display_errors();
-								            return;
-									    }
+						if (!$this->upload->do_upload($mi_archivo)) {
+								//*** ocurrio un error
+								$data['uploadError'] = $this->upload->display_errors();
+								echo $this->upload->display_errors();
+								return;
+						}
 														
-										 $data['uploadSuccess'] = $this->upload->data();
-   			 }
+							 $data['uploadSuccess'] = $this->upload->data();
+   			 
 					   $actualizar_empresa = $this->empresa_model->actualizar($parametros,$id_login);
 					   //$this->Empresa_model->update($nombre,$cif,$telefono,$telefono2,$contacto,$archivo);
 					   $datos["mensaje"] = "Validacion correcta";
