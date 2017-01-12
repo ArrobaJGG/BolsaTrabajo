@@ -3,7 +3,7 @@ $this->load->helper('form');
  ?>
 
 	
-<form name="userForm" ng-submit="submit($event)" action="./Editarempresa_controller" method="post" novalidate>
+<form name="userForm" ng-submit="submit($event)" action="./Editarempresa_controller" method="post" novalidate enctype="multipart/form-data">
     	
 		<table title="editar_empresa">
 			<div ng-controller="myCtrl" >
@@ -41,7 +41,7 @@ $this->load->helper('form');
 			</tr>
 			<tr>
 				<td>Logo:</td>
-				<td><input type="file" name="logo" value="" accept="image/*" /></td>
+				<td><input type="file" name="logo"  accept="image/*" /></td>
 			</tr>
 </div>
 		

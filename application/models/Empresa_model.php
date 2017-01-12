@@ -20,7 +20,7 @@ class Empresa_model extends CI_Model{
 		return $row;
 	}
 	public function actualizar($parametros,$id_login){
-		$sql = "UPDATE empresa SET nombre = '$parametros[nombre]', cif = '$parametros[cif]', telefono1 = $parametros[telefono], telefono2 = $parametros[telefono2], persona_contacto= '$parametros[persona_contacto]' WHERE id_login =$id_login";
+		$sql = "UPDATE empresa SET nombre = '$parametros[nombre]', cif = '$parametros[cif]', telefono1 = $parametros[telefono], telefono2 = $parametros[telefono2], persona_contacto= '$parametros[persona_contacto]'  WHERE id_login =$id_login";
 		$query = $this->db->query($sql);
 		//$row = $query->row();	
 		//return $row;
