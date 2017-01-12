@@ -42,6 +42,11 @@ $this->load->helper('form');
 			<tr>
 				<td>Logo:</td>
 				<td><input type="file" name="logo"  accept="image/*" /></td>
+				<td><div id="imgempresa">
+					<img src="http://localhost/BolsaTrabajo/img/<?php echo $id_login ?>.jpg"; width="35" height="35">
+				   
+				</div></td>
+				
 			</tr>
 </div>
 		

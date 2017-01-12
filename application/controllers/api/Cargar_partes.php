@@ -8,4 +8,7 @@ public function __construct(){
 public function cargar($pagina){
 	$this->load->view("partes/$pagina");
 }
+public function imgempresa(){
+	$this->load->view();
+}
 }

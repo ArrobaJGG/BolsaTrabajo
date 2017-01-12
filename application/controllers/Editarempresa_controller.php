@@ -56,8 +56,10 @@ public function index(){
 
 						$mi_archivo = 'logo';
 				        $config['upload_path'] = './img/';
+						$config['overwrite'] = TRUE;
+						$ruta =$config['upload_path'];
 						$config['upload_path'] = FCPATH . './img/';
-						$config['file_name'] = 'holamundo';
+						$config['file_name'] = $id_login;
 						$config['allowed_types'] = 'jpg';
 						//$config['max_size'] = "50000";//kb
 						//$config['max_width'] = "2000"; // kb
@@ -76,6 +78,8 @@ public function index(){
 							 $data['uploadSuccess'] = $this->upload->data();
    			 
 					   $actualizar_empresa = $this->empresa_model->actualizar($parametros,$id_login);
+					  // $actualizar_ruta = $this->empresa_model->actualizar($ruta,$id_login);
+					   
 					   //$this->Empresa_model->update($nombre,$cif,$telefono,$telefono2,$contacto,$archivo);
 					   $datos["mensaje"] = "Validacion correcta";
 					   
@@ -86,6 +90,7 @@ public function index(){
 
 }
 				$datos_empresa = $this->empresa_model->id_login($id_login);
+				
 				//echo($this->session->$correo);
  				$data["titulo"]="Editar Empresa";
 				$data["javascript"]="assets/js/editar_empresa.js";

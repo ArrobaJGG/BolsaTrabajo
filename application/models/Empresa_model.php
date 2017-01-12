@@ -25,6 +25,10 @@ class Empresa_model extends CI_Model{
 		//$row = $query->row();	
 		//return $row;
 	}
+	public function ruta($ruta, $id_login){
+		$sql = "update  empresa set  logo=$ruta where id_login=$id_login";
+		$query = $this->db->query($sql);
+	}
 	
 
 }
