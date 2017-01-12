@@ -19,10 +19,10 @@ public function index(){
 		
 	if ($this->input->post('Actualizar')){
 		$this->load->library('form_validation');
-				$this->form_validation->set_rules('nombre', 'Nombre', 'alpha|required|min_length[3]');// el trim siempre delante
+				$this->form_validation->set_rules('nombre', 'Nombre', 'required|min_length[3]');// el trim siempre delante
 				$this->form_validation->set_rules('cif', 'Cif', 'trim|required|max_length[9]'); // max_length solo sirve para letras
 				$this->form_validation->set_rules('telefono', 'Telefono', 'trim|required|numeric|integer');
-				$this->form_validation->set_rules('telefono2', 'Telefono2', 'trim|required|numeric|integer');
+				$this->form_validation->set_rules('telefono2', 'Telefono2', 'trim|numeric|integer');
 				$this->form_validation->set_rules('persona_contacto', 'persona_contacto', 'trim|required|alpha');
 				$this->form_validation->set_rules('archivo', 'Archivo');
 					// mensaje de errores
@@ -57,7 +57,6 @@ public function index(){
 						$mi_archivo = 'logo';
 				        $config['upload_path'] = './img/';
 						$config['overwrite'] = TRUE;
-						$ruta =$config['upload_path'];
 						$config['upload_path'] = FCPATH . './img/';
 						$config['file_name'] = $id_login;
 						$config['allowed_types'] = 'jpg';
@@ -78,7 +77,7 @@ public function index(){
 							 $data['uploadSuccess'] = $this->upload->data();
    			 
 					   $actualizar_empresa = $this->empresa_model->actualizar($parametros,$id_login);
-					  // $actualizar_ruta = $this->empresa_model->actualizar($ruta,$id_login);
+					  
 					   
 					   //$this->Empresa_model->update($nombre,$cif,$telefono,$telefono2,$contacto,$archivo);
 					   $datos["mensaje"] = "Validacion correcta";
