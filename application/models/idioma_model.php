@@ -32,12 +32,5 @@ class idioma_model extends CI_Model{
 		$nivelhablado = $row ? $row : false;
 		return $nivelhablado;
 	}
-	public function titulado()
-	{
-		$query = $this->db->query('SELECT * FROM nivel');
-		$row = $query->result_array();
-		$titulados= $row ? $row : false;
-		return $titulados;		
-	}
 }
 ?>

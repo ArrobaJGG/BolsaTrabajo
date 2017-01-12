@@ -3,24 +3,24 @@ $this -> load -> helper('form');
 ?>
 <div ng-controller="UserController">
 	<form name="userForm" ng-submit="submit($event)" action="./Editar_perfil_controller" method="post" novalidate>
-		Nombre: <input name="nombre" type="text" ng-model="user.nombre"  required />
+		Nombre: <input name="nombre" ng-init="nombre'<?php echo $nombre;?>'" type="text" ng-model="user.nombre"  required />
 		<span class="messages" ng-show="userForm.$submitted || userForm.nombre.$touched">
 			<span ng-show="userForm.nombre.$error.required">El campo es obligatorio.</span>
 		</span></br>
 		
-		Apellido: <input type="text" name="apellido" ng-model="user.apellido" placeholder="apellido" required>
+		Apellido: <input type="text" name="apellido" ng-init="apellido'<?php echo $apellido; ?>'" ng-model="user.apellido" placeholder="apellido" required>
 		<span class="messages" ng-show="userForm.$submitted || userForm.apellido.$touched">
 			<span ng-show="userForm.apellido.$error.required">El campo es obligatorio.</span>
 		</span></br>
 		
-		Telefono: <input type="text" name="telefono" ng-model="user.telefono" placeholder="telefono"  min="9" max="13" required>
+		Telefono: <input type="text" name="telefono" ng-init="telefono'<?php echo $telefono; ?>'" ng-model="user.telefono" placeholder="telefono"  min="9" max="13" required>
 		<span class="messages" ng-show="userForm.$submitted || userForm.telefono.$touched">
 			<span ng-show="userForm.telefono.$error.required">El campo es obligatorio.</span>
 			<span ng-show="userForm.telefono.$error.max">el telefono no puede ser inferior de 9.</span>
 			<span ng-show="userForm.telefono.$error.max">el telefono no puede exceder de 13.</span>
 		</span></br>
 		
-		DNI: <input type="text" name="DNI" ng-model="user.dni" placeholder="dni" required>
+		DNI: <input type="text" name="DNI" ng-init="DNI'<?php echo $DNI; ?>'" ng-model="user.dni" placeholder="dni" required>
 		<span class="messages" ng-show="userForm.$submitted || userForm.dni.$touched">
 			<span ng-show="userForm.dni.$error.required">El campo es obligatorio.</span>
 		</span></br>
@@ -41,7 +41,7 @@ $this -> load -> helper('form');
 			<span ng-show="userForm.descripcion.$error.maxlength">La descripcion no puede exceder de 1000 caracteres.</span>
 		</span></br>
 		<p>Familia:
-			<select>
+			<select name="familia">
 				<?php
 				foreach ($familias as $familia) {
 					echo '<option value="' . $familia['id_familia_laboral'] . '">' . $familia['nombre'] . '</option>';
@@ -51,7 +51,7 @@ $this -> load -> helper('form');
 		</p>
 		
 		<p>Idiomas: 
-			<select>
+			<select name="idioma">
 				<?php
 				foreach ($idiomas as $idioma) {
 					echo '<option value="' . $idioma['id_idioma'] . '">' . $idioma['nombre'] . '</option>';
@@ -60,21 +60,21 @@ $this -> load -> helper('form');
 			</select>
 		</p>
 		<p>Nivel: 
-			<select>
+			<select name="nivelleido">
 				<?php
 				foreach ($niveles as $nivelleido) {
 					echo '<option value="' . $nivelleido['id_nivel'] . '">' . $nivelleido['titulacion'] . ' ' . $nivelleido['equivalencia'] . ' ' . $nivelleido['tipo'] . '</option>';
 				}
 				?>
 			</select>
-			<select>
+			<select name="nivelescrito">
 				<?php
 				foreach ($nivelesescritos as $nivelescrito) {
 					echo '<option value="' . $nivelescrito['id_nivel'] . '">' . $nivelescrito['titulacion'] . ' ' . $nivelescrito['equivalencia'] . ' ' . $nivelescrito['tipo'] . '</option>';
 				}
 				?>
 			</select>
-			<select>
+			<select name="nivelhablado">
 				<?php
 				foreach ($niveleshablados as $nivelhablado) {
 					echo '<option value="' . $nivelhablado['id_nivel'] . '">' . $nivelhablado['titulacion'] . ' ' . $nivelhablado['equivalencia'] . ' ' . $nivelhablado['tipo'] . '</option>';

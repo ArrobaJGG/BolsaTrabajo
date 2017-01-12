@@ -3,8 +3,9 @@ class Editar_perfil_controller extends CI_Controller{
 	
 	public function __construct(){
 		parent::__construct();
-		$this->load->model('alumno_model');
+		$this->load->model('familia_laboral_model');
 		$this->load->model('idioma_model');
+		$this->load->model('alumno_model');
 	//para poder ir de un controlador a otro facilmente
 		$this->load->helper(array('form','url'));
 		$this->load->library('form_validation');
@@ -34,9 +35,28 @@ class Editar_perfil_controller extends CI_Controller{
 			if($this->form_validation->run()==false){ //Si la validación es incorrecta
 				$datos["mensaje"]="Validación incorrecta";
 			}else{
+				   	   $nombre = $this->input->post('nombre');
+					   $apellido = $this->input->post('apellido');
+					   $telefono = $this->input->post('telefono');
+					   $DNI = $this->input->post('DNI');
+					   $fecha = $this->input->post('fecha');
+					   $codigo_postal = $this->input->post('codigopostal');
+					   $descripcion = $this->input->post('descripcion');
+					   $familia = $this->input->post('familia');
+					   $idioma = $this->input->post('idioma');
+					   $nivel_leido = $this->input->post('nivelleido');
+					   $nivel_escrito = $this->input->post('nivelescrito');
+					   $nivel_hablado = $this->input->post('nivelhablado');
+					   $titulado = $this->input->post('titulado');
+					   $curso = $this->input->post('curso');
+					   $ano_inicio = $this->input->post('ano_inicio');
+					   $ano_fin = $this->input->post('ano_fin');
+					   $experiencia = $this->input->post('experiencia');
+					   $foto = $this->input->post('foto');
+			}
+			if ($this->input->post("titulado")==true){
 				
 			}
-			
 			$data['titulo'] = "Editar Perfil";
 			$data["javascript"]="assets/js/editar_perfil.js";
 			$data['idiomas']=$this->idioma_model->idioma();
@@ -44,7 +64,6 @@ class Editar_perfil_controller extends CI_Controller{
 			$data['niveleshablados']=$this->idioma_model->nivelhablado();
 			$data['nivelesescritos']=$this->idioma_model->nivelescrito();
 			$data['familias']=$this->familia_laboral_model->familia();
-			$data['titulados']=$this->idioma_model->titulado();
 			$this->load->view("includes/header", $data);
 			$this->load->view("Editar_perfil_view",$data);
 			$this->load->view("includes/footer", $data);
