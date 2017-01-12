@@ -19,7 +19,7 @@ public function index(){
 		
 	if ($this->input->post('Actualizar')){
 		$this->load->library('form_validation');
-				$this->form_validation->set_rules('nombre', 'Nombre', 'required|min_length[3]');// el trim siempre delante
+				$this->form_validation->set_rules('nombre', 'Nombre', 'alpha|required|min_length[3]');// el trim siempre delante
 				$this->form_validation->set_rules('cif', 'Cif', 'trim|required|max_length[9]'); // max_length solo sirve para letras
 				$this->form_validation->set_rules('telefono', 'Telefono', 'trim|required|numeric|integer');
 				$this->form_validation->set_rules('telefono2', 'Telefono2', 'trim|numeric|integer');
@@ -67,9 +67,9 @@ public function index(){
 								        
 						if (!$this->upload->do_upload($mi_archivo)) {
 								//*** ocurrio un error
-								$data['uploadError'] = $this->upload->display_errors();
+								/*$data['uploadError'] = $this->upload->display_errors();
 								echo $this->upload->display_errors();
-								return;
+								return;*/
 						}
 														
 							 $data['uploadSuccess'] = $this->upload->data();
