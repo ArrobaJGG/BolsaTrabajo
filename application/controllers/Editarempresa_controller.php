@@ -24,7 +24,7 @@ public function index(){
 				$this->form_validation->set_rules('telefono', 'Telefono', 'trim|required|numeric|integer');
 				$this->form_validation->set_rules('telefono2', 'Telefono2', 'trim|numeric|integer');
 				$this->form_validation->set_rules('persona_contacto', 'persona_contacto', 'trim|required|alpha');
-				$this->form_validation->set_rules('archivo', 'Archivo');
+				$this->form_validation->set_rules('logo','logo');
 					// mensaje de errores
 					$this->form_validation->set_message('required','El campo %s es obligatorio'); 
 					$this->form_validation->set_message('alpha','El campo %s debe estar compuesto solo por letras');
@@ -51,11 +51,9 @@ public function index(){
 					   						"id_login" => $id_login,
 					   						"logo" => $logo);
 					   
-					   
-  			 
-
-						$mi_archivo = 'logo';
+					    $mi_archivo = 'logo';
 				        $config['upload_path'] = './img/';
+						$config['default'] = './img/pordefecto.jpg/';
 						$config['overwrite'] = TRUE;
 						$config['upload_path'] = FCPATH . './img/';
 						$config['file_name'] = $id_login;
