@@ -19,11 +19,11 @@ public function index(){
 		
 	if ($this->input->post('Actualizar')){
 		$this->load->library('form_validation');
-				$this->form_validation->set_rules('nombre', 'Nombre', 'alpha|required|min_length[3]');// el trim siempre delante
+				$this->form_validation->set_rules('nombre', 'Nombre', 'required|min_length[3]');// el trim siempre delante
 				$this->form_validation->set_rules('cif', 'Cif', 'trim|required|max_length[9]'); // max_length solo sirve para letras
 				$this->form_validation->set_rules('telefono', 'Telefono', 'trim|required|numeric|integer');
 				$this->form_validation->set_rules('telefono2', 'Telefono2', 'trim|numeric|integer');
-				$this->form_validation->set_rules('persona_contacto', 'persona_contacto', 'trim|required|alpha');
+				$this->form_validation->set_rules('persona_contacto', 'persona_contacto', 'required|callback_solo_letras');
 				$this->form_validation->set_rules('logo','logo');
 					// mensaje de errores
 					$this->form_validation->set_message('required','El campo %s es obligatorio'); 
@@ -53,7 +53,7 @@ public function index(){
 					   
 					    $mi_archivo = 'logo';
 				        $config['upload_path'] = './img/';
-						$config['default'] = './img/pordefecto.jpg/';
+						//$config['default'] = './img/pordefecto.jpg/';
 						$config['overwrite'] = TRUE;
 						$config['upload_path'] = FCPATH . './img/';
 						$config['file_name'] = $id_login;
@@ -71,8 +71,9 @@ public function index(){
 								echo $this->upload->display_errors();
 								return;*/
 						}
+						
 														
-							 $data['uploadSuccess'] = $this->upload->data();
+						$data['uploadSuccess'] = $this->upload->data();
    			 
 					   $actualizar_empresa = $this->empresa_model->actualizar($parametros,$id_login);
 					  
@@ -101,5 +102,24 @@ else{
 
 }
 
+
+
+
+
+public function solo_letras($cadena)
+{
+    $patron = '/[a-zA-Z,.\s]*$/';
+    if( !preg_match( $patron, $cadena ) ) {
+        return FALSE;
+    }
+    else {
+        return TRUE;
+    }
 }
+
+
+}
+
+
+
 ?>

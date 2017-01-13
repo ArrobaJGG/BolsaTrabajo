@@ -11,7 +11,7 @@ $this->load->helper('form');
 				
 			<tr>
 				<td>Nombre: </td>
-				<td><input type="text" name="nombre" ng-init = "nombre='<?php echo $nombre; ?>'"  ng-model="nombre"  required />
+				<td><input type="text" name="nombre" ng-init = "nombre='<?php if ($nombre==NULL){ echo " campo vacio "; } else {echo $nombre;} ?>'"  ng-model="nombre"  required />
 				<span class="messages" ng-show="userForm.$submitted || nombre.$touched"></span>
 				<span ng-show="userForm.nombre.$error.required">El campo es obligatorio.</span>
        		    </td>
