@@ -94,11 +94,17 @@ class Migration_llenar_tablas extends CI_Migration {
             		('Frances')	
                 ");
                   $this->db->query("
-            		INSERT INTO nivel(titulacion,equivalencia)
+            		INSERT INTO nivel(titulacion,equivalencia,tipo)
             		VALUES
-            		('C1','alto'),
-            		('B1','medio'),
-            		('A1','bajo')	
+            		('C1','alto','oral'),
+            		('B1','medio','oral'),
+            		('A1','bajo','oral'),
+            		('C1','alto','escrito'),
+            		('B1','medio','escrito'),
+            		('A1','bajo','escrito'),
+            		('C1','alto','leido'),
+            		('B1','medio','leido'),
+            		('A1','bajo','leido')
                 ");
         }
 
