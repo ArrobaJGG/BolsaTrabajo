@@ -23,7 +23,7 @@ public function index(){
 				$this->form_validation->set_rules('cif', 'Cif', 'trim|required|max_length[9]'); // max_length solo sirve para letras
 				$this->form_validation->set_rules('telefono', 'Telefono', 'trim|required|numeric|integer');
 				$this->form_validation->set_rules('telefono2', 'Telefono2', 'trim|numeric|integer');
-				$this->form_validation->set_rules('persona_contacto', 'persona_contacto', 'trim|required');
+				$this->form_validation->set_rules('persona_contacto', 'persona_contacto', 'required|callback_solo_letras');
 				$this->form_validation->set_rules('logo','logo');
 					// mensaje de errores
 					$this->form_validation->set_message('required','El campo %s es obligatorio'); 
@@ -53,7 +53,7 @@ public function index(){
 					   
 					    $mi_archivo = 'logo';
 				        $config['upload_path'] = './img/';
-						$config['default'] = './img/pordefecto.jpg/';
+						//$config['default'] = './img/pordefecto.jpg/';
 						$config['overwrite'] = TRUE;
 						$config['upload_path'] = FCPATH . './img/';
 						$config['file_name'] = $id_login;
@@ -102,14 +102,24 @@ else{
 
 }
 
+
+
+
+
+public function solo_letras($cadena)
+{
+    $patron = '/[a-zA-Z,.\s]*$/';
+    if( !preg_match( $patron, $cadena ) ) {
+        return FALSE;
+    }
+    else {
+        return TRUE;
+    }
+}
+
+
 }
 
 
 
-
-
-function letras(){
-	
-	
-}
 ?>
