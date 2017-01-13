@@ -30,7 +30,7 @@ class Editar_perfil_controller extends CI_Controller{
 				
             //Mensajes
             // %s es el nombre del campo que ha fallado
-				$this->form_validation->set_message('required','El campo %s es obligatorio');
+			  	$this->form_validation->set_message('required','El campo %s es obligatorio');
 				$this->form_validation->set_message('alpha','El campo %s debe estar compuesto solo por letras');
 				$this->form_validation->set_message('integer', 'El campo %s debe poseer solo numeros enteros');
 				$this->form_validation->set_message('min_length','El campo %s debe tener mas de 3 caracteres');
