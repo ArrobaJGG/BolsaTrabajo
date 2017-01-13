@@ -49,7 +49,7 @@ class Login_model extends CI_Model{
 		return $this->db->query($sql);
 	}
 	public function validar_login($correo){
-		$sql = "UPDATE login SET validado = true WHERE correo = '$correo'";
+		$sql = "UPDATE login SET validado = 1 WHERE correo = '$correo'";
 		return $this->db->query($sql);
 	}
 	public function existe_correo($hash){
@@ -58,6 +58,10 @@ class Login_model extends CI_Model{
 		$row = $query->row();
 		$existe = isset($row) ? $row->correo : false;
 		return $existe;
+	}
+	public function set_contrasena($correo,$contrasena){
+		$sql = "UPDATE login SET contrasena = '$contrasena' WHERE correo = '$correo'";
+		return $this->db->query($sql);
 	}
 }
 
