@@ -18,7 +18,7 @@ class Editar_perfil_controller extends CI_Controller{
 			
 		
 			 if($this->input->post("Enviar")){*/
-				$this->form_validation->set_rules('nombre', 'nombre ', 'required|callback_solo_letras');
+				$this->form_validation->set_rules('nombre', 'nombre ', 'required|callback_letras');
 				$this->form_validation->set_rules('apellido','apellido','required|alpha');
 				$this->form_validation->set_rules('telefono','telefono','required|integer');
 				$this->form_validation->set_rules('dni','dni','required');
@@ -26,11 +26,11 @@ class Editar_perfil_controller extends CI_Controller{
 				$this->form_validation->set_rules('codigopostal','codigopostal','required|integer');
 				$this->form_validation->set_rules('descripcion','descripcion','required|max_length');
 				$this->form_validation->set_rules('ano_inicio','ano_inicio','required|callback_numcheck');
-				$this->form_validation->set_rules('ano_fin','ano_fin','required|calback_numcheckmax');
+				$this->form_validation->set_rules('ano_fin','ano_fin','required|callback_numcheckmax');
 				
             //Mensajes
             // %s es el nombre del campo que ha fallado
-			  	$this->form_validation->set_message('required','El campo %s es obligatorio');
+				$this->form_validation->set_message('required','El campo %s es obligatorio');
 				$this->form_validation->set_message('alpha','El campo %s debe estar compuesto solo por letras');
 				$this->form_validation->set_message('integer', 'El campo %s debe poseer solo numeros enteros');
 				$this->form_validation->set_message('min_length','El campo %s debe tener mas de 3 caracteres');
@@ -96,16 +96,19 @@ public function numcheckmax($in){
 		return TRUE;
 	}
 }
-public function solo_letras($cadena)
-{
-    $patron = '/[a-zA-Z,.\s]*$/';
-    if( !preg_match( $patron, $cadena ) ) {
-        return FALSE;
-    }
-    else {
-        return TRUE;
-    }
+public function letras($cadena){
+	if (!preg_match( '/[0-9]+$/i', $cadena ))
+	{
+		if(preg_match( '/^[a-z ,.]*$/i', $cadena ))
+		return TRUE;
+		}
+	else {
+		$this->form_validation->set_message('letras', 'el campo %s tiene que tenere solo letras');
+			return FALSE;
+	}
+		
+		
+	
 }
-
 }
 ?>
