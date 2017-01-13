@@ -5,10 +5,17 @@ class Alumno_model extends CI_Model{
                 $this->load->database();
         }
 	public function get_nombre($id_login){
-		$sql = "SELECT nombre FROM alumno WHERE id_login = '$id_login'";
+		$sql = "SELECT nombre FROM alumno WHERE id_login = $id_login";
 		$query = $this->db->query($sql);
 		$row = $query->row();
 		$devolver = isset($row) ? $row->nombre : false;
+		return $devolver;
+	}
+	public function existe($id_login){
+		$sql = "SELECT nombre FROM alumno WHERE id_login = $id_login";
+		$query = $this->db->query($sql);
+		$row = $query->row();
+		$devolver = isset($row) ? true : false;
 		return $devolver;
 	}
 	public function actualizar_alumno($columnas,$datos){
@@ -28,19 +35,10 @@ class Alumno_model extends CI_Model{
 		$sql += ')';
 		return $this->db->query($sql);
 	}
-		public function titulado()
-		{
-		$query = $this->db->query('SELECT * FROM alumno_idioma');
-		$row = $query->result_array();
-		$titulados= $row ? $row : false;
-		return $titulados;		
-		}
-	public function alumnos()
-	{
-		$query = $this->db->query('SELECT * FROM alumno');
-		$row = $query->result_array();
-		$alumno= $row ? $row : false;
-		return $alumno;	
+
+	public function crear_alumno($id_login){
+		$sql = "INSERT INTO alumno (id_login) VALUES ('$id_login')";
+		return $this->db->query($sql);
 	}
 }
 ?>

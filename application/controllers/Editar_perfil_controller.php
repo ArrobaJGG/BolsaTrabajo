@@ -29,6 +29,7 @@ class Editar_perfil_controller extends CI_Controller{
 				$this->form_validation->set_rules('ano_fin','ano_fin','required|callback_numcheckmax');
 				
             //Mensajes
+            // gorka paga la coca primer aviso
             // %s es el nombre del campo que ha fallado
 				$this->form_validation->set_message('required','El campo %s es obligatorio');
 				$this->form_validation->set_message('alpha','El campo %s debe estar compuesto solo por letras');
