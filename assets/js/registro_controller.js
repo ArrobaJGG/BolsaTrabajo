@@ -18,7 +18,6 @@ app.controller("formulario_ctrl",['$scope','$document',function($scope,$document
 			error = false;
 
 		}
-		alert("hoooola");
 		if(error) $event.preventDefault();
 	} ;
 }]);
