@@ -52,6 +52,9 @@ public function index(){
 					case 'empresa':
 						redirect("resumenempresa_controller");
 						break;
+					case 'administrador':
+						redirect('notificaciones_controller');
+						break;
 				}
 				}else{
 				$datos["mensaje"]="Usuario o contraseña incorrectos";
@@ -61,6 +64,7 @@ public function index(){
         }
     $data["titulo"]="Login";
 	$data["javascript"]="assets/js/login_controller.js";
+	$data['libreria'] = array();
 	$this->load->view("includes/header",$data);
 	$this->load->view("login_view",$datos);
 	$this->load->view("includes/footer");
