@@ -16,4 +16,4 @@ function mostrarImagen(input) {
 $("#file_url").change(function(){
  mostrarImagen(this);
 });//*/
-				
+//var persona_contacto = document.getElementById("persona_contacto").value;

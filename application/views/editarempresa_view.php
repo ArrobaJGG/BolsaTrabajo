@@ -11,7 +11,7 @@ $this->load->helper('form');
 				
 			<tr>
 				<td>Nombre: </td>
-				<td><input type="text" name="nombre" ng-init = "nombre='<?php if ($nombre==NULL){ echo " campo vacio "; } else {echo $nombre;} ?>'"  ng-model="nombre"  required />
+				<td><input  name="nombre" ng-init = "nombre='<?php if ($nombre==NULL){ echo " campo vacio "; } else {echo $nombre;} ?>'"  ng-model="nombre"  required />
 				<span class="messages" ng-show="userForm.$submitted || nombre.$touched"></span>
 				<span ng-show="userForm.nombre.$error.required">El campo es obligatorio.</span>
        		    </td>
@@ -34,7 +34,7 @@ $this->load->helper('form');
 			</tr>
 			<tr>
 				<td>Nombre contacto:</td>
-				<td><input type="text" name="persona_contacto" ng-init = "persona_contacto = '<?php $persona_contacto = (null) ?  " "  : $persona_contacto; echo $persona_contacto ?>'" ng-model="persona_contacto" required  />
+				<td><input type="text"  id="persona_contacto" name="persona_contacto" ng-init = "persona_contacto = '<?php $persona_contacto = (null) ?  " "  : $persona_contacto; echo $persona_contacto ?>'" ng-model="persona_contacto" required  />
 					<span class="messages" ng-show="userForm.$submitted || persona_contacto.$touched">
 					<span ng-show="userForm.persona_contacto.$error.required">El campo es obligatorio.</span>
 				</td>
