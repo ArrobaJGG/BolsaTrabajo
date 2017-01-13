@@ -22,9 +22,9 @@ public function index(){
 				$this->form_validation->set_rules('nombre', 'Nombre', 'alpha|required|min_length[3]');// el trim siempre delante
 				$this->form_validation->set_rules('cif', 'Cif', 'trim|required|max_length[9]'); // max_length solo sirve para letras
 				$this->form_validation->set_rules('telefono', 'Telefono', 'trim|required|numeric|integer');
-				$this->form_validation->set_rules('telefono2', 'Telefono2', 'trim|required|numeric|integer');
+				$this->form_validation->set_rules('telefono2', 'Telefono2', 'trim|numeric|integer');
 				$this->form_validation->set_rules('persona_contacto', 'persona_contacto', 'trim|required|alpha');
-				$this->form_validation->set_rules('archivo', 'Archivo');
+				$this->form_validation->set_rules('logo','logo');
 					// mensaje de errores
 					$this->form_validation->set_message('required','El campo %s es obligatorio'); 
 					$this->form_validation->set_message('alpha','El campo %s debe estar compuesto solo por letras');
@@ -51,13 +51,12 @@ public function index(){
 					   						"id_login" => $id_login,
 					   						"logo" => $logo);
 					   
-					   
-  			 
-
-						$mi_archivo = 'logo';
+					    $mi_archivo = 'logo';
 				        $config['upload_path'] = './img/';
+						$config['default'] = './img/pordefecto.jpg/';
+						$config['overwrite'] = TRUE;
 						$config['upload_path'] = FCPATH . './img/';
-						$config['file_name'] = 'holamundo';
+						$config['file_name'] = $id_login;
 						$config['allowed_types'] = 'jpg';
 						//$config['max_size'] = "50000";//kb
 						//$config['max_width'] = "2000"; // kb
@@ -68,14 +67,16 @@ public function index(){
 								        
 						if (!$this->upload->do_upload($mi_archivo)) {
 								//*** ocurrio un error
-								$data['uploadError'] = $this->upload->display_errors();
+								/*$data['uploadError'] = $this->upload->display_errors();
 								echo $this->upload->display_errors();
-								return;
+								return;*/
 						}
 														
 							 $data['uploadSuccess'] = $this->upload->data();
    			 
 					   $actualizar_empresa = $this->empresa_model->actualizar($parametros,$id_login);
+					  
+					   
 					   //$this->Empresa_model->update($nombre,$cif,$telefono,$telefono2,$contacto,$archivo);
 					   $datos["mensaje"] = "Validacion correcta";
 					   
@@ -86,6 +87,7 @@ public function index(){
 
 }
 				$datos_empresa = $this->empresa_model->id_login($id_login);
+				
 				//echo($this->session->$correo);
  				$data["titulo"]="Editar Empresa";
 				$data["javascript"]="assets/js/editar_empresa.js";
