@@ -11,7 +11,7 @@ $this->load->helper('form');
 				
 			<tr>
 				<td>Nombre: </td>
-				<td><input type="text" name="nombre" ng-init = "nombre='<?php if ($nombre==NULL){ echo " campo vacio "; } else {echo $nombre;} ?>'"  ng-model="nombre"  required />
+				<td><input  name="nombre" ng-init = "nombre='<?php if ($nombre==NULL){ echo " campo vacio "; } else {echo $nombre;} ?>'"  ng-model="nombre"  required />
 				<span class="messages" ng-show="userForm.$submitted || nombre.$touched"></span>
 				<span ng-show="userForm.nombre.$error.required">El campo es obligatorio.</span>
        		    </td>
@@ -23,18 +23,18 @@ $this->load->helper('form');
 			</tr>
 			<tr>
 				<td>telefono: </td>
-				<td><input type="text" name="telefono" ng-init = "telefono='<?php echo $telefono1; ?>'"  ng-model="telefono"  required />
+				<td><input type="text" name="telefono" ng-init = "telefono='<?php  $telefono1 = (NULL) ? " " :  $telefono1; echo $telefono1 ?>'"  ng-model="telefono"  required />
 				<span class="messages" ng-show="userForm.$submitted || telefono.$touched"></span>
 				<span ng-show="userForm.telefono.$error.required">El campo es obligatorio.</span>
        		    </td>
 			</tr>
 			<tr>
 				<td>telefono2:</td>
-				<td><input type="number" name="telefono2" value="<?php echo $telefono2; ?>" /></td>
+				<td><input type="number" name="telefono2" value="<?php $telefono2 = (NULL) ? " " :   $telefono2; echo $telefono2 ?>" /></td>
 			</tr>
 			<tr>
 				<td>Nombre contacto:</td>
-				<td><input type="text" name="persona_contacto" ng-init = "persona_contacto = '<?php echo $persona_contacto; ?>'" ng-model="persona_contacto" required  />
+				<td><input type="text"  id="persona_contacto" name="persona_contacto" ng-init = "persona_contacto = '<?php $persona_contacto = (null) ?  " "  : $persona_contacto; echo $persona_contacto ?>'" ng-model="persona_contacto" required  />
 					<span class="messages" ng-show="userForm.$submitted || persona_contacto.$touched">
 					<span ng-show="userForm.persona_contacto.$error.required">El campo es obligatorio.</span>
 				</td>

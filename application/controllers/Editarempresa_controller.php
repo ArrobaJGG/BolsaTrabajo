@@ -20,10 +20,10 @@ public function index(){
 	if ($this->input->post('Actualizar')){
 		$this->load->library('form_validation');
 				$this->form_validation->set_rules('nombre', 'Nombre', 'required|min_length[3]');// el trim siempre delante
-				$this->form_validation->set_rules('cif', 'Cif', 'trim|required|max_length[9]'); // max_length solo sirve para letras
+				$this->form_validation->set_rules('cif', 'Cif', 'requiredtrim|required|max_length[9]'); // max_length solo sirve para letras
 				$this->form_validation->set_rules('telefono', 'Telefono', 'trim|required|numeric|integer');
-				$this->form_validation->set_rules('telefono2', 'Telefono2', 'trim|numeric|integer');
-				$this->form_validation->set_rules('persona_contacto', 'persona_contacto', 'required|callback_solo_letras');
+				$this->form_validation->set_rules('telefono2', 'Telefono2', 'trim|numeric|integer|required');
+				$this->form_validation->set_rules('persona_contacto', 'persona_contacto', 'required|callback_letras');
 				$this->form_validation->set_rules('logo','logo');
 					// mensaje de errores
 					$this->form_validation->set_message('required','El campo %s es obligatorio'); 
@@ -106,15 +106,19 @@ else{
 
 
 
-public function solo_letras($cadena)
-{
-    $patron = '/[a-zA-Z,.\s]*$/';
-    if( !preg_match( $patron, $cadena ) ) {
-        return FALSE;
-    }
-    else {
-        return TRUE;
-    }
+public function letras($cadena){
+	if (!preg_match( '/[0-9]+$/i', $cadena ))
+	{
+		if(preg_match( '/^[a-z]*$/i', $cadena ))
+		return TRUE;
+		}
+	else {
+		$this->form_validation->set_message('letras', 'el campo %s tiene que tenere solo letras');
+			return FALSE;
+	}
+		
+		
+	
 }
 
 
