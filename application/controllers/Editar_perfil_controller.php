@@ -6,6 +6,7 @@ class Editar_perfil_controller extends CI_Controller{
 		$this->load->model('familia_laboral_model');
 		$this->load->model('idioma_model');
 		$this->load->model('alumno_model');
+		$this->load->model('editar_perfil_model');
 	//para poder ir de un controlador a otro facilmente
 		$this->load->helper(array('form','url'));
 		$this->load->library('form_validation');
@@ -13,9 +14,8 @@ class Editar_perfil_controller extends CI_Controller{
 	}
 	
 	public function index(){
-		if (isset($this->session->userdata['correo'])) {		
-			$id_login = $this->session->userdata['id_login'];
-			
+		if (($this->session->userdata('rol')=='alumno')) {		
+			$id_login = $this->session->userdata['id_login'];	
 		
 			if($this->input->post("Enviar")){
 				$this->form_validation->set_rules('nombre', 'nombre ', 'required|callback_letras');
@@ -71,11 +71,16 @@ class Editar_perfil_controller extends CI_Controller{
 			$data['niveleshablados']=$this->idioma_model->nivelhablado();
 			$data['nivelesescritos']=$this->idioma_model->nivelescrito();
 			$data['familias']=$this->familia_laboral_model->familia();
+			$data['cursos']=$this->editar_perfil_model->curso();
 			$this->load->view("includes/header", $data);
 			$this->load->view("Editar_perfil_view");
 			$this->load->view("includes/footer", $data);
 			
 			}
+		else{
+			redirect('login_controller');
+			}
+
 		}
 
 		public function numcheck($in){

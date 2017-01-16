@@ -2,8 +2,8 @@
 $this -> load -> helper('form');
 ?>
 <div ng-controller="UserController">
-	<form name="userForm" ng-submit="submit($event)" action="./Editar_perfil_controller" method="post" novalidate>
-		Nombre: <input name="nombre"  type="text" ng-model="user.nombre"  required />
+	<form name="userForm" ng-submit="submit($event)"  action="./Editar_perfil_controller" method="post" novalidate>
+		Nombre: <input name="nombre"  type="text" ng-model="user.nombre"  ng-init = "nombre='<?php if ($nombre==NULL){ echo " campo vacio "; } else {echo $nombre;} ?>'" required />
 		<span class="messages" ng-show="userForm.$submitted || userForm.nombre.$touched">
 			<span ng-show="userForm.nombre.$error.required">El campo es obligatorio.</span>
 		</span></br>
@@ -82,13 +82,14 @@ $this -> load -> helper('form');
 				?>
 			</select>
 			<input type="checkbox" name="titulado" value="titulado"> titulado<br>
-			<?php
-			
-			?>
-		</p>
+			</p>
 		<p>Curso: 
 			<select name="Curso">
-				
+				<?php
+				foreach ($cursos as $curso) {
+					echo '<option value="' . $curso['id_curso'] . '">'. ' ' . $curso['nombre'] . '</option>';
+				}
+				?>
 			</select>
 		</p>
 	</br>
