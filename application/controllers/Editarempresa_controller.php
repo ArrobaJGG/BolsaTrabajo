@@ -89,7 +89,9 @@ public function index(){
 }
 				$datos_empresa = $this->empresa_model->id_login($id_login);
 				
+				
 				//echo($this->session->$correo);
+ 				$data['libreria'] = array();
  				$data["titulo"]="Editar Empresa";
 				$data["javascript"]="assets/js/editar_empresa.js";
 				$this->load->view("includes/header",$data);
