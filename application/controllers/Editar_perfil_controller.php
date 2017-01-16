@@ -13,11 +13,11 @@ class Editar_perfil_controller extends CI_Controller{
 	}
 	
 	public function index(){
-		/*if (isset($this->session->userdata['correo'])) {		
+		if (isset($this->session->userdata['correo'])) {		
 			$id_login = $this->session->userdata['id_login'];
 			
 		
-			if($this->input->post("Enviar")){*/
+			if($this->input->post("Enviar")){
 				$this->form_validation->set_rules('nombre', 'nombre ', 'required|callback_letras');
 				$this->form_validation->set_rules('apellido','apellido','required|alpha');
 				$this->form_validation->set_rules('telefono','telefono','required|integer');
@@ -58,7 +58,7 @@ class Editar_perfil_controller extends CI_Controller{
 				$ano_fin = $this->input->post('ano_fin');
 				$experiencia = $this->input->post('experiencia');
 				$foto = $this->input->post('foto');
-			//}
+			}
 				
 		   //} 
 				
@@ -75,8 +75,8 @@ class Editar_perfil_controller extends CI_Controller{
 			$this->load->view("Editar_perfil_view");
 			$this->load->view("includes/footer", $data);
 			
+			}
 		}
-
 
 		public function numcheck($in){
 			if (intval($in) < 1960) {
