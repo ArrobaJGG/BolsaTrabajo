@@ -17,7 +17,7 @@ class Editar_perfil_controller extends CI_Controller{
 			$id_login = $this->session->userdata['id_login'];
 			
 		
-			 if($this->input->post("Enviar")){*/
+			if($this->input->post("Enviar")){*/
 				$this->form_validation->set_rules('nombre', 'nombre ', 'required|callback_letras');
 				$this->form_validation->set_rules('apellido','apellido','required|alpha');
 				$this->form_validation->set_rules('telefono','telefono','required|integer');
@@ -29,9 +29,6 @@ class Editar_perfil_controller extends CI_Controller{
 				$this->form_validation->set_rules('ano_fin','ano_fin','required|callback_numcheckmax');
 				
             //Mensajes
-           
-            // gorka paga la coca primer aviso
-           
             // %s es el nombre del campo que ha fallado
 				$this->form_validation->set_message('required','El campo %s es obligatorio');
 				$this->form_validation->set_message('alpha','El campo %s debe estar compuesto solo por letras');
@@ -61,57 +58,52 @@ class Editar_perfil_controller extends CI_Controller{
 				$ano_fin = $this->input->post('ano_fin');
 				$experiencia = $this->input->post('experiencia');
 				$foto = $this->input->post('foto');
-				
-				
 			//}
 				
-		//	} 
+		   //} 
+				
+			}
+			$data['libreria']=array();
+			$data['titulo'] = "Editar Perfil";
+			$data["javascript"]="assets/js/editar_perfil.js";
+			$data['idiomas']=$this->idioma_model->idioma();
+			$data['niveles']=$this->idioma_model->nivelleido();
+			$data['niveleshablados']=$this->idioma_model->nivelhablado();
+			$data['nivelesescritos']=$this->idioma_model->nivelescrito();
+			$data['familias']=$this->familia_laboral_model->familia();
+			$this->load->view("includes/header", $data);
+			$this->load->view("Editar_perfil_view");
+			$this->load->view("includes/footer", $data);
 			
 		}
-		
-		$data['titulo'] = "Editar Perfil";
-		$data["javascript"]="assets/js/editar_perfil.js";
-		$data['idiomas']=$this->idioma_model->idioma();
-		$data['niveles']=$this->idioma_model->nivelleido();
-		$data['niveleshablados']=$this->idioma_model->nivelhablado();
-		$data['nivelesescritos']=$this->idioma_model->nivelescrito();
-		$data['familias']=$this->familia_laboral_model->familia();
-		$this->load->view("includes/header", $data);
-		$this->load->view("Editar_perfil_view");
-		$this->load->view("includes/footer", $data);
-		
-	}
 
 
-public function numcheck($in){
-	if (intval($in) < 1960) {
-		$this->form_validation->set_message('numcheck', 'el campo %s tiene que ser mas que 1960');
-		return FALSE;
-	} else {
-		return TRUE;
-	}
-}
-public function numcheckmax($in){
-	if (intval($in) > 1980) {
-		$this->form_validation->set_message('numcheck', 'el campo %s tiene que ser menos que 1980');
-		return FALSE;
-	} else {
-		return TRUE;
-	}
-}
-public function letras($cadena){
-	if (!preg_match( '/[0-9]+$/i', $cadena ))
-	{
-		if(preg_match( '/^[a-z ,.]*$/i', $cadena ))
-		return TRUE;
+		public function numcheck($in){
+			if (intval($in) < 1960) {
+				$this->form_validation->set_message('numcheck', 'el campo %s tiene que ser mas que 1960');
+				return FALSE;
+			} else {
+				return TRUE;
+			}
 		}
-	else {
-		$this->form_validation->set_message('letras', 'el campo %s tiene que tenere solo letras');
-			return FALSE;
+		public function numcheckmax($in){
+			if (intval($in) > 1980) {
+				$this->form_validation->set_message('numcheck', 'el campo %s tiene que ser menos que 1980');
+				return FALSE;
+			} else {
+				return TRUE;
+			}
+		}
+		public function letras($cadena){
+			if (!preg_match( '/[0-9]+$/i', $cadena ))
+			{
+				if(preg_match( '/^[a-z ,.]*$/i', $cadena ))
+					return TRUE;
+			}
+			else {
+				$this->form_validation->set_message('letras', 'el campo %s tiene que tener solo letras');
+				return FALSE;
+			}
+		}
 	}
-		
-		
-	
-}
-}
-?>
+	?>

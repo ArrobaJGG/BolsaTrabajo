@@ -83,7 +83,7 @@ $this -> load -> helper('form');
 			</select>
 			<input type="checkbox" name="titulado" value="titulado"> titulado<br>
 			<?php
-			  
+			
 			?>
 		</p>
 		<p>Curso: 
