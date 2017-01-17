@@ -47,6 +47,20 @@ class Empresa_model extends CI_Model{
 		return $this->db->query($sql);
 	}
 	
-
+	public function validar_empresa($id){
+		$sql = "UPDATE empresa SET estado = true WHERE id_login = $id";
+		return $this->db->query($sql);
+	}
+	
+	public function get_empresas($limit){
+		$sql = "SELECT * FROM empresa ORDER BY id_login DESC LIMIT $limit";
+		$query = $this->db->query($sql);
+		$devolver = isset($query) ? $query->result_array() : false;
+		return $devolver;
+	}
+	public function borrar_empresa($id){
+		$sql = "DELETE FROM empresa WHERE id_login = '$id'";
+		return $this->db->query($sql);
+	}
 }
 ?>
