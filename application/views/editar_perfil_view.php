@@ -2,40 +2,40 @@
 $this -> load -> helper('form');
 ?>
 <div ng-controller="UserController">
-	<form name="userForm" ng-submit="submit($event)" action="./Editar_perfil_controller" method="post" novalidate>
-		Nombre: <input name="nombre"  type="text" ng-model="user.nombre"  required />
+	<form name=" userForm" ng-submit="submit($event)"  action="./Editar_perfil_controller" method="post" novalidate>
+		Nombre: <input name="nombre"  type="text" ng-model="user.nombre"  ng-init = "nombre='<?php if ($nombre==NULL){ echo " campo vacio "; } else {echo $nombre;} ?>'" required />
 		<span class="messages" ng-show="userForm.$submitted || userForm.nombre.$touched">
 			<span ng-show="userForm.nombre.$error.required">El campo es obligatorio.</span>
 		</span></br>
 		
-		Apellido: <input type="text" name="apellido"  ng-model="user.apellido" placeholder="apellido" required>
+		Apellido: <input type="text" name="apellido"  ng-model="user.apellido" ng-init = "apellido='<?php if ($apellido==NULL){ echo " campo vacio "; } else {echo $apellido;} ?>'" required>
 		<span class="messages" ng-show="userForm.$submitted || userForm.apellido.$touched">
 			<span ng-show="userForm.apellido.$error.required">El campo es obligatorio.</span>
 		</span></br>
 		
-		Telefono: <input type="text" name="telefono"  ng-model="user.telefono" placeholder="telefono"  min="9" max="13" required>
+		Telefono: <input type="text" name="telefono"  ng-model="user.telefono" ng-init = "telefono='<?php if ($telefono==NULL){ echo " campo vacio "; } else {echo $telefono;} ?>'" min="9" max="13" required>
 		<span class="messages" ng-show="userForm.$submitted || userForm.telefono.$touched">
 			<span ng-show="userForm.telefono.$error.required">El campo es obligatorio.</span>
 			<span ng-show="userForm.telefono.$error.max">el telefono no puede ser inferior de 9.</span>
 			<span ng-show="userForm.telefono.$error.max">el telefono no puede exceder de 13.</span>
 		</span></br>
 		
-		DNI: <input type="text" name="DNI" ng-model="user.dni" placeholder="dni" required>
+		DNI: <input type="text" name="DNI" ng-model="user.dni" ng-init = "dni='<?php if ($dni==NULL){ echo " campo vacio "; } else {echo $dni;} ?>'" required>
 		<span class="messages" ng-show="userForm.$submitted || userForm.dni.$touched">
 			<span ng-show="userForm.dni.$error.required">El campo es obligatorio.</span>
 		</span></br>
 		
-		Fecha Nacimiento: <input type="date" name="fecha" ng-model="user.fecha" placeholder="fecha nacimiento" required>
+		Fecha Nacimiento: <input type="date" name="fecha" ng-model="user.fecha" ng-init = "fecha='<?php if ($fecha==NULL){ echo " campo vacio "; } else {echo $fecha;} ?>'" required>
 		<span class="messages" ng-show="userForm.$submitted || userForm.fecha.$touched">
 			<span ng-show="userForm.fecha.$error.required">El campo es obligatorio.</span>
 		</span></br>
 		
-		Codigo Postal: <input type="text" name="codigopostal" ng-model="user.codigopostal" placeholder="38587" required>
+		Codigo Postal: <input type="text" name="codigopostal" ng-model="user.codigopostal" ng-init = "codigopostal='<?php if ($codigopostal==NULL){ echo " campo vacio "; } else {echo $codigopostal;} ?>'" required>
 		<span class="messages" ng-show="userForm.$submitted || userForm.codigopostal.$touched">
 			<span ng-show="userForm.codigopostal.$error.required">El campo es obligatorio.</span>
 		</span></br>
 		
-		Descripcion: <textarea name="descripcion" ng-model="user.descripcion" ng-maxlength="1000" placeholder="introduce aqui..."  ng-maxlength="1000" required></textarea>
+		Descripcion: <textarea name="descripcion" ng-model="user.descripcion" ng-init = "descripcion='<?php if ($descripcion==NULL){ echo " campo vacio "; } else {echo $descripcion;} ?>'"  ng-maxlength="1000" required></textarea>
 		<span class="messages" ng-show="userForm.$submitted || userForm.descripcion.$touched">
 			<span ng-show="userForm.descripcion.$error.required">El campo es obligatorio.</span>
 			<span ng-show="userForm.descripcion.$error.maxlength">La descripcion no puede exceder de 1000 caracteres.</span>
@@ -82,38 +82,40 @@ $this -> load -> helper('form');
 				?>
 			</select>
 			<input type="checkbox" name="titulado" value="titulado"> titulado<br>
-			<?php
-			
-			?>
-		</p>
+			</p>
 		<p>Curso: 
 			<select name="Curso">
-				
+				<?php
+				foreach ($cursos as $curso) {
+					echo '<option value="' . $curso['id_curso'] . '">'. ' ' . $curso['nombre'] . '</option>';
+				}
+				?>
 			</select>
 		</p>
 	</br>
-	Año Inicio: <input type="number" name="ano_inicio" ng-model="ano_incio"  min="1960" >
+	Año Inicio: <input type="number" name="ano_inicio" ng-model="ano_incio" ng-init = "ano_inicio='<?php if ($ano_inicio==NULL){ echo " campo vacio "; } else {echo $ano_inicio;} ?>'" min="1960" >
 	<span class="messages" ng-show="userForm.$submitted || userForm.ano_inicio.$touched">
 		<span ng-show="userForm.ano_inicio.$error.required">El campo es obligatorio.</span>
 		<span ng-show="userForm.ano_inicio.$error.min">el año de inicio no puede ser inferior de 1960.</span>
 	</span></br>
 	
-	Año Fin: <input type="number" name="ano_fin" ng-model="ano_fin" min="1980" >
+	Año Fin: <input type="number" name="ano_fin" ng-model="ano_fin" ng-init = "ano_fin='<?php if ($ano_fin==NULL){ echo " campo vacio "; } else {echo $ano_fin;} ?>'" min="1980" >
 	<span class="messages" ng-show="userForm.$submitted || userForm.ano_fin.$touched">
 		<span ng-show="userForm.ano_fin.$error.required">El campo es obligatorio.</span>
 		<span ng-show="userForm.ano_fin.$error.min">el año de finalizacion no puede ser inferior de 1980.</span>
 	</span></br>
 	
-	Experiencia: <textarea name="experiencia" ng-model="experiencia" ng-maxlength="1000" placeholder="experiencia..."></textarea>
+	Experiencia: <textarea name="experiencia" ng-model="experiencia" ng-init = "experiencia='<?php if ($experiencia==NULL){ echo " campo vacio "; } else {echo $experiencia;} ?>'" ng-maxlength="1000" ></textarea>
 	<span class="messages" ng-show="userForm.$submitted || userForm.experiencia.$touched">
 		<span ng-show="userForm.experiencia.$error.required">El campo es obligatorio.</span>
 		<span ng-show="userForm.ano_inicio.$error.maxlength">el año de inicio no puede ser inferior de 1960.</span>
 	</span></br>
 	
-	Foto: <input type="file" name="foto" ng-model="foto" required>
-	<span class="messages" ng-show="userForm.$submitted || userForm.foto.$touched">
-		<span ng-show="userForm.foto.$error.required">El campo es obligatorio.</span>
-	</span></br>
+	Foto: <input type="file" name="foto" accept="image/*" value="http://localhost/BolsaTrabajo/img/<?php echo $id_login ?>.jpg" onerror="this.src='./img/pordefecto.jpg'"/></td>
+				<td><div id="imgempresa">
+					<img src="http://localhost/BolsaTrabajo/img/<?php echo $id_login ?>.jpg"; width="35" height="35" onerror="this.src='./img/pordefecto.jpg'";>
+				   
+				</div></td></br>
 	
 	<p><?php if(isset($mensaje)) echo $mensaje ?></p>
 	<?php echo validation_errors(); ?><!--mostrar los errores de validación-->

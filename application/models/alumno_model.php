@@ -1,4 +1,4 @@
-<?php 
+ <?php 
 class Alumno_model extends CI_Model{
 	public function __construct()
         {
@@ -22,7 +22,7 @@ class Alumno_model extends CI_Model{
 		/*
 		 * Cambiar insert por update y alguna cosa mas para poder actualizar solo los campos que se envian
 		 */
-		$sql = "INSERT INTO alumno (";
+		$sql = "UPDATE INTO alumno (";
 		foreach ($columnas as $columna) {
 			$sql += $columna.',';
 		}
@@ -40,6 +40,7 @@ class Alumno_model extends CI_Model{
 		$sql = "INSERT INTO alumno (id_login) VALUES ('$id_login')";
 		return $this->db->query($sql);
 	}
+
 	public function get_alumnos($limite = PHP_INT_MAX){
 		$sql = "SELECT * FROM alumno ORDER BY id_login DESC LIMIT $limite";
 		$query = $this->db->query($sql);
@@ -49,6 +50,13 @@ class Alumno_model extends CI_Model{
 	public function borrar_alumno($id){
 		$sql = "DELETE FROM alumno WHERE id_login = '$id'";
 		return $this->db->query($sql);
+	}
+	public function actualizar($parametros,$id_login){
+		$sql = "UPDATE alumno SET nombre = '$parametros[nombre]', dni = '$parametros[cif]', telefono1 = $parametros[telefono], telefono2 = $parametros[telefono2], persona_contacto= '$parametros[persona_contacto]'  WHERE id_login = $id_login";
+		$query = $this->db->query($sql);
+		//$row = $query->row();	
+		//return $row;
+
 	}
 }
 ?>
