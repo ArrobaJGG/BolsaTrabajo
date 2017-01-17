@@ -30,9 +30,9 @@ class Login_model extends CI_Model{
 		$devolver = isset($row) ? $row->rol : false;
 		return $devolver;
 		}
-	public function get_correo($correo)
+	public function get_correo($id)
 		{
-		$sql = "SELECT correo FROM login WHERE correo='$correo'";
+		$sql = "SELECT correo FROM login WHERE id_login='$id'";
 		$query = $this->db->query($sql);
 		$row = $query->row();
 		$devolver = isset($row) ? $row->correo : false;
@@ -62,6 +62,17 @@ class Login_model extends CI_Model{
 	}
 	public function set_contrasena($correo,$contrasena){
 		$sql = "UPDATE login SET contrasena = '$contrasena' WHERE correo = '$correo'";
+		return $this->db->query($sql);
+	}
+	public function esta_validado($correo){
+		$sql = "SELECT validado FROM login WHERE correo = '$correo'";
+		$query= $this->db->query($sql);
+		$row = $query->row();
+		$devolver = isset($row) ? $row->validado : false;
+		return $devolver;
+	}
+	public function borrar_usuario($id){
+		$sql = "DELETE FROM login WHERE id_login = $id";;
 		return $this->db->query($sql);
 	}
 }
