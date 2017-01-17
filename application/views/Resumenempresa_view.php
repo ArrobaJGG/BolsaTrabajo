@@ -8,8 +8,8 @@ $this->load->helper('form');
 	?>
 
 	<div id="cuadro">
-		<h1>Ofertas:</h1>
-		<div id="">
+		<h1>Ofertas: </h1>
+		<div id="s">
 			
 		</div>
 		

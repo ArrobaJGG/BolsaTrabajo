@@ -33,4 +33,16 @@ border-color: #FA787E;
     form input.ng-valid.ng-touched {
       border-color: #78FA89;
     }
-  */  
+  */ 
+  
+  
+  /* resumenempresa_view */
+ 
+ #cuadro{
+	border: black 1px solid;
+}
+
+#cuadro h1{
+	border: black 1px solid;
+} 
+/*       */  

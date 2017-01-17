@@ -14,13 +14,15 @@ $this->load->library("session");
 
 		
 public function index(){
-	if (isset($this->session->userdata['correo'])) {		
+	
+	if ($this->session->userdata('rol')=='empresa') {		
 		$id_login = $this->session->userdata['id_login'];
+		$rol = $this->session->userdata['rol'];
 		
 	if ($this->input->post('Actualizar')){
 		$this->load->library('form_validation');
 				$this->form_validation->set_rules('nombre', 'Nombre', 'required|min_length[3]');// el trim siempre delante
-				$this->form_validation->set_rules('cif', 'Cif', 'requiredtrim|required|max_length[9]'); // max_length solo sirve para letras
+				$this->form_validation->set_rules('cif', 'Cif', 'required|trim|required|max_length[9]'); // max_length solo sirve para letras
 				$this->form_validation->set_rules('telefono', 'Telefono', 'trim|required|numeric|integer');
 				$this->form_validation->set_rules('telefono2', 'Telefono2', 'trim|numeric|integer|required');
 				$this->form_validation->set_rules('persona_contacto', 'persona_contacto', 'required|callback_letras');
