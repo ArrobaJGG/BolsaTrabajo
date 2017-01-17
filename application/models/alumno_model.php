@@ -41,7 +41,7 @@ class Alumno_model extends CI_Model{
 		return $this->db->query($sql);
 	}
 	public function actualizar($parametros,$id_login){
-		$sql = "UPDATE alumno SET nombre = '$parametros[nombre]', dni = '$parametros[cif]', telefono1 = $parametros[telefono], telefono2 = $parametros[telefono2], persona_contacto= '$parametros[persona_contacto]'  WHERE id_login = $id_login";
+		$sql = "UPDATE alumno SET nombre = '$parametros[nombre]', dni = '$parametros[dni]', telefono1 = $parametros[telefono], apellido = $parametros[apellido], fecha= '$parametros[fecha],  WHERE id_login = $id_login";
 		$query = $this->db->query($sql);
 		//$row = $query->row();	
 		//return $row;

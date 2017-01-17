@@ -58,11 +58,62 @@ class Editar_perfil_controller extends CI_Controller{
 				$ano_fin = $this->input->post('ano_fin');
 				$experiencia = $this->input->post('experiencia');
 				$foto = $this->input->post('foto');
+				$parametros = array( "nombre" => $nombre, 
+					   						"apellido" => $apellido ,
+					   						"telefono" => $telefono ,
+					   						"dni" => $dni,
+					   						"fecha" => $fecha,
+					   						"codigopostal" => $codigo_postal,
+					   						"descripcion" => $descripcion,
+					   						"familia" => $familia,
+					   						"idioma" => $idioma,
+					   						"nivelleido" => $nivel_leido,
+					   						"nivelescrito" => $nivel_escrito,
+					   						"nivelhablado" => $nivel_hablado,
+					   						"titulado" => $titulado,
+					   						"curso" => $curso,
+					   						"ano_fin" => $ano_fin,
+					   						"experiencia" => $experiencia,
+					   						"id_login" => $id_login,
+					   						"foto" => $foto);
+					    $mi_archivo = 'logo';
+				        $config['upload_path'] = './img/';
+						//$config['default'] = './img/pordefecto.jpg/';
+						$config['overwrite'] = TRUE;
+						$config['upload_path'] = FCPATH . './img/';
+						$config['file_name'] = $id_login;
+						$config['allowed_types'] = 'jpg';
+						//$config['max_size'] = "50000";//kb
+						//$config['max_width'] = "2000"; // kb
+						//$config['max_height'] = "2000";// kb
+								
+						$this->load->library('upload', $config);
+						$this->upload->initialize($config);
+								        
+						if (!$this->upload->do_upload($mi_archivo)) {
+								//*** ocurrio un error
+								/*$data['uploadError'] = $this->upload->display_errors();
+								echo $this->upload->display_errors();
+								return;*/
+						}
+						
+														
+						$data['uploadSuccess'] = $this->upload->data();
+   			 
+					   $enviar_alumno = $this->alumno_model->actualizar($parametros,$id_login);
+					  
+					   
+					   //$this->Empresa_model->update($nombre,$cif,$telefono,$telefono2,$contacto,$archivo);
+					   $datos["mensaje"] = "Validacion correcta";
+					   
+					
+				}
+				
 			}
 				
 		   //} 
 				
-			}
+			
 			$data['libreria']=array();
 			$data['titulo'] = "Editar Perfil";
 			$data["javascript"]="assets/js/editar_perfil.js";
@@ -82,6 +133,7 @@ class Editar_perfil_controller extends CI_Controller{
 			}
 
 		}
+		
 
 		public function numcheck($in){
 			if (intval($in) < 1960) {
