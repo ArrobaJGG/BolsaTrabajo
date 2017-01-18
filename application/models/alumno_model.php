@@ -56,7 +56,6 @@ class Alumno_model extends CI_Model{
 		$query = $this->db->query($sql);
 		//$row = $query->row();	
 		//return $row;
-
 	}
 }
 ?>

@@ -9,6 +9,7 @@ class Notificaciones_controller extends CI_Controller{
 		$this->load->model('reporte_model');
 		$this->load->model('alumno_model');
 		$this->load->model('empresa_model');
+		$this->load->model('profesor_model');
 		$this->load->library('session');
 		$this -> load -> helper('form');
 		$this -> load -> library('form_validation');
@@ -66,6 +67,30 @@ class Notificaciones_controller extends CI_Controller{
 		$this->form_validation->set_rules('id', 'id', 'numeric|required|trim|xss_clean');
 		$id = $this->input->post('id');
 		if($this->empresa_model->borrar_empresa($id)){
+			$this->login_model->borrar_usuario($id);
+			$mensaje = "Alumno borrado correctamente";
+		}
+		else{
+			$mensaje = "Ha ocurrido un error";
+		}
+		echo $mensaje;
+	}
+	public function cargar_familias(){
+		$this->load->model("familia_laboral_model");
+		$familias = $this->familia_laboral_model->familia();
+		echo json_encode($familias);
+	}
+	public function profesores($limite = PHP_MAX_INT){
+		$profesores = $this->profesor_model->get_profesores($limite)? $this->profesor_model->get_profesores($limite):array();
+		foreach ($profesores as $key => $value) {
+			$profesores[$key]['correo'] = $this->login_model->get_correo($value['id_login']);
+		}
+		echo json_encode($profesores);
+	}
+	public function borrar_profesor(){
+		$this->form_validation->set_rules('id', 'id', 'numeric|required|trim|xss_clean');
+		$id = $this->input->post('id');
+		if($this->profesor_model->borrar_profesor($id)){
 			$this->login_model->borrar_usuario($id);
 			$mensaje = "Alumno borrado correctamente";
 		}
