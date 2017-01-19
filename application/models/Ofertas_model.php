@@ -13,11 +13,13 @@ class Ofertas_model extends CI_Model{
 		$sql = " SELECT * FROM oferta WHERE id_login=$id_login";
 		$query = $this->db->query($sql);
 		if ($query->num_rows() > 0){
-		           $row = $query->row();	
-						return $row;
+		           $todo = $query->result_array();	
+						return $todo;
 		    }
 		    return null;
 	}
+	
+	
 	
 
 }
