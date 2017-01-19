@@ -97,17 +97,13 @@ class Registro_controller extends CI_Controller {
 		} else {
 			if ($correo = $this -> login_model -> existe_correo($hash)) {
 				$this->alumno_model->existe($this->login_model->get_id($correo));
-				if($this->login_model->esta_validado($this->session->userdata('usuario'))) redirect('../../login_controller');
-				if ($this -> login_model -> validar_login($correo)) {
-					$datos_sesion = array(
-						'usuario' => $correo,
-						'id_login' => $this -> login_model -> get_id($correo),
-						'tipo' => 'cambio');
-					$this -> session -> set_userdata($datos_sesion);
-					//var_dump($this->session->userdata());
-				} else {
-					echo "ha ocurrido un error";
-				}
+				if($this->login_model->esta_validado($correo)) redirect('../../login_controller');
+				$datos_sesion = array(
+					'usuario' => $correo,
+					'id_login' => $this -> login_model -> get_id($correo),
+					'tipo' => 'cambio');
+				$this -> session -> set_userdata($datos_sesion);
+				//var_dump($this->session->userdata());
 			} else {
 				redirect('../../login_controller');
 			}
@@ -115,7 +111,7 @@ class Registro_controller extends CI_Controller {
 		$data['javascript'] = array();
 		$data['libreria'] = array();
 		$data['titulo'] = "Cambiar contraseña";
-
+		$data['hash'] = $hash;
 		$this -> load -> view("includes/header", $data);
 		$this -> load -> view("cambiar_contrasena", $data);
 		$this -> load -> view("includes/footer", $data);
@@ -149,18 +145,13 @@ class Registro_controller extends CI_Controller {
 			
 		} else {
 			if ($correo = $this -> login_model -> existe_correo($hash)) {
-				echo $this->login_model->esta_validado($correo);
 				if($this->login_model->esta_validado($correo)) redirect('../../login_controller');
-				if ($this -> login_model -> validar_login($correo)) {
-					$datos_sesion = array(
-						'usuario' => $correo,
-						'id_login' => $this -> login_model -> get_id($correo),
-						'tipo' => 'cambio');
-					$this -> session -> set_userdata($datos_sesion);
-					//var_dump($this->session->userdata());
-				} else {
-					echo "ha ocurrido un error";
-				}
+				$datos_sesion = array(
+					'usuario' => $correo,
+					'id_login' => $this -> login_model -> get_id($correo),
+					'tipo' => 'cambio');
+				$this -> session -> set_userdata($datos_sesion);
+				//var_dump($this->session->userdata());
 			} else {
 				redirect('../../login_controller');
 			}
@@ -186,7 +177,7 @@ class Registro_controller extends CI_Controller {
 					$this -> form_validation -> set_rules('usuario', 'Usuario', 'valid_email|trim');
 					if ($this -> form_validation -> run() != false) {
 						$caracteres_invalidos = array('/', '$');
-						if (!$this -> login_model -> get_correo($this -> input -> post('usuario'))) {
+						if (!$this -> login_model -> get_id($this -> input -> post('usuario'))) {
 							echo "correo enviado";
 							$datos = array('correo' => $this -> input -> post('usuario'),
 								'rol' => 'alumno', 
@@ -228,7 +219,7 @@ class Registro_controller extends CI_Controller {
 		$this -> form_validation -> set_rules('nombre', 'Nombre empresa', 'required');
 		if ($this -> form_validation -> run() != false) {
 			$caracteres_invalidos = array('/', '$');
-			if (!$this -> login_model -> get_correo($this -> input -> post('usuario'))) {
+			if (!$this -> login_model -> get_id($this -> input -> post('usuario'))) {
 				$datos = array(
 					'correo' => $this -> input -> post('usuario'),
 					'rol' => 'empresa', 'contrasena' => password_hash($this -> string_aleatorio(10), PASSWORD_DEFAULT),
@@ -268,7 +259,7 @@ class Registro_controller extends CI_Controller {
 		$this -> form_validation -> set_rules('id_familia_laboral','id familia laboral','numeric|trim');
 		if ($this -> form_validation -> run() != false) {
 		$caracteres_invalidos = array('/', '$');
-			if (!$this -> login_model -> get_correo($this -> input -> post('usuario'))) {
+			if (!$this -> login_model -> get_id($this -> input -> post('usuario'))) {
 				$datos = array(
 					'correo' => $this -> input -> post('usuario'),
 					'rol' => 'profesor', 'contrasena' => password_hash($this -> string_aleatorio(10), PASSWORD_DEFAULT),
@@ -306,17 +297,65 @@ class Registro_controller extends CI_Controller {
 			echo "correo invalido";
 		}
 	}
-	protected function crear_alumnos(){
-		if (isset($_FILES['file']) && $_FILES['file']['error'] == 0) {
-		
-		// uploads image in the folder images
-		    $temp = explode(".", $_FILES["file"]["name"]);
-		    $newfilename = substr(md5(time()), 0, 10) . '.' . end($temp);
-		    move_uploaded_file($_FILES['file']['tmp_name'], 'images/' . $newfilename);
-		
-		// give callback to your angular code with the image src name
-		    echo json_encode($newfilename);
+	public function crear($tipo){
+		if (isset($_FILES['files'])) {
+			$localizacion = $_FILES['files']["tmp_name"];
+			$archivo = fopen($localizacion, "r") or die("Unable to open file!");
+			switch ($tipo) {
+				case 'alumno':
+					$mensajes = $this->crear_multiples_alumnos($archivo);
+					echo json_encode($mensajes);
+				break;
+			}
 		}
+		else{
+			echo "Como has llegado aqui";
+		}
+	}
+	protected function crear_multiples_alumnos($archivo){
+		$mensajes = array();
+		$log  = fgetss($archivo);
+		if(!strcmp ( $log,"correo")){
+			$mensajes['formato'] = "Formato incorrecto";
+		}
+		else{
+			while($usuario = fgetss($archivo)) {
+				$usuario = trim(preg_replace('/\s\s+/', ' ', $usuario));
+				
+				$this->form_validation->set_data(array('usuario'=> $usuario));
+				$this->form_validation->set_rules('usuario', 'usuario', 'valid_email');
+				if ($this -> form_validation -> run() != false) {
+					$caracteres_invalidos = array('/', '$');
+					if (!$this -> login_model -> get_id($usuario)) {
+						$datos = array('correo' => $usuario,
+							'rol' => 'alumno', 
+							'contrasena' => password_hash($this -> string_aleatorio(10), PASSWORD_DEFAULT), 
+							'fecha_creacion' => date("Y/m/d"), 
+							'ultimo_login' => date("Y/m/d"), 
+							'validado' => false, 
+							'hash_validar' => str_replace($caracteres_invalidos, '', password_hash(time() . $this -> input -> post('usuario'), PASSWORD_DEFAULT)));
+						if ($this -> login_model -> crear_usuario($datos)) {
+							//Montar el mail y enviar
+							//*
+							$this -> email -> from('arrobajgg@gmail.com', 'BolsaTrabajoFPTxurdinaga');
+							$this -> email -> to($datos['correo']);
+							$this -> email -> subject('Validacion Bolsa de trabajo FPTxurdinaga');
+							$this -> email -> message('Para validar su correo vaya a esta direccion http://localhost/BolsaTrabajo/Registro_controller/cambiar_contrasena_alumno/' . $datos['hash_validar']);
+							$this -> email -> send();
+							//*/
+						}
+		
+					} 
+					else {
+						$mensajes[$usuario]="El correo introducido ya existe";
+					}
+				} 
+				else {
+					$mensajes[$usuario] = "correo invalido";
+				}
+			}
+		}
+	return $mensajes;
 	}
 	//*Algoritmo para generar strings aleatorios
 	protected function string_aleatorio($length, $keyspace = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ') {

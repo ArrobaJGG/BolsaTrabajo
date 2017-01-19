@@ -3,7 +3,4 @@
 	<span ng-show = "usuarioCreado">{{mensaje}}</span>
 	<button ng-click="enviar()">Enviar</button>
 </form>
-<div>
-	<!--<input data-my-Directive type="file" name="file">
-		terminar algun dia-->
-</div>
+<upload style="width: 100px;height: 100px;background-color: blue" to="./registro_controller/crear/alumno" ng-model="object.id"></upload>

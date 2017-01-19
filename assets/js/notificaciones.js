@@ -174,6 +174,7 @@ myApp.controller('borrarEmpresaCtrl',['$scope','$http',function($scope,$http){
 }]);
 myApp.controller('darAltaProfesorCtrl',['$scope','$http',function($scope,$http){
 	$scope.mensaje = "prueba";
+	$scope.activoAng = "1";
 	$scope.usuarioCreado = false;
 	$http.get('/BolsaTrabajo/notificaciones_controller/cargar_familias')
 	.then(
@@ -208,6 +209,7 @@ myApp.controller('darAltaProfesorCtrl',['$scope','$http',function($scope,$http){
 }]);
 myApp.controller('darBajaProfesorCtrl',['$scope','$http',function($scope,$http){
 	$scope.usuarioBorrado = false;
+	
 	$http.get('/BolsaTrabajo/notificaciones_controller/profesores/10')
 		.then(
 			function successCallback(response){
@@ -245,3 +247,58 @@ myApp.controller('borrarProfesorCtrl',['$scope','$http',function($scope,$http){
   		);
 	};
 }]);
+myApp.directive('upload', ['$http', function($http) {
+    return {
+        restrict: 'E',
+        replace: true,
+        scope: {},
+        require: '?ngModel',
+        template: '<div class="asset-upload">subir archivo csv</div>',
+        link: function(scope, element, attrs, ngModel) {
+            // Code goes here
+            element.on('dragover', function(e) {
+			    e.preventDefault();
+			    e.stopPropagation();
+			});
+			element.on('dragenter', function(e) {
+			    e.preventDefault();
+			    e.stopPropagation();
+			});
+			element.on('drop', function(e) {
+			    e.preventDefault();
+			    e.stopPropagation();
+			    console.log(e.dataTransfer.files);
+			    if (e.dataTransfer){
+			        if (e.dataTransfer.files.length > 0) {
+			        	var comprobar = new RegExp("(.*?)\.(csv)");
+			        	if(comprobar.test(e.dataTransfer.files[0].name)){
+			            	upload(e.dataTransfer.files);
+			            }
+			            else{
+			            	console.log(comprobar.test(e.dataTransfer.files[0].name));
+			            }
+			        }
+			    }
+			    return false;
+			});
+			var upload = function(files) {
+			    var data = new FormData();
+			    data.append("files",files[0]);
+				console.log(data.getAll(data));
+			    $http({
+			        method: 'POST',
+			        url: attrs.to,
+			        data: data,
+			        withCredentials: true,
+			        headers: {'Content-Type': undefined },
+			        transformRequest: angular.identity
+			    }).then(function() {
+			        console.log("Uploaded");
+			    },function() {
+			        console.log("Error");
+			    });
+			};
+        }
+    };
+}]);
+
