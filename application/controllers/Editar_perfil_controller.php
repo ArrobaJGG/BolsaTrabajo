@@ -3,19 +3,17 @@ class Editar_perfil_controller extends CI_Controller{
 	
 	public function __construct(){
 		parent::__construct();
-		$this->load->model('familia_laboral_model');
-		$this->load->model('idioma_model');
-		$this->load->model('alumno_model');
-		$this->load->model('editar_perfil_model');
+		$this->load->model(array('familia_laboral_model','idioma_model','alumno_model'));
 	//para poder ir de un controlador a otro facilmente
 		$this->load->helper(array('form','url'));
-		$this->load->library('form_validation');
+		$this->load->library('form_validation'); 
 		$this->load->library('session');
 	}
 	
 	public function index(){
 		if (($this->session->userdata('rol')=='alumno')) {		
-			$id_login = $this->session->userdata['id_login'];	
+			$id_login = $this->session->userdata['id_login'];
+			
 		
 			if($this->input->post("Enviar")){
 				$this->form_validation->set_rules('nombre', 'nombre ', 'required|callback_letras');
@@ -61,7 +59,7 @@ class Editar_perfil_controller extends CI_Controller{
 				$parametros = array( "nombre" => $nombre, 
 					   						"apellido" => $apellido ,
 					   						"telefono" => $telefono ,
-					   						"dni" => $dni,
+					   						"DNI" => $DNI,
 					   						"fecha" => $fecha,
 					   						"codigopostal" => $codigo_postal,
 					   						"descripcion" => $descripcion,
@@ -72,11 +70,12 @@ class Editar_perfil_controller extends CI_Controller{
 					   						"nivelhablado" => $nivel_hablado,
 					   						"titulado" => $titulado,
 					   						"curso" => $curso,
-					   						"ano_fin" => $ano_fin,
+					   						"fecha_inicio" => $fecha_inicio,
+					   						"fecha_final" => $fecha_final,
 					   						"experiencia" => $experiencia,
 					   						"id_login" => $id_login,
 					   						"foto" => $foto);
-					    $mi_archivo = 'logo';
+					    $mi_archivo = 'foto';
 				        $config['upload_path'] = './img/';
 						//$config['default'] = './img/pordefecto.jpg/';
 						$config['overwrite'] = TRUE;
@@ -102,8 +101,6 @@ class Editar_perfil_controller extends CI_Controller{
    			 
 					   $enviar_alumno = $this->alumno_model->actualizar($parametros,$id_login);
 					  
-					   
-					   //$this->Empresa_model->update($nombre,$cif,$telefono,$telefono2,$contacto,$archivo);
 					   $datos["mensaje"] = "Validacion correcta";
 					   
 					
@@ -113,7 +110,8 @@ class Editar_perfil_controller extends CI_Controller{
 				
 		   //} 
 				
-			
+			$datos_alumnos = $this->alumno_model->id_login($id_login);
+			$datos_alumnos['curso'] = $this->alumno_model->alumno_curso($id_login);
 			$data['libreria']=array();
 			$data['titulo'] = "Editar Perfil";
 			$data["javascript"]="assets/js/editar_perfil.js";
@@ -122,11 +120,10 @@ class Editar_perfil_controller extends CI_Controller{
 			$data['niveleshablados']=$this->idioma_model->nivelhablado();
 			$data['nivelesescritos']=$this->idioma_model->nivelescrito();
 			$data['familias']=$this->familia_laboral_model->familia();
-			$data['cursos']=$this->editar_perfil_model->curso();
-			$this->load->view("includes/header", $data);
-			$this->load->view("Editar_perfil_view");
-			$this->load->view("includes/footer", $data);
-			
+			//$data['cursos']=$this->editar_perfil_model->editar_curso();
+			$this->load->view("includes/header",$data);
+			$this->load->view("Editar_perfil_view", $datos_alumnos);
+			$this->load->view("includes/footer",$data );			
 			}
 		else{
 			redirect('login_controller');

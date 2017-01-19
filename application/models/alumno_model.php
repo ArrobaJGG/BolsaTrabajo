@@ -47,15 +47,33 @@ class Alumno_model extends CI_Model{
 		$devolver = isset($query) ? $query->result_array() : false;
 		return $devolver;
 	}
-	public function borrar_alumno($id){
-		$sql = "DELETE FROM alumno WHERE id_login = '$id'";
-		return $this->db->query($sql);
-	}
 	public function actualizar($parametros,$id_login){
-		$sql = "UPDATE alumno SET nombre = '$parametros[nombre]', dni = $parametros[dni], telefono1 = $parametros[telefono], apellido = '$parametros[apellido]', fecha= $parametros[fecha],fecha= '$parametros[fecha],  WHERE id_login = $id_login";
+		$sql = "UPDATE alumno SET nombre = '$parametros[nombre]', apellido = $parametros[apellido], telefono1 = $parametros[telefono], DNI = $parametros[DNI], fecha = $parametros[fecha]   WHERE id_login = $id_login";
 		$query = $this->db->query($sql);
 		//$row = $query->row();	
 		//return $row;
+
+	}
+	public function id_login($id_login){
+		$sql= "select * from alumno where id_login='$id_login'";
+		$query = $this->db->query($sql);
+		$row = $query->row_array();	
+		return $row;
+	}
+	public function ruta($ruta, $id_login){
+		$sql = "update  alumno set  foto=$ruta where id_login=$id_login";
+		$query = $this->db->query($sql);
+	}
+	public function validar_alumno($id){
+		$sql = "UPDATE alumno SET estado = true WHERE id_login = $id";
+		return $this->db->query($sql);
+	}
+	public function alumno_curso($id_login){
+		$sql = "select nombre,fecha_inicio,fecha_final from curso,alumno_curso where curso.id_curso=alumno_curso.id_curso and alumno_curso.id_login=$id_login";
+		$query = $this->db->query($sql);
+		$row = $query->row_array();	
+		return $row;
+
 	}
 }
 ?>
