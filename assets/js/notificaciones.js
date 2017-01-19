@@ -19,11 +19,19 @@ var myApp = angular.module("my-app", ['ngRoute']);
     })
     .when("/dar-baja-alumno",{
     	templateUrl : "/BolsaTrabajo/api/cargar_partes/cargar/dar_baja_alumno",
-    	controller : 'darBajaAlumno'
+    	controller : 'darBajaAlumnoCtrl'
     }).
     when("/dar-baja-empresa",{
     	templateUrl : "/BolsaTrabajo/api/cargar_partes/cargar/dar_baja_empresa",
-    	controller : 'darBajaEmpresa'
+    	controller : 'darBajaEmpresaCtrl'
+    }).
+    when("/dar-alta-profesor",{
+    	templateUrl : "/BolsaTrabajo/api/cargar_partes/cargar/dar_alta_profesor",
+    	controller : 'darAltaProfesorCtrl'
+    })
+    .when("/dar-baja-profesor",{
+    	templateUrl : "/BolsaTrabajo/api/cargar_partes/cargar/dar_baja_profesor",
+    	controller : 'darBajaProfesorCtrl'
     });
 });
 myApp.controller('notificacionesCtrl', ['$scope', '$http', function ($scope, $http) {
@@ -92,7 +100,7 @@ myApp.controller('darAltaUnaEmpresaCtrl',['$scope','$http',function ($scope,$htt
   		);
 	};
 }]);
-myApp.controller('darBajaAlumno',['$scope','$http',function($scope,$http){
+myApp.controller('darBajaAlumnoCtrl',['$scope','$http',function($scope,$http){
 	$scope.usuarioBorrado = false;
 	$http.get('/BolsaTrabajo/notificaciones_controller/alumnos/10')
 		.then(
@@ -124,7 +132,7 @@ myApp.controller('borrarAlumnoCtrl',['$scope','$http',function($scope,$http){
   		);
 	};
 }]);
-myApp.controller('darBajaEmpresa',['$scope','$http',function($scope,$http){
+myApp.controller('darBajaEmpresaCtrl',['$scope','$http',function($scope,$http){
 	$scope.usuarioBorrado = false;
 	$http.get('/BolsaTrabajo/notificaciones_controller/empresas/10')
 		.then(
@@ -160,6 +168,79 @@ myApp.controller('borrarEmpresaCtrl',['$scope','$http',function($scope,$http){
 				    // or server returns response with an error status.
 				    console.log(response.data);
 				    console.log('error');
+	  		}
+  		);
+	};
+}]);
+myApp.controller('darAltaProfesorCtrl',['$scope','$http',function($scope,$http){
+	$scope.mensaje = "prueba";
+	$scope.usuarioCreado = false;
+	$http.get('/BolsaTrabajo/notificaciones_controller/cargar_familias')
+	.then(
+		function successCallback(response){
+			$scope.familias = response.data;
+			console.log(response.data);
+		},
+		function errorCallback(response){
+			console.log(response.data);
+		}
+	);
+	$scope.enviar = function(){
+		console.log($scope);
+		$scope.mensaje = "cargando...";
+		$scope.usuarioCreado = true;
+		$http.post('/BolsaTrabajo/registro_controller/crear_profesor',
+			"nombre="+$scope.nombreAng
+			+"&apellidos="+$scope.apellidosAng
+			+"&id_familia_laboral="+$scope.idAng
+			+"&activo="+$scope.activoAng
+			+"&usuario="+$scope.usuarioAng,
+		{'headers':{'content-type': 'application/x-www-form-urlencoded'}})
+		.then(
+			function successCallback(response){
+				$scope.mensaje = response.data;
+			},
+			function errorCallback(response){
+				console.log(response.data);
+			}
+		);
+	};
+}]);
+myApp.controller('darBajaProfesorCtrl',['$scope','$http',function($scope,$http){
+	$scope.usuarioBorrado = false;
+	$http.get('/BolsaTrabajo/notificaciones_controller/profesores/10')
+		.then(
+			function successCallback(response){
+				$scope.profesores = response.data;
+			}
+			,function errorCallback(response){
+				console.log(response.data);
+			}
+		);
+	$scope.estado = function(estado){
+		if(estado == 1){
+			return true;
+		}
+		else{
+			return false;
+		}
+	};
+}]);
+myApp.controller('borrarProfesorCtrl',['$scope','$http',function($scope,$http){
+	$scope.borrar = function($event){
+		$scope.mensaje = "cargando";
+		$scope.usuarioBorrado = true;
+		$http.post('/BolsaTrabajo/notificaciones_controller/borrar_profesor',"id="+$event.target.value,{'headers':{'content-type': 'application/x-www-form-urlencoded'}})
+		.then(
+			function successCallback(response){
+				$scope.mensaje = response.data;
+				if(response.data = "Alumno borrado correctamente") $event.target.parentElement.remove();
+			},
+			function errorCallback(response) {
+			    // called asynchronously if an error occurs
+			    // or server returns response with an error status.
+			    console.log(response.data);
+			    console.log('error');
 	  		}
   		);
 	};
