@@ -97,7 +97,7 @@ public function index(){
  				$data["titulo"]="Editar Empresa";
 				$data["javascript"]="assets/js/editar_empresa.js";
 				$this->load->view("includes/header",$data);
-				$this->load->view("editarempresa_view",$datos_empresa);
+				$this->load->view("editarempresa_view",$datos_alumnos);
 				$this->load->view("includes/footer", $data);
 }
 else{

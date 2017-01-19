@@ -29,23 +29,6 @@ class Empresa_model extends CI_Model{
 		$sql = "update  empresa set  logo=$ruta where id_login=$id_login";
 		$query = $this->db->query($sql);
 	}
-	public function actualizar_alumno($columnas,$datos){
-		/*
-		 * Cambiar insert por update y alguna cosa mas para poder actualizar solo los campos que se envian
-		 */
-		$sql = "INSERT INTO alumno (";
-		foreach ($columnas as $columna) {
-			$sql += $columna.',';
-		}
-		trim($sql,',');
-		$sql += ') VALUES (';
-		foreach ($datos as $dato) {
-			$sql += $dato.',';
-		}
-		trim($sql,',');
-		$sql += ')';
-		return $this->db->query($sql);
-	}
 	
 	public function validar_empresa($id){
 		$sql = "UPDATE empresa SET estado = true WHERE id_login = $id";
