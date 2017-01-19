@@ -10,12 +10,11 @@ class Registro_controller extends CI_Controller {
 		$this -> load -> library('email');
 		//session_destroy();
 		$this -> load -> library('session');
+		$this -> load -> helper('form');
+		$this -> load -> library('form_validation');
 	}
 
 	public function index() {
-
-		$this -> load -> helper('form');
-		$this -> load -> library('form_validation');
 
 		$informacion = array();
 		if ($this -> input -> post('Enviar')) {
@@ -73,13 +72,11 @@ class Registro_controller extends CI_Controller {
 	public function cambiar_contrasena_alumno($hash = false) {
 		$this -> load -> model('alumno_model');
 			
-		$this -> load -> helper('form');
-		$this -> load -> library('form_validation');
 		$data = array();
 		$data['error'] = '';
 		$this -> load -> library('session');
 		//var_dump($this->session->userdata());
-		if ($this -> session -> userdata('tipo')=='cambio'&&$this->input->post('enviar')) {
+		if ($this -> session -> userdata('tipo')=='cambio'&&$this->login_model->esta_validado($this->session->userdata('correo')!=0)) {
 			$this -> form_validation -> set_rules('contrasena', 'contrasena', 'required|min_length[3]');
 			if (!$this -> form_validation -> run() == false && $this -> input -> post('contrasena') == $this -> input -> post('repetirContrasena')) {
 				$contrasena_codificada = password_hash($this -> input -> post('contrasena'), PASSWORD_DEFAULT);
@@ -127,14 +124,12 @@ class Registro_controller extends CI_Controller {
 
 	public function cambiar_contrasena_empresa($hash = false) {
 		$this -> load -> model('alumno_model');
-			
-		$this -> load -> helper('form');
-		$this -> load -> library('form_validation');
+		
 		$data = array();
 		$data['error'] = '';
 		$this -> load -> library('session');
 		//var_dump($this->session->userdata());
-		if ($this -> session -> userdata('tipo')=='cambio'&&$this->input->post('enviar')) {
+		if ($this -> session -> userdata('tipo')=='cambio'&&$this->login_model->esta_validado($this->session->userdata('correo')!=0)) {
 			
 			$this -> form_validation -> set_rules('contrasena', 'contrasena', 'required|min_length[3]');
 			if (!$this -> form_validation -> run() == false && $this -> input -> post('contrasena') == $this -> input -> post('repetirContrasena')) {
@@ -228,8 +223,6 @@ class Registro_controller extends CI_Controller {
 		}
 	}
 	public function registrar_empresa(){
-		$this -> load -> helper('form');
-		$this -> load -> library('form_validation');
 		
 		$this -> form_validation -> set_rules('usuario', 'Usuario', 'required|valid_email|trim');
 		$this -> form_validation -> set_rules('nombre', 'Nombre empresa', 'required');
@@ -248,6 +241,51 @@ class Registro_controller extends CI_Controller {
 						$datos_empresa = Array('id_login' => $id, 'nombre' => $this -> input -> post('nombre'));
 						$this -> empresa_model -> crear_empresa($datos_empresa);
 						$this->empresa_model->validar_empresa($id);
+						//Montar el mail y enviar
+						//*
+						$this -> email -> from('arrobajgg@gmail.com', 'BolsaTrabajoFPTxurdinaga');
+						$this -> email -> to($datos['correo']);
+						$this -> email -> subject('Validacion Bolsa de trabajo FPTxurdinaga');
+						$this -> email -> message('Para validar su correo vaya a esta direccion http://localhost/BolsaTrabajo/Registro_controller/cambiar_contrasena_empresa/' . $datos['hash_validar']);
+						$this -> email -> send();
+						//*/
+						echo "correo enviado";
+					}
+				}
+			}
+			else{
+				echo "El correo introducido ya existe";
+			}
+		}
+		else {
+			echo "correo invalido";
+		}
+	}
+	public function crear_profesor(){
+		$this -> form_validation -> set_rules('usuario', 'Usuario', 'required|valid_email|trim');
+		$this -> form_validation -> set_rules('nombre', 'Nombre', 'required|trim');
+		$this -> form_validation -> set_rules('apellidos', 'apellidos', 'required|trim');
+		$this -> form_validation -> set_rules('id_familia_laboral','id familia laboral','numeric|trim');
+		if ($this -> form_validation -> run() != false) {
+		$caracteres_invalidos = array('/', '$');
+			if (!$this -> login_model -> get_correo($this -> input -> post('usuario'))) {
+				$datos = array(
+					'correo' => $this -> input -> post('usuario'),
+					'rol' => 'profesor', 'contrasena' => password_hash($this -> string_aleatorio(10), PASSWORD_DEFAULT),
+					'fecha_creacion' => date("Y/m/d"),
+					'ultimo_login' => date("Y/m/d"),
+					'validado' => false,
+					'hash_validar' => str_replace($caracteres_invalidos, '', password_hash(time() . $this -> input -> post('usuario'), PASSWORD_DEFAULT)));
+				if ($this -> login_model -> crear_usuario($datos)) {
+					if ($id = $this -> login_model -> get_id($datos['correo'])) {
+						$this->load->model('profesor_model');
+						$datos_profesor = Array(
+							'id_login' => $id
+							,'nombre' => $this -> input -> post('nombre')
+							,'apellidos'=>$this->input->post('apellidos')
+							,'id_familia_laboral'=>$this->input->post('id_familia_laboral')
+							,'activo'=>$this->input->post('activo'));
+						$this -> profesor_model -> crear_profesor($datos_profesor);
 						//Montar el mail y enviar
 						//*
 						$this -> email -> from('arrobajgg@gmail.com', 'BolsaTrabajoFPTxurdinaga');

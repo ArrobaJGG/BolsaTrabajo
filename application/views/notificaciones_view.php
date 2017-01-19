@@ -5,12 +5,13 @@
 			<ul>
 				<li><a href="#!/dar-alta-alumno">Alumno</a></li>
 				<li><a href="#!/dar-alta-empresa">Empresa</a></li>
-				<li><a href="#!/dar-alta-profesor">Empresa</a></li>
+				<li><a href="#!/dar-alta-profesor">Profesor</a></li>
 			</ul>
 		</li>
 		<li>Dar baja
 			<li><a href="#!/dar-baja-alumno">Alumno</a></li>
 			<li><a href="#!/dar-baja-empresa">Empresa</a></li>
+			<li><a href="#!/dar-baja-profesor">Profesor</a></li>
 		</li>	
 	</ul>
 	<div>

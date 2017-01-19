@@ -52,6 +52,7 @@ class Alumno_model extends CI_Model{
 		$query = $this->db->query($sql);
 		//$row = $query->row();	
 		//return $row;
+
 	}
 	public function id_login($id_login){
 		$sql= "select * from alumno where id_login='$id_login'";
@@ -72,6 +73,7 @@ class Alumno_model extends CI_Model{
 		$query = $this->db->query($sql);
 		$row = $query->row_array();	
 		return $row;
+
 	}
 }
 ?>
