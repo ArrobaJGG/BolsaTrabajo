@@ -4,11 +4,7 @@ class Ofertas_model extends CI_Model{
         {
                 $this->load->database();
         }
-	/*public function datos_oferta($id_login){
-		$sql = " SELECT * FROM oferta WHERE id_login=$id_login";
-		$query = $this->db->query($sql);
-		return $query->row_array();
-	}*/
+	
 	public function datos_oferta($id_login){
 		$sql = " SELECT * FROM oferta WHERE id_login=$id_login";
 		$query = $this->db->query($sql);
@@ -17,6 +13,13 @@ class Ofertas_model extends CI_Model{
 						return $todo;
 		    }
 		    return null;
+	}
+	public function etiqueta(){
+		$sql = "SELECT * FROM etiqueta";
+		$query = $this->db->query($sql);
+		$row = $query->result_array();
+		$etiqueta = $row ? $row : false;
+		return $etiqueta;
 	}
 	
 	

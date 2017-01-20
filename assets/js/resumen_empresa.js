@@ -20,8 +20,9 @@ var myApp = angular.module("my-app",[]);
 	
 	$scope.vermas =		function () {
 		//console.log($scope.ofertas.length);
-				if ($scope.ofertas[contador].titulo){
-					alert("entro");
+		var titulo = $scope.ofertas[contador].titulo;
+				if (typeof titulo != 'undefined'){
+					
 						var midiv = document.createElement("div");
 						midiv.setAttribute("id","cuadro");
 						//midiv.setAttribute("otros_atributos","otros");
@@ -31,13 +32,8 @@ var myApp = angular.module("my-app",[]);
 						document.getElementById('cuadro').appendChild(midiv); // Lo pones en "body", si quieres ponerlo dentro de algún id en concreto usas document.getElementById('donde lo quiero poner').appendChild(midiv);
 						//indice++;
 						contador++;
+						alert(titulo);
 					
-				}else{
-						
-						
-					alert("segunda");
-					
-						
 				}
 		
 			};
