@@ -76,7 +76,7 @@ class Registro_controller extends CI_Controller {
 		$data['error'] = '';
 		$this -> load -> library('session');
 		//var_dump($this->session->userdata());
-		if ($this -> session -> userdata('tipo')=='cambio'&&$this->login_model->esta_validado($this->session->userdata('correo')!=0)) {
+		if ($this -> session -> userdata('tipo')=='cambio'&&!$this->login_model->esta_validado($this->session->userdata('correo'))) {
 			$this -> form_validation -> set_rules('contrasena', 'contrasena', 'required|min_length[3]');
 			if (!$this -> form_validation -> run() == false && $this -> input -> post('contrasena') == $this -> input -> post('repetirContrasena')) {
 				$contrasena_codificada = password_hash($this -> input -> post('contrasena'), PASSWORD_DEFAULT);
@@ -125,8 +125,7 @@ class Registro_controller extends CI_Controller {
 		$data['error'] = '';
 		$this -> load -> library('session');
 		//var_dump($this->session->userdata());
-		if ($this -> session -> userdata('tipo')=='cambio'&&$this->login_model->esta_validado($this->session->userdata('correo')!=0)) {
-			
+		if ($this -> session -> userdata('tipo')=='cambio'&&!$this->login_model->esta_validado($this->session->userdata('correo'))) {
 			$this -> form_validation -> set_rules('contrasena', 'contrasena', 'required|min_length[3]');
 			if (!$this -> form_validation -> run() == false && $this -> input -> post('contrasena') == $this -> input -> post('repetirContrasena')) {
 				$contrasena_codificada = password_hash($this -> input -> post('contrasena'), PASSWORD_DEFAULT);
@@ -315,13 +314,13 @@ class Registro_controller extends CI_Controller {
 	protected function crear_multiples_alumnos($archivo){
 		$mensajes = array();
 		$log  = fgetss($archivo);
-		if(!strcmp ( $log,"correo")){
+		$log = trim(preg_replace('/\s\s+/', ' ', $log));
+		if($log!="correo"){
 			$mensajes['formato'] = "Formato incorrecto";
 		}
 		else{
 			while($usuario = fgetss($archivo)) {
 				$usuario = trim(preg_replace('/\s\s+/', ' ', $usuario));
-				
 				$this->form_validation->set_data(array('usuario'=> $usuario));
 				$this->form_validation->set_rules('usuario', 'usuario', 'valid_email');
 				if ($this -> form_validation -> run() != false) {
@@ -343,6 +342,7 @@ class Registro_controller extends CI_Controller {
 							$this -> email -> message('Para validar su correo vaya a esta direccion http://localhost/BolsaTrabajo/Registro_controller/cambiar_contrasena_alumno/' . $datos['hash_validar']);
 							$this -> email -> send();
 							//*/
+							$mensajes[$usuario]="Alumno creado y correo enviado";
 						}
 		
 					} 

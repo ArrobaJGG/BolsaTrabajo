@@ -1,6 +1,6 @@
 /*/
-
 alert('yyy');//*/
+
 var myApp = angular.module("my-app", ['ngRoute']);
 
   myApp.config(function($routeProvider) {
@@ -247,11 +247,13 @@ myApp.controller('borrarProfesorCtrl',['$scope','$http',function($scope,$http){
   		);
 	};
 }]);
-myApp.directive('upload', ['$http', function($http) {
+myApp.directive('upload', ['$http',function($http) {
     return {
         restrict: 'E',
         replace: true,
-        scope: {},
+        scope: {
+        	upload : "=objetoUpload"
+        },
         require: '?ngModel',
         template: '<div class="asset-upload">subir archivo csv</div>',
         link: function(scope, element, attrs, ngModel) {
@@ -259,12 +261,14 @@ myApp.directive('upload', ['$http', function($http) {
             element.on('dragover', function(e) {
 			    e.preventDefault();
 			    e.stopPropagation();
+			    console.log(e);
 			});
 			element.on('dragenter', function(e) {
 			    e.preventDefault();
 			    e.stopPropagation();
 			});
 			element.on('drop', function(e) {
+				console.log(scope.objetoUpload);
 			    e.preventDefault();
 			    e.stopPropagation();
 			    console.log(e.dataTransfer.files);
@@ -272,7 +276,12 @@ myApp.directive('upload', ['$http', function($http) {
 			        if (e.dataTransfer.files.length > 0) {
 			        	var comprobar = new RegExp("(.*?)\.(csv)");
 			        	if(comprobar.test(e.dataTransfer.files[0].name)){
-			            	upload(e.dataTransfer.files);
+			        		scope.upload = {};
+			        		upload(e.dataTransfer.files,function(up){
+		        				scope.upload.mensajes =  up;
+		        				scope.upload.cargando = false;
+			        		});
+			        		scope.upload.cargando = true;
 			            }
 			            else{
 			            	console.log(comprobar.test(e.dataTransfer.files[0].name));
@@ -281,7 +290,7 @@ myApp.directive('upload', ['$http', function($http) {
 			    }
 			    return false;
 			});
-			var upload = function(files) {
+			function upload(files,callback) {
 			    var data = new FormData();
 			    data.append("files",files[0]);
 				console.log(data.getAll(data));
@@ -292,12 +301,13 @@ myApp.directive('upload', ['$http', function($http) {
 			        withCredentials: true,
 			        headers: {'Content-Type': undefined },
 			        transformRequest: angular.identity
-			    }).then(function() {
-			        console.log("Uploaded");
-			    },function() {
-			        console.log("Error");
+			    }).then(function(response) {
+			     	callback(response.data);
+			    },function(response) {
+			      	callback(response.data);
 			    });
 			};
+			
         }
     };
 }]);

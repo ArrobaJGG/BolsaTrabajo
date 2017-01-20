@@ -1,6 +1,6 @@
 <form name="crearUnUsuario" >
-	<span>Nombre empresa</span><input type="text" name="nombre" ng-model="nombreEmpresa"><br/>
-	<span>correo(nombre usuario)</span><input ng-model="userAng" type="text" name="usuario"><br>
+	<span>Nombre empresa</span><input type="text" name="nombre" ng-model="nombreEmpresa" required><br/>
+	<span>correo(nombre usuario)</span><input ng-model="userAng" type="email" name="usuario" required><br>
 	<span ng-show = "usuarioCreado">{{mensaje}}</span>
-	<button ng-click="enviar()">Enviar</button>
+	<button ng-disabled="!crearUnUsuario.$valid" ng-click="enviar()">Enviar</button>
 </form>
