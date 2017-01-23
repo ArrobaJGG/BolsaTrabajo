@@ -217,10 +217,10 @@ class Migration_inicio extends CI_Migration {
 			  `id_etiqueta` INT NOT NULL AUTO_INCREMENT,
 			  `nombre` VARCHAR(200) NOT NULL,
 			  `id_familia_laboral` INT NOT NULL,
-			  PRIMARY KEY (`id_etiqueta`, `id_famila_laboral`),
-			  INDEX `id_familia_laboral_fk_idx` (`id_famila_laboral` ASC),
+			  PRIMARY KEY (`id_etiqueta`, `id_familia_laboral`),
+			  INDEX `id_familia_laboral_fk_idx` (`id_familia_laboral` ASC),
 			  CONSTRAINT `id_familia_laboral_fk`
-			    FOREIGN KEY (`id_famila_laboral`)
+			    FOREIGN KEY (`id_familia_laboral`)
 			    REFERENCES `bolsa_trabajo`.`familia_laboral` (`id_familia_laboral`)
 			    ON DELETE NO ACTION
 			    ON UPDATE NO ACTION)
