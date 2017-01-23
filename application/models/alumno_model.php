@@ -81,5 +81,9 @@ class Alumno_model extends CI_Model{
 		return $row;
 
 	}
+	public function borrar_alumno($id){
+		$sql = "DELETE FROM alumno WHERE id_login = '$id'";
+		return $this->db->query($sql);
+	}
 }
 ?>
