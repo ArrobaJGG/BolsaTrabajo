@@ -23,8 +23,14 @@ class Registro_controller extends CI_Controller {
 			$this -> form_validation -> set_rules('nombre_empresa', 'Nombre empresa', 'required');
 			if ($this -> form_validation -> run() != false) {
 				$caracteres_invalidos = array('/', '$');
-				if (!$this -> login_model -> get_correo($this -> input -> post('usuario'))) {
-					$datos = array('correo' => $this -> input -> post('usuario'), 'rol' => 'empresa', 'contrasena' => password_hash($this -> input -> post('contrasena'), PASSWORD_DEFAULT), 'fecha_creacion' => date("Y/m/d"), 'ultimo_login' => date("Y/m/d"), 'validado' => false, 'hash_validar' => str_replace($caracteres_invalidos, '', password_hash(time() . $this -> input -> post('usuario'), PASSWORD_DEFAULT)));
+				if (!$this -> login_model -> existe_cuenta($this -> input -> post('usuario'))) {
+					$datos = array(
+						'correo' => $this -> input -> post('usuario')
+						, 'rol' => 'empresa', 'contrasena' => password_hash($this -> input -> post('contrasena'), PASSWORD_DEFAULT)
+						, 'fecha_creacion' => date("Y/m/d")
+						, 'ultimo_login' => date("Y/m/d")
+						, 'validado' => false
+						, 'hash_validar' => str_replace($caracteres_invalidos, '', password_hash(time() . $this -> input -> post('usuario'), PASSWORD_DEFAULT)));
 					if ($this -> login_model -> crear_usuario($datos)) {
 						if ($id = $this -> login_model -> get_id($datos['correo'])) {
 							$datos_empresa = Array('id_login' => $id, 'nombre' => $this -> input -> post('nombre_empresa'));
@@ -166,7 +172,7 @@ class Registro_controller extends CI_Controller {
 
 	}
 
-	public function registrar_alumno() {
+	protected function registrar_alumno() {
 		$this -> load -> helper('form');
 		$this -> load -> library('form_validation');
 		if (isset($this -> session -> userdata['correo'])) {
@@ -212,7 +218,7 @@ class Registro_controller extends CI_Controller {
 			echo "salir";
 		}
 	}
-	public function registrar_empresa(){
+	protected function registrar_empresa(){
 		
 		$this -> form_validation -> set_rules('usuario', 'Usuario', 'required|valid_email|trim');
 		$this -> form_validation -> set_rules('nombre', 'Nombre empresa', 'required');
@@ -251,7 +257,7 @@ class Registro_controller extends CI_Controller {
 			echo "correo invalido";
 		}
 	}
-	public function crear_profesor(){
+	protected function crear_profesor(){
 		$this -> form_validation -> set_rules('usuario', 'Usuario', 'required|valid_email|trim');
 		$this -> form_validation -> set_rules('nombre', 'Nombre', 'required|trim');
 		$this -> form_validation -> set_rules('apellidos', 'apellidos', 'required|trim');
@@ -356,6 +362,13 @@ class Registro_controller extends CI_Controller {
 			}
 		}
 	return $mensajes;
+	}
+	public function validarse($function,$arg=''){
+		//$this->cargar_familias();
+		if($this->session->userdata('rol')=='administrador'){
+			call_user_func(array('Registro_controller',$function),$arg);
+		}
+		
 	}
 	//*Algoritmo para generar strings aleatorios
 	protected function string_aleatorio($length, $keyspace = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ') {

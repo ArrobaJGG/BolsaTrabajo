@@ -32,25 +32,44 @@ var myApp = angular.module("my-app", ['ngRoute']);
     .when("/dar-baja-profesor",{
     	templateUrl : "/BolsaTrabajo/api/cargar_partes/cargar/dar_baja_profesor",
     	controller : 'darBajaProfesorCtrl'
+    })
+    .when("/administrar-idiomas",{
+    	templateUrl : "/BolsaTrabajo/api/cargar_partes/cargar/idiomas",
+    	controller : 'idiomasCtrl'
     });
 });
 myApp.controller('notificacionesCtrl', ['$scope', '$http', function ($scope, $http) {
 	$scope.estaCargando = true;
-	$http.get('/BolsaTrabajo/notificaciones_controller/reportes')
+	$scope.estaCargandoNuevasAltas = true;
+	$http.get('/BolsaTrabajo/notificaciones_controller/validar/reportes')
 		.then(
 			function successCallback(response) {
 			    // this callback will be called asynchronously
 			    // when the response is available
-			    console.log(response);
+			    //console.log(response);
 			    $scope.reportes = response.data;
+			    $scope.estaCargando = false;
+		    },
+			function errorCallback(response) {
+			    // called asynchronously if an error occurs
+			    // or server returns response with an error status.
+			    console.log('hola');
+			    $scope.estaCargando = false;
+	  		});
+	$http.get('/BolsaTrabajo/notificaciones_controller/validar/nuevas_altas/10')
+		.then(
+			function successCallback(response) {
+			    // this callback will be called asynchronously
+			    // when the response is available
+			   // console.log(response);
+			    $scope.nuevasAltas = response.data;
+			    $scope.estaCargandoNuevasAltas = false;
 		    },
 	     	function errorCallback(response) {
 			    // called asynchronously if an error occurs
 			    // or server returns response with an error status.
 			    console.log('hola');
-	  		}).
-	  		finally( function(){
-	  			$scope.estaCargando = false;
+			    $scope.estaCargandoNuevasAltas = true;
 	  		});
  
 }]);
@@ -61,7 +80,7 @@ myApp.controller('darAltaUnAlumnoCtrl',['$scope','$http',function ($scope,$http)
   	$scope.enviar = function(){
 	  	$scope.mensaje = "cargando";
 	  	$scope.usuarioCreado = true;
-		$http.post('/BolsaTrabajo/registro_controller/registrar_alumno',"usuario="+$scope.userAng,{'headers':{'content-type': 'application/x-www-form-urlencoded'}})
+		$http.post('/BolsaTrabajo/registro_controller/validarse/registrar_alumno',"usuario="+$scope.userAng,{'headers':{'content-type': 'application/x-www-form-urlencoded'}})
 		.then(
 			function successCallback(response){
 				if(response.data == "salir") window.location.assign("login_controller" );
@@ -83,7 +102,7 @@ myApp.controller('darAltaUnaEmpresaCtrl',['$scope','$http',function ($scope,$htt
   	$scope.enviar = function(){
 	  	$scope.mensaje = "cargando";
 	  	$scope.usuarioCreado = true;
-		$http.post('/BolsaTrabajo/registro_controller/registrar_empresa',
+		$http.post('/BolsaTrabajo/registro_controller/validarse/registrar_empresa',
 		"usuario="+$scope.userAng+"&nombre="+$scope.nombreEmpresa,
 		{'headers':{'content-type': 'application/x-www-form-urlencoded'}})
 		.then(
@@ -102,7 +121,7 @@ myApp.controller('darAltaUnaEmpresaCtrl',['$scope','$http',function ($scope,$htt
 }]);
 myApp.controller('darBajaAlumnoCtrl',['$scope','$http',function($scope,$http){
 	$scope.usuarioBorrado = false;
-	$http.get('/BolsaTrabajo/notificaciones_controller/alumnos/10')
+	$http.get('/BolsaTrabajo/notificaciones_controller/validar/alumnos/10')
 		.then(
 			function successCallback(response){
 				console.log(response.data);
@@ -117,7 +136,7 @@ myApp.controller('borrarAlumnoCtrl',['$scope','$http',function($scope,$http){
 	$scope.borrar = function($event){
 		$scope.mensaje = "cargando";
 		$scope.usuarioBorrado = true;
-		$http.post('/BolsaTrabajo/notificaciones_controller/borrar_alumno',"id="+$event.target.value,{'headers':{'content-type': 'application/x-www-form-urlencoded'}})
+		$http.post('/BolsaTrabajo/notificaciones_controller/validar/borrar_alumno',"id="+$event.target.value,{'headers':{'content-type': 'application/x-www-form-urlencoded'}})
 		.then(
 			function successCallback(response){
 				$scope.mensaje = response.data;
@@ -134,7 +153,7 @@ myApp.controller('borrarAlumnoCtrl',['$scope','$http',function($scope,$http){
 }]);
 myApp.controller('darBajaEmpresaCtrl',['$scope','$http',function($scope,$http){
 	$scope.usuarioBorrado = false;
-	$http.get('/BolsaTrabajo/notificaciones_controller/empresas/10')
+	$http.get('/BolsaTrabajo/notificaciones_controller/validar/empresas/10')
 		.then(
 			function successCallback(response){
 				console.log(response.data);
@@ -157,7 +176,7 @@ myApp.controller('borrarEmpresaCtrl',['$scope','$http',function($scope,$http){
 	$scope.borrar = function($event){
 		$scope.mensaje = "cargando";
 		$scope.usuarioBorrado = true;
-		$http.post('/BolsaTrabajo/notificaciones_controller/borrar_empresa',"id="+$event.target.value,{'headers':{'content-type': 'application/x-www-form-urlencoded'}})
+		$http.post('/BolsaTrabajo/notificaciones_controller/validar/borrar_empresa',"id="+$event.target.value,{'headers':{'content-type': 'application/x-www-form-urlencoded'}})
 		.then(
 			function successCallback(response){
 				$scope.mensaje = response.data;
@@ -176,7 +195,7 @@ myApp.controller('darAltaProfesorCtrl',['$scope','$http',function($scope,$http){
 	$scope.mensaje = "prueba";
 	$scope.activoAng = "1";
 	$scope.usuarioCreado = false;
-	$http.get('/BolsaTrabajo/notificaciones_controller/cargar_familias')
+	$http.get('/BolsaTrabajo/notificaciones_controller/validar/cargar_familias')
 	.then(
 		function successCallback(response){
 			$scope.familias = response.data;
@@ -190,7 +209,7 @@ myApp.controller('darAltaProfesorCtrl',['$scope','$http',function($scope,$http){
 		console.log($scope);
 		$scope.mensaje = "cargando...";
 		$scope.usuarioCreado = true;
-		$http.post('/BolsaTrabajo/registro_controller/crear_profesor',
+		$http.post('/BolsaTrabajo/registro_controller/validarse/crear_profesor',
 			"nombre="+$scope.nombreAng
 			+"&apellidos="+$scope.apellidosAng
 			+"&id_familia_laboral="+$scope.idAng
@@ -210,7 +229,7 @@ myApp.controller('darAltaProfesorCtrl',['$scope','$http',function($scope,$http){
 myApp.controller('darBajaProfesorCtrl',['$scope','$http',function($scope,$http){
 	$scope.usuarioBorrado = false;
 	
-	$http.get('/BolsaTrabajo/notificaciones_controller/profesores/10')
+	$http.get('/BolsaTrabajo/notificaciones_controller/validar/profesores/10')
 		.then(
 			function successCallback(response){
 				$scope.profesores = response.data;
@@ -232,11 +251,94 @@ myApp.controller('borrarProfesorCtrl',['$scope','$http',function($scope,$http){
 	$scope.borrar = function($event){
 		$scope.mensaje = "cargando";
 		$scope.usuarioBorrado = true;
-		$http.post('/BolsaTrabajo/notificaciones_controller/borrar_profesor',"id="+$event.target.value,{'headers':{'content-type': 'application/x-www-form-urlencoded'}})
+		$http.post('/BolsaTrabajo/notificaciones_controller/validar/borrar_profesor',"id="+$event.target.value,{'headers':{'content-type': 'application/x-www-form-urlencoded'}})
 		.then(
 			function successCallback(response){
 				$scope.mensaje = response.data;
 				if(response.data = "Alumno borrado correctamente") $event.target.parentElement.remove();
+			},
+			function errorCallback(response) {
+			    // called asynchronously if an error occurs
+			    // or server returns response with an error status.
+			    console.log(response.data);
+			    console.log('error');
+	  		}
+  		);
+	};
+}]);
+myApp.controller('idiomasCtrl',['$scope','$http',function($scope,$http){
+	actualizarIdiomas();
+	function actualizarIdiomas(){
+		$scope.cargandoIdiomas = true;
+		$http.get('/BolsaTrabajo/notificaciones_controller/validar/get_idiomas')
+			.then(
+				function successCallback(response){
+					$scope.idiomas = response.data;
+				}
+				,function errorCallback(response){
+					console.log(response.data);
+				}
+			);
+	}
+	
+	$scope.agregarIdioma = function(){
+		$http.post('/BolsaTrabajo/notificaciones_controller/validar/agregar_idioma'
+			,"nombre="+$scope.idiomaAng
+			,{'headers':{'content-type': 'application/x-www-form-urlencoded'}})
+		.then(
+			function successCallback(response){
+				$scope.mensaje = response.data;
+				actualizarIdiomas();
+			},
+			function errorCallback(response) {
+			    // called asynchronously if an error occurs
+			    // or server returns response with an error status.
+			    console.log(response.data);
+			    console.log('error');
+	  		}
+  		);
+	};
+}]);
+myApp.controller('idiomaCtrl',['$scope','$http',function($scope,$http){
+	$scope.modoEditor = false;
+	$scope.editar = function(){
+		$scope.modoEditor = true;
+	};
+	$scope.enviar = function($event){
+		$http.post('/BolsaTrabajo/notificaciones_controller/validar/editar_idioma',
+			"id="+$event.target.value
+			+"&nombre="+$scope.idiom,
+			{'headers':{'content-type': 'application/x-www-form-urlencoded'}})
+		.then(
+			function successCallback(response){
+				$scope.mensaje = response.data.mensaje;
+				$scope.error = response.data.error;
+				if(response.data.error ==false){
+					$scope.modoEditor = false;
+					$scope.$parent.idioma.nombre = $scope.idiom;
+				}
+			},
+			function errorCallback(response) {
+			    // called asynchronously if an error occurs
+			    // or server returns response with an error status.
+			    console.log(response.data);
+			    console.log('error');
+	  		}
+  		);
+  		
+		//$scope.modoEditor = false;
+	};
+	$scope.borrar = function($event){
+		$http.post('/BolsaTrabajo/notificaciones_controller/validar/borrar_idioma',
+			"id="+$event.target.value,
+			{'headers':{'content-type': 'application/x-www-form-urlencoded'}})
+		.then(
+			function successCallback(response){
+				$scope.mensaje = response.data.mensaje;
+				$scope.error = response.data.error;
+				if(response.data.error ==false){
+					$event.target.parentElement.parentElement.parentElement.remove();
+				}
 			},
 			function errorCallback(response) {
 			    // called asynchronously if an error occurs

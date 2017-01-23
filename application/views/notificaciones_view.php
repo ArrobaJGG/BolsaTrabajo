@@ -12,6 +12,11 @@
 			<li><a href="#!/dar-baja-alumno">Alumno</a></li>
 			<li><a href="#!/dar-baja-empresa">Empresa</a></li>
 			<li><a href="#!/dar-baja-profesor">Profesor</a></li>
+		</li>
+		<li>
+			Herramientas administrativas
+			<li><a href="#!/administrar-idiomas">Idiomas</a></li>
+			<li><a href="#!/administrar-cursos-familias-etiquetas">Cursos, familias y etiquetas</a></li>
 		</li>	
 	</ul>
 	<div>
