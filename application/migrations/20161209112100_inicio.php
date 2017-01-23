@@ -216,7 +216,7 @@ class Migration_inicio extends CI_Migration {
 			CREATE TABLE IF NOT EXISTS `bolsa_trabajo`.`etiqueta` (
 			  `id_etiqueta` INT NOT NULL AUTO_INCREMENT,
 			  `nombre` VARCHAR(200) NOT NULL,
-			  `id_famila_laboral` INT NOT NULL,
+			  `id_familia_laboral` INT NOT NULL,
 			  PRIMARY KEY (`id_etiqueta`, `id_famila_laboral`),
 			  INDEX `id_familia_laboral_fk_idx` (`id_famila_laboral` ASC),
 			  CONSTRAINT `id_familia_laboral_fk`
