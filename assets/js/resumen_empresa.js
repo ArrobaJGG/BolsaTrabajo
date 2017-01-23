@@ -32,7 +32,7 @@ var myApp = angular.module("my-app",[]);
 						document.getElementById('cuadro').appendChild(midiv); // Lo pones en "body", si quieres ponerlo dentro de algún id en concreto usas document.getElementById('donde lo quiero poner').appendChild(midiv);
 						//indice++;
 						contador++;
-						alert(titulo);
+					
 					
 				}
 		

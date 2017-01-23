@@ -18,6 +18,32 @@ public function index(){
 				$data['etiquetas'] = $this->Ofertas_model->etiqueta();
 				//var_dump( $data['etiquetas']);	
 				
+				if ($this->input->post('Publicar')) {
+				$this->load->library('form_validation');
+				$this->form_validation->set_rules('titulo', 'titulo', 'required|min_length[3]');// el trim siempre delante
+				$this->form_validation->set_rules('fechae', 'fechae');
+				$this->form_validation->set_rules('lugar', 'lugar', 'min_length[3]');
+				$this->form_validation->set_rules('telefono', 'telefono', 'trim|numeric|integer');
+				$this->form_validation->set_rules('requisito', 'requisito', 'required|min_length[3]');
+				$this->form_validation->set_rules('sueldo', 'sueldo', 'numeric');
+				$this->form_validation->set_rules('funciones', 'funciones', 'min_length[3]');
+				$this->form_validation->set_rules('ofrece', 'ofrece', 'min_length[3]');
+				$this->form_validation->set_rules('resumen', 'resumen', 'min_length[3]');
+				$this->form_validation->set_rules('familia', 'familia');
+				$this->form_validation->set_rules('etiquetas', 'etiquetas', 'min_length[3]');
+					// mensaje de errores
+					$this->form_validation->set_message('required','El campo %s es obligatorio'); 
+					$this->form_validation->set_message('alpha','El campo %s debe estar compuesto solo por letras');
+				    $this->form_validation->set_message('min_length', ' %s es muy corto');
+				    $this->form_validation->set_message('max_lenght','El campo %s debe contener solo numeros');
+					$this->form_validation->set_message('numeric','El campo %s debe contener solo numeros');
+					$this->form_validation->set_message('integer','El campo %s debe contener solo numeros enteros');	
+				} 
+						if($this->form_validation->run() ==false){
+					    	 					
+						}else{
+							
+						}
 				
 				
 				$data['libreria'] = array();
