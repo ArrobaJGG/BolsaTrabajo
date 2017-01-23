@@ -12,3 +12,4 @@ class Familia_laboral_model extends CI_Model{
 				return $familia;
 	}
 }
+?>
