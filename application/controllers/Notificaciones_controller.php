@@ -163,7 +163,8 @@ class Notificaciones_controller extends CI_Controller{
 		$mensajes['error'] = false;
 		$id = $this->input->post('id');
 		if ($this -> form_validation -> run() != false){
-			if($this->idioma_model->borrar_idioma($id)){
+			if($this->idioma_model->borrar_alumno_idioma($id)){
+			    $this->idioma_model->borrar_idioma($id);
 				$mensajes['mensaje'] = "Idioma borrado";
 			}
 		}
@@ -173,5 +174,35 @@ class Notificaciones_controller extends CI_Controller{
 		}
 		echo json_encode($mensajes);
 	}
+    protected function get_familias_cursos_etiquetas(){
+        $this->load->model('ofertas_model');
+        $this->load->model('familia_laboral_model');
+        $this->load->model('curso_model');
+        $datos['etiquetas'] = $this->ofertas_model->etiqueta() ? $this->ofertas_model->etiqueta() : array();
+        $datos['familias'] = $this->familia_laboral_model->familia() ? $this->familia_laboral_model->familia() : array();
+        $datos['cursos'] = $this->curso_model->get_curso() ? $this->curso_model->get_curso() :array();
+        echo json_encode($datos);
+    }
+    protected function agregar_etiqueta(){
+        $this->form_validation->set_rules('nombre', 'Nombre', 'required|trim|regex_match[/^([a-z,0-9,A-Z,á,é,í,ó,ú,â,ê,ô,ã,õ,ç,Á,É,Í,Ó,Ú,Â,Ê,Ô,Ã,Õ,Ç,ü,ñ,Ü,Ñ," "]+)$/]');
+        $this->form_validation->set_rules('id', 'id', 'numeric|required|trim');
+        $familia = $this->input->post('id');
+        $nombre = $this->input->post('nombre');
+        $this->load->model('ofertas_model');
+        if($this -> form_validation -> run() != false){
+            if($this->ofertas_model->agregar_etiqueta($nombre,$familia)){
+                $mensaje ="Etiqueta agregada correctamente";
+            }
+            else{
+                $mensaje ="error";
+            }
+        } 
+    }
+    protected function numero_idioma_borrado(){
+        $this->form_validation->set_rules('id', 'id', 'numeric|required|trim');
+        $id = $this->input->post('id');
+        $numero = $this->idioma_model->get_numero_idioma_borrado($id) ? $this->idioma_model->get_numero_idioma_borrado($id) : "0";
+        echo $numero;
+    }
 }
 ?>
