@@ -10,7 +10,7 @@ class Migration_inicio extends CI_Migration {
 		$this->db->query("
 			CREATE TABLE IF NOT EXISTS `bolsa_trabajo`.`login` (
 			  `id_login` INT NOT NULL AUTO_INCREMENT,
-			  `correo` VARCHAR(45) NOT NULL,
+			  `correo` VARCHAR(120) NOT NULL,
 			  `contrasena` VARCHAR(128) NOT NULL,
 			  `rol` VARCHAR(20) NOT NULL,
 			  `ultimo_login` DATE NOT NULL,
@@ -25,8 +25,8 @@ class Migration_inicio extends CI_Migration {
 			CREATE TABLE IF NOT EXISTS `bolsa_trabajo`.`alumno` (
 			  `id_login` INT NOT NULL,
 			  `dni` VARCHAR(9) NULL,
-			  `nombre` VARCHAR(45) NULL,
-			  `apellidos` VARCHAR(45) NULL,
+			  `nombre` VARCHAR(200) NULL,
+			  `apellidos` VARCHAR(200) NULL,
 			  `telefono1` VARCHAR(14) NULL,
 			  `telefono2` VARCHAR(14) NULL,
 			  `estado` TINYINT(1) NOT NULL,
@@ -63,15 +63,15 @@ class Migration_inicio extends CI_Migration {
 		$this->db->query("
 			CREATE TABLE IF NOT EXISTS `bolsa_trabajo`.`familia_laboral` (
 			  `id_familia_laboral` INT NOT NULL AUTO_INCREMENT,
-			  `nombre` VARCHAR(45) NOT NULL,
+			  `nombre` VARCHAR(200) NOT NULL,
 			  PRIMARY KEY (`id_familia_laboral`))
 			ENGINE = InnoDB");
 		
 		$this->db->query("
 			CREATE TABLE IF NOT EXISTS `bolsa_trabajo`.`profesor` (
 			  `id_login` INT NOT NULL,
-			  `nombre` VARCHAR(45) NOT NULL,
-			  `apellidos` VARCHAR(45) NOT NULL,
+			  `nombre` VARCHAR(200) NOT NULL,
+			  `apellidos` VARCHAR(200) NOT NULL,
 			  `id_familia_laboral` INT NOT NULL,
 			  `activo` TINYINT(1) NOT NULL,
 			  PRIMARY KEY (`id_login`),
@@ -91,7 +91,7 @@ class Migration_inicio extends CI_Migration {
 		$this->db->query("
 			CREATE TABLE IF NOT EXISTS `bolsa_trabajo`.`categoria` (
 			  `id_categoria` INT NOT NULL AUTO_INCREMENT,
-			  `nombre` VARCHAR(45) NOT NULL,
+			  `nombre` VARCHAR(200) NOT NULL,
 			  PRIMARY KEY (`id_categoria`))
 			ENGINE = InnoDB");
 			
@@ -99,7 +99,7 @@ class Migration_inicio extends CI_Migration {
 			CREATE TABLE IF NOT EXISTS `bolsa_trabajo`.`curso` (
 			  `id_curso` INT NOT NULL AUTO_INCREMENT,
 			  `id_familia` INT NOT NULL,
-			  `nombre` VARCHAR(45) NOT NULL,
+			  `nombre` VARCHAR(200) NOT NULL,
 			  `id_categoria` INT NOT NULL,
 			  PRIMARY KEY (`id_curso`),
 			  INDEX `id_familia_idx` (`id_familia` ASC),
@@ -139,15 +139,15 @@ class Migration_inicio extends CI_Migration {
 		$this->db->query("
 			CREATE TABLE IF NOT EXISTS `bolsa_trabajo`.`idioma` (
 			  `id_idioma` INT NOT NULL AUTO_INCREMENT,
-			  `nombre` VARCHAR(45) NOT NULL,
+			  `nombre` VARCHAR(150) NOT NULL,
 			  PRIMARY KEY (`id_idioma`))
 			ENGINE = InnoDB");
 		
 		$this->db->query("
 			CREATE TABLE IF NOT EXISTS `bolsa_trabajo`.`nivel` (
 			  `id_nivel` INT NOT NULL AUTO_INCREMENT,
-			  `titulacion` VARCHAR(45) NOT NULL,
-			  `equivalencia` VARCHAR(45) NOT NULL,
+			  `titulacion` VARCHAR(150) NOT NULL,
+			  `equivalencia` VARCHAR(150) NOT NULL,
 			  `tipo` VARCHAR(45) NOT NULL,
 			  PRIMARY KEY (`id_nivel`))
 			ENGINE = InnoDB");
@@ -183,18 +183,18 @@ class Migration_inicio extends CI_Migration {
 			  `id_oferta` INT NOT NULL AUTO_INCREMENT,
 			  `id_login` INT NULL,
 			  `id_familia` INT NOT NULL,
-			  `nombre_empresa` VARCHAR(100) NOT NULL,
+			  `nombre_empresa` VARCHAR(200) NOT NULL,
 			  `fecha_creacion` DATE NOT NULL,
 			  `fecha_expiracion` DATE NOT NULL,
-			  `lugar` VARCHAR(45) NULL,
+			  `lugar` VARCHAR(200) NULL,
 			  `resumen` TEXT NULL,
 			  `funciones` TEXT NULL,
 			  `ofrece` TEXT NULL,
-			  `sueldo` VARCHAR(45) NULL,
+			  `sueldo` VARCHAR(200) NULL,
 			  `requisitos` TEXT NULL,
-			  `horario` VARCHAR(45) NULL,
-			  `titulo` VARCHAR(45) NULL,
-			  `correo` VARCHAR(45) NULL,
+			  `horario` VARCHAR(200) NULL,
+			  `titulo` VARCHAR(200) NULL,
+			  `correo` VARCHAR(150) NULL,
 			  `telefono` VARCHAR(45) NULL,
 			  `oculto` TINYINT(1) NOT NULL,
 			  PRIMARY KEY (`id_oferta`, `id_familia`),
@@ -215,7 +215,7 @@ class Migration_inicio extends CI_Migration {
 		$this->db->query("
 			CREATE TABLE IF NOT EXISTS `bolsa_trabajo`.`etiqueta` (
 			  `id_etiqueta` INT NOT NULL AUTO_INCREMENT,
-			  `nombre` VARCHAR(45) NOT NULL,
+			  `nombre` VARCHAR(200) NOT NULL,
 			  `id_famila_laboral` INT NOT NULL,
 			  PRIMARY KEY (`id_etiqueta`, `id_famila_laboral`),
 			  INDEX `id_familia_laboral_fk_idx` (`id_famila_laboral` ASC),
@@ -292,8 +292,8 @@ class Migration_inicio extends CI_Migration {
 		$this->db->query("
 			CREATE TABLE IF NOT EXISTS `bolsa_trabajo`.`experiencia` (
 			  `id_login` INT NOT NULL,
-			  `nombre_empresa` VARCHAR(45) NOT NULL,
-			  `trabajo_realizado` VARCHAR(45) NOT NULL,
+			  `nombre_empresa` VARCHAR(200) NOT NULL,
+			  `trabajo_realizado` VARCHAR(200) NOT NULL,
 			  `fecha_inicio` DATE NOT NULL,
 			  `fecha_fin` DATE NULL,
 			  PRIMARY KEY (`id_login`),
