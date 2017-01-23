@@ -1,4 +1,4 @@
-<form action="<?php echo base_url() ?>" method="POST">
+<form action="<?php echo base_url($hash) ?>" method="POST">
 	<?php if($error){?>
 		<span><?php echo $error ?></span><br>
 	<?php } ?>

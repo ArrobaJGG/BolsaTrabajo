@@ -6,6 +6,11 @@
 	<tr>
 		<td>
 		<table>
+			<p ng-show="estaCargandoNuevasAltas">cargando</p>
+				<p style="border:1px solid" ng-repeat="nueva in nuevasAltas"> 
+					nombre empresa: {{nueva.nombre}}</br>
+					correo: {{nueva.correo}}
+				</p>
 			
 		</table>
 		</td>

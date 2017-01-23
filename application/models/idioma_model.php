@@ -32,5 +32,17 @@ class idioma_model extends CI_Model{
 		$nivelhablado = $row ? $row : false;
 		return $nivelhablado;
 	}
+	public function agregar_idioma($nombre){
+		$sql = "INSERT INTO idioma (nombre) VALUES ('$nombre')";
+		return $this->db->query($sql);
+	}
+	public function editar_idioma($id,$nombre){
+		$sql = "UPDATE idioma SET nombre = '$nombre' WHERE id_idioma='$id' ";
+		return $this->db->query($sql);
+	}
+	public function borrar_idioma($id){
+		$sql = "DELETE FROM idioma WHERE id_idioma = $id";
+		return $this->db->query($sql);
+	}
 }
 ?>

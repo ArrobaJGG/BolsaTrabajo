@@ -60,6 +60,13 @@ class Login_model extends CI_Model{
 		$existe = isset($row) ? $row->correo : false;
 		return $existe;
 	}
+	public function existe_cuenta($correo){
+		$sql = "SELECT correo FROM login WHERE correo='$correo'";
+		$query = $this->db->query($sql);
+		$row = $query->row();
+		$existe = isset($row) ? $row->correo : false;
+		return $existe;
+	}
 	public function set_contrasena($correo,$contrasena){
 		$sql = "UPDATE login SET contrasena = '$contrasena' WHERE correo = '$correo'";
 		return $this->db->query($sql);
