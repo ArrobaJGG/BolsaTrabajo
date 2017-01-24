@@ -481,8 +481,95 @@ myApp.controller('etiquetaCtrl',['$scope','$http',function($scope,$http){
 		  		}
 			);
 			console.log($scope.numero);
-		
-		
+	};
+}]);
+myApp.controller('cursoCtrl',['$scope','$http',function($scope,$http){
+	$scope.modoEditarCurso = false;
+	
+}]);
+myApp.controller('familiaCtrl',['$scope','$http',function($scope,$http){
+	$scope.modoEditarFamilia = false;
+	$scope.errorValidacion = false;
+	$scope.editarFamilia = function($event){
+		$scope.modoEditarFamilia = true;
+		$event.stopPropagation();
+	};
+	$scope.enviarFamilia = function($event){
+		$http.post('/BolsaTrabajo/notificaciones_controller/validar/editar_familia'
+		,"nombre="+$scope.nombreFamiliaAng
+		+"&id="+$event.target.value
+		,{'headers':{'content-type': 'application/x-www-form-urlencoded'}})
+		.then(
+			function successCallback(response){
+				$scope.mensajes = response.data;
+				$scope.modoEditarFamilia = false;
+				$scope.$parent.familia.nombre = $scope.nombreFamiliaAng;
+			},
+			function errorCallback(response) {
+			    // called asynchronously if an error occurs
+			    // or server returns response with an error status.
+			    console.log(response.data);
+			    console.log('error');
+	  		}
+		);
+	};
+	$scope.borrarFamilia = function($event){
+		$scope.numero = "";
+		$scope.mensaje = "";
+		$scope.error = false;
+		$http.post('/BolsaTrabajo/notificaciones_controller/validar/numero_familia_borrado'
+		,"id="+$event.target.value
+		,{'headers':{'content-type': 'application/x-www-form-urlencoded'}})
+			.then(
+				function successCallback(response){
+					if(response.data.error){
+						$scope.errorValidacion = true;
+					}
+					else{
+						if(response.data.oferta!="0"){
+							$scope.mensaje = "Debe borrar las ofertas pertenecientes a esta familia laboral antes de realizar esta operacion.";
+							$scope.error = true;
+						}
+						if(response.data.profesor != "0"){
+							$scope.mensaje +="\nDebe borrar o cambiar de familia laboral a los profesores de esta familia laboral.";
+							$scope.error = true;
+						}
+						if(response.data.curso != "0"){
+							$scope.mensaje +="\nDebe borrar o cambiar de familia laboral a los cursos bajo esta familia";
+							$scope.error = true;
+						}
+						if(!$scope.error){
+							if(confirm("El numero de etiquetas que se borrarian por estar asociadas es: "+$scope.numero.etiqueta
+							+"¿desea continuar?")){
+								$http.post('/BolsaTrabajo/notificaciones_controller/validar/borrar_familia',
+								"id="+$event.target.value,
+								{'headers':{'content-type': 'application/x-www-form-urlencoded'}})
+								.then(
+									function successCallback(response){
+										$scope.mensaje = response.data.mensaje;
+										$scope.error = response.data.error;
+										if(response.data.error ==false){
+											$event.target.parentElement.parentElement.remove();
+										}
+									},
+									function errorCallback(response) {
+									    // called asynchronously if an error occurs
+									    // or server returns response with an error status.
+									    console.log(response.data);
+									    console.log('error');
+							  		}
+					  			);
+							}
+						}
+					}
+				},
+				function errorCallback(response) {
+				    // called asynchronously if an error occurs
+				    // or server returns response with an error status.
+				    console.log(response.data);
+				    console.log('error');
+		  		}
+			);
 	};
 }]);
 myApp.directive('upload', ['$http',function($http) {

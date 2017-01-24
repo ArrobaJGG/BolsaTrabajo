@@ -1,13 +1,26 @@
 <div>
     <div><span>Seleccione una familia laboral</span></div>
-    <div ng-click="seleccionar(familia.id_familia_laboral)" id="familias" ng-repeat="familia in familias track by familia.id_familia_laboral">
-        {{familia.nombre}}
+    <div ng-controller="familiaCtrl"  id="familias" ng-repeat="familia in familias track by familia.id_familia_laboral">
+        <div ng-click="seleccionar(familia.id_familia_laboral)" ng-show="!modoEditarFamilia">
+            <span>{{familia.nombre}}</span><button ng-click="editarFamilia($event)" >Editar</button> <button ng-click="borrarFamilia($event)" value="{{familia.id_familia_laboral}}">borrar</button>
+            <span ng-show="error">{{mensaje}}</span>
+            <!--TODO agregar mas familias para continuar con testeos-->
+        </div>
+        <span ng-show="modoEditarFamilia">
+            <input type="text" ng-init="nombreFamiliaAng=familia.nombre" ng-model = "nombreFamiliaAng"> <button value="{{familia.id_familia_laboral}}" ng-click="enviarFamilia($event)">Enviar</button>
+        </span>
     </div>
     <div>
         <div style="border:1px solid" id="cursos">
     		<h3>Cursos</h3>
-            <div  ng-repeat= "curso in cursos | filter: {id_familia : familiaSeleccionada}">
+            <div ng-controller="cursoCtrl" ng-repeat= "curso in cursos | filter: {id_familia : familiaSeleccionada}">
                 <span>{{curso.nombre}}</span>
+                <span ng-show="!modoEditarCurso">
+                    <span>{{curso.nombre}}</span><button ng-click="editarEtiqueta()" >Editar</button> <button ng-click="borrarCurso($event)" value="{{curso.id_curso}}">borrar</button>
+                </span>
+                <span ng-show="modoEditarCurso">
+                    <input type="text" ng-init="nombreCursoAng=curso.nombre" ng-model = "nombreCursoAng"> <button value="{{curso.id_curso}}" ng-click="enviarCurso($event)">Enviar</button>
+                </span>
             </div> 
             
         </div>
