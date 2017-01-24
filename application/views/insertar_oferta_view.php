@@ -2,10 +2,12 @@
 $this->load->helper('form');
  ?>
 
-	
+	<!--
 	<?php 
 	echo form_open('Insertar_oferta_controller');
-	?>
+	?>-->
+	
+<form action="./Insertar_oferta_controller" method="post" novalidate enctype="multipart/form-data">
 
 
 Titulo: <input type="text" name="titulo" value="" placeholder="Titulo" required></br>
@@ -28,7 +30,7 @@ Familia: <select name="familia" onfocus="saber()">
 				?>
 			</select>
 			
-			<button onclick="showHide()" >Añadir</button></br>
+<input type="button"onclick="showHide()" value="Añadir"></br>
 
 <div id="etiquetas" style="display:none">
 	
@@ -40,10 +42,11 @@ Familia: <select name="familia" onfocus="saber()">
 						?>
 				</select></br>
 </div>
+Correo: <input type="email" name="correo" value=""/></br>
+Horario: <input type="text" name="horario"  value=""/></br>
 
 
-<input type="submit" value="Publicar"/>
-<input type="button" onclick="hola()"value="clica" />
-	
-</body>
-</html>
+<input type="submit"name="Publicar" value="Publicar"/>
+<?php if (isset($mensaje)) echo $mensaje ?>
+		<?php echo validation_errors(); ?>
+</form>	

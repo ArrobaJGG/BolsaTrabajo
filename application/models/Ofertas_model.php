@@ -22,7 +22,12 @@ class Ofertas_model extends CI_Model{
 		return $etiqueta;
 	}
 	
-	
+	public function insertar(){
+		$sql = "INSERT INTO oferta (titulo,fechae,lugar,telefono,requisito,sueldo,funciones,ofrece,familia,etiquetas,correo,horario)
+				VALUES ($titulo,$fechae,$lugar,$telefono,$requisito,$sueldo,$funciones,$ofrece,$familia,$etiquetas,$correo,$horario)";
+		$query = $this->db->query($sql);
+		
+	}
 	
 
 }
