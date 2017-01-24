@@ -44,5 +44,16 @@ class idioma_model extends CI_Model{
 		$sql = "DELETE FROM idioma WHERE id_idioma = $id";
 		return $this->db->query($sql);
 	}
+    public function borrar_alumno_idioma($id){
+        $sql = "DELETE FROM alumno_idioma WHERE id_idioma = $id";
+        return $this->db->query($sql);
+    }
+    public function get_numero_idioma_borrado($id){
+        $sql = "SELECT count(DISTINCT(id_login)) cuenta FROM alumno_idioma WHERE id_idioma = '$id'";
+        $query = $this->db->query($sql);
+        $row = $query->row();
+        $devolver = $row ? $row->cuenta : false;
+        return $devolver;
+    }
 }
 ?>
