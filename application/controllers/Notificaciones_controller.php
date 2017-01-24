@@ -198,11 +198,70 @@ class Notificaciones_controller extends CI_Controller{
             }
         } 
     }
+	protected function editar_etiqueta(){
+		$this->load->model('ofertas_model');
+		$this->form_validation->set_rules('nombre', 'Nombre', 'required|trim|regex_match[/^([a-z,A-Z,á,é,í,ó,ú,â,ê,ô,ã,õ,ç,Á,É,Í,Ó,Ú,Â,Ê,Ô,Ã,Õ,Ç,ü,ñ,Ü,Ñ," "]+)$/]');
+		$this->form_validation->set_rules('id', 'id', 'numeric|required|trim');
+		$nombre = $this->input->post('nombre');
+		$id = $this->input->post('id');
+		$mensajes['error'] = false;
+		if ($this -> form_validation -> run() != false){
+			if($this->ofertas_model->editar_etiqueta($nombre,$id)){
+				$mensajes['mensaje']= "Editado satisfactoriamente";
+			}
+			else{
+				$mensajes['mensaje'] = "No se ha podido editar";
+				$mensajes['error'] = true;
+			}
+		}
+		else{
+			$mensajes['mensaje'] = "Nombre invalido";
+			$mensajes['error'] = true;
+		}
+		echo json_encode($mensajes);
+	}
+	protected function numero_etiqueta_borrado(){
+		$this->load->model('ofertas_model');
+		$this->form_validation->set_rules('id', 'id', 'numeric|required|trim');
+        $id = $this->input->post('id');
+		if($this -> form_validation -> run() != false){
+			$numero['alumno'] = $this->ofertas_model->get_numero_etiqueta_alumno_borrado($id) ? $this->ofertas_model->get_numero_etiqueta_alumno_borrado($id) : "0";
+			$numero['oferta']= $this->ofertas_model->get_numero_etiqueta_oferta_borrado($id) ? $this->ofertas_model->get_numero_etiqueta_oferta_borrado($id) : "0";
+		}
+		else{
+			$numero['alumno'] = "0";
+			$numero['oferta'] = "0";
+		}
+        echo json_encode($numero);
+	}
+	protected function borrar_etiqueta(){
+		$this->load->model('ofertas_model');
+		$this->form_validation->set_rules('id', 'id', 'numeric|required|trim');
+		$mensajes['error'] = false;
+		$id = $this->input->post('id');
+		if ($this -> form_validation -> run() != false){
+			if($this->ofertas_model->borrar_etiqueta_alumno($id)&&$this->ofertas_model->borrar_etiqueta_oferta($id)){
+			    $this->ofertas_model->borrar_etiqueta($id);
+				$mensajes['mensaje'] = "Etiqueta borrada";
+			}
+		}
+		else{
+			$mensajes['mensaje'] = "ID invalida";
+			$mensajes['error'] = true; 
+		}
+		echo json_encode($mensajes);
+	}
     protected function numero_idioma_borrado(){
         $this->form_validation->set_rules('id', 'id', 'numeric|required|trim');
         $id = $this->input->post('id');
-        $numero = $this->idioma_model->get_numero_idioma_borrado($id) ? $this->idioma_model->get_numero_idioma_borrado($id) : "0";
+		if($this -> form_validation -> run() != false){
+			$numero = $this->idioma_model->get_numero_idioma_borrado($id) ? $this->idioma_model->get_numero_idioma_borrado($id) : "0";
+		}
+		else{
+			$numero = "0";
+		}
         echo $numero;
     }
+	
 }
 ?>

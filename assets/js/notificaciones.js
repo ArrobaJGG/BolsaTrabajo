@@ -377,12 +377,13 @@ myApp.controller('idiomaCtrl',['$scope','$http',function($scope,$http){
 }]);
 myApp.controller('cursosFamiliasEtiquetasController',['$scope','$http',function($scope,$http){
 	$scope.familiaSeleccionada= 0;
+	
 	actualizar();
-	
-	
 	$scope.seleccionar = function(id){
 		$scope.familiaSeleccionada = id;
 	};
+	
+	
 	$scope.anadirEtiqueta = function(){
 		$http.post('/BolsaTrabajo/notificaciones_controller/validar/agregar_etiqueta'
 		,"nombre="+$scope.etiquetaAng
@@ -417,6 +418,72 @@ myApp.controller('cursosFamiliasEtiquetasController',['$scope','$http',function(
 	  		}
 		);
 	}
+}]);
+myApp.controller('etiquetaCtrl',['$scope','$http',function($scope,$http){
+	$scope.modoEditarEtiqueta = false;
+	$scope.editarEtiqueta = function(){
+		$scope.modoEditarEtiqueta = true;
+	};
+	$scope.enviarEtiqueta = function($event){
+		$http.post('/BolsaTrabajo/notificaciones_controller/validar/editar_etiqueta'
+		,"nombre="+$scope.nombreEtiquetaAng
+		+"&id="+$event.target.value
+		,{'headers':{'content-type': 'application/x-www-form-urlencoded'}})
+		.then(
+			function successCallback(response){
+				$scope.mensajes = response.data;
+				$scope.modoEditarEtiqueta = false;
+				$scope.$parent.etiqueta.nombre = $scope.nombreEtiquetaAng;
+			},
+			function errorCallback(response) {
+			    // called asynchronously if an error occurs
+			    // or server returns response with an error status.
+			    console.log(response.data);
+			    console.log('error');
+	  		}
+		);
+	};
+	$scope.borrarEtiqueta = function($event){
+		$scope.numero = "";
+		$http.post('/BolsaTrabajo/notificaciones_controller/validar/numero_etiqueta_borrado'
+		,"id="+$event.target.value
+		,{'headers':{'content-type': 'application/x-www-form-urlencoded'}})
+			.then(
+				function successCallback(response){
+					$scope.numero = response.data;
+					if(confirm("El numero de alumnos que perderan el idioma seleccionado es: "+$scope.numero.alumno
+					+", y el numero de ofertas que lo perderian es: "+$scope.numero.oferta+"\n ¿desea continuar?")){
+						$http.post('/BolsaTrabajo/notificaciones_controller/validar/borrar_etiqueta',
+						"id="+$event.target.value,
+						{'headers':{'content-type': 'application/x-www-form-urlencoded'}})
+					.then(
+						function successCallback(response){
+							$scope.mensaje = response.data.mensaje;
+							$scope.error = response.data.error;
+							if(response.data.error ==false){
+								$event.target.parentElement.parentElement.remove();
+							}
+						},
+						function errorCallback(response) {
+						    // called asynchronously if an error occurs
+						    // or server returns response with an error status.
+						    console.log(response.data);
+						    console.log('error');
+				  		}
+			  		);
+					}
+				},
+				function errorCallback(response) {
+				    // called asynchronously if an error occurs
+				    // or server returns response with an error status.
+				    console.log(response.data);
+				    console.log('error');
+		  		}
+			);
+			console.log($scope.numero);
+		
+		
+	};
 }]);
 myApp.directive('upload', ['$http',function($http) {
     return {
