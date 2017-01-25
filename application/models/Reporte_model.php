@@ -15,6 +15,10 @@ class Reporte_model extends CI_Model{
 		$sql = "DELETE FROM reporte WHERE id_reporte='$id'";
 		return $this->db->query($sql);
 	}
+    public function borrar_reportes_relacionados($id){
+        $sql ="DELETE FROM reporte WHERE id_entidad='$id'";
+        return $this->db->query($sql);
+    }
 }
 
 	

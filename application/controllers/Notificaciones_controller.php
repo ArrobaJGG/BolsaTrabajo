@@ -60,7 +60,7 @@ class Notificaciones_controller extends CI_Controller{
 		echo json_encode($alumnos);
 	}
 	protected function borrar_alumno(){
-		//TODO poner mismo formato que en el resto
+		$mensajes['error'] = false;
 		$this->form_validation->set_rules('id', 'id', 'numeric|required|trim');
 		if($this -> form_validation -> run() != false){
 			$id = $this->input->post('id');
@@ -70,12 +70,14 @@ class Notificaciones_controller extends CI_Controller{
 			$this->alumno_model->borrar_etiqueta_alumno($id);
 			$this->alumno_model->borrar_alumno($id);
 			$this->login_model->borrar_usuario($id);
-			$mensaje = "Alumno borrado correctamente";	
+			$mensajes['mensajes'] = "Alumno borrado correctamente";
+            
 		}
 		else{
-			$mensaje = "Ha ocurrido un error";
+			$mensajes['mensaje'] = "Ha ocurrido un error";
+            $mensajes['error'] = true;
 		}
-		echo $mensaje;
+		echo json_encode($mensajes);
 	}
 	protected function empresas($limite = PHP_MAX_INT){
 		$empresas = $this->empresa_model->get_empresas($limite)? $this->empresa_model->get_empresas($limite):array();
@@ -205,6 +207,7 @@ class Notificaciones_controller extends CI_Controller{
         $datos['etiquetas'] = $this->ofertas_model->etiqueta() ? $this->ofertas_model->etiqueta() : array();
         $datos['familias'] = $this->familia_laboral_model->familia() ? $this->familia_laboral_model->familia() : array();
         $datos['cursos'] = $this->curso_model->get_curso() ? $this->curso_model->get_curso() :array();
+        $datos['categorias'] = $this->curso_model->get_categoria() ? $this->curso_model->get_categoria() :array();
         echo json_encode($datos);
     }
     protected function agregar_etiqueta(){
@@ -367,9 +370,9 @@ class Notificaciones_controller extends CI_Controller{
 		}
 	}
 	protected function borrar_reporte(){
-		$this->form_validation->set_rules('id', 'id', 'numeric|required|trim');
+		$this->form_validation->set_rules('id_reporte', 'id_reporte', 'numeric|required|trim');
 		$mensajes['error'] = false;
-		$id = $this->input->post('id');
+		$id = $this->input->post('id_reporte');
 		if ($this -> form_validation -> run() != false){
 			$this->reporte_model->borrar_reporte($id);
 			$mensajes['mensaje'] = "Reporte borrado";
@@ -397,6 +400,7 @@ class Notificaciones_controller extends CI_Controller{
 				case 'oferta':
 					$this->borrar_oferta();
 			}
+            $this->reporte_model->borrar_reportes_relacionados($id);
 		}
 		else{
 			$mensajes['mensaje'] = "ID invalida";
@@ -418,5 +422,61 @@ class Notificaciones_controller extends CI_Controller{
 		}
 		echo json_encode($mensajes);
 	}
+    protected function agregar_categoria(){
+        $this->load->model('curso_model');
+        $mensajes['error'] = false; 
+        $this->form_validation->set_rules('nombre', 'Nombre', 'required|trim|regex_match[/^([a-z,A-Z,á,é,í,ó,ú,â,ê,ô,ã,õ,ç,Á,É,Í,Ó,Ú,Â,Ê,Ô,Ã,Õ,Ç,ü,ñ,Ü,Ñ," "]+)$/]');
+        if ($this -> form_validation -> run() != false){
+            $this->curso_model->agregar_categoria($this->input->post('nombre'));
+            $mensajes['mensaje'] = "Categoria agregada correctamente";
+        }
+        else{
+            $mensajes['mensaje'] = "Nombre invalido";
+            $mensajes['error'] = true; 
+        }
+        echo json_encode($mensajes);
+    }
+    protected function editar_categoria(){
+        $this->load->model('curso_model');
+        $this->form_validation->set_rules('nombre', 'Nombre', 'required|trim|regex_match[/^([a-z,A-Z,á,é,í,ó,ú,â,ê,ô,ã,õ,ç,Á,É,Í,Ó,Ú,Â,Ê,Ô,Ã,Õ,Ç,ü,ñ,Ü,Ñ," "]+)$/]');
+        $this->form_validation->set_rules('id', 'id', 'numeric|required|trim');
+        $nombre = $this->input->post('nombre');
+        $id = $this->input->post('id');
+        $mensajes['error'] = false;
+        if ($this -> form_validation -> run() != false){
+            if($this->curso_model->editar_categoria($id,$nombre)){
+                $mensajes['mensaje']= "Editado satisfactoriamente";
+            }
+            else{
+                $mensajes['mensaje'] = "No se ha podido editar";
+                $mensajes['error'] = true;
+            }
+        }
+        else{
+            $mensajes['mensaje'] = "Nombre invalido";
+            $mensajes['error'] = true;
+        }
+        echo json_encode($mensajes);
+    }
+    protected function numero_categoria_borrado(){
+        $this->load->model('curso_model');
+        $mensajes['error'] = false;
+        $this->form_validation->set_rules('id', 'id', 'numeric|required|trim');
+        if ($this -> form_validation -> run() != false){
+            $id = $this->input->post('id');
+            $numero = $this->curso_model->numero_categoria_borrado($id)? $this->curso_model->numero_categoria_borrado($id): "0";
+            $mensajes['mensaje'] = $numero;    
+        }
+        else{
+            $mensajes['error'] = true;
+            $mensajes['mensaje'] = "ID invalida";
+        }
+        echo json_encode($mensajes);
+    }
+    protected function borrar_categoria(){
+        $this->load->model('curso_model');
+        $id = $this->input->post('id');
+        $this->curso_model->borrar_categoria($id);
+    }
 }
 ?>

@@ -24,7 +24,7 @@
 					tipo: {{reporte.tipo}}<br/>
 					nombre {{reporte.tipo}}: {{reporte.nombre}}</br>
 					descripcion: {{reporte.descripcion}}<br/>
-					<button ng-click="eliminarReporte($event,reporte.id_reporte)">Ignorar</button> <button  ng-click="eliminarEntidad($event,reporte.id_entidad,reporte.tipo)">Eliminar {{reporte.tipo}}</button>
+					<button ng-click="eliminarReporte($event,reporte.id_reporte)">Ignorar</button> <button  ng-click="eliminarEntidad($event,reporte.id_entidad,reporte.tipo,reporte.id_reporte)">Eliminar {{reporte.tipo}}</button>
 				</p>
 			</div>
 		</td>

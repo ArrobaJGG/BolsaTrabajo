@@ -46,7 +46,8 @@ var myApp = angular.module("my-app", ['ngRoute']);
 myApp.controller('notificacionesCtrl', ['$scope', '$http', function ($scope, $http) {
 	$scope.estaCargando = true;
 	$scope.estaCargandoNuevasAltas = true;
-	$http.get('/BolsaTrabajo/notificaciones_controller/validar/reportes')
+	$scope.actualizarReportes = function(){
+		$http.get('/BolsaTrabajo/notificaciones_controller/validar/reportes')
 		.then(
 			function successCallback(response) {
 			    // this callback will be called asynchronously
@@ -61,6 +62,8 @@ myApp.controller('notificacionesCtrl', ['$scope', '$http', function ($scope, $ht
 			    console.log('hola');
 			    $scope.estaCargando = false;
 	  		});
+	};
+	$scope.actualizarReportes();
 	$http.get('/BolsaTrabajo/notificaciones_controller/validar/nuevas_altas/10')
 		.then(
 			function successCallback(response) {
@@ -144,8 +147,8 @@ myApp.controller('borrarAlumnoCtrl',['$scope','$http',function($scope,$http){
 		$http.post('/BolsaTrabajo/notificaciones_controller/validar/borrar_alumno',"id="+$event.target.value,{'headers':{'content-type': 'application/x-www-form-urlencoded'}})
 		.then(
 			function successCallback(response){
-				$scope.mensaje = response.data;
-				if(response.data = "Alumno borrado correctamente") $event.target.parentElement.remove();
+				$scope.mensaje = response.data.mensaje;
+				if(!response.data.error) $event.target.parentElement.remove();
 			},
 			function errorCallback(response) {
 				    // called asynchronously if an error occurs
@@ -377,12 +380,55 @@ myApp.controller('idiomaCtrl',['$scope','$http',function($scope,$http){
 }]);
 myApp.controller('cursosFamiliasEtiquetasCtrl',['$scope','$http',function($scope,$http){
 	$scope.familiaSeleccionada= 0;
-	actualizar();
+	$scope.categoriaSeleccionada = "!0";
+	$scope.actualizar = function(){
+		$http.get('/BolsaTrabajo/notificaciones_controller/validar/get_familias_cursos_etiquetas')
+		.then(
+			function successCallback(response){
+				$scope.familias = response.data.familias;
+				$scope.cursos = response.data.cursos;
+				$scope.etiquetas = response.data.etiquetas;
+				$scope.categorias =  response.data.categorias;
+			},
+			function errorCallback(response) {
+			    // called asynchronously if an error occurs
+			    // or server returns response with an error status.
+			    console.log(response.data);
+			    console.log('error');
+	  		}
+		);
+	};
+	$scope.actualizar();
 	$scope.seleccionar = function(id){
 		$scope.familiaSeleccionada = id;
 	};
-	
-	
+	$scope.seleccionarCategoria = function(id){
+		$scope.categoriaSeleccionada = id;
+	};
+	$scope.estadoAgregando= false;
+	$scope.mostrarAgregar = function(){
+		$scope.estadoAgregando = true;
+	};
+	$scope.agregar = function(){
+		$http.post('/BolsaTrabajo/notificaciones_controller/validar/agregar_categoria'
+		,"nombre="+$scope.categoriaAng
+		,{'headers':{'content-type': 'application/x-www-form-urlencoded'}})
+		.then(
+			function successCallback(response){
+				$scope.mensaje = response.data.mensaje;
+				if(!response.data.error){
+					$scope.actualizar();
+					$scope.estadoAgregando = false;
+				}
+			},
+			function errorCallback(response) {
+			    // called asynchronously if an error occurs
+			    // or server returns response with an error status.
+			    console.log(response.data);
+			    console.log('error');
+	  		}
+		);
+	};
 	$scope.anadirEtiqueta = function(){
 		$http.post('/BolsaTrabajo/notificaciones_controller/validar/agregar_etiqueta'
 		,"nombre="+$scope.etiquetaAng
@@ -391,7 +437,7 @@ myApp.controller('cursosFamiliasEtiquetasCtrl',['$scope','$http',function($scope
 		.then(
 			function successCallback(response){
 				$scope.mensajes = response.data;
-				actualizar();
+				$scope.actualizar();
 			},
 			function errorCallback(response) {
 			    // called asynchronously if an error occurs
@@ -401,22 +447,7 @@ myApp.controller('cursosFamiliasEtiquetasCtrl',['$scope','$http',function($scope
 	  		}
 		);
 	};
-	function actualizar(){
-		$http.get('/BolsaTrabajo/notificaciones_controller/validar/get_familias_cursos_etiquetas')
-		.then(
-			function successCallback(response){
-				$scope.familias = response.data.familias;
-				$scope.cursos = response.data.cursos;
-				$scope.etiquetas = response.data.etiquetas;
-			},
-			function errorCallback(response) {
-			    // called asynchronously if an error occurs
-			    // or server returns response with an error status.
-			    console.log(response.data);
-			    console.log('error');
-	  		}
-		);
-	}
+	
 }]);
 myApp.controller('etiquetaCtrl',['$scope','$http',function($scope,$http){
 	$scope.modoEditarEtiqueta = false;
@@ -613,7 +644,7 @@ myApp.controller('nuevaAltaCtrl',['$scope','$http',function($scope,$http){
 myApp.controller('reporteCtrl',['$scope','$http',function($scope,$http){
 	$scope.eliminarReporte = function($event,$id){
 		$http.post('/BolsaTrabajo/notificaciones_controller/validar/borrar_reporte'
-		,"id="+$id
+		,"id_reporte="+$id
 		,{'headers':{'content-type': 'application/x-www-form-urlencoded'}})
 		.then(
 			function successCallback(response){
@@ -630,16 +661,15 @@ myApp.controller('reporteCtrl',['$scope','$http',function($scope,$http){
 	  		}
 		);
 	};
-	$scope.eliminarEntidad = function($event,id,tipo){
+	$scope.eliminarEntidad = function($event,id,tipo,id_reporte){
 		$http.post('/BolsaTrabajo/notificaciones_controller/validar/borrar_entidad'
 		,"id="+id
-		+"&tipo="+tipo)
+		+"&tipo="+tipo
+		+"&id_reporte="+id_reporte
+		,{'headers':{'content-type': 'application/x-www-form-urlencoded'}})
 		.then(
 			function successCallback(response){
 				$scope.mensaje = response.data.mensaje;
-				if(response.data.error ==false){
-					$event.target.parentElement.remove();
-				}
 			},
 			function errorCallback(response) {
 			    // called asynchronously if an error occurs
@@ -650,6 +680,73 @@ myApp.controller('reporteCtrl',['$scope','$http',function($scope,$http){
 		);
 		
 	};
+}]);
+myApp.controller('categoriaCtrl',['$scope','$http',function($scope,$http){
+	$scope.modoEditarCategoria = false;
+	$scope.editar =  function ($event){
+		$scope.modoEditarCategoria = true;
+		$event.stopPropagation();
+	};
+	$scope.enviar = function($event){
+		$http.post('/BolsaTrabajo/notificaciones_controller/validar/editar_categoria',
+			"id="+$event.target.value
+			+"&nombre="+$scope.categoriaAng,
+			{'headers':{'content-type': 'application/x-www-form-urlencoded'}})
+		.then(
+			function successCallback(response){
+				$scope.mensaje = response.data.mensaje;
+				$scope.error = response.data.error;
+				if(!response.data.error){
+					$scope.modoEditarCategoria = false;
+					$scope.$parent.categoria.nombre = $scope.categoriaAng;
+				}
+			},
+			function errorCallback(response) {
+			    // called asynchronously if an error occurs
+			    // or server returns response with an error status.
+			    console.log(response.data);
+			    console.log('error');
+	  		}
+  		);
+  	};
+  	$scope.borrar =  function($event){
+  		$http.post('/BolsaTrabajo/notificaciones_controller/validar/numero_categoria_borrado',
+  		"id="+$event.target.value
+  		,{'headers':{'content-type': 'application/x-www-form-urlencoded'}})
+  		.then(
+  			function successCallback(response){
+				$scope.mensaje = response.data.mensaje;
+				if(!response.data.error){
+					if(response.data.mensaje!="0"){
+						$scope.error = true;
+						$scope.mensaje = "Primero ha de borrar o cambiar de categoria a los cursos pertenecientes";
+					}
+					else{
+						$http.post('/BolsaTrabajo/notificaciones_controller/validar/borrar_categoria'
+						,"id="+$event.target.value
+						,{'headers':{'content-type': 'application/x-www-form-urlencoded'}})
+						.then(
+							function successCallback(response){
+								$event.target.parentElement.remove();
+							},
+							function errorCallback(response) {
+							    // called asynchronously if an error occurs
+							    // or server returns response with an error status.
+							    console.log(response.data);
+							    console.log('error');
+					  		}
+						);
+					}
+				}
+			},
+			function errorCallback(response) {
+			    // called asynchronously if an error occurs
+			    // or server returns response with an error status.
+			    console.log(response.data);
+			    console.log('error');
+	  		}
+  		);
+  	};
 }]);
 myApp.directive('upload', ['$http',function($http) {
     return {
