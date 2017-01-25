@@ -51,5 +51,11 @@ class Empresa_model extends CI_Model{
 		$devolver = isset($query) ? $query->result_array() : false;
 		return $devolver;
 	}
+	public function get_nombre($id){
+		$sql = "SELECT nombre FROM empresa WHERE id_login='$id'";
+		$query = $this->db->query($sql);
+		$devolver = isset($query) ? $query->row->nombre : false;
+		return $devolver;
+	}
 }
 ?>

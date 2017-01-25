@@ -32,15 +32,25 @@ class Notificaciones_controller extends CI_Controller{
 	}
 	protected function reportes(){
 		$reportes = $this->reporte_model->get_reportes()? $this->reporte_model->get_reportes():array();
-		
+		$this->load->model('ofertas_model');
 		foreach ($reportes as $key => $reporte) {
-			//TODO switch con los tipos de reporte 
-			$reportes[$key]['nombre'] = $this->alumno_model->get_nombre($reporte['id_entidad']);
+			switch ($reporte['tipo']) {
+				case 'alumno':
+					$reportes[$key]['nombre'] = $this->alumno_model->get_nombre($reporte['id_entidad']);
+					break;
+				case 'empresa':
+					$reportes[$key]['nombre'] = $this->empresa_model->get_nombre($reporte['id_entidad']);
+					break;
+				case 'oferta':
+					$reportes[$key]['nombre'] = $this->ofertas_model->get_nombre($reporte['id_entidad']);
+				break;
+			}
 		}
 		//sleep ( 2 );
 		echo json_encode($reportes);
 		
 	}
+	
 	protected function nuevas_altas($limit){
 		$nuevas_altas = $this->empresa_model->get_nuevas_altas($limit) ? $this->empresa_model->get_nuevas_altas($limit) : array();
 		echo json_encode($nuevas_altas);
@@ -50,12 +60,16 @@ class Notificaciones_controller extends CI_Controller{
 		echo json_encode($alumnos);
 	}
 	protected function borrar_alumno(){
-	    //TODO borrar correctamente a los alumnos
-		$this->form_validation->set_rules('id', 'id', 'numeric|required|trim|xss_clean');
-		$id = $this->input->post('id');
-		if($this->alumno_model->borrar_alumno($id)){
+		$this->form_validation->set_rules('id', 'id', 'numeric|required|trim');
+		if($this -> form_validation -> run() != false){
+			$id = $this->input->post('id');
+			$this->alumno_model->borrar_alumno_curso($id);
+			$this->alumno_model->borrar_alumno_idioma($id);
+			$this->alumno_model->borrar_oferta_alumno($id);
+			$this->alumno_model->borrar_etiqueta_alumno($id);
+			$this->alumno_model->borrar_alumno($id);
 			$this->login_model->borrar_usuario($id);
-			$mensaje = "Alumno borrado correctamente";
+			$mensaje = "Alumno borrado correctamente";	
 		}
 		else{
 			$mensaje = "Ha ocurrido un error";
