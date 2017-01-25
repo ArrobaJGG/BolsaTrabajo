@@ -34,12 +34,12 @@ class Ofertas_model extends CI_Model{
 	    $sql = "INSERT INTO etiqueta(nombre,id_familia_laboral) VALUES ('$nombre','$familia')";
         return $this->db->query($sql);
 	}
-<<<<<<< HEAD
-	
 
 	
 
-=======
+	
+
+
 	public function editar_etiqueta($nombre,$id){
 		$sql = "UPDATE etiqueta SET nombre = '$nombre' WHERE id_etiqueta='$id' ";
 		return $this->db->query($sql);
@@ -77,6 +77,6 @@ class Ofertas_model extends CI_Model{
         $id = $row ? $row : false;
         return $id;
 	}
->>>>>>> c3a5f50cca499f9f60f6a11b64653d5150a081c0
+
 }
 ?>
