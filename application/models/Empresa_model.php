@@ -46,9 +46,15 @@ class Empresa_model extends CI_Model{
 		return $this->db->query($sql);
 	}
 	public function get_nuevas_altas($limit = PHP_MAX_INT){
-		$sql = "SELECT nombre,correo FROM empresa,login WHERE login.id_login = empresa.id_login AND estado=false ORDER BY empresa.id_login DESC LIMIT $limit";
+		$sql = "SELECT nombre,correo,empresa.id_login 'id_login' FROM empresa,login WHERE login.id_login = empresa.id_login AND estado=false ORDER BY empresa.id_login DESC LIMIT $limit";
 		$query = $this->db->query($sql);
 		$devolver = isset($query) ? $query->result_array() : false;
+		return $devolver;
+	}
+	public function get_nombre($id){
+		$sql = "SELECT nombre FROM empresa WHERE id_login='$id'";
+		$query = $this->db->query($sql);
+		$devolver = isset($query) ? $query->row->nombre : false;
 		return $devolver;
 	}
 }

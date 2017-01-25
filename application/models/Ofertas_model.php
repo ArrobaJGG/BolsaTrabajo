@@ -78,5 +78,12 @@ class Ofertas_model extends CI_Model{
         return $id;
 	}
 
+	public function get_nombre($id){
+		$sql = "SELECT nombre FROM oferta WHERE id_oferta = '$id'";
+		$query = $this->db->query($sql);
+		$nombre = $query ? $query->row->nombre : false;
+		return $nombre;
+	}
+
 }
 ?>

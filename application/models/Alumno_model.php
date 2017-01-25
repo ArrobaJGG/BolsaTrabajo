@@ -79,10 +79,25 @@ class Alumno_model extends CI_Model{
 		$query = $this->db->query($sql);
 		$row = $query->row_array();	
 		return $row;
-
 	}
 	public function borrar_alumno($id){
 		$sql = "DELETE FROM alumno WHERE id_login = '$id'";
+		return $this->db->query($sql);
+	}
+	public function borrar_alumno_idioma($id){
+		$sql = "DELETE FROM alumno_idioma WHERE id_login = '$id'";
+		return $this->db->query($sql);
+	}
+	public function borrar_alumno_curso($id){
+		$sql = "DELETE FROM alumno_curso WHERE id_login = '$id'";
+		return $this->db->query($sql);
+	}
+	public function borrar_oferta_alumno($id){
+		$sql = "DELETE FROM oferta_alumno WHERE id_login = '$id'";
+		return $this->db->query($sql);
+	}
+	public function borrar_etiqueta_alumno($id){
+		$sql = "DELETE FROM etiqueta_alumno WHERE id_login = '$id'";
 		return $this->db->query($sql);
 	}
 }

@@ -517,6 +517,7 @@ myApp.controller('familiaCtrl',['$scope','$http',function($scope,$http){
 		$scope.numero = "";
 		$scope.mensaje = "";
 		$scope.error = false;
+		$event.stopPropagation();
 		$http.post('/BolsaTrabajo/notificaciones_controller/validar/numero_familia_borrado'
 		,"id="+$event.target.value
 		,{'headers':{'content-type': 'application/x-www-form-urlencoded'}})
