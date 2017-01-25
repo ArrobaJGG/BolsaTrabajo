@@ -25,17 +25,17 @@ $this -> load -> helper('form');
 			<span ng-show="userForm.dni.$error.required">El campo es obligatorio.</span>
 		</span></br>
 		
-		Fecha Nacimiento: <input type="text" name="fecha" ng-model="fecha" ng-init = "fecha='<?php if ($fecha_nacimiento==NULL){ echo " campo vacio "; } else {echo $fecha_nacimiento;} ?>'" required>
+		Fecha Nacimiento: <input type="text" name="fecha_nacimiento" ng-model="fecha_nacimiento" ng-init = "fecha_nacimiento='<?php if ($fecha_nacimiento==NULL){ echo " campo vacio "; } else {echo $fecha_nacimiento;} ?>'" required>
 		<span class="messages" ng-show="userForm.$submitted || userForm.fecha.$touched">
 			<span ng-show="userForm.fecha.$error.required">El campo es obligatorio.</span>
 		</span></br>
 		
-		Codigo Postal: <input type="text" name="codigopostal" ng-model="codigopostal" ng-init = "codigopostal='<?php if ($codigo_postal==NULL){ echo " campo vacio "; } else {echo $codigo_postal;} ?>'" required>
+		Codigo Postal: <input type="text" name="codigo_postal" ng-model="codigo_postal" ng-init = "codigo_postal='<?php if ($codigo_postal==NULL){ echo " campo vacio "; } else {echo $codigo_postal;} ?>'" required>
 		<span class="messages" ng-show="userForm.$submitted || userForm.codigopostal.$touched">
 			<span ng-show="userForm.codigopostal.$error.required">El campo es obligatorio.</span>
 		</span></br>
 		
-		Descripcion: <textarea name="descripcion" ng-model="descripcion" ng-init = "descripcion='<?php if ($resumen==NULL){ echo " campo vacio "; } else {echo $resumen;} ?>'"  ng-maxlength="1000" required></textarea>
+		Descripcion: <textarea name="resumen" ng-model="resumen" ng-init = "resumen='<?php if ($resumen==NULL){ echo " campo vacio "; } else {echo $resumen;} ?>'"  ng-maxlength="1000" required></textarea>
 		<span class="messages" ng-show="userForm.$submitted || userForm.descripcion.$touched">
 			<span ng-show="userForm.descripcion.$error.required">El campo es obligatorio.</span>
 			<span ng-show="userForm.descripcion.$error.maxlength">La descripcion no puede exceder de 1000 caracteres.</span>

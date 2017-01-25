@@ -23,14 +23,13 @@ public function index(){
 		$rol = $this->session->userdata['rol'];
 		
 	if ($this->input->post('Enviar')){
-		var_dump($this->input->post());
+		
 				$this->form_validation->set_rules('nombre', 'nombre ', 'required|callback_letras');
 				$this->form_validation->set_rules('apellido','apellido','callback_letras');
 				$this->form_validation->set_rules('telefono','telefono','integer');
 				$this->form_validation->set_rules('dni','dni','required');
-				$this->form_validation->set_rules('fecha','fecha','required');
-				$this->form_validation->set_rules('codigopostal','codigopostal','integer');
-				$this->form_validation->set_rules('descripcion','descripcion','max_length[1000]');
+				$this->form_validation->set_rules('codigo_postal','codigo_postal','integer');
+				$this->form_validation->set_rules('resumen','resumen','max_length[1000]');
 				$this->form_validation->set_rules('fecha_inicio','fecha_inicio');
 				$this->form_validation->set_rules('fecha_final','fecha_final');
 				
@@ -48,16 +47,16 @@ public function index(){
 				}else{
 				$nombre = $this->input->post('nombre');
 				$apellidos = $this->input->post('apellidos');
-				$telefono = $this->input->post('telefono1');
+				$telefono = $this->input->post('telefono');
 				$dni = $this->input->post('dni');
-				$fecha = $this->input->post('fecha');
-				$codigo_postal = $this->input->post('codigopostal');
-				$descripcion = $this->input->post('descripcion');
+				$fecha_nacimiento = $this->input->post('fecha_nacimiento');
+				$codigo_postal = $this->input->post('codigo_postal');
+				$resumen = $this->input->post('resumen');
 				$familia = $this->input->post('familia');
 				$idioma = $this->input->post('idioma');
-				$nivel_leido = $this->input->post('nivelleido');
-				$nivel_escrito = $this->input->post('nivelescrito');
-				$nivel_hablado = $this->input->post('nivelhablado');
+				$nivelleido = $this->input->post('nivelleido');
+				$nivelescrito = $this->input->post('nivelescrito');
+				$nivelhablado = $this->input->post('nivelhablado');
 				$titulado = $this->input->post('titulado');
 				$curso = $this->input->post('curso');
 				$fecha_inicio = $this->input->post('fecha_inicio');
@@ -67,13 +66,22 @@ public function index(){
 					 $parametros_alumno = array( "nombre" => $nombre, 
 					   						"dni" => $dni,
 					   						"apellidos" => $apellidos ,
-					   						"telefono1" => $telefono,
-					   						"fecha" => $fecha,
+					   						"telefono" => $telefono,
+					   						"fecha_nacimiento" => $fecha_nacimiento,
 					   						"id_login" => $id_login,
-					   						"codigopostal" => $codigo_postal,
-					   						"descripcion" => $descripcion,
+					   						"codigo_postal" => $codigo_postal,
+					   						"resumen" => $resumen,
 					   						"experiencia" => $experiencia,
 					   						"logo" => $logo);
+					  $parametros_alumno_curso= array("fecha_inicio" => $fecha_inicio,
+					  								  "fecha_final" => $fecha_final,
+													  "id_login" => $id_login
+													  );
+					  $parametros_nivel= array("nivelleido" => $nivelleido,
+					  						   "nivelescrito" => $nivelescrito,
+					  						   "nivelhablado" => $nivelhablado
+					  							
+												);
 					    $mi_archivo = 'logo';
 				        $config['upload_path'] = './img/';
 						//$config['default'] = './img/pordefecto.jpg/';
@@ -100,7 +108,8 @@ public function index(){
    			 
 					   //$actualizar_alumno = $this->alumno_model->actualizar($parametros,$id_login);
 					  
-					   	$actualizar_alumno = $this->alumno_model->actualizar($parametros_alumno,$id_login);
+					   	$actualizar_alumno = $this->alumno_model->actualizar_alumno($parametros_alumno,$id_login);
+						$actualizar_alumno = $this->alumno_model->actualizar_alumno_curso($parametros_alumno_curso,$id_login);
 					   //$actualizar_alumno=$this->alumno_model->actualizar($nombre,$apellidos,$telefono,$dni,$fecha,$codigo_postal,$descripcion,$experiencia);
 					   	$datos["mensaje"] = "Validacion correcta";
 					   

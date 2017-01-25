@@ -18,7 +18,7 @@ class Alumno_model extends CI_Model{
 		$devolver = isset($row) ? true : false;
 		return $devolver;
 	}
-	public function actualizar_alumno($columnas,$datos){
+	public function actualizar_alumno1($columnas,$datos){
 		/*
 		 * Cambiar insert por update y alguna cosa mas para poder actualizar solo los campos que se envian
 		 */
@@ -47,8 +47,12 @@ class Alumno_model extends CI_Model{
 		$devolver = isset($query) ? $query->result_array() : false;
 		return $devolver;
 	}
-	public function actualizar($parametros_alumno,$id_login){
-		$sql = "UPDATE empresa SET nombre = '$parametros_alumno[nombre]', dni = '$parametros_alumno[dni]', telefono1 = $parametros_alumno[telefono], fecha = $parametros_alumno[fecha], codigopostal= '$parametros_alumno[codigo_postal]', descripcion= '$parametros_alumno[descripcion]', experiencia= '$parametros_alumno[experiencia]'  WHERE id_login = $id_login";
+	public function actualizar_alumno($parametros_alumno,$id_login){
+		$sql = "UPDATE alumno SET nombre = '$parametros_alumno[nombre]', dni = '$parametros_alumno[dni]', telefono1 = $parametros_alumno[telefono], fecha_nacimiento = '$parametros_alumno[fecha_nacimiento]', codigo_postal= '$parametros_alumno[codigo_postal]', resumen= '$parametros_alumno[resumen]', experiencia= '$parametros_alumno[experiencia]'  WHERE id_login = $id_login";
+		$query = $this->db->query($sql);
+	}
+		public function actualizar_alumno_curso($parametros_alumno_curso,$id_login){
+		$sql = "UPDATE alumno_curso SET fecha_inicio='$parametros_alumno_curso[fecha_inicio]', fecha_final='$parametros_alumno_curso[fecha_final]'  WHERE id_login = $id_login";
 		$query = $this->db->query($sql);
 	}
 	public function id_login($id_login){
