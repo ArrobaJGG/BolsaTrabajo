@@ -21,6 +21,7 @@ class Ofertas_model extends CI_Model{
 		$etiqueta = $row ? $row : false;
 		return $etiqueta;
 	}
+
 	
 	public function insertar(){
 		$sql = "INSERT INTO oferta (titulo,fechae,lugar,telefono,requisito,sueldo,funciones,ofrece,familia,etiquetas,correo,horario)
@@ -28,6 +29,13 @@ class Ofertas_model extends CI_Model{
 		$query = $this->db->query($sql);
 		
 	}
+
+	public function agregar_etiqueta($nombre,$familia){
+	    $sql = "INSERT INTO etiqueta(nombre,id_familia_laboral) VALUES ('$nombre','$familia')";
+        return $this->db->query($sql);
+	}
+	
+
 	
 
 }

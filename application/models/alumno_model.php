@@ -47,12 +47,18 @@ class Alumno_model extends CI_Model{
 		$devolver = isset($query) ? $query->result_array() : false;
 		return $devolver;
 	}
-	public function actualizar($parametros,$id_login){
-		$sql = "UPDATE alumno SET nombre = '$parametros[nombre]', apellido = $parametros[apellido], telefono1 = $parametros[telefono], DNI = $parametros[DNI], fecha = $parametros[fecha]   WHERE id_login = $id_login";
-		$query = $this->db->query($sql);
-		//$row = $query->row();	
-		//return $row;
-
+	public function actualizar($nombre,$apellidos,$telefono,$DNI,$fecha_nacimiento,$codigo_postal,$descripcion,$experiencia){
+		$data = array(
+		'nombre'=> $nombre,
+		'apellidos'=> $apellidos,
+		'telefono1'=> $telefono,
+		'dni' => $DNI,
+		'fecha_nacimiento' => $fecha_nacimiento,
+		'codigo_postal' => $codigo_postal,
+		'descripcion' => $descripcion,
+		'experiencia' => $experiencia
+		);
+		return $this->db->insert('alumno',$data);
 	}
 	public function id_login($id_login){
 		$sql= "select * from alumno where id_login='$id_login'";
@@ -69,7 +75,7 @@ class Alumno_model extends CI_Model{
 		return $this->db->query($sql);
 	}
 	public function alumno_curso($id_login){
-		$sql = "select nombre,fecha_inicio,fecha_final from curso,alumno_curso where curso.id_curso=alumno_curso.id_curso and alumno_curso.id_login=$id_login";
+		$sql = "select * from curso,alumno_curso where curso.id_curso=alumno_curso.id_curso and alumno_curso.id_login=$id_login";
 		$query = $this->db->query($sql);
 		$row = $query->row_array();	
 		return $row;

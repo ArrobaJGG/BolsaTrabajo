@@ -20,7 +20,7 @@ public function index(){
 				
 				if ($this->input->post('Publicar')) {
 					
-						$this->form_validation->set_rules('titulo', 'titulo', 'required|min_length[3]|alpha');// el trim siempre delante
+						$this->form_validation->set_rules('titulo', 'titulo', 'required|min_length[3]');// el trim siempre delante
 						$this->form_validation->set_rules('fechae', 'fechae');
 						$this->form_validation->set_rules('lugar', 'lugar', 'min_length[3]|alpha');
 						$this->form_validation->set_rules('telefono', 'telefono', 'trim|numeric|integer');
