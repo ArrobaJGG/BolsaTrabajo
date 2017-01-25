@@ -11,6 +11,10 @@ class Reporte_model extends CI_Model{
 		$devolver = isset($query) ? $query->result_array() : false;
 		return $devolver;
 	}
+	public function borrar_reporte($id){
+		$sql = "DELETE FROM reporte WHERE id_reporte='$id'";
+		return $this->db->query($sql);
+	}
 }
 
 	

@@ -60,6 +60,7 @@ class Notificaciones_controller extends CI_Controller{
 		echo json_encode($alumnos);
 	}
 	protected function borrar_alumno(){
+		//TODO poner mismo formato que en el resto
 		$this->form_validation->set_rules('id', 'id', 'numeric|required|trim');
 		if($this -> form_validation -> run() != false){
 			$id = $this->input->post('id');
@@ -84,16 +85,24 @@ class Notificaciones_controller extends CI_Controller{
 		echo json_encode($empresas);
 	}
 	protected function borrar_empresa(){
-		$this->form_validation->set_rules('id', 'id', 'numeric|required|trim|xss_clean');
+		$this->form_validation->set_rules('id', 'id', 'numeric|required|trim');
 		$id = $this->input->post('id');
-		if($this->empresa_model->borrar_empresa($id)){
-			$this->login_model->borrar_usuario($id);
-			$mensaje = "Alumno borrado correctamente";
+		$mensajes['error'] = false;
+		if($this -> form_validation -> run() != false){
+			if($this->empresa_model->borrar_empresa($id)){
+				$this->login_model->borrar_usuario($id);
+				$mensajes['mensaje'] = "Empresa borrado correctamente";
+			}
+			else{
+				$mensajes['error'] = true;
+				$mensajes['mensaje'] = "Ha ocurrido un error";
+			}
 		}
 		else{
-			$mensaje = "Ha ocurrido un error";
+			$mensajes['error'] = true;
+				$mensajes['mensaje'] = "ID invalida";
 		}
-		echo $mensaje;
+		echo json_encode($mensajes);
 	}
 	protected function cargar_familias(){
 		$this->load->model("familia_laboral_model");
@@ -340,5 +349,74 @@ class Notificaciones_controller extends CI_Controller{
         }
         echo json_encode($mensajes);
     }
+	protected function validar_empresa(){
+		$this->form_validation->set_rules('id', 'id', 'numeric|required|trim');
+        $mensajes['error'] = false;
+        $id = $this->input->post('id');
+		if ($this -> form_validation -> run() != false){
+			if($this->empresa_model->validar_empresa($id)){
+				$mensajes['mensaje'] = "validacion correcta";
+			}
+			else{
+				$mensajes['mensajes'] = "ha ocurrido un error";
+			}
+		}
+		else{
+			$mensajes['mensaje'] = "ID invalida";
+            $mensajes['error'] = true; 
+		}
+	}
+	protected function borrar_reporte(){
+		$this->form_validation->set_rules('id', 'id', 'numeric|required|trim');
+		$mensajes['error'] = false;
+		$id = $this->input->post('id');
+		if ($this -> form_validation -> run() != false){
+			$this->reporte_model->borrar_reporte($id);
+			$mensajes['mensaje'] = "Reporte borrado";
+		}
+		else{
+			$mensajes['mensaje'] = "ID invalida";
+			$mensajes['error'] = true; 
+		}
+		echo json_encode($mensajes);
+	}
+	protected function borrar_entidad(){
+		$this->form_validation->set_rules('id', 'id', 'numeric|required|trim');
+		$mensajes['error'] = false;
+		$this->form_validation->set_rules('tipo', 'tipo', 'required|trim|alpha');
+		if ($this -> form_validation -> run() != false){
+			$id = $this->input->post('id');
+			$tipo = $this->input->post('tipo');
+			switch ($tipo) {
+				case 'alumno':
+					$this->borrar_alumno();
+					break;
+				case 'empresa':
+					$this->borrar_empresa();
+					break;
+				case 'oferta':
+					$this->borrar_oferta();
+			}
+		}
+		else{
+			$mensajes['mensaje'] = "ID invalida";
+			$mensajes['error'] = true; 
+		}
+	}
+	protected function borrar_oferta(){
+		$this->form_validation->set_rules('id', 'id', 'numeric|required|trim');
+		$this->load->model('ofertas_model');
+		$mensajes['error'] = false;
+		$id = $this->input->post('id');
+		if ($this -> form_validation -> run() != false){
+			$this->ofertas_model->borrar_oferta($id);
+			$mensajes['mensaje'] = "Oferta borrado";
+		}
+		else{
+			$mensajes['mensaje'] = "ID invalida";
+			$mensajes['error'] = true; 
+		}
+		echo json_encode($mensajes);
+	}
 }
 ?>

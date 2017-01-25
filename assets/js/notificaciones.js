@@ -39,7 +39,7 @@ var myApp = angular.module("my-app", ['ngRoute']);
     })
     .when("/administrar-cursos-familias-etiquetas",{
     	templateUrl : "/BolsaTrabajo/api/cargar_partes/cargar/cursos_familias_etiquetas",
-    	controller : 'cursosFamiliasEtiquetasController'
+    	controller : 'cursosFamiliasEtiquetasCtrl'
     }
     );
 });
@@ -184,8 +184,8 @@ myApp.controller('borrarEmpresaCtrl',['$scope','$http',function($scope,$http){
 		$http.post('/BolsaTrabajo/notificaciones_controller/validar/borrar_empresa',"id="+$event.target.value,{'headers':{'content-type': 'application/x-www-form-urlencoded'}})
 		.then(
 			function successCallback(response){
-				$scope.mensaje = response.data;
-				if(response.data = "Alumno borrado correctamente") $event.target.parentElement.remove();
+				$scope.mensaje = response.data.mensaje;
+				if(!response.data.error) $event.target.parentElement.remove();
 			},
 			function errorCallback(response) {
 				    // called asynchronously if an error occurs
@@ -375,9 +375,8 @@ myApp.controller('idiomaCtrl',['$scope','$http',function($scope,$http){
 		
 	};
 }]);
-myApp.controller('cursosFamiliasEtiquetasController',['$scope','$http',function($scope,$http){
+myApp.controller('cursosFamiliasEtiquetasCtrl',['$scope','$http',function($scope,$http){
 	$scope.familiaSeleccionada= 0;
-	
 	actualizar();
 	$scope.seleccionar = function(id){
 		$scope.familiaSeleccionada = id;
@@ -571,6 +570,85 @@ myApp.controller('familiaCtrl',['$scope','$http',function($scope,$http){
 				    console.log('error');
 		  		}
 			);
+	};
+}]);
+myApp.controller('nuevaAltaCtrl',['$scope','$http',function($scope,$http){
+	$scope.validarEmpresa = function($event){
+		$scope.mensaje = "Cargando...";
+		$http.post('/BolsaTrabajo/notificaciones_controller/validar/validar_empresa'
+		,"id="+$event.target.value
+		,{'headers':{'content-type': 'application/x-www-form-urlencoded'}})
+		.then(
+			function successCallback(response){
+				$scope.mensaje = response.data.mensaje;
+			},
+			function errorCallback(response) {
+			    // called asynchronously if an error occurs
+			    // or server returns response with an error status.
+			    console.log(response.data);
+			    console.log('error');
+	  		}
+		);
+	};
+	$scope.borrarEmpresa = function($event){
+		$http.post('/BolsaTrabajo/notificaciones_controller/validar/borrar_empresa'
+		,"id="+$event.target.value
+		,{'headers':{'content-type': 'application/x-www-form-urlencoded'}})
+		.then(
+			function successCallback(response){
+				$scope.mensaje = response.data.mensaje;
+				if(response.data.error ==false){
+					$event.target.parentElement.remove();
+				}
+			},
+			function errorCallback(response) {
+			    // called asynchronously if an error occurs
+			    // or server returns response with an error status.
+			    console.log(response.data);
+			    console.log('error');
+	  		}
+		);
+	};
+}]);
+myApp.controller('reporteCtrl',['$scope','$http',function($scope,$http){
+	$scope.eliminarReporte = function($event,$id){
+		$http.post('/BolsaTrabajo/notificaciones_controller/validar/borrar_reporte'
+		,"id="+$id
+		,{'headers':{'content-type': 'application/x-www-form-urlencoded'}})
+		.then(
+			function successCallback(response){
+				$scope.mensaje = response.data.mensaje;
+				if(response.data.error ==false){
+					$event.target.parentElement.remove();
+				}
+			},
+			function errorCallback(response) {
+			    // called asynchronously if an error occurs
+			    // or server returns response with an error status.
+			    console.log(response.data);
+			    console.log('error');
+	  		}
+		);
+	};
+	$scope.eliminarEntidad = function($event,id,tipo){
+		$http.post('/BolsaTrabajo/notificaciones_controller/validar/borrar_entidad'
+		,"id="+id
+		+"&tipo="+tipo)
+		.then(
+			function successCallback(response){
+				$scope.mensaje = response.data.mensaje;
+				if(response.data.error ==false){
+					$event.target.parentElement.remove();
+				}
+			},
+			function errorCallback(response) {
+			    // called asynchronously if an error occurs
+			    // or server returns response with an error status.
+			    console.log(response.data);
+			    console.log('error');
+	  		}
+		);
+		
 	};
 }]);
 myApp.directive('upload', ['$http',function($http) {
