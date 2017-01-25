@@ -16,11 +16,13 @@ public function index(){
 		if ($this->session->userdata('rol')=='empresa') {
 				$data['familias'] = $this->Familia_laboral_model->familia();	
 				$data['etiquetas'] = $this->Ofertas_model->etiqueta();
+				$id_login = $this->session->userdata['id_login'];
 				//var_dump( $data['etiquetas']);	
 				
 				if ($this->input->post('Publicar')) {
 					
 						$this->form_validation->set_rules('titulo', 'titulo', 'required|min_length[3]');// el trim siempre delante
+						$this->form_validation->set_rules('nombre','nombre');
 						$this->form_validation->set_rules('fechae', 'fechae');
 						$this->form_validation->set_rules('lugar', 'lugar', 'min_length[3]|alpha');
 						$this->form_validation->set_rules('telefono', 'telefono', 'trim|numeric|integer');
@@ -29,7 +31,7 @@ public function index(){
 						$this->form_validation->set_rules('funciones', 'funciones', 'min_length[3]');
 						$this->form_validation->set_rules('ofrece', 'ofrece', 'min_length[3]');
 						$this->form_validation->set_rules('resumen', 'resumen', 'required|min_length[3]');
-						$this->form_validation->set_rules('familia', 'familia');
+						$this->form_validation->set_rules('id_familia', 'id_familia');
 						$this->form_validation->set_rules('etiquetas', 'etiquetas');
 						$this->form_validation->set_rules('correo', 'correo', 'valid_email');
 						$this->form_validation->set_rules('horario', 'horario');
@@ -46,19 +48,25 @@ public function index(){
 						if($this->form_validation->run() ==false){
 					    	 					
 						}else{
-							$titulo = $this->input->post('titulo');
-							$fechae = $this->input->post('fechae');
-							$lugar = $this->input->post('lugar');
-							$telefono = $this->input->post('telefono');
-							$requisito = $this->input->post('requisito');
-							$sueldo = $this->input->post('sueldo');
-							$funciones = $this->input->post('funciones');
-							$ofrece = $this->input->post('resumen');
-							$familia= $this->input->post('familia');
-							$etiquetas = $this->input->post('etiquetas');
-							$correo = $this->input->post('correo');
-							$horario = $this->input->post('horario');
-							$parametros = array ( "titulo" => $titulo,
+							$titulo = ($this->input->post('titulo')) ? $this->input->post('titulo') : null;
+							$nombre = ($this->input->post('nombre')) ? $this->input->post('nombre') : null ;
+							$fechae  = ($this->input->post('fechae')) ? $this->input->post('fechae') : null ;
+							$lugar = ($this->input->post('lugar')) ? $this->input->post('lugar'): null ;
+							$telefono = ($this->input->post('telefono')) ? $this->input->post('telefono') : null ;
+							$requisito = ($this->input->post('requisito')) ? $this->input->post('requisito') : null ;
+							$sueldo = ($this->input->post('sueldo')) ? $this->input->post('sueldo') : null;
+							$funciones = ($this->input->post('funciones')) ? $this->input->post('funciones') : null ;
+							$ofrece = ($this->input->post('ofrece')) ? $this->input->post('ofrece') : null ;
+							$resumen = ($this->input->post('resumen')) ? $this->input->post('resumen') : null ;
+							$id_familia = ($this->input->post('id_familia')) ? $this->input->post('id_familia') : null ;
+							$etiquetas = ($this->input->post('etiquetas')) ? $this->input->post('etiquetas') : null ;
+							$correo  = ($this->input->post('correo')) ? $this->input->post('correo') : null ;
+							$horario = ($this->input->post('horario')) ? $this->input->post('horario') : null ;
+							$oculto = ($this->input->post('oculto')) ? $this->input->post('oculto') : FALSE;
+							
+							$parametros = array ( 
+													"titulo" => $titulo,
+													"nombre" =>$nombre,
 													"fechae" => $fechae,
 													"lugar" => $lugar,
 													"telefono" => $telefono,
@@ -66,13 +74,17 @@ public function index(){
 													"sueldo" => $sueldo,
 													"funciones" => $funciones,
 													"ofrece" => $ofrece,
-													"familia" => $familia,
+													"id_familia" => $id_familia,
 													"etiquetas" => $etiquetas,
 													"correo" => $correo,
-													"horario" => $horario
+													"horario" => $horario,
+													"resumen" => $resumen,
+													"oculto" => $oculto,
+													"fechac" => date('Y/m/d'),
+													
 													);
-						$insertaroferta = $this->Ofertas_model->insertar($parametros);
-						var_dump($insertaroferta);
+						$insertaroferta = $this->Ofertas_model->insertar($parametros,$id_login);
+						
 						}
 				
 				

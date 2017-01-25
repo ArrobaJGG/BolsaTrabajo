@@ -23,12 +23,11 @@ class Ofertas_model extends CI_Model{
 	}
 
 	
-	public function insertar($parametros){
-		$sql = "INSERT INTO oferta (titulo,fechae,lugar,telefono,requisito,sueldo,funciones,ofrece,familia,etiquetas,correo,horario)
-				VALUES ($parametros[titulo],$parametros[fechae],$parametros[lugar],$parametros[telefono]$parametros[requisito],$parametros[sueldo],$parametros[funciones],$parametros[ofrece],$parametros[familia],$parametros[etiquetas],$parametros[correo],$parametros[horario])";
-		$query = $this->db->query($sql);
-		
-	}
+	 public function insertar($parametros,$id_login){
+	 	 $sql = "INSERT INTO oferta SET id_login=$id_login, id_familia='$parametros[id_familia]', nombre_empresa='$parametros[nombre]', fecha_creacion='$parametros[fechac]' , fecha_expiracion='$parametros[fechae]', lugar='$parametros[lugar]', resumen='$parametros[resumen]', funciones='$parametros[funciones]', ofrece='$parametros[ofrece]', sueldo='$parametros[sueldo]', requisitos='$parametros[requisito]', horario='$parametros[horario]', titulo='$parametros[titulo]', correo='$parametros[correo]', telefono='$parametros[telefono]', oculto='$parametros[oculto]'";
+	 	 $query = $this->db->query($sql);
+	 }
+	
 
 	public function agregar_etiqueta($nombre,$familia){
 	    $sql = "INSERT INTO etiqueta(nombre,id_familia_laboral) VALUES ('$nombre','$familia')";
@@ -38,7 +37,6 @@ class Ofertas_model extends CI_Model{
 	
 
 	
-
 
 	public function editar_etiqueta($nombre,$id){
 		$sql = "UPDATE etiqueta SET nombre = '$nombre' WHERE id_etiqueta='$id' ";
