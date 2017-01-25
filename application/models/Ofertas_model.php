@@ -21,10 +21,25 @@ class Ofertas_model extends CI_Model{
 		$etiqueta = $row ? $row : false;
 		return $etiqueta;
 	}
+
+	
+	public function insertar(){
+		$sql = "INSERT INTO oferta (titulo,fechae,lugar,telefono,requisito,sueldo,funciones,ofrece,familia,etiquetas,correo,horario)
+				VALUES ($titulo,$fechae,$lugar,$telefono,$requisito,$sueldo,$funciones,$ofrece,$familia,$etiquetas,$correo,$horario)";
+		$query = $this->db->query($sql);
+		
+	}
+
 	public function agregar_etiqueta($nombre,$familia){
 	    $sql = "INSERT INTO etiqueta(nombre,id_familia_laboral) VALUES ('$nombre','$familia')";
         return $this->db->query($sql);
 	}
+
+	
+
+	
+
+
 	public function editar_etiqueta($nombre,$id){
 		$sql = "UPDATE etiqueta SET nombre = '$nombre' WHERE id_etiqueta='$id' ";
 		return $this->db->query($sql);
@@ -62,11 +77,13 @@ class Ofertas_model extends CI_Model{
         $id = $row ? $row : false;
         return $id;
 	}
+
 	public function get_nombre($id){
 		$sql = "SELECT nombre FROM oferta WHERE id_oferta = '$id'";
 		$query = $this->db->query($sql);
 		$nombre = $query ? $query->row->nombre : false;
 		return $nombre;
 	}
+
 }
 ?>
