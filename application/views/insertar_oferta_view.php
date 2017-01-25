@@ -14,7 +14,7 @@ Titulo: <input type="text" name="titulo" value="" placeholder="Titulo" required>
 
 Fecha Expiracion: <input type="date" name="fechae" value=""></br>
 Lugar: <input type="text" name="lugar" value="" placeholder="Ciudad"></br>
-Telefono:<input type="number" name="telefono" value=""/>
+Telefono a contactar:<input type="number" name="telefono" value=""/></br>
 Requisito: <input type="text" name="requisito" value="" placeholder="Requisitos"></br>
 Sueldo: <input type="number" name="sueldo" value="" placeholder=""></br>
 Funciones: <input type="text" name="funciones" value="" placeholder="Trabajo a realizar"></br>

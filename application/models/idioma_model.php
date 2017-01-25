@@ -49,7 +49,7 @@ class idioma_model extends CI_Model{
         return $this->db->query($sql);
     }
     public function get_numero_idioma_borrado($id){
-        $sql = "SELECT count(*) cuenta FROM alumno_idioma WHERE id_idioma = '$id'";
+        $sql = "SELECT count(DISTINCT(id_login)) cuenta FROM alumno_idioma WHERE id_idioma = '$id'";
         $query = $this->db->query($sql);
         $row = $query->row();
         $devolver = $row ? $row->cuenta : false;

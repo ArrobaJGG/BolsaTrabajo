@@ -2,7 +2,7 @@
 $this -> load -> helper('form');
 ?>
 <div ng-controller="UserController">
-	<form name="userForm" ng-submit="submit($event)"  action="./Editar_perfil_controller" method="post" novalidate>
+	<form name="userForm" ng-submit="submit($event)"  action="./Editar_perfil_controller" method="post" enctype="multipart/form-data" novalidate>
 		Nombre: <input name="nombre"  type="text" ng-model="nombre"  ng-init = "nombre='<?php if ($nombre==NULL){ echo " campo vacio "; } else {echo $nombre;} ?>'" required />
 		<span class="messages" ng-show="userForm.$submitted || userForm.nombre.$touched">
 			<span ng-show="userForm.nombre.$error.required">El campo es obligatorio.</span>
@@ -20,7 +20,7 @@ $this -> load -> helper('form');
 			<span ng-show="userForm.telefono.$error.max">el telefono no puede exceder de 13.</span>
 		</span></br>
 		
-		DNI: <input type="text" name="DNI" ng-model="DNI" ng-init = "DNI='<?php if ($dni==NULL){ echo " campo vacio "; } else {echo $dni;} ?>'" required>
+		DNI: <input type="text" name="dni" ng-model="DNI" ng-init = "DNI='<?php if ($dni==NULL){ echo " campo vacio "; } else {echo $dni;} ?>'" required>
 		<span class="messages" ng-show="userForm.$submitted || userForm.DNI.$touched">
 			<span ng-show="userForm.dni.$error.required">El campo es obligatorio.</span>
 		</span></br>
@@ -113,13 +113,13 @@ $this -> load -> helper('form');
 		<span ng-show="userForm.ano_inicio.$error.maxlength">el año de inicio no puede ser inferior de 1960.</span>
 	</span></br>
 	
-	Foto: <input type="file" name="foto" accept="image/*" value="http://localhost/BolsaTrabajo/img/<?php echo $id_login ?>.jpg" onerror="this.src='./img/pordefecto.jpg'"/></td>
-				<td><div id="imgempresa">
+	Foto: <input type="file" name="logo" accept="image/*" value="http://localhost/BolsaTrabajo/img/<?php echo $id_login ?>.jpg" onerror="this.src='./img/pordefecto.jpg'"/></td>
+				<td><div id="imgalumno">
 					<img src="http://localhost/BolsaTrabajo/img/<?php echo $id_login ?>.jpg"; width="35" height="35" onerror="this.src='./img/pordefecto.jpg'";>
 				   
 				</div></td></br>
+<input type="submit" value="Enviar" name="Enviar"/>
 	<p><?php if(isset($mensaje)) echo $mensaje; ?></p>
 	<?php echo validation_errors(); ?><!--mostrar los errores de validación-->
-	<input type="submit" value="Enviar"/>
 </form>	
 </div>
