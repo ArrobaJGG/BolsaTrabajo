@@ -95,13 +95,13 @@ $this -> load -> helper('form');
 			
 		</p>
 	</br>
-	Año Inicio: <input type="text" name="fecha_inicio" ng-model="fecha_inicio"  min="1960" ng-maxlength="1000" ng-init = "fecha_inicio='<?php if ($cursos['fecha_inicio']==NULL){ echo " campo vacio "; } else {echo $cursos['fecha_inicio'];} ?>'"/>
+	Año Inicio: <input type="text" name="fecha_inicio" ng-model="fecha_inicio" ng-init = "fecha_inicio='<?php if ($cursos['fecha_inicio']==NULL){ echo " campo vacio "; } else {echo $cursos['fecha_inicio'];} ?>'"/>
 		<span class="messages" ng-show="userForm.$submitted || userForm.ano_inicio.$touched">
 		<span ng-show="userForm.ano_inicio.$error.required">El campo es obligatorio.</span>
 		<span ng-show="userForm.ano_inicio.$error.min">el año de inicio no puede ser inferior de 1960.</span>
 	</span></br>
 	
-	Año Fin: <input type="text" name="fecha_final" ng-model="fecha_final"  min="1980" ng-init = "fecha_final='<?php if ($cursos['fecha_final']==NULL){ echo " campo vacio "; } else {echo $cursos['fecha_final'];} ?>'" >
+	Año Fin: <input type="text" name="fecha_final" ng-model="fecha_final" ng-init = "fecha_final='<?php if ($cursos['fecha_final']==NULL){ echo " campo vacio "; } else {echo $cursos['fecha_final'];} ?>'" >
 	<span class="messages" ng-show="userForm.$submitted || userForm.ano_fin.$touched">
 		<span ng-show="userForm.ano_fin.$error.required">El campo es obligatorio.</span>
 		<span ng-show="userForm.ano_fin.$error.min">el año de finalizacion no puede ser inferior de 1980.</span>

@@ -47,18 +47,9 @@ class Alumno_model extends CI_Model{
 		$devolver = isset($query) ? $query->result_array() : false;
 		return $devolver;
 	}
-	public function actualizar($nombre,$apellidos,$telefono,$DNI,$fecha_nacimiento,$codigo_postal,$descripcion,$experiencia){
-		$data = array(
-		'nombre'=> $nombre,
-		'apellidos'=> $apellidos,
-		'telefono1'=> $telefono,
-		'dni' => $DNI,
-		'fecha_nacimiento' => $fecha_nacimiento,
-		'codigo_postal' => $codigo_postal,
-		'descripcion' => $descripcion,
-		'experiencia' => $experiencia
-		);
-		return $this->db->insert('alumno',$data);
+	public function actualizar($parametros_alumno,$id_login){
+		$sql = "UPDATE empresa SET nombre = '$parametros_alumno[nombre]', dni = '$parametros_alumno[dni]', telefono1 = $parametros_alumno[telefono], fecha = $parametros_alumno[fecha], codigopostal= '$parametros_alumno[codigo_postal]', descripcion= '$parametros_alumno[descripcion]', experiencia= '$parametros_alumno[experiencia]'  WHERE id_login = $id_login";
+		$query = $this->db->query($sql);
 	}
 	public function id_login($id_login){
 		$sql= "select * from alumno where id_login='$id_login'";
