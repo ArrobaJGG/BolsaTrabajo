@@ -69,8 +69,10 @@ public function index(){
 													"familia" => $familia,
 													"etiquetas" => $etiquetas,
 													"correo" => $correo,
-													"horario" => $horario);
-	
+													"horario" => $horario
+													);
+						$insertaroferta = $this->Ofertas_model->insertar($parametros);
+						var_dump($insertaroferta);
 						}
 				
 				

@@ -23,9 +23,9 @@ class Ofertas_model extends CI_Model{
 	}
 
 	
-	public function insertar(){
+	public function insertar($parametros){
 		$sql = "INSERT INTO oferta (titulo,fechae,lugar,telefono,requisito,sueldo,funciones,ofrece,familia,etiquetas,correo,horario)
-				VALUES ($titulo,$fechae,$lugar,$telefono,$requisito,$sueldo,$funciones,$ofrece,$familia,$etiquetas,$correo,$horario)";
+				VALUES ($parametros[titulo],$parametros[fechae],$parametros[lugar],$parametros[telefono]$parametros[requisito],$parametros[sueldo],$parametros[funciones],$parametros[ofrece],$parametros[familia],$parametros[etiquetas],$parametros[correo],$parametros[horario])";
 		$query = $this->db->query($sql);
 		
 	}
