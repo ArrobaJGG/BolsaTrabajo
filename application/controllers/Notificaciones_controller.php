@@ -115,11 +115,12 @@ class Notificaciones_controller extends CI_Controller{
 		$profesores = $this->profesor_model->get_profesores($limite)? $this->profesor_model->get_profesores($limite):array();
 		foreach ($profesores as $key => $value) {
 			$profesores[$key]['correo'] = $this->login_model->get_correo($value['id_login']);
+			$profesores[$key]['estado'] = $this->login_model->esta_validado($profesores[$key]['correo']);
 		}
 		echo json_encode($profesores);
 	}
 	protected function borrar_profesor(){
-		$this->form_validation->set_rules('id', 'id', 'numeric|required|trim|xss_clean');
+		$this->form_validation->set_rules('id', 'id', 'numeric|required|trim');
 		$id = $this->input->post('id');
 		if ($this -> form_validation -> run() != false){
 			if($this->profesor_model->borrar_profesor($id)){

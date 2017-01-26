@@ -123,7 +123,51 @@ class Registro_controller extends CI_Controller {
 		$this -> load -> view("includes/footer", $data);
 
 	}
+	public function cambiar_contrasena_profesor($hash = false) {
+			
+		$data = array();
+		$data['error'] = '';
+		$this -> load -> library('session');
+		//var_dump($this->session->userdata());
+		if ($this -> session -> userdata('tipo')=='cambio'&&!$this->login_model->esta_validado($this->session->userdata('correo'))) {
+			$this -> form_validation -> set_rules('contrasena', 'contrasena', 'required|min_length[3]');
+			if (!$this -> form_validation -> run() == false && $this -> input -> post('contrasena') == $this -> input -> post('repetirContrasena')) {
+				$contrasena_codificada = password_hash($this -> input -> post('contrasena'), PASSWORD_DEFAULT);
+				if ($this -> login_model -> set_contrasena($this -> session -> userdata('usuario'), $contrasena_codificada)) {
+					$this -> login_model -> validar_login($this -> session -> userdata('usuario'));
+					$this->session->unset_userdata('tipo');
+					$this->session->userdata['rol'] = 'profesor';
+					redirect('../resumenprofesor_controller');
+				}
+			}
+			else{
+				//echo $this->session->userdata('id_login');
+				//echo $this->alumno_model->existe($this->session->userdata('id_login'));
+				$data['error'] = "Campos invalidos";
+			}
+			
+		} else {
+			if ($correo = $this -> login_model -> existe_correo($hash)) {
+				if($this->login_model->esta_validado($correo)) redirect('../../login_controller');
+				$datos_sesion = array(
+					'usuario' => $correo,
+					'id_login' => $this -> login_model -> get_id($correo),
+					'tipo' => 'cambio');
+				$this -> session -> set_userdata($datos_sesion);
+				//var_dump($this->session->userdata());
+			} else {
+				redirect('../../login_controller');
+			}
+		}
+		$data['javascript'] = array();
+		$data['libreria'] = array();
+		$data['titulo'] = "Cambiar contraseña";
+		$data['hash'] = $hash;
+		$this -> load -> view("includes/header", $data);
+		$this -> load -> view("cambiar_contrasena", $data);
+		$this -> load -> view("includes/footer", $data);
 
+	}
 	public function cambiar_contrasena_empresa($hash = false) {
 		$this -> load -> model('alumno_model');
 		
@@ -288,7 +332,7 @@ class Registro_controller extends CI_Controller {
 						$this -> email -> from('arrobajgg@gmail.com', 'BolsaTrabajoFPTxurdinaga');
 						$this -> email -> to($datos['correo']);
 						$this -> email -> subject('Validacion Bolsa de trabajo FPTxurdinaga');
-						$this -> email -> message('Para validar su correo vaya a esta direccion http://localhost/BolsaTrabajo/Registro_controller/cambiar_contrasena_empresa/' . $datos['hash_validar']);
+						$this -> email -> message('Para validar su correo vaya a esta direccion http://localhost/BolsaTrabajo/Registro_controller/cambiar_contrasena_profesor/' . $datos['hash_validar']);
 						$this -> email -> send();
 						//*/
 						echo "correo enviado";
