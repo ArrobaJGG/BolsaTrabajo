@@ -9,6 +9,10 @@
                 <input type="text" ng-init="nombreFamiliaAng=familia.nombre" ng-model = "nombreFamiliaAng"> <button value="{{familia.id_familia_laboral}}" ng-click="enviarFamilia($event)">Enviar</button>
             </span>
         </div>
+        <button ng-show="!estadoAgregandoFamilia" ng-click="mostrarAgregarFamilia()">Agregar</button>
+        <form name="nuevaFamilia" ng-show="estadoAgregandoFamilia">
+            <input type="text" required ng-model="familiaAng"><button ng-disabled="!nuevaFamilia.$valid" ng-click="agregarFamilia()">Enviar</button>
+        </form>
     </div>
     <div ><span>Seleccione una categoria</span>
         <div ng-controller="categoriaCtrl" ng-repeat="categoria in categorias">
@@ -29,15 +33,30 @@
         <div ng-show="familiaSeleccionada" style="border:1px solid" id="cursos">
     		<h3>Cursos</h3>
             <div ng-controller="cursoCtrl" ng-repeat= "curso in cursos | filter: {id_familia : familiaSeleccionada,id_categoria : categoriaSeleccionada}">
-                <span>{{curso.nombre}}</span>
-                <span ng-show="!modoEditarCurso">
-                    <span>{{curso.nombre}}</span><button ng-click="editarEtiqueta()" >Editar</button> <button ng-click="borrarCurso($event)" value="{{curso.id_curso}}">borrar</button>
-                </span>
+                <form ng-show="!modoEditarCurso">
+                    <span>{{curso.nombre}}</span><button ng-click="editarCurso()" >Editar</button> <button ng-click="borrar($event)" value="{{curso.id_curso}}">borrar</button>
+                </form>
                 <span ng-show="modoEditarCurso">
-                    <input type="text" ng-init="nombreCursoAng=curso.nombre" ng-model = "nombreCursoAng"> <button value="{{curso.id_curso}}" ng-click="enviarCurso($event)">Enviar</button>
+                	<span>Categoria</span>
+                	<select ng-init="categoriaAng = curso.id_categoria"ng-model="categoriaAng" name="seleccionarCategoria">
+		        		<option ng-repeat = "categoria in categorias" value="{{categoria.id_categoria}}">{{categoria.nombre}}</option>
+		        	</select><br>
+		        	<span>Familia</span>
+                	<select ng-init="familiaCursoAng=curso.id_familia" ng-model="familiaCursoAng" name="seleccionarFamilia">
+		        		<option ng-repeat = "familia in familias" value="{{familia.id_familia_laboral}}">{{familia.nombre}}</option>
+		        	</select><br>
+                    <input type="text" ng-init="nombreCursoAng=curso.nombre" ng-model = "nombreCursoAng"> <button value="{{curso.id_curso}}" ng-click="enviar($event)">Enviar</button>
                 </span>
             </div> 
-            
+            <button ng-show="!estadoAgregandoCurso" ng-click="mostrarAgregarCurso()">Agregar</button>
+		        <form name="nuevoCurso" ng-show="estadoAgregandoCurso">
+		        	<span>Categoria</span>
+		        	<select ng-model="categoriaCursoAng" name="seleccionarCategoria">
+		        		<option ng-repeat = "categoria in categorias" value="{{categoria.id_categoria}}">{{categoria.nombre}}</option>
+		        	</select><br>
+		        	<span>Nombre</span>
+		            <input type="text" required ng-model="cursoAng"><button ng-disabled="!nuevoCurso.$valid" ng-click="agregarCurso()">Enviar</button>
+		        </form>
         </div>
        	<div ng-show="familiaSeleccionada" style="border:1px solid" id="etiquetas">
 			<h3>Etiquetas</h3>       

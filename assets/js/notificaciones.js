@@ -409,6 +409,56 @@ myApp.controller('cursosFamiliasEtiquetasCtrl',['$scope','$http',function($scope
 	$scope.mostrarAgregar = function(){
 		$scope.estadoAgregando = true;
 	};
+	$scope.estadoAgregandoFamilia = false;
+	$scope.mostrarAgregarFamilia =  function(){
+		$scope.estadoAgregandoFamilia = true;
+	};
+	$scope.estadoAgregandoCurso = false;
+	$scope.mostrarAgregarCurso =  function(){
+		$scope.estadoAgregandoCurso = true;
+	};
+	$scope.agregarCurso= function(){
+		$http.post('/BolsaTrabajo/notificaciones_controller/validar/agregar_curso'
+		,"nombre="+$scope.cursoAng
+		+"&id_categoria="+$scope.categoriaCursoAng
+		+"&id_familia="+$scope.familiaSeleccionada
+		,{'headers':{'content-type': 'application/x-www-form-urlencoded'}})
+		.then(
+			function successCallback(response){
+				$scope.mensaje = response.data.mensaje;
+				if(!response.data.error){
+					$scope.actualizar();
+					$scope.estadoAgregandoCurso= false;
+				}
+			},
+			function errorCallback(response) {
+			    // called asynchronously if an error occurs
+			    // or server returns response with an error status.
+			    console.log(response.data);
+			    console.log('error');
+	  		}
+		);
+	};
+	$scope.agregarFamilia = function(){
+		$http.post('/BolsaTrabajo/notificaciones_controller/validar/agregar_familia'
+		,"nombre="+$scope.familiaAng
+		,{'headers':{'content-type': 'application/x-www-form-urlencoded'}})
+		.then(
+			function successCallback(response){
+				$scope.mensaje = response.data.mensaje;
+				if(!response.data.error){
+					$scope.actualizar();
+					$scope.estadoAgregandoFamilia = false;
+				}
+			},
+			function errorCallback(response) {
+			    // called asynchronously if an error occurs
+			    // or server returns response with an error status.
+			    console.log(response.data);
+			    console.log('error');
+	  		}
+		);
+	};
 	$scope.agregar = function(){
 		$http.post('/BolsaTrabajo/notificaciones_controller/validar/agregar_categoria'
 		,"nombre="+$scope.categoriaAng
@@ -515,7 +565,74 @@ myApp.controller('etiquetaCtrl',['$scope','$http',function($scope,$http){
 }]);
 myApp.controller('cursoCtrl',['$scope','$http',function($scope,$http){
 	$scope.modoEditarCurso = false;
-	
+	$scope.editarCurso =  function(){
+		$scope.modoEditarCurso = true;
+	};
+	$scope.enviar = function($event){
+		$http.post('/BolsaTrabajo/notificaciones_controller/validar/editar_curso'
+		,"nombre="+$scope.nombreCursoAng
+		+"&id_curso="+$event.target.value
+		+"&id_categoria="+$scope.categoriaAng
+		+"&id_familia="+$scope.familiaCursoAng
+		,{'headers':{'content-type': 'application/x-www-form-urlencoded'}})
+		.then(
+			function successCallback(response){
+				$scope.mensajes = response.data;
+				$scope.modoEditarCurso = false;
+				$scope.$parent.actualizar();
+			},
+			function errorCallback(response) {
+			    // called asynchronously if an error occurs
+			    // or server returns response with an error status.
+			    console.log(response.data);
+			    console.log('error');
+	  		}
+		);
+	};
+	$scope.borrar = function($event){
+		$scope.numero = "";
+		$scope.mensaje = "";
+		$scope.error = false;
+		$http.post('/BolsaTrabajo/notificaciones_controller/validar/numero_curso_alumno_borrado'
+		,"id="+$event.target.value
+		,{'headers':{'content-type': 'application/x-www-form-urlencoded'}})
+			.then(
+				function successCallback(response){
+					if(response.data.error){
+						$scope.errorValidacion = true;
+					}
+					else{
+						if(confirm("El numero de alumnos que perderian este curso es: "+response.data.alumno
+						+"¿desea continuar?")){
+							$http.post('/BolsaTrabajo/notificaciones_controller/validar/borrar_curso',
+							"id="+$event.target.value,
+							{'headers':{'content-type': 'application/x-www-form-urlencoded'}})
+							.then(
+								function successCallback(response){
+									$scope.mensaje = response.data.mensaje;
+									$scope.error = response.data.error;
+									if(response.data.error ==false){
+										$event.target.parentElement.parentElement.remove();
+									}
+								},
+								function errorCallback(response) {
+								    // called asynchronously if an error occurs
+								    // or server returns response with an error status.
+								    console.log(response.data);
+								    console.log('error');
+						  		}
+				  			);
+						}
+					}
+				},
+				function errorCallback(response) {
+				    // called asynchronously if an error occurs
+				    // or server returns response with an error status.
+				    console.log(response.data);
+				    console.log('error');
+		  		}
+			);
+	};
 }]);
 myApp.controller('familiaCtrl',['$scope','$http',function($scope,$http){
 	$scope.modoEditarFamilia = false;
@@ -570,7 +687,7 @@ myApp.controller('familiaCtrl',['$scope','$http',function($scope,$http){
 							$scope.error = true;
 						}
 						if(!$scope.error){
-							if(confirm("El numero de etiquetas que se borrarian por estar asociadas es: "+$scope.numero.etiqueta
+							if(confirm("El numero de etiquetas que se borrarian por estar asociadas es: "+response.data.etiqueta
 							+"¿desea continuar?")){
 								$http.post('/BolsaTrabajo/notificaciones_controller/validar/borrar_familia',
 								"id="+$event.target.value,
@@ -684,6 +801,7 @@ myApp.controller('reporteCtrl',['$scope','$http',function($scope,$http){
 myApp.controller('categoriaCtrl',['$scope','$http',function($scope,$http){
 	$scope.modoEditarCategoria = false;
 	$scope.editar =  function ($event){
+		$scope.mensaje = " ";
 		$scope.modoEditarCategoria = true;
 		$event.stopPropagation();
 	};
@@ -710,6 +828,7 @@ myApp.controller('categoriaCtrl',['$scope','$http',function($scope,$http){
   		);
   	};
   	$scope.borrar =  function($event){
+  		$event.stopPropagation();
   		$http.post('/BolsaTrabajo/notificaciones_controller/validar/numero_categoria_borrado',
   		"id="+$event.target.value
   		,{'headers':{'content-type': 'application/x-www-form-urlencoded'}})
