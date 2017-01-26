@@ -14,6 +14,12 @@ class Ofertas_model extends CI_Model{
 		    }
 		    return null;
 	}
+	public function datos_una_oferta($id_oferta){
+		$sql = " SELECT * FROM oferta WHERE id_oferta=$id_oferta";
+		$query = $this->db->query($sql);
+		$row = $query->row();
+		return $row;
+	}
 	public function etiqueta(){
 		$sql = "SELECT * FROM etiqueta";
 		$query = $this->db->query($sql);
@@ -32,6 +38,10 @@ class Ofertas_model extends CI_Model{
 	public function agregar_etiqueta($nombre,$familia){
 	    $sql = "INSERT INTO etiqueta(nombre,id_familia_laboral) VALUES ('$nombre','$familia')";
         return $this->db->query($sql);
+	}
+	public function actualizar($parametros,$id_oferta){
+		$sql = "update set  id_familia='$parametros[id_familia]', nombre_empresa='$parametros[nombre]' , fecha_expiracion='$parametros[fechae]', lugar='$parametros[lugar]', resumen='$parametros[resumen]', funciones='$parametros[funciones]', ofrece='$parametros[ofrece]', sueldo='$parametros[sueldo]', requisitos='$parametros[requisito]', horario='$parametros[horario]', titulo='$parametros[titulo]', correo='$parametros[correo]', telefono='$parametros[telefono]', oculto='$parametros[oculto]' where id_oferta=$id_oferta";
+		$query = $this->db->query($sql);
 	}
 
 	

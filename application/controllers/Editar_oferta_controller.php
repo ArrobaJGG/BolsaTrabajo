@@ -8,16 +8,19 @@ $this->load->model('Ofertas_model');
  $this->load->helper(array('form', 'url'));
 $this->load->helper('form','url_helper');
 $this->load->library("session");
+$this->load->library('form_validation');
 }
-	public function index(){
-			if ($this->sesion->userdata('rol')=='empresa') {
+	
+	public function index($id_oferta = null){
+		var_dump($id_oferta);
+			if ($this->session->userdata('rol')=='empresa') {
 					$id_login = $this->session->userdata['id_login'];
-					$rol = $this->session->userdata['rol'];
-					$datos_oferta = $this->Oferta_model->datos_oferta($id_login);
+					//$rol = $this->session->userdata['rol'];
+					$datos_oferta = $this->Ofertas_model->datos_una_oferta($id_oferta);
 					
 					
 						if ($this->input->post('Actualizar')) {
-								$this->load->library('form_validation');
+								
 									$this->form_validation->set_rules('titulo', 'titulo', 'required|min_length[3]');// el trim siempre delante
 									$this->form_validation->set_rules('nombre','nombre');
 									$this->form_validation->set_rules('fechae', 'fechae');
@@ -82,6 +85,14 @@ $this->load->library("session");
 													);
 									$actualizardatos = $this->Ofertas_model->actualizar($parametros,$id_login);
 						}
+									//echo($this->session->$correo);
+									 				$data['libreria'] = array();
+									 				$data["titulo"]="Editar Oferta";
+													$data["javascript"]="assets/js/editar_oferta_empresa.js";
+													$this->load->view("includes/header",$data);
+													$this->load->view("editar_oferta_view",$datos_oferta);
+													$this->load->view("includes/footer", $data);
+
 						
 			} else {
 					redirect('login_controller');
