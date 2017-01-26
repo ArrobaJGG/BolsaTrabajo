@@ -3,9 +3,9 @@ alert('yyy');//*/
 
 var myApp = angular.module("my-app", ['ngRoute']);
 
-  myApp.config(function($routeProvider) {
+myApp.config(function($routeProvider) {
     $routeProvider
-    .when("/prueba", {
+    .when("/notificaciones", {
     	templateUrl : "/BolsaTrabajo/api/cargar_partes/cargar/notificaciones",
     	controller: 'notificacionesCtrl'
     })

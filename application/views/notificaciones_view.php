@@ -1,6 +1,6 @@
 <div>
 	<ul>
-		<li><a href="#!/prueba">Notificaciones</a></li>
+		<li><a href="#!/notifiaciones">Notificaciones</a></li>
 		<li>Dar alta
 			<ul>
 				<li><a href="#!/dar-alta-alumno">Alumno</a></li>
