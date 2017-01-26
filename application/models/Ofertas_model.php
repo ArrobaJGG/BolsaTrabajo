@@ -78,6 +78,10 @@ class Ofertas_model extends CI_Model{
 		$sql = "DELETE FROM etiqueta WHERE id_etiqueta = $id";
 		return $this->db->query($sql);
 	}
+	public function borrar_oferta($id){
+		$sql = "DELETE FROM oferta WHERE id_oferta = $id";
+		return $this->db->query($sql);
+	}
 	public function get_id_etiqueta_con_id_familia($id){
 	    $sql = "SELECT id_etiqueta FROM etiqueta WHERE id_familia_laboral='$id'";
         $query = $this->db->query($sql);

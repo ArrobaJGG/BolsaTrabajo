@@ -18,7 +18,7 @@ class Alumno_model extends CI_Model{
 		$devolver = isset($row) ? true : false;
 		return $devolver;
 	}
-	public function actualizar_alumno($columnas,$datos){
+	public function actualizar_alumno1($columnas,$datos){
 		/*
 		 * Cambiar insert por update y alguna cosa mas para poder actualizar solo los campos que se envian
 		 */
@@ -47,18 +47,16 @@ class Alumno_model extends CI_Model{
 		$devolver = isset($query) ? $query->result_array() : false;
 		return $devolver;
 	}
-	public function actualizar($nombre,$apellidos,$telefono,$DNI,$fecha_nacimiento,$codigo_postal,$descripcion,$experiencia){
-		$data = array(
-		'nombre'=> $nombre,
-		'apellidos'=> $apellidos,
-		'telefono1'=> $telefono,
-		'dni' => $DNI,
-		'fecha_nacimiento' => $fecha_nacimiento,
-		'codigo_postal' => $codigo_postal,
-		'descripcion' => $descripcion,
-		'experiencia' => $experiencia
-		);
-		return $this->db->insert('alumno',$data);
+	public function actualizar_alumno($parametros_alumno,$id_login){
+		$sql = "UPDATE alumno SET nombre = '$parametros_alumno[nombre]', dni = '$parametros_alumno[dni]', telefono1 = $parametros_alumno[telefono], fecha_nacimiento = '$parametros_alumno[fecha_nacimiento]', codigo_postal= '$parametros_alumno[codigo_postal]', resumen= '$parametros_alumno[resumen]', experiencia= '$parametros_alumno[experiencia]'  WHERE id_login = $id_login";
+		$query = $this->db->query($sql);
+	}
+	public function actualizar_familia($parametros_familia,$id_login){
+		
+	}
+		public function actualizar_alumno_curso($parametros_alumno_curso,$id_login){
+		$sql = "UPDATE alumno_curso SET fecha_inicio='$parametros_alumno_curso[fecha_inicio]', fecha_final='$parametros_alumno_curso[fecha_final]'  WHERE id_login = $id_login";
+		$query = $this->db->query($sql);
 	}
 	public function id_login($id_login){
 		$sql= "select * from alumno where id_login='$id_login'";
@@ -67,7 +65,7 @@ class Alumno_model extends CI_Model{
 		return $row;
 	}
 	public function ruta($ruta, $id_login){
-		$sql = "update  alumno set  foto=$ruta where id_login=$id_login";
+		$sql = "update  alumno set  logo=$ruta where id_login=$id_login";
 		$query = $this->db->query($sql);
 	}
 	public function validar_alumno($id){
@@ -98,6 +96,17 @@ class Alumno_model extends CI_Model{
 	}
 	public function borrar_etiqueta_alumno($id){
 		$sql = "DELETE FROM etiqueta_alumno WHERE id_login = '$id'";
+		return $this->db->query($sql);
+	}
+	public function get_curso_alumno_borrado($id){
+		$sql = "SELECT count(DISTINCT(id_login)) cuenta FROM alumno_curso WHERE id_curso = '$id'";
+		$query = $this->db->query($sql);
+        $row = $query->row();
+        $devolver = $row ? $row->cuenta : false;
+        return $devolver;
+	}
+	public function borrar_alumno_curso_con_id_curso($id){
+		$sql = "DELETE FROM alumno_curso WHERE id_curso = '$id'";
 		return $this->db->query($sql);
 	}
 }
