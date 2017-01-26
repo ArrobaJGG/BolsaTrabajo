@@ -36,7 +36,7 @@
                 <form ng-show="!modoEditarCurso">
                     <span>{{curso.nombre}}</span><button ng-click="editarCurso()" >Editar</button> <button ng-click="borrar($event)" value="{{curso.id_curso}}">borrar</button>
                 </form>
-                <span ng-show="modoEditarCurso">
+                <form name="editarCursoForm"ng-show="modoEditarCurso">
                 	<span>Categoria</span>
                 	<select ng-init="categoriaAng = curso.id_categoria"ng-model="categoriaAng" name="seleccionarCategoria">
 		        		<option ng-repeat = "categoria in categorias" value="{{categoria.id_categoria}}">{{categoria.nombre}}</option>
@@ -45,13 +45,13 @@
                 	<select ng-init="familiaCursoAng=curso.id_familia" ng-model="familiaCursoAng" name="seleccionarFamilia">
 		        		<option ng-repeat = "familia in familias" value="{{familia.id_familia_laboral}}">{{familia.nombre}}</option>
 		        	</select><br>
-                    <input type="text" ng-init="nombreCursoAng=curso.nombre" ng-model = "nombreCursoAng"> <button value="{{curso.id_curso}}" ng-click="enviar($event)">Enviar</button>
-                </span>
+                    <input type="text" ng-init="nombreCursoAng=curso.nombre" required ng-model = "nombreCursoAng"> <button ng-disabled="!editarCursoForm.$valid" value="{{curso.id_curso}}" ng-click="enviar($event)">Enviar</button>
+                </form>
             </div> 
             <button ng-show="!estadoAgregandoCurso" ng-click="mostrarAgregarCurso()">Agregar</button>
 		        <form name="nuevoCurso" ng-show="estadoAgregandoCurso">
 		        	<span>Categoria</span>
-		        	<select ng-model="categoriaCursoAng" name="seleccionarCategoria">
+		        	<select required ng-model="categoriaCursoAng" name="seleccionarCategoria">
 		        		<option ng-repeat = "categoria in categorias" value="{{categoria.id_categoria}}">{{categoria.nombre}}</option>
 		        	</select><br>
 		        	<span>Nombre</span>
@@ -64,14 +64,14 @@
             	<span ng-show="!modoEditarEtiqueta">
             		<span>{{etiqueta.nombre}}</span><button ng-click="editarEtiqueta()" >Editar</button> <button ng-click="borrarEtiqueta($event)" value="{{etiqueta.id_etiqueta}}">borrar</button>
             	</span>
-            	<span ng-show="modoEditarEtiqueta">
-            		<input type="text" ng-init="nombreEtiquetaAng=etiqueta.nombre" ng-model = "nombreEtiquetaAng"> <button value="{{etiqueta.id_etiqueta}}" ng-click="enviarEtiqueta($event)">Enviar</button>
-            	</span>
+            	<form name="editarEtiquetaForm" ng-show="modoEditarEtiqueta">
+            		<input type="text" ng-init="nombreEtiquetaAng=etiqueta.nombre" ng-model = "nombreEtiquetaAng" required> <button value="{{etiqueta.id_etiqueta}}" ng-disabled="!editarEtiquetaForm.$valid" ng-click="enviarEtiqueta($event)">Enviar</button>
+            	</form>
             </div>
-            <div id="anadirEtiqueta">
+            <form name="anadirEtiquetaForm" id="anadirEtiqueta">
                 <span>Nueva etiqueta en la familia laboral <span ng-repeat="familia in familias | filter: {id_familia_laboral : familiaSeleccionada}">{{familia.nombre}}</span></span><br>
-                <input type="text" ng-model="etiquetaAng" /><button ng-click="anadirEtiqueta()">Añadir</button>
-            </div>
+                <input type="text" ng-model="etiquetaAng" required /><button ng-disabled="!anadirEtiquetaForm.$valid" ng-click="anadirEtiqueta()">Añadir</button>
+            </form>
        </div>
     </div>
 </div>
