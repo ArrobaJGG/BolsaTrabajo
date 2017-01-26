@@ -98,5 +98,16 @@ class Alumno_model extends CI_Model{
 		$sql = "DELETE FROM etiqueta_alumno WHERE id_login = '$id'";
 		return $this->db->query($sql);
 	}
+	public function get_curso_alumno_borrado($id){
+		$sql = "SELECT count(DISTINCT(id_login)) cuenta FROM alumno_curso WHERE id_curso = '$id'";
+		$query = $this->db->query($sql);
+        $row = $query->row();
+        $devolver = $row ? $row->cuenta : false;
+        return $devolver;
+	}
+	public function borrar_alumno_curso_con_id_curso($id){
+		$sql = "DELETE FROM alumno_curso WHERE id_curso = '$id'";
+		return $this->db->query($sql);
+	}
 }
 ?>
