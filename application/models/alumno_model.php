@@ -51,6 +51,9 @@ class Alumno_model extends CI_Model{
 		$sql = "UPDATE alumno SET nombre = '$parametros_alumno[nombre]', dni = '$parametros_alumno[dni]', telefono1 = $parametros_alumno[telefono], fecha_nacimiento = '$parametros_alumno[fecha_nacimiento]', codigo_postal= '$parametros_alumno[codigo_postal]', resumen= '$parametros_alumno[resumen]', experiencia= '$parametros_alumno[experiencia]'  WHERE id_login = $id_login";
 		$query = $this->db->query($sql);
 	}
+	public function actualizar_familia($parametros_familia,$id_login){
+		
+	}
 		public function actualizar_alumno_curso($parametros_alumno_curso,$id_login){
 		$sql = "UPDATE alumno_curso SET fecha_inicio='$parametros_alumno_curso[fecha_inicio]', fecha_final='$parametros_alumno_curso[fecha_final]'  WHERE id_login = $id_login";
 		$query = $this->db->query($sql);
@@ -62,7 +65,7 @@ class Alumno_model extends CI_Model{
 		return $row;
 	}
 	public function ruta($ruta, $id_login){
-		$sql = "update  alumno set  foto=$ruta where id_login=$id_login";
+		$sql = "update  alumno set  logo=$ruta where id_login=$id_login";
 		$query = $this->db->query($sql);
 	}
 	public function validar_alumno($id){

@@ -80,8 +80,9 @@ public function index(){
 					  $parametros_nivel= array("nivelleido" => $nivelleido,
 					  						   "nivelescrito" => $nivelescrito,
 					  						   "nivelhablado" => $nivelhablado
-					  							
-												);
+					  							);
+					  $parametros_familia= array( "familia" => $familia,
+					  							  "id_login" => $id_login);
 					    $mi_archivo = 'logo';
 				        $config['upload_path'] = './img/';
 						//$config['default'] = './img/pordefecto.jpg/';
