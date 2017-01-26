@@ -12,7 +12,7 @@ $this->load->helper('form');
 			
 			<h3><?php echo $ofertas[0]['titulo']; ?></h3>
 			<p><?php  echo $ofertas[0]['resumen']; ?></p>
-			<input type="button" value="Editar Oferta" onclick="window.location='./Editar_oferta_controller/<?php echo $ofertas[0]['id_oferta']; ?>'" />
+			<input type="button" value="Editar Oferta" onclick="window.location='./Editar_oferta_controller/index/<?php echo $ofertas[0]['id_oferta']; ?>'" />
 			
 		</div>
 		<?php } else{ ?>

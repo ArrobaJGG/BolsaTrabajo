@@ -2,7 +2,7 @@
 $this->load->helper('form');
  ?>
  
-<form action="./Editar_oferta_controller" method="post" novalidate enctype="multipart/form-data">
+<form action="Editar_oferta_controller" method="post" novalidate enctype="multipart/form-data">
 
 
 Titulo: <input type="text" name="titulo" value="<?php if ($titulo==null){echo "";}else{echo $titulo;} ?>" placeholder="Titulo" required></br>
