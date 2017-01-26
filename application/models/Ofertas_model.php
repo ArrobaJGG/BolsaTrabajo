@@ -23,12 +23,11 @@ class Ofertas_model extends CI_Model{
 	}
 
 	
-	public function insertar(){
-		$sql = "INSERT INTO oferta (titulo,fechae,lugar,telefono,requisito,sueldo,funciones,ofrece,familia,etiquetas,correo,horario)
-				VALUES ($titulo,$fechae,$lugar,$telefono,$requisito,$sueldo,$funciones,$ofrece,$familia,$etiquetas,$correo,$horario)";
-		$query = $this->db->query($sql);
-		
-	}
+	 public function insertar($parametros,$id_login){
+	 	 $sql = "INSERT INTO oferta SET id_login=$id_login, id_familia='$parametros[id_familia]', nombre_empresa='$parametros[nombre]', fecha_creacion='$parametros[fechac]' , fecha_expiracion='$parametros[fechae]', lugar='$parametros[lugar]', resumen='$parametros[resumen]', funciones='$parametros[funciones]', ofrece='$parametros[ofrece]', sueldo='$parametros[sueldo]', requisitos='$parametros[requisito]', horario='$parametros[horario]', titulo='$parametros[titulo]', correo='$parametros[correo]', telefono='$parametros[telefono]', oculto='$parametros[oculto]'";
+	 	 $query = $this->db->query($sql);
+	 }
+	
 
 	public function agregar_etiqueta($nombre,$familia){
 	    $sql = "INSERT INTO etiqueta(nombre,id_familia_laboral) VALUES ('$nombre','$familia')";
@@ -38,7 +37,6 @@ class Ofertas_model extends CI_Model{
 	
 
 	
-
 
 	public function editar_etiqueta($nombre,$id){
 		$sql = "UPDATE etiqueta SET nombre = '$nombre' WHERE id_etiqueta='$id' ";
@@ -70,12 +68,23 @@ class Ofertas_model extends CI_Model{
 		$sql = "DELETE FROM etiqueta WHERE id_etiqueta = $id";
 		return $this->db->query($sql);
 	}
+	public function borrar_oferta($id){
+		$sql = "DELETE FROM oferta WHERE id_oferta = $id";
+		return $this->db->query($sql);
+	}
 	public function get_id_etiqueta_con_id_familia($id){
 	    $sql = "SELECT id_etiqueta FROM etiqueta WHERE id_familia_laboral='$id'";
         $query = $this->db->query($sql);
         $row = $query->result_array();
         $id = $row ? $row : false;
         return $id;
+	}
+
+	public function get_nombre($id){
+		$sql = "SELECT nombre FROM oferta WHERE id_oferta = '$id'";
+		$query = $this->db->query($sql);
+		$nombre = $query ? $query->row->nombre : false;
+		return $nombre;
 	}
 
 }

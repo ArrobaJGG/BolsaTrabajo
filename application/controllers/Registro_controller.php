@@ -128,6 +128,7 @@ class Registro_controller extends CI_Controller {
 		$this -> load -> model('alumno_model');
 		
 		$data = array();
+		$data['hash'] = $hash;
 		$data['error'] = '';
 		$this -> load -> library('session');
 		//var_dump($this->session->userdata());
@@ -236,7 +237,7 @@ class Registro_controller extends CI_Controller {
 					if ($id = $this -> login_model -> get_id($datos['correo'])) {
 						$datos_empresa = Array('id_login' => $id, 'nombre' => $this -> input -> post('nombre'));
 						$this -> empresa_model -> crear_empresa($datos_empresa);
-						$this->empresa_model->validar_empresa($id);
+                        $this->empresa_model->validar_empresa($id);
 						//Montar el mail y enviar
 						//*
 						$this -> email -> from('arrobajgg@gmail.com', 'BolsaTrabajoFPTxurdinaga');
@@ -375,7 +376,7 @@ class Registro_controller extends CI_Controller {
 		$str = '';
 		$max = mb_strlen($keyspace, '8bit') - 1;
 		for ($i = 0; $i < $length; ++$i) {
-			$str .= $keyspace[random_int(0, $max)];
+			$str .= $keyspace[rand(0, $max)];
 		}
 		return $str;
 	}
