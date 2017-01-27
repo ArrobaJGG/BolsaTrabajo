@@ -1,3 +1,4 @@
+<mi-buscador></mi-buscador>
 <div>
 	<ul>
 		<li><a href="#!/notifiaciones">Notificaciones</a></li>

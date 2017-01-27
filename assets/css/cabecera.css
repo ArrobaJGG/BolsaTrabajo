@@ -45,4 +45,63 @@ border-color: #FA787E;
 #cuadro h1{
 	border: black 1px solid;
 } 
-/*       */  
+/*Buscador buscador buscador */ 
+.contenedorBuscador{
+	width:80%;
+	position:relative;
+	display: flex;
+	margin: auto;
+	border: 1px solid black;
+	height: 40px;
+}
+.texto{
+	flex: 10;
+	border:1px solid blue;
+}
+.contenedorBotones{
+	position:relative;
+	cursor: pointer;
+	width:10%;
+	border:1px solid blue;
+}
+.contenedorBotonesEtiqueta{
+	position:relative;
+}
+.elemento{
+	display:none;
+	cursor: pointer;
+	width:100%;
+	border:1px solid blue;
+}
+.mostrarListaEtiqueta, .mostrarLista{
+	position:absolute;
+	width:200%;
+	left:-50%;
+}
+.contenedorBotones:hover .elemento{
+	display:block;
+}
+.contenedorBotonesEtiqueta:hover .elemento{
+	display:block;
+}
+.contenedorBotonesEtiqueta{
+	cursor: pointer;
+	width:5%;
+	border:1px solid blue;
+}
+.selector{
+	height:100%;
+	background-color:red;
+	overflow:hidden;
+}
+.elemento{
+	border:1px solid blue;
+	width: auto;
+}
+.elemento:hover{
+	background-color : #FA787E;
+}
+.inputTexto{
+	width:100%;
+	height:100%;
+}
