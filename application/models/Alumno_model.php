@@ -109,5 +109,7 @@ class Alumno_model extends CI_Model{
 		$sql = "DELETE FROM alumno_curso WHERE id_curso = '$id'";
 		return $this->db->query($sql);
 	}
+	
+	
 }
 ?>
