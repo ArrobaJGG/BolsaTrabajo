@@ -87,10 +87,11 @@ $this -> load -> helper('form');
 		<p>Curso: 
 			<select name="curso">
 				<?php
-				foreach ($cursos as $curso) {
-					echo '<option value="' . $curso['id_curso'] . '">'. ' ' . $curso['nombre'] . '</option>';
+				foreach ($alumnos_cursos as $alumno_curso) {
+					echo '<option value="' . $alumno_curso['id_curso'] . '">'. ' ' . $alumno_curso['nombre'] . '</option>';
 				}
 				?>
+				
 			</select>
 			
 		</p>

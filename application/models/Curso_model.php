@@ -46,5 +46,11 @@ class Curso_model extends CI_Model{
 		$sql = "DELETE FROM curso WHERE id_curso='$id'";
         return $this->db->query($sql);
 	}
+	public function curso_familia(){
+		$query=$this->db->query("SELECT * FROM curso");
+		$row = $query->result_array();
+		$cursos_familia = $row ? $row : false;
+		return $cursos_familia;
+	}
 }
 ?>
