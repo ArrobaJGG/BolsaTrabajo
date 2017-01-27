@@ -9,17 +9,38 @@ $this->load->model('Ofertas_model');
 $this->load->helper('form','url_helper');
 $this->load->library("session");
 $this->load->library('form_validation');
+
 }
 	
 	public function index($id_oferta = null){
-		var_dump($id_oferta);
-			if ($this->session->userdata('rol')=='empresa') {
+		
+			if ($this->session->userdata('rol')=='empresa'||$this->session->userdata('rol')=='profesor') {
 					$id_login = $this->session->userdata['id_login'];
 					//$rol = $this->session->userdata['rol'];
 					$datos_oferta = $this->Ofertas_model->datos_una_oferta($id_oferta);
 					
 					
-						if ($this->input->post('Actualizar')) {
+						
+									
+									 				$data['libreria'] = array();
+									 				$data["titulo"]="Editar Oferta";
+													$data["javascript"]="assets/js/editar_oferta.js";
+													$this->load->view("includes/header",$data);
+													$this->load->view("editar_oferta_view",$datos_oferta);
+													$this->load->view("includes/footer", $data);
+
+						
+			} else {
+					redirect('login_controller');
+			}
+			
+	}
+
+
+
+	public function actualiza ($id_oferta){
+		$id_login = $this->session->userdata['id_login'];
+		if ($this->input->post('Actualizar')) {
 								
 									$this->form_validation->set_rules('titulo', 'titulo', 'required|min_length[3]');// el trim siempre delante
 									$this->form_validation->set_rules('nombre','nombre');
@@ -85,22 +106,7 @@ $this->load->library('form_validation');
 													);
 									$actualizardatos = $this->Ofertas_model->actualizar($parametros,$id_login);
 						}
-									//echo($this->session->$correo);
-									 				$data['libreria'] = array();
-									 				$data["titulo"]="Editar Oferta";
-													$data["javascript"]="assets/js/editar_oferta_empresa.js";
-													$this->load->view("includes/header",$data);
-													$this->load->view("editar_oferta_view",$datos_oferta);
-													$this->load->view("includes/footer", $data);
-
-						
-			} else {
-					redirect('login_controller');
-			}
-			
 	}
-
-
 
 }
 
