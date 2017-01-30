@@ -122,7 +122,7 @@ class Editar_perfil_controller extends CI_Controller{
      				$config['source_image'] = $img_full_path;
      				$config['maintain_ratio'] = TRUE;
 					$config['overwrite'] = TRUE;
-     				$config['width'] = 75;
+     				$config['width'] = 100;
      				$config['height'] = 50;
      				$config['new_image'] = './img/imgr/'. $data['upload_data']['file_name'];
      				$this->image_lib->initialize($config); /// <<- IMPORTANTE
