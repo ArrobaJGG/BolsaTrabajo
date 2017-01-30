@@ -16,7 +16,7 @@ Funciones: <input type="text" name="funciones" value="<?php echo $funciones ?>" 
 Ofrece: <input type="text" name="ofrece" value="<?php $ofrece ?>" placeholder="Complementos..."></br>
 Resumen: <input type="text" name="resumen" value="<?php echo $resumen ?>" required></br>
 
-Familia: <select name="id_familia" onfocus="saber()">
+Familia: <select name="id_familia"> onfocus="saber()">
 				<?php
 				foreach ($familias as $familia) {
 					echo '<option value="' . $familia['id_familia_laboral'] . '">' . $familia['nombre'] . '</option>';

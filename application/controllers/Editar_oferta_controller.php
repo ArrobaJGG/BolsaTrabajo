@@ -4,6 +4,7 @@ class Editar_oferta_controller extends CI_Controller{
 public function __construct(){
 parent::__construct();
 $this->load->model('Ofertas_model');
+$this->load->model('Familia_laboral_model');
 //para poder ir de un controlador a otro facilmente
  $this->load->helper(array('form', 'url'));
 $this->load->helper('form','url_helper');
@@ -18,15 +19,18 @@ $this->load->library('form_validation');
 					$id_login = $this->session->userdata['id_login'];
 					//$rol = $this->session->userdata['rol'];
 					$datos_oferta = $this->Ofertas_model->datos_una_oferta($id_oferta);
+					$data['familias'] = $this->Familia_laboral_model->familia();	
+					$data['etiquetas'] = $this->Ofertas_model->etiqueta();
 					
 					
-						
+					
+					
 									
 									 				$data['libreria'] = array();
 									 				$data["titulo"]="Editar Oferta";
 													$data["javascript"]="assets/js/editar_oferta.js";
 													$this->load->view("includes/header",$data);
-													$this->load->view("editar_oferta_view",$datos_oferta);
+													$this->load->view("editar_oferta_view",$datos_oferta,$data);
 													$this->load->view("includes/footer", $data);
 
 						
@@ -106,6 +110,7 @@ $this->load->library('form_validation');
 													);
 									$actualizardatos = $this->Ofertas_model->actualizar($parametros,$id_login);
 						}
+		redirect('../../Resumenempresa_controller');
 	}
 
 }
