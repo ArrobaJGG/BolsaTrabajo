@@ -116,7 +116,7 @@ $this -> load -> helper('form');
 	
 	Foto: <input type="file" name="logo" accept="image/*" value="http://localhost/BolsaTrabajo/img/<?php echo $id_login ?>.jpg" onerror="this.src='./img/pordefecto.jpg'"/></td>
 				<td><div id="imgalumno">
-					<img src="http://localhost/BolsaTrabajo/img/<?php echo $id_login ?>.jpg"; width="35" height="35" onerror="this.src='./img/pordefecto.jpg'";>
+					<img src="http://localhost/BolsaTrabajo/img/imgr/<?php echo $id_login ?>.jpg"; width="35" height="35" onerror="this.src='./img/pordefecto.jpg'";>
 				   
 				</div></td></br>
 <input type="submit" value="Enviar" name="Enviar"/>
