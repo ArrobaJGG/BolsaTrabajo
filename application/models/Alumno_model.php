@@ -47,6 +47,12 @@ class Alumno_model extends CI_Model{
 		$devolver = isset($query) ? $query->result_array() : false;
 		return $devolver;
 	}
+	public function get_alumnos_familia_laboral($id,$limite = PHP_INT_MAX){
+		$sql = "SELECT * FROM alumno WHERE id_login IN (SELECT id_login FROM alumno_curso a,curso c WHERE a.id_curso = c.id_curso AND id_familia = '$id') ORDER BY id_login LIMIT $limite";
+		$query = $this->db->query($sql);
+		$devolver = isset($query) ? $query->result_array() : false;
+		return $devolver;
+	}
 	public function actualizar_alumno($parametros_alumno,$id_login){
 		$sql = "UPDATE alumno SET nombre = '$parametros_alumno[nombre]', dni = '$parametros_alumno[dni]', telefono1 = $parametros_alumno[telefono], fecha_nacimiento = '$parametros_alumno[fecha_nacimiento]', codigo_postal= '$parametros_alumno[codigo_postal]', resumen= '$parametros_alumno[resumen]', experiencia= '$parametros_alumno[experiencia]'  WHERE id_login = $id_login";
 		$query = $this->db->query($sql);

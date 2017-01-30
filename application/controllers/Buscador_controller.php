@@ -29,6 +29,22 @@ class Buscador_controller extends CI_Controller{
         $rest_json = file_get_contents("php://input");
         $_POST = json_decode($rest_json, true);
         $datos = $this->input->post('datos');
-        
+        switch ($datos['tipo']) {
+            case '':
+                $this->buscador_model->buscar_todos($datos);
+                break;
+			case 'alumno':
+				$this->buscador_model->buscar_alumno($datos);
+				break;
+			case 'profesor':
+				$this->buscador_model->buscar_profesor($datos);
+				break;
+			case 'oferta':
+				$this->buscador_model->buscar_oferta($datos);
+				break;
+			case 'empresa':
+				$this->buscador_model->buscar_empresa($datos);
+				break;
+        }
     }
 }

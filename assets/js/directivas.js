@@ -72,13 +72,13 @@ angular.module("myDirectivas")
         templateUrl: '/BolsaTrabajo/api/cargar_partes/cargar/buscador',
         link: function(scope, element, attrs) {
         	scope.buscador = {
-        		tipo: " ",
+        		tipo: "",
         		id_familia : "",
         		id_categoria : "",
         		id_curso : ""
         	};
         	
-        	scope.tipoSeleccionado = "!";
+        	scope.tipoSeleccionado = "";
         	$http.get('/BolsaTrabajo/Buscador_controller/validar/get_datos')
         	.then(
         		function correcto(response){
@@ -116,12 +116,12 @@ angular.module("myDirectivas")
 	};
 	$scope.seleccionarFamilia =  function(){
 		if($scope.$parent.$parent.seleccionado != $scope.familia.nombre){
-			$scope.buscador.id_curso = "! ";
+			$scope.buscador.id_curso = "";
 			$scope.$parent.$parent.seleccionado = $scope.familia.nombre;
 			$scope.$parent.$parent.$parent.buscador.id_familia = $scope.familia.id_familia_laboral;
 			$timeout(function(){
 	    		if($scope.cursosFiltrados.length ==0){
-					$scope.buscador.id_curso = "! ";
+					$scope.buscador.id_curso = "";
 				}
 	    	},0,true);
 		}

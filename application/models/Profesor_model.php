@@ -21,4 +21,10 @@ class Profesor_model extends CI_Model{
 		$sql = "DELETE FROM profesor WHERE id_login = '$id'";
 		return $this->db->query($sql);
 	}
+	public function get_familia_laboral($id){
+		$sql = "SELECT id_familia_laboral FROM profesor WHERE id_login ='$id'";
+		$query = $this->db->query($sql);
+		$devolver = isset($query) ? $query->row()->id_familia_laboral : false;
+		return $devolver;
+	}
 }
