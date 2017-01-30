@@ -71,6 +71,13 @@ angular.module("myDirectivas")
         require: '?ngModel',
         templateUrl: '/BolsaTrabajo/api/cargar_partes/cargar/buscador',
         link: function(scope, element, attrs) {
+        	scope.buscador = {
+        		tipo: " ",
+        		id_familia : "",
+        		id_categoria : "",
+        		id_curso : ""
+        	};
+        	
         	scope.tipoSeleccionado = "!";
         	$http.get('/BolsaTrabajo/Buscador_controller/validar/get_datos')
         	.then(
@@ -85,13 +92,63 @@ angular.module("myDirectivas")
         			console.log(response.data);
         		}
         	);
+        	
+        	scope.enviar = function(){
+        		$http.post('/BolsaTrabajo/Buscador_controller/validar/buscador'
+        		,JSON.stringify({datos : scope.buscador}))
+	        	.then(
+	        		function correcto(response){
+	        			console.log(response.data);
+	        		},
+	        		function fallo(response){
+	        			console.log(response.data);
+	        		}
+	        	);
+        	};
         }
       };
 }])
-.controller('contenedorBotonesCtrl',['$scope',function($scope){
+.controller('elementoCtrl',['$scope','$timeout',function($scope,$timeout){
 	$scope.mostrar = false;
-	$scope.tipoSeleccionado = "todos";
+	$scope.seleccionarTipo =  function(){
+		$scope.$parent.$parent.seleccionado = $scope.$parent.tipo;
+		$scope.$parent.$parent.$parent.buscador.tipo = $scope.tipo;
+	};
+	$scope.seleccionarFamilia =  function(){
+		if($scope.$parent.$parent.seleccionado != $scope.familia.nombre){
+			$scope.buscador.id_curso = "! ";
+			$scope.$parent.$parent.seleccionado = $scope.familia.nombre;
+			$scope.$parent.$parent.$parent.buscador.id_familia = $scope.familia.id_familia_laboral;
+			$timeout(function(){
+	    		if($scope.cursosFiltrados.length ==0){
+					$scope.buscador.id_curso = "! ";
+				}
+	    	},0,true);
+		}
+	};
+	$scope.seleccionarCategoria =  function(){
+		if($scope.$parent.$parent.seleccionado != $scope.categoria.nombre){
+			$scope.buscador.id_curso = "";
+			$scope.$parent.$parent.seleccionado = $scope.categoria.nombre;
+			$scope.$parent.$parent.$parent.buscador.id_categoria = $scope.categoria.id_categoria;
+			$timeout(function(){
+        		if($scope.cursosFiltrados.length ==0){
+					$scope.buscador.id_curso = "! ";
+				}
+    		},0,true);
+		}
+	};
+	$scope.seleccionarCurso = function(){
+		$scope.$parent.$parent.seleccionado = $scope.curso.nombre;
+		$scope.$parent.$parent.$parent.buscador.id_curso = $scope.curso.id_curso;
+	};
+	
 }])
 .controller('contenedorBotonesEtiquetasCtrl',['$scope',function($scope){
 	$scope.mostrar = false;
+}])
+.controller('contenedorBotonesCtrl',['$scope',function($scope){
+	$scope.mostrar = false;
+	$scope.seleccionado = "todos";
 }]);
+

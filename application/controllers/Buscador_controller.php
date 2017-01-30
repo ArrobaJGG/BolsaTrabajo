@@ -25,4 +25,10 @@ class Buscador_controller extends CI_Controller{
 		$datos['etiquetas'] = $this->ofertas_model->etiqueta();
 		echo json_encode($datos);
 	}
+    protected function buscador(){
+        $rest_json = file_get_contents("php://input");
+        $_POST = json_decode($rest_json, true);
+        $datos = $this->input->post('datos');
+        
+    }
 }
