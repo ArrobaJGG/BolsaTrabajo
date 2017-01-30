@@ -5,3 +5,6 @@
 #cuadro h1{
 	border: black 1px solid;
 }
+#cuadro p{
+	color grey;
+}

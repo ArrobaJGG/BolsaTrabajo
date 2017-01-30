@@ -84,7 +84,7 @@ class Editar_perfil_controller extends CI_Controller{
 						);
 					$parametros_familia= array( "familia" => $familia,
 						"id_login" => $id_login);
-					$parametros_curso=array("curso" => )
+					//$parametros_curso=array("curso" => )
 					$my_image='logo';
 					$config['upload_path'] = './img';
 					$config['allowed_types'] = 'gif|jpg|png|jpeg';
