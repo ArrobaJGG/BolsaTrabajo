@@ -132,7 +132,12 @@ class Editar_perfil_controller extends CI_Controller{
           				echo $this->image_lib->display_errors(); exit();
      				}
 				}
-					
+					if ($idioma = ' '){
+						break;
+					}
+					else{
+						
+					}
 					   //$actualizar_alumno = $this->alumno_model->actualizar($parametros,$id_login);
  
  $actualizar_alumno = $this->alumno_model->actualizar_alumno($parametros_alumno,$id_login);
