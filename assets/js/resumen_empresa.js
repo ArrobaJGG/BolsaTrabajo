@@ -36,7 +36,7 @@ var myApp = angular.module("my-app",[]);
 						midiv.setAttribute("id","cuadro");
 						boton.setAttribute("type" , "button");
 						boton.setAttribute("value","Editar Oferta");
-						boton.setAttribute("href","https://www.youtube.com/watch?v=ukXUDv7TI4k");
+						boton.setAttribute("OnClick","location.href=OnClick=http://www.marca.com/");
 						
 						//console.log($scope.ofertas);
 						
