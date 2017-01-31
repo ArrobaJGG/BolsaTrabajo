@@ -16,6 +16,10 @@ myApp.config(function($routeProvider){
     .when("/ver-mis-alumnos", {
     	templateUrl : "/BolsaTrabajo/api/cargar_partes/cargar/mis_alumnos",
     	controller: 'misAlumnosCtrl'
+    })
+    .when("/ver-todos-alumnos", {
+    	templateUrl : "/BolsaTrabajo/api/cargar_partes/cargar/mis_alumnos",
+    	controller: 'todosAlumnosCtrl'
     });
 });
 myApp.controller('resumenProfesorCtrl',['$scope','$compile','$timeout',function($scope,$compile,$timeout){
@@ -67,6 +71,17 @@ myApp.controller('todasOfertasCtrl',['$scope','$http',function($scope,$http){
 }]);
 myApp.controller('misAlumnosCtrl',['$scope','$http',function($scope,$http){
 	$http.get('/BolsaTrabajo/resumen_profesor_controller/validar/get_mis_alumnos')
+	.then(
+		function correcto(response){
+			$scope.alumnos = response.data.alumnos;
+		},
+		function incorrecto(response){
+			console.log(response.data);
+		}
+	);
+}]);
+myApp.controller('todosAlumnosCtrl',['$scope','$http',function($scope,$http){
+	$http.get('/BolsaTrabajo/resumen_profesor_controller/validar/get_todos_alumnos')
 	.then(
 		function correcto(response){
 			$scope.alumnos = response.data.alumnos;

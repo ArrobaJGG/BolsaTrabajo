@@ -13,7 +13,7 @@ class Insertar_oferta_controller extends CI_Controller{
 					}
 		
 public function index(){
-		if ($this->session->userdata('rol')=='empresa') {
+		if ($this->session->userdata('rol')=='empresa'||$this->session->userdata('rol')=='profesor') {
 				$data['familias'] = $this->Familia_laboral_model->familia();	
 				$data['etiquetas'] = $this->Ofertas_model->etiqueta();
 				$id_login = $this->session->userdata['id_login'];

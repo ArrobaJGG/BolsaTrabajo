@@ -54,6 +54,10 @@ class Resumen_profesor_controller extends CI_Controller{
 		$datos['alumnos'] = $this->alumno_model->get_alumnos_familia_laboral($departamento,10);
 		echo json_encode($datos);
 	}
+    protected function get_todos_alumnos(){
+        $datos['alumnos'] = $this->alumno_model->get_alumnos(10);
+        echo json_encode($datos);
+    }
 	protected function editar_perfil_oculto(){
 		$rest_json = file_get_contents("php://input");
         $_POST = json_decode($rest_json, true);

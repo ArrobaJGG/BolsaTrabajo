@@ -35,14 +35,13 @@ class Alumno_model extends CI_Model{
 		$sql += ')';
 		return $this->db->query($sql);
 	}
-
 	public function crear_alumno($id_login){
 		$sql = "INSERT INTO alumno (id_login) VALUES ('$id_login')";
 		return $this->db->query($sql);
 	}
 
-	public function get_alumnos($limite = PHP_INT_MAX){
-		$sql = "SELECT * FROM alumno ORDER BY id_login DESC LIMIT $limite";
+	public function get_alumnos($limite = PHP_INT_MAX,$desplazamiento = 0){
+		$sql = "SELECT * FROM alumno ORDER BY id_login DESC LIMIT $desplazamiento, $limite";
 		$query = $this->db->query($sql);
 		$devolver = isset($query) ? $query->result_array() : false;
 		return $devolver;
@@ -60,7 +59,7 @@ class Alumno_model extends CI_Model{
 	public function actualizar_familia($parametros_familia,$id_login){
 		
 	}
-		public function actualizar_alumno_curso($parametros_alumno_curso,$id_login){
+	public function actualizar_alumno_curso($parametros_alumno_curso,$id_login){
 		$sql = "UPDATE alumno_curso SET fecha_inicio='$parametros_alumno_curso[fecha_inicio]', fecha_final='$parametros_alumno_curso[fecha_final]'  WHERE id_login = $id_login";
 		$query = $this->db->query($sql);
 	}
