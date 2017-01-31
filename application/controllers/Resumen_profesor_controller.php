@@ -19,7 +19,7 @@ class Resumen_profesor_controller extends CI_Controller{
         if($this->session->userdata('rol')=='profesor'){
             $data['notificaciones'] = array();
             $data['javascript'] = 'assets/js/resumen_profesor.js';
-            $data['libreria'] = array("http://ajax.googleapis.com/ajax/libs/angularjs/1.6.0/angular-route.js");     
+            $data['libreria'] = array("http://ajax.googleapis.com/ajax/libs/angularjs/1.6.0/angular-route.js","https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js");     
             $data['titulo'] = "Resumen profesor";
             
             $this->load->view("includes/header", $data);
@@ -48,5 +48,16 @@ class Resumen_profesor_controller extends CI_Controller{
 	protected function get_todas_ofertas(){
 		$datos['ofertas'] = $this->ofertas_model->get_ofertas(10);
 		echo json_encode($datos);
+	}
+	protected function get_mis_alumnos(){
+		$departamento = $this->profesor_model->get_familia_laboral($this->session->userdata['id_login']);
+		$datos['alumnos'] = $this->alumno_model->get_alumnos_familia_laboral($departamento,10);
+		echo json_encode($datos);
+	}
+	protected function editar_perfil_oculto(){
+		$rest_json = file_get_contents("php://input");
+        $_POST = json_decode($rest_json, true);
+		$datos = $this->input->post();
+		echo json_encode($this->input->post());
 	}
 }

@@ -1,4 +1,4 @@
-<div>
+<div ng-controller="resumenProfesorCtrl">
     <ul>
         <li><a href="#!/resumen">Resumen</a></li>
         <li>Ofertas
