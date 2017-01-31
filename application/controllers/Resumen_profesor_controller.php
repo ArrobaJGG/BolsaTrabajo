@@ -1,5 +1,5 @@
 <?php
-class Notificaciones_controller extends CI_Controller{
+class Resumen_profesor_controller extends CI_Controller{
     public function __construct(){
         parent::__construct();
         $this->load->model('login_model');
@@ -8,6 +8,7 @@ class Notificaciones_controller extends CI_Controller{
         $this->load->model('reporte_model');
         $this->load->model('alumno_model');
         $this->load->model('empresa_model');
+		$this->load->model('ofertas_model');
         $this->load->model('profesor_model');
         $this->load->model('idioma_model');
         $this->load->library('session');
@@ -29,4 +30,23 @@ class Notificaciones_controller extends CI_Controller{
             redirect('./login_controller');
         }
     }
+	public function validar($function,$arg = array()){
+		if($this->session->userdata('rol') == 'profesor'){
+			call_user_func( array('resumen_profesor_controller',$function),$arg);
+		}
+	}
+	protected function get_info_resumen(){
+		$departamento = $this->profesor_model->get_familia_laboral($this->session->userdata['id_login']);
+		$datos['alumnos'] = $this->alumno_model->get_alumnos_familia_laboral($departamento,10);
+		$datos['ofertas'] = $this->ofertas_model->get_ofertas_familia_laboral($departamento,10);
+		echo json_encode($datos);
+	}
+	protected function get_mis_ofertas(){
+		$datos['ofertas'] = $this->ofertas_model->datos_oferta($this->session->userdata('id_login'));
+		echo json_encode($datos);
+	}
+	protected function get_todas_ofertas(){
+		$datos['ofertas'] = $this->ofertas_model->get_ofertas(10);
+		echo json_encode($datos);
+	}
 }

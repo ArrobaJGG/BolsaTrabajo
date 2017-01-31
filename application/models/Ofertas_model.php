@@ -14,6 +14,15 @@ class Ofertas_model extends CI_Model{
 		    }
 		    return null;
 	}
+	public function get_ofertas($limite){
+		$sql = " SELECT * FROM oferta ORDER BY id_oferta DESC  LIMIT $limite";
+		$query = $this->db->query($sql);
+		if ($query->num_rows() > 0){
+		           $todo = $query->result_array();	
+						return $todo;
+		    }
+		    return null;
+	}
 	public function datos_una_oferta($id_oferta){
 		$sql = " SELECT * FROM oferta WHERE id_oferta=$id_oferta";
 		$query = $this->db->query($sql);
@@ -88,6 +97,12 @@ class Ofertas_model extends CI_Model{
         $row = $query->result_array();
         $id = $row ? $row : false;
         return $id;
+	}
+	public function get_ofertas_familia_laboral($id,$limit){
+		$sql = "SELECT * FROM oferta WHERE id_oferta IN (SELECT id_oferta FROM curso_oferta a,curso c WHERE a.id_curso = c.id_curso AND id_familia = $id) ORDER BY id_oferta LIMIT $limit";
+		$query = $this->db->query($sql);
+		$devolver = isset($query) ? $query->result_array() : false;
+		return $devolver;
 	}
 
 	public function get_nombre($id){
