@@ -62,7 +62,9 @@ Horario: <input type="text" name="horario"  value=""/></br>
 Oculto: <input type="checkbox"  name="oculto" value=""/><br/>
 
 
+
 <input type="submit"name="Publicar" value="Publicar"/>
+<input type="button" name="Cancelar" value="Cancelar" onclick="window.location='Resumenempresa_controller'" />
 <?php if (isset($mensaje)) echo $mensaje ?>
 		<?php echo validation_errors(); ?>
 </form>	
