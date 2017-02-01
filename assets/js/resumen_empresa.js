@@ -40,11 +40,11 @@ var myApp = angular.module("my-app",[]);
 						
 						boton.setAttribute("value","Editar Oferta");
 						
-						boton.setAttribute("onclick", "window.location='./Editar_oferta_controller/index/contador'");
+						boton.setAttribute("onclick", "window.location='./Editar_oferta_controller/index/"+$scope.ofertas[contador].id_oferta+"'");
 						
 						
 						
-						midiv.innerHTML = "<h3>"+$scope.ofertas[contador].titulo+"</h3><p>"+$scope.ofertas[contador].resumen+"</p>";
+						midiv.innerHTML = "<h3><a href='/BolsaTrabajo/Mostrar_ofertas_controller/index/"+$scope.ofertas[contador].id_oferta+"'>"+$scope.ofertas[contador].titulo+"</a></h3><p>"+$scope.ofertas[contador].resumen+"</p>";
 						boton.innerHTML= "Editar Oferta";
 						
 						document.getElementById('cuadro').appendChild(midiv); // Lo pones en "body", si quieres ponerlo dentro de algún id en concreto usas document.getElementById('donde lo quiero poner').appendChild(midiv);

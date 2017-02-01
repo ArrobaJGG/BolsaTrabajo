@@ -84,7 +84,7 @@ public function index(){
 													
 													);
 						$insertaroferta = $this->Ofertas_model->insertar($parametros,$id_login);
-						
+						redirect('/Resumenempresa_controller');
 						}
 				
 				

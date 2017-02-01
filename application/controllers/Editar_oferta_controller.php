@@ -69,7 +69,7 @@ $this->load->library('form_validation');
 												$this->form_validation->set_message('valid_email','El campo email debe ser correcto');
 						}
 						if ($this->form_validation->run() ==false){
-												
+							$this->index($id_oferta);		
 						}else{
 							$titulo = ($this->input->post('titulo')) ? $this->input->post('titulo') : null;
 							$nombre = ($this->input->post('nombre')) ? $this->input->post('nombre') : null ;
