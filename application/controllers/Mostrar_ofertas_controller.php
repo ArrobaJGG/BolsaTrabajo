@@ -11,8 +11,10 @@
 				//$this->load->library('form_validation');
 
 	}	
+	//TODO cuando se mete un id que no corresponde peta
 	public function index($id_oferta){
 					$datos_oferta = $this->Ofertas_model->datos_una_oferta($id_oferta);
+					//$familia = $this->Ofertas_model->familia($id_familia);
 					$data['familias'] = $this->Familia_laboral_model->familia();	
 					$data['etiquetas'] = $this->Ofertas_model->etiqueta();
 					$data['libreria'] = array();
