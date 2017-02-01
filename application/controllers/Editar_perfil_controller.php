@@ -154,6 +154,7 @@ $datos_alumnos = $this->alumno_model->id_login($id_login);
 $datos_alumnos['cursos'] = $this->alumno_model->alumno_curso($id_login);
 $data['libreria']=array();
 $data['titulo'] = "Editar Perfil";
+$data['css'] = array("/BolsaTrabajo/assets/css/cabecera.css");
 $data["javascript"]="assets/js/editar_perfil.js";
 $data['idiomas']=$this->idioma_model->idioma();
 $data['niveles']=$this->idioma_model->nivelleido();
