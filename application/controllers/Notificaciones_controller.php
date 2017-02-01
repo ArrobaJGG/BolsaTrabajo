@@ -9,6 +9,7 @@ class Notificaciones_controller extends CI_Controller{
 		$this->load->model('reporte_model');
 		$this->load->model('alumno_model');
 		$this->load->model('empresa_model');
+        $this->load->model('ofertas_model');
 		$this->load->model('profesor_model');
 		$this->load->model('idioma_model');
 		$this->load->library('session');
@@ -21,7 +22,10 @@ class Notificaciones_controller extends CI_Controller{
 			$data['javascript'] = 'assets/js/directivas.js';
 			$data['libreria'] = array("http://ajax.googleapis.com/ajax/libs/angularjs/1.6.0/angular-route.js",base_url('assets/js/notificaciones.js'));		
 			$data['titulo'] = "Notificaciones";
-			$data['css'] = array("/BolsaTrabajo/assets/css/cabecera.css");
+			$data['css'] = array("/BolsaTrabajo/assets/css/cabecera.css",
+                "/BolsaTrabajo/assets/css/notificaciones.css",
+                "assets/font-awesome/css/font-awesome.min.css"
+            );
 			
 			$this->load->view("includes/header", $data);
 			$this->load->view("notificaciones_view");
@@ -92,14 +96,10 @@ class Notificaciones_controller extends CI_Controller{
 		$id = $this->input->post('id');
 		$mensajes['error'] = false;
 		if($this -> form_validation -> run() != false){
-			if($this->empresa_model->borrar_empresa($id)){
-				$this->login_model->borrar_usuario($id);
-				$mensajes['mensaje'] = "Empresa borrado correctamente";
-			}
-			else{
-				$mensajes['error'] = true;
-				$mensajes['mensaje'] = "Ha ocurrido un error";
-			}
+		    $this->ofertas_model->borrar_ofertas_id_login($id);
+			$this->empresa_model->borrar_empresa($id);
+			$this->login_model->borrar_usuario($id);
+			$mensajes['mensaje'] = "Empresa borrado correctamente";	
 		}
 		else{
 			$mensajes['error'] = true;
@@ -124,13 +124,10 @@ class Notificaciones_controller extends CI_Controller{
 		$this->form_validation->set_rules('id', 'id', 'numeric|required|trim');
 		$id = $this->input->post('id');
 		if ($this -> form_validation -> run() != false){
-			if($this->profesor_model->borrar_profesor($id)){
-				$this->login_model->borrar_usuario($id);
-				$mensaje = "Alumno borrado correctamente";
-			}
-			else{
-				$mensaje = "Ha ocurrido un error";
-			}
+		    $this->ofertas_model->borrar_ofertas_id_login($id);
+			$this->profesor_model->borrar_profesor($id);
+			$this->login_model->borrar_usuario($id);
+			$mensaje = "Alumno borrado correctamente";
 		}
 		else{
 			$mensaje = "Datos invalidos";
@@ -181,6 +178,7 @@ class Notificaciones_controller extends CI_Controller{
 	}
 	public function validar($function,$arg=''){
 		//$this->cargar_familias();
+		
 		if($this->session->userdata('rol')=='administrador'){
 			call_user_func( array('Notificaciones_controller',$function),$arg);
 		}

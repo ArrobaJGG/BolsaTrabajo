@@ -111,6 +111,25 @@ class Ofertas_model extends CI_Model{
 		$nombre = $query ? $query->row->nombre : false;
 		return $nombre;
 	}
+    public function borrar_ofertas_id_login($id){
+        $this->db->trans_start();
+        $sql = "DELETE FROM oferta_alumno WHERE id_oferta IN (SELECT id_oferta FROM oferta WHERE id_login = $id)";
+        $this->db->query($sql);
+        $sql = "DELETE FROM curso_oferta WHERE id_oferta IN (SELECT id_oferta FROM oferta WHERE id_login = $id)";
+        $this->db->query($sql);
+        $sql = "DELETE FROM etiqueta_oferta WHERE id_oferta IN (SELECT id_oferta FROM oferta WHERE id_login = $id)";
+        $this->db->query($sql);
+        $sql = "DELETE FROM oferta WHERE id_login=$id";
+        $this->db->query($sql);
+        $this->db->trans_complete();
+        if ($this->db->trans_status() === FALSE)
+        {
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
 
 }
 ?>
