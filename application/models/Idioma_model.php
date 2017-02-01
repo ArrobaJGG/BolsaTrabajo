@@ -54,6 +54,10 @@ class idioma_model extends CI_Model{
         $row = $query->row();
         $devolver = $row ? $row->cuenta : false;
         return $devolver;
-    }
+    }	
+    public function actualizar_idioma($parametros_alumno_idioma,$id_login){
+		$sql = "UPDATE alumno_idioma SET idioma= '$parametros_alumno_idioma[idioma]' where id_login=$id_login";
+		$query = $this->db->query($sql);
+	}
 }
 ?>

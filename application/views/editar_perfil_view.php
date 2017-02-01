@@ -51,7 +51,7 @@ $this -> load -> helper('form');
 		</p>
 		
 		<p>Idiomas: 
-			<select name="idioma">
+			<select name="idioma" multiple>
 				<?php
 				foreach ($idiomas as $idioma) {
 					echo '<option value="' . $idioma['id_idioma'] . '">' . $idioma['nombre'] . '</option>';

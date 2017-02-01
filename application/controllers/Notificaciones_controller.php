@@ -18,8 +18,8 @@ class Notificaciones_controller extends CI_Controller{
 	public function index(){
 		if($this->session->userdata('rol')=='administrador'){
 			$data['notificaciones'] = array();
-			$data['javascript'] = 'assets/js/notificaciones.js';
-			$data['libreria'] = array("http://ajax.googleapis.com/ajax/libs/angularjs/1.6.0/angular-route.js");		
+			$data['javascript'] = 'assets/js/directivas.js';
+			$data['libreria'] = array("http://ajax.googleapis.com/ajax/libs/angularjs/1.6.0/angular-route.js",base_url('assets/js/notificaciones.js'));		
 			$data['titulo'] = "Notificaciones";
 			
 			$this->load->view("includes/header", $data);

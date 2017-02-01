@@ -1,5 +1,5 @@
 <?php
-class Editar_perfil_controller extends CI_Controller{
+class Editar_perfil_controller extends SuperController{
 	
 	public function __construct(){
 		parent::__construct();
@@ -13,7 +13,7 @@ class Editar_perfil_controller extends CI_Controller{
 		$this->load->library('session');
 		$this->load->library('upload');
 		$this->load->library('image_lib');
-
+		
 	}
 
 	
@@ -84,6 +84,7 @@ class Editar_perfil_controller extends CI_Controller{
 						);
 					$parametros_familia= array( "familia" => $familia,
 						"id_login" => $id_login);
+					$parametros_alumno_idioma= array( "idioma" => $idioma);
 					
 					
 					$mi_archivo = 'logo';
@@ -96,7 +97,7 @@ class Editar_perfil_controller extends CI_Controller{
 					$this->load->library('upload', $config);
 					$this->upload->initialize($config);
 					if (!$this->upload->do_upload($mi_archivo)) {
-     					echo $this->upload->display_errors(); exit();
+     					//echo $this->upload->display_errors(); exit();
 					} else {     
      					$data = array('upload_data' => $this->upload->data());
     					$img_full_path = $config['upload_path'] . $data['upload_data']['file_name'];
@@ -132,16 +133,14 @@ class Editar_perfil_controller extends CI_Controller{
           				echo $this->image_lib->display_errors(); exit();
      				}
 				}
-					if ($idioma = ' '){
-						break;
-					}
-					else{
-						
-					}
+				
+					
 					   //$actualizar_alumno = $this->alumno_model->actualizar($parametros,$id_login);
  
  $actualizar_alumno = $this->alumno_model->actualizar_alumno($parametros_alumno,$id_login);
  $actualizar_alumno = $this->alumno_model->actualizar_alumno_curso($parametros_alumno_curso,$id_login);
+ //$actualizar_nivel  = $this->idioma_model->actualizar_idioma($parametros_idioma,$id_login);
+ 
 					   //$actualizar_alumno=$this->alumno_model->actualizar($nombre,$apellidos,$telefono,$dni,$fecha,$codigo_postal,$descripcion,$experiencia);
  $datos["mensaje"] = "Validacion correcta";
  
@@ -149,7 +148,7 @@ class Editar_perfil_controller extends CI_Controller{
 }
 
 
-
+//redirect('/resumenalumno_controller');
 }
 $datos_alumnos = $this->alumno_model->id_login($id_login);
 $datos_alumnos['cursos'] = $this->alumno_model->alumno_curso($id_login);
@@ -170,6 +169,7 @@ $this->load->view("includes/footer",$data );
 
 	
 }
+
 else{
 	redirect('login_controller');
 }

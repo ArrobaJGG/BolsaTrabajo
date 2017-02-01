@@ -1,5 +1,5 @@
 
-var contador = 0;
+var contador = 1;
 
 var myApp = angular.module("my-app",[]);
 			myApp.controller('nuevaoferta',['$scope','$http',function($scope,$http){
@@ -19,24 +19,41 @@ var myApp = angular.module("my-app",[]);
 		
 	
 	$scope.vermas =		function () {
-		//console.log($scope.ofertas.length);
+		
 		var titulo = $scope.ofertas[contador].titulo;
+		var longitud = $scope.ofertas.length;
+		console.log(longitud);
+		console.log(contador);
+		if(longitud <= contador){
+			alert("longitud "+longitud+" contador "+contador);
+			
+		}
 				if (typeof titulo != 'undefined'){
 					
 						var midiv = document.createElement("div");
-						midiv.setAttribute("id","cuadro");
-						//midiv.setAttribute("otros_atributos","otros");
-						console.log($scope.ofertas);
+						var boton = document.createElement("input");
 						
-						midiv.innerHTML = "<h3>"+$scope.ofertas[contador].titulo+"</h3> <p>"+$scope.ofertas[contador].resumen+"</p>";
+						midiv.setAttribute("id","cuadro");
+						boton.setAttribute("type" , "button");
+						boton.setAttribute("value","Editar Oferta");
+						boton.setAttribute("href","https://www.youtube.com/watch?v=ukXUDv7TI4k");
+						
+						//console.log($scope.ofertas);
+						
+						midiv.innerHTML = "<h3>"+$scope.ofertas[contador].titulo+"</h3><p>"+$scope.ofertas[contador].resumen+"</p>";
+						boton.innerHTML= 
+						
 						document.getElementById('cuadro').appendChild(midiv); // Lo pones en "body", si quieres ponerlo dentro de algún id en concreto usas document.getElementById('donde lo quiero poner').appendChild(midiv);
-						//indice++;
+						document.getElementById('cuadro').appendChild(boton);						
 						contador++;
 					
 					
 				}
+				
+				
 		
 			};
-  
+			
+		
 
 		}]);

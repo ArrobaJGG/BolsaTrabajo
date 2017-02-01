@@ -2,7 +2,7 @@
 $this->load->helper('form');
  ?>
  
-<form action="Editar_oferta_controller" method="post" novalidate enctype="multipart/form-data">
+<form action="<?php echo base_url("../../Editar_oferta_controller/actualiza/$id_oferta")?>" method="post" novalidate enctype="multipart/form-data">
 
 
 Titulo: <input type="text" name="titulo" value="<?php if ($titulo==null){echo "";}else{echo $titulo;} ?>" placeholder="Titulo" required></br>
@@ -16,7 +16,7 @@ Funciones: <input type="text" name="funciones" value="<?php echo $funciones ?>" 
 Ofrece: <input type="text" name="ofrece" value="<?php $ofrece ?>" placeholder="Complementos..."></br>
 Resumen: <input type="text" name="resumen" value="<?php echo $resumen ?>" required></br>
 
-Familia: <select name="id_familia" onfocus="saber()">
+Familia: <select name="id_familia"> onfocus="saber()">
 				<?php
 				foreach ($familias as $familia) {
 					echo '<option value="' . $familia['id_familia_laboral'] . '">' . $familia['nombre'] . '</option>';
