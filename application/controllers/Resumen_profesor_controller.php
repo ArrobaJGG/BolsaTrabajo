@@ -21,7 +21,8 @@ class Resumen_profesor_controller extends CI_Controller{
             $data['javascript'] = 'assets/js/resumen_profesor.js';
             $data['libreria'] = array("http://ajax.googleapis.com/ajax/libs/angularjs/1.6.0/angular-route.js","https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js");     
             $data['titulo'] = "Resumen profesor";
-            
+            $data['css'] = array("/BolsaTrabajo/assets/css/cabecera.css");
+			
             $this->load->view("includes/header", $data);
             $this->load->view("resumen_profesor_view");
             $this->load->view("includes/footer", $data);
@@ -62,6 +63,10 @@ class Resumen_profesor_controller extends CI_Controller{
 		$rest_json = file_get_contents("php://input");
         $_POST = json_decode($rest_json, true);
 		$datos = $this->input->post();
-		echo json_encode($this->input->post());
+		$this->alumno_model->actualizar_perfil_oculto($datos['perfil'],$datos['id_login']);
+	}
+	protected function perfil_oculto($id){
+		$data['texto'] = $this->alumno_model->get_perfil_oculto($id);
+		echo json_encode($data);
 	}
 }
