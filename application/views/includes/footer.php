@@ -15,6 +15,6 @@ idazkaria@fpTXurdinaga.com</p>
 <?php foreach ($libreria as $lib): ?>
 	<script src=" <?php echo $lib ?>"></script>
 <?php endforeach; ?>
-<script src=" <?php echo base_url($javascript)  ?>"></script>
+<script src="/BolsaTrabajo/<?php echo $javascript; ?>"></script>
 </body>
 </html>

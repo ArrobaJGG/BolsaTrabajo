@@ -12,7 +12,7 @@ $this->load->library("session");
 $this->load->library('form_validation');
 
 }
-	
+	// TODO falta editar cada oferta y que no casque cuando no hay una id_oferta
 	public function index($id_oferta = null){
 		
 			if ($this->session->userdata('rol')=='empresa'||$this->session->userdata('rol')=='profesor') {
@@ -21,17 +21,15 @@ $this->load->library('form_validation');
 					$datos_oferta = $this->Ofertas_model->datos_una_oferta($id_oferta);
 					$data['familias'] = $this->Familia_laboral_model->familia();	
 					$data['etiquetas'] = $this->Ofertas_model->etiqueta();
+					$data['libreria'] = array();
+					$data["titulo"]="Editar Oferta";
+					$data["javascript"]="assets/js/editar_oferta.js";
+					$this->load->view("includes/header",$data);
+					$this->load->view("editar_oferta_view",$datos_oferta,$data);
+					$this->load->view("includes/footer", $data);
 					
 					
 					
-					
-									
-									 				$data['libreria'] = array();
-									 				$data["titulo"]="Editar Oferta";
-													$data["javascript"]="assets/js/editar_oferta.js";
-													$this->load->view("includes/header",$data);
-													$this->load->view("editar_oferta_view",$datos_oferta,$data);
-													$this->load->view("includes/footer", $data);
 
 						
 			} else {
@@ -71,7 +69,7 @@ $this->load->library('form_validation');
 												$this->form_validation->set_message('valid_email','El campo email debe ser correcto');
 						}
 						if ($this->form_validation->run() ==false){
-							
+												
 						}else{
 							$titulo = ($this->input->post('titulo')) ? $this->input->post('titulo') : null;
 							$nombre = ($this->input->post('nombre')) ? $this->input->post('nombre') : null ;
@@ -109,8 +107,9 @@ $this->load->library('form_validation');
 													
 													);
 									$actualizardatos = $this->Ofertas_model->actualizar($parametros,$id_login);
+									redirect('../../Resumenempresa_controller');
 						}
-		redirect('../../Resumenempresa_controller');
+		
 	}
 
 }

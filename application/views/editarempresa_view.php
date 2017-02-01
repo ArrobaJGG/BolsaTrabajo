@@ -52,7 +52,7 @@ $this->load->helper('form');
 		
 		</table>
 		<input type="submit" name="Actualizar" value="Actualizar" />
-		<input type="reset" name="Cancelar" value="Cancelar"/>
+		<input type="button" name="Cancelar" value="Cancelar" onclick="window.location='Resumenempresa_controller'" />
 		<?php if (isset($mensaje)) echo $mensaje ?>
 		<?php echo validation_errors(); ?>
 		<!--<button type="cancel" onclick="javascript:window.location='http://stackoverflow.com';">Cancel</button>-->

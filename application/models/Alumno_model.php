@@ -35,14 +35,13 @@ class Alumno_model extends CI_Model{
 		$sql += ')';
 		return $this->db->query($sql);
 	}
-
 	public function crear_alumno($id_login){
 		$sql = "INSERT INTO alumno (id_login) VALUES ('$id_login')";
 		return $this->db->query($sql);
 	}
 
-	public function get_alumnos($limite = PHP_INT_MAX){
-		$sql = "SELECT * FROM alumno ORDER BY id_login DESC LIMIT $limite";
+	public function get_alumnos($limite = PHP_INT_MAX,$desplazamiento = 0){
+		$sql = "SELECT * FROM alumno ORDER BY id_login DESC LIMIT $desplazamiento, $limite";
 		$query = $this->db->query($sql);
 		$devolver = isset($query) ? $query->result_array() : false;
 		return $devolver;
@@ -57,6 +56,12 @@ class Alumno_model extends CI_Model{
 		$sql = "UPDATE alumno SET nombre = '$parametros_alumno[nombre]', dni = '$parametros_alumno[dni]', telefono1 = $parametros_alumno[telefono], fecha_nacimiento = '$parametros_alumno[fecha_nacimiento]', codigo_postal= '$parametros_alumno[codigo_postal]', resumen= '$parametros_alumno[resumen]', experiencia= '$parametros_alumno[experiencia]'  WHERE id_login = $id_login";
 		$query = $this->db->query($sql);
 	}
+<<<<<<< HEAD
+=======
+	public function actualizar_familia($parametros_familia,$id_login){
+		
+	}
+>>>>>>> 7bca541e88b3305eae777466a9114e914edb6059
 	public function actualizar_alumno_curso($parametros_alumno_curso,$id_login){
 		$sql = "UPDATE alumno_curso SET fecha_inicio='$parametros_alumno_curso[fecha_inicio]', fecha_final='$parametros_alumno_curso[fecha_final]'  WHERE id_login = $id_login";
 		$query = $this->db->query($sql);
