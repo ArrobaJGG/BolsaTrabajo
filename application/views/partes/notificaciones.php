@@ -4,7 +4,7 @@
 		<div>
            <p ng-show="estaCargandoNuevasAltas">cargando</p>
            <div class="elementoNotificacion">
-                <div  ng-controller="nuevaAltaCtrl" ng-repeat="nueva in nuevasAltas"> 
+                <div class="animate-repeat" ng-controller="nuevaAltaCtrl" ng-repeat="nueva in nuevasAltas"> 
                     Nombre empresa: {{nueva.nombre}}</br>
                     Correo: {{nueva.correo}}
                     <br><span>{{mensaje}}</span>
@@ -22,7 +22,7 @@
 		<div>
 			<p ng-show="estaCargando">cargando</p>
 			<div class="elementoNotificacion">
-    			<div ng-controller="reporteCtrl" ng-repeat="reporte in reportes"> 
+    			<div class="animate-repeat" ng-controller="reporteCtrl" ng-repeat="reporte in reportes"> 
     				Tipo: {{reporte.tipo}}<br/>
     				nombre {{reporte.tipo}}: {{reporte.nombre}}</br>
     				descripcion: {{reporte.descripcion}}<br/>

@@ -1,6 +1,6 @@
 /*/
 alert('yyy');//*/
-angular.module("myDirectivas",[]);
+angular.module("myDirectivas",['ngAnimate']);
 var myApp = angular.module("my-app", ['myDirectivas','ngRoute']);
 
 myApp.config(function($routeProvider) {
@@ -784,7 +784,8 @@ myApp.controller('reporteCtrl',['$scope','$http',function($scope,$http){
 			function successCallback(response){
 				$scope.mensaje = response.data.mensaje;
 				if(response.data.error ==false){
-					$event.target.parentElement.parentElement.remove();
+					//TODO mirar el destroy 
+					$scope.$destroy();
 				}
 			},
 			function errorCallback(response) {
