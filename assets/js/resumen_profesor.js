@@ -91,31 +91,66 @@ myApp.controller('todosAlumnosCtrl',['$scope','$http',function($scope,$http){
 		}
 	);
 }]);
-myApp.directive('miEditarPerfil',['$http',function($http){
-	return {
-        restrict: 'E',
-        replace: true,
-        scope: {
-        	alumno : "="
-        },
-        require: '?ngModel',
-        templateUrl: '/BolsaTrabajo/api/cargar_partes/cargar/editar_perfil_privado',
-        link: function(scope, element, attrs){
-        	scope.enviar = function(id){
+myApp.controller('alumnoCtrl',['$scope','$http',function($scope,$http){
+	
+}]);
+myApp.directive('miEditorPerfil',['$compile','$http',function($compile,$http){
+	return{
+		restrict: 'E',
+	    replace: true,
+	    scope: {
+	    	alumno : "="
+	    },
+	    require: '?ngModel',
+	    templateUrl : '/BolsaTrabajo/api/cargar_partes/cargar/boton_editar',
+	    link: function(scope, element, attrs){
+	    	scope.modoEditor = false;
+	    	scope.activar= true;
+			scope.mensajeBoton = "Editar perfil";	    	
+	    	scope.hacer =  function(){
+	    		if(scope.modoEditor){
+	    			scope.enviar();
+	    			scope.modoEditor =  false;
+	    			scope.mensajeBoton = "Editar perfil";
+	    		}
+	    		else{
+	    			scope.editar();
+	    			scope.modoEditor =  true;
+	    			scope.mensajeBoton = "Enviar";
+	    		}
+	    	};
+	    	scope.editar = function($event){
+	    		activar= false;
+	    		$http.get('/BolsaTrabajo/resumen_profesor_controller/validar/perfil_oculto/'+scope.alumno)
+	    		.then(
+	    			function correcto(response){
+	    				scope.texto = response.data.texto;
+	    				scope.activar = true;
+	    			}
+	    			,function incorrecto(response){
+	    				console.log(response.data);
+	    				scope.activar = true;
+	    			}
+	    		);
+				
+			};
+			scope.enviar = function(){
+				activar= false;
         		var datos = {
-					id_login : id,
+					id_login : scope.alumno,
 					perfil: scope.texto
         		};
         		$http.post('/BolsaTrabajo/resumen_profesor_controller/validar/editar_perfil_oculto',JSON.stringify(datos))
         		.then(
         			function correcto(response){
-        				console.log(response.data);
+        				scope.activar = true;
         			},
         			function incorrecto(response){
         				console.log(response.data);
+        				scope.activar = true;
         			}
         		);
-        	};
-        }
-     };
+			};
+		}
+   };
 }]);

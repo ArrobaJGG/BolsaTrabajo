@@ -1,8 +1,8 @@
 <div ng-controller="cambiarCredencialesCtrl">
-    <form method="post" action="<?php echo base_url('cambiar_credenciales_controller/cambiar_contrasena'); ?>" name="cambiarUsuario">
+    <!--TODO algun dia enviar correo para comprobar y eso<form method="post" action="<?php echo base_url('cambiar_credenciales_controller/cambiar_contrasena'); ?>" name="cambiarUsuario">
         <span>Cambiar nombre usuario(correo)</span>
         <input name="usuario" ng-model="usuario" ng-init="usuario='<?php echo $correo;  ?> '" required type="email"><button ng-disabled="!cambiarUsuario.$valid" type="submit">Cambiar nombre usuario</button>
-    </form>
+    </form>-->
     <form method="post" action="<?php echo base_url('cambiar_credenciales_controller/cambiar_contrasena'); ?>" name="cambiarContrasena">
         <span>Nueva contraseña</span>
         <input ng-model="contrasena"required type="password" name="contrasena">

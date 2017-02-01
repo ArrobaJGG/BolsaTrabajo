@@ -41,13 +41,13 @@ class Alumno_model extends CI_Model{
 	}
 
 	public function get_alumnos($limite = PHP_INT_MAX,$desplazamiento = 0){
-		$sql = "SELECT * FROM alumno ORDER BY id_login DESC LIMIT $desplazamiento, $limite";
+		$sql = "SELECT * FROM alumno WHERE estado = true ORDER BY id_login DESC LIMIT $desplazamiento, $limite";
 		$query = $this->db->query($sql);
 		$devolver = isset($query) ? $query->result_array() : false;
 		return $devolver;
 	}
 	public function get_alumnos_familia_laboral($id,$limite = PHP_INT_MAX){
-		$sql = "SELECT * FROM alumno WHERE id_login IN (SELECT id_login FROM alumno_curso a,curso c WHERE a.id_curso = c.id_curso AND id_familia = '$id') ORDER BY id_login LIMIT $limite";
+		$sql = "SELECT * FROM alumno WHERE estado= true AND id_login IN (SELECT id_login FROM alumno_curso a,curso c WHERE a.id_curso = c.id_curso AND id_familia = '$id') ORDER BY id_login LIMIT $limite";
 		$query = $this->db->query($sql);
 		$devolver = isset($query) ? $query->result_array() : false;
 		return $devolver;
@@ -116,7 +116,16 @@ class Alumno_model extends CI_Model{
 		$sql = "DELETE FROM alumno_curso WHERE id_curso = '$id'";
 		return $this->db->query($sql);
 	}
-	
-	
+	public function get_perfil_oculto($id){
+		$sql = "SELECT perfil_oculto FROM alumno WHERE id_login = '$id'";
+		$query = $this->db->query($sql);
+        $row = $query->row();
+        $devolver = $row ? $row->perfil_oculto : false;
+        return $devolver;
+	}
+	public function actualizar_perfil_oculto($perfil,$id){
+		$sql = "UPDATE alumno SET perfil_oculto = '$perfil' WHERE id_login = '$id'";
+		return $this->db->query($sql);
+	}
 }
 ?>

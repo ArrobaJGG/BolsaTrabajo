@@ -1,6 +1,6 @@
 <?php
 class Notificaciones_controller extends CI_Controller{
-	
+	//TODO preguntar por manera de cancelar la espera de la query ajax
 	public function __construct(){
 	    parent::__construct();
 	    $this->load->model('login_model');
@@ -21,6 +21,7 @@ class Notificaciones_controller extends CI_Controller{
 			$data['javascript'] = 'assets/js/directivas.js';
 			$data['libreria'] = array("http://ajax.googleapis.com/ajax/libs/angularjs/1.6.0/angular-route.js",base_url('assets/js/notificaciones.js'));		
 			$data['titulo'] = "Notificaciones";
+			$data['css'] = array("/BolsaTrabajo/assets/css/cabecera.css");
 			
 			$this->load->view("includes/header", $data);
 			$this->load->view("notificaciones_view");

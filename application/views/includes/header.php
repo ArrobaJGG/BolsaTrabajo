@@ -4,7 +4,10 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title><?php echo $titulo; ?></title>
-	<link rel="stylesheet" href="/BolsaTrabajo/assets/css/cabecera.css">
+	<?php foreach ($css as $cs): ?>
+		<link rel="stylesheet" href="<?php echo $cs ?>">
+	<?php endforeach; ?>
+	
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.0/angular.min.js"></script>
 	<title><?php echo $titulo; ?></title>
 	<link rel="stylesheet" href="">
