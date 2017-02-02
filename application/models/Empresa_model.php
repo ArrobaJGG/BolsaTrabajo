@@ -35,8 +35,8 @@ class Empresa_model extends CI_Model{
 		return $this->db->query($sql);
 	}
 	
-	public function get_empresas($limit){
-		$sql = "SELECT * FROM empresa ORDER BY id_login DESC LIMIT $limit";
+	public function get_empresas($limit,$offset = 0){
+		$sql = "SELECT * FROM empresa,login WhERE empresa.id_login = login.id_login AND validado = true ORDER BY empresa.id_login DESC LIMIT $offset, $limit";
 		$query = $this->db->query($sql);
 		$devolver = isset($query) ? $query->result_array() : false;
 		return $devolver;

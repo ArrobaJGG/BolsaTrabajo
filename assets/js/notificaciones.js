@@ -51,6 +51,9 @@ myApp.controller('notiCtrl', ['$scope', '$http', function ($scope, $http) {
 myApp.controller('notificacionesCtrl', ['$scope', '$http', function ($scope, $http) {
 	$scope.estaCargando = true;
 	$scope.estaCargandoNuevasAltas = true;
+	$scope.remove = function(array, index){
+    	array.splice(index, 1);
+	};
 	$scope.actualizarReportes = function(){
 		$http.get('/BolsaTrabajo/notificaciones_controller/validar/reportes')
 		.then(
@@ -775,17 +778,19 @@ myApp.controller('nuevaAltaCtrl',['$scope','$http',function($scope,$http){
 		);
 	};
 }]);
-myApp.controller('reporteCtrl',['$scope','$http',function($scope,$http){
-	$scope.eliminarReporte = function($event,$id){
+myApp.controller('reporteCtrl',['$scope','$http','$timeout',function($scope,$http,$timeout){
+	$scope.eliminarReporte = function(objeto,o){
+		console.log(objeto);
+		console.log(o);
 		$http.post('/BolsaTrabajo/notificaciones_controller/validar/borrar_reporte'
-		,"id_reporte="+$id
+		,"id_reporte="+$scope.$parent.reporte.id_reporte
 		,{'headers':{'content-type': 'application/x-www-form-urlencoded'}})
 		.then(
 			function successCallback(response){
 				$scope.mensaje = response.data.mensaje;
 				if(response.data.error ==false){
 					//TODO mirar el destroy 
-					$scope.$destroy();
+					$scope.remove(objeto,o);
 				}
 			},
 			function errorCallback(response) {
