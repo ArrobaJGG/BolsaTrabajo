@@ -21,6 +21,7 @@ $this->load->library('form_validation');
 					$datos_oferta = $this->Ofertas_model->datos_una_oferta($id_oferta);
 					$data['familias'] = $this->Familia_laboral_model->familia();	
 					$data['etiquetas'] = $this->Ofertas_model->etiqueta();
+					$data['css'] = array("/BolsaTrabajo/assets/css/cabecera.css");
 					$data['libreria'] = array();
 					$data["titulo"]="Editar Oferta";
 					$data["javascript"]="assets/js/editar_oferta.js";

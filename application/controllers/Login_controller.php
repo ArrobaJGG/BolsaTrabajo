@@ -44,13 +44,13 @@ public function index(){
 				$this->login_model->actualizar_ultimo_login($correo,date("Y/m/d"));
 				switch ($rol){
 					case 'alumno':
-						redirect("resumenalumno_controller");
+						redirect("resumen_alumno_controller");
 						break;
 					case 'profesor':
-						redirect("resumenprofesor_controller");
+						redirect("resumen_profesor_controller");
 						break;
 					case 'empresa':
-						redirect("resumenempresa_controller");
+						redirect("resumen_empresa_controller");
 						break;
 					case 'administrador':
 						redirect('notificaciones_controller');

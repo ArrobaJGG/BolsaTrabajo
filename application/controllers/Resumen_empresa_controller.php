@@ -1,6 +1,6 @@
 <?php 
 
-class Resumenempresa_controller extends CI_Controller{
+class Resumen_empresa_controller extends CI_Controller{
 	
 	function __construct() {
 		parent::__construct();
@@ -26,9 +26,10 @@ class Resumenempresa_controller extends CI_Controller{
 				//echo($this->session->$correo);
  				$data['libreria'] = array();
  				$data["titulo"]="Resumen Empresa";
+				$data['css'] = array("/BolsaTrabajo/assets/css/cabecera.css");
 				$data["javascript"]="assets/js/resumen_empresa.js";
 				$this->load->view("includes/header",$data);
-				$this->load->view('Resumenempresa_view', $ofertas);
+				$this->load->view('resumen_empresa_view', $ofertas);
 				$this->load->view("includes/footer", $data);
 					
 		}else{
