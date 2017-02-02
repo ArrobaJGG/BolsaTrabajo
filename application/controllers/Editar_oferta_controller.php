@@ -59,7 +59,8 @@ $this->load->library('form_validation');
 									$this->form_validation->set_rules('etiquetas', 'etiquetas');
 									$this->form_validation->set_rules('correo', 'correo', 'valid_email');
 									$this->form_validation->set_rules('horario', 'horario');
-									
+									$this->form_validation->set_rules('duracion', 'duracion');
+										
 										// mensaje de errores
 												$this->form_validation->set_message('required','El campo %s es obligatorio'); 
 												$this->form_validation->set_message('alpha','El campo %s debe estar compuesto solo por letras');
@@ -70,7 +71,7 @@ $this->load->library('form_validation');
 												$this->form_validation->set_message('valid_email','El campo email debe ser correcto');
 						}
 						if ($this->form_validation->run() ==false){
-							$this->index($id_oferta);		
+							$this->index($id_oferta);	
 						}else{
 							$titulo = ($this->input->post('titulo')) ? $this->input->post('titulo') : null;
 							$nombre = ($this->input->post('nombre')) ? $this->input->post('nombre') : null ;
@@ -87,6 +88,7 @@ $this->load->library('form_validation');
 							$correo  = ($this->input->post('correo')) ? $this->input->post('correo') : null ;
 							$horario = ($this->input->post('horario')) ? $this->input->post('horario') : null ;
 							$oculto = ($this->input->post('oculto')) ? $this->input->post('oculto') : FALSE;
+							$duracion = ($this->input->post('duracion')) ? $this->input->post('duracion') : null;
 							
 							$parametros = array ( 
 													"titulo" => $titulo,
@@ -105,9 +107,11 @@ $this->load->library('form_validation');
 													"resumen" => $resumen,
 													"oculto" => $oculto,
 													"fechac" => date('Y/m/d'),
-													
+													"duracion" => $duracion
 													);
-									$actualizardatos = $this->Ofertas_model->actualizar($parametros,$id_login);
+									
+									$actualizardatos = $this->Ofertas_model->actualizar($parametros,$id_oferta);
+									
 									redirect('../../Resumen_empresa_controller');
 						}
 		
