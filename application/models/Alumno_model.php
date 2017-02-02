@@ -40,10 +40,18 @@ class Alumno_model extends CI_Model{
 		return $this->db->query($sql);
 	}
 
-	public function get_alumnos($limite = PHP_INT_MAX,$desplazamiento = 0){
-		$sql = "SELECT * FROM alumno WHERE validado = true ORDER BY id_login DESC LIMIT $desplazamiento, $limite";
+	public function get_alumnos($datos){
+		$sql = "SELECT * FROM alumno WHERE
+		      nombre COLLATE utf8_general_ci LIKE '%$datos[nombre]%' COLLATE utf8_general_ci 
+		      AND apellidos COLLATE utf8_general_ci LIKE '%$datos[apellidos]%' COLLATE utf8_general_ci
+		      AND validado = true 
+	      ORDER BY id_login DESC LIMIT $datos[offset], $datos[limite]";
 		$query = $this->db->query($sql);
-		$devolver = isset($query) ? $query->result_array() : false;
+		$devolver['alumnos'] = isset($query) ? $query->result_array() : false;
+        $devolver['numero_lineas'] = $this->db->query("SELECT count(id_login) numero_lineas FROM alumno WHERE
+              nombre COLLATE utf8_general_ci LIKE '%$datos[nombre]%' COLLATE utf8_general_ci 
+              AND apellidos COLLATE utf8_general_ci LIKE '%$datos[apellidos]%' COLLATE utf8_general_ci
+              AND validado = true ")->row()->numero_lineas;
 		return $devolver;
 	}
 	public function get_alumnos_familia_laboral($id,$limite = PHP_INT_MAX){

@@ -60,10 +60,22 @@ class Notificaciones_controller extends CI_Controller{
 		$nuevas_altas = $this->empresa_model->get_nuevas_altas($limit) ? $this->empresa_model->get_nuevas_altas($limit) : array();
 		echo json_encode($nuevas_altas);
 	}
-	protected function alumnos($limite=PHP_MAX_INT,$offset = 0){
-  		$offset =  $this->uri->segment(5);
-		$offset = $offset+0;//TODO mirra esto
-		$alumnos = $this->alumno_model->get_alumnos($limite,$offset)? $this->alumno_model->get_alumnos($limite,$offset):array();
+	protected function alumnos(){
+	    $rest_json = file_get_contents("php://input");
+        $_POST = json_decode($rest_json, true);
+        $limite = $this->input->post('numero_alumnos');
+        $offset = $this->input->post('desplazamiento');
+        $nombre = $this->input->post('nombre') ? $this->input->post('nombre') : '%';
+        $apellidos = $this->input->post('apellido') ? $this->input->post('apellido')  : '%';
+        $datos = array(
+            'nombre' => $nombre,
+            'apellidos' => $apellidos,
+            'limite' => $limite,
+            'offset' => $offset
+        );
+        /*var_dump($datos);
+        var_dump($this->input->post());//*/
+		$alumnos = $this->alumno_model->get_alumnos($datos)? $this->alumno_model->get_alumnos($datos):array();
 		echo json_encode($alumnos);
 	}
 	protected function borrar_alumno(){
@@ -87,10 +99,19 @@ class Notificaciones_controller extends CI_Controller{
 		echo json_encode($mensajes);
 	}
 	protected function empresas($limite = PHP_MAX_INT){
-		$empresas = $this->empresa_model->get_empresas($limite)? $this->empresa_model->get_empresas($limite):array();
-		foreach ($empresas as $key => $value) {
-			$empresas[$key]['correo'] = $this->login_model->get_correo($value['id_login']);
-		}
+	    $rest_json = file_get_contents("php://input");
+        $_POST = json_decode($rest_json, true);
+        $limite = $this->input->post('numero_alumnos');
+        $offset = $this->input->post('desplazamiento');
+        $nombre = $this->input->post('nombre') ? $this->input->post('nombre') : '%';
+        $correo = $this->input->post('correo') ? $this->input->post('correo')  : '%';
+        $datos = array(
+            'nombre' => $nombre,
+            'correo' => $correo,
+            'limite' => $limite,
+            'offset' => $offset
+        );
+		$empresas = $this->empresa_model->get_empresas($datos)? $this->empresa_model->get_empresas($datos):array();
 		echo json_encode($empresas);
 	}
 	protected function borrar_empresa(){

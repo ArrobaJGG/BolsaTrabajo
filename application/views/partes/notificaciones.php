@@ -21,6 +21,7 @@
 	    <div class="titulo"><h4>Reportes</h4></div>
 		<div>
 			<p ng-show="estaCargando">cargando</p>
+			<span>{{mensajeReportes}}</span>
 			<div class="elementoRepetible">
     			<div class="animate-repeat" ng-controller="reporteCtrl" ng-repeat="reporte in reportes"> 
     				Tipo: {{reporte.tipo}}<br/>
@@ -31,7 +32,7 @@
         				<i class="fa fa-trash-o"  ng-click="eliminarEntidad($event,reporte.id_entidad,reporte.tipo,reporte.id_reporte)">Eliminar {{reporte.tipo}}</i>
     			    </div>
     			</div>
-    			<span>{{mensajeReportes}}</span>
+    			
 			</div>
 		</div>
 	</section>
