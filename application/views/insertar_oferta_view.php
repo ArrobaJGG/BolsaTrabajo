@@ -2,24 +2,21 @@
 $this->load->helper('form');
  ?>
 
-	<!--
-	<?php 
-	echo form_open('Insertar_oferta_controller');
-	?>-->
+	
 	
 <form action="./Insertar_oferta_controller" method="post" novalidate enctype="multipart/form-data">
 
 
 Titulo: <input type="text" name="titulo" value="" placeholder="Titulo" required></br>
-Nombre de empresa: <input type="text" name="nombre" value="" placeholder="nombre"></br>
-Fecha Expiracion: <input type="date" name="fechae" value=""></br>
+Nombre de empresa: <input type="text" name="nombre" value="" placeholder="Nombre"></br>
+Fecha Expiracion: <input type="date" name="fechae" value="" placeholder="Fecha Expiracion"></br>
 Lugar: <input type="text" name="lugar" value="" placeholder="Ciudad"></br>
-Telefono a contactar:<input type="number" name="telefono" value=""/></br>
-Requisito: <input type="text" name="requisito" value="" placeholder="Requisitos"></br>
-Sueldo: <input type="number" name="sueldo" value="" placeholder=""></br>
+Telefono a contactar:<input type="number" name="telefono" value="" placeholder="Telefono"/></br>
+Requisito: <input type="text" name="requisito" value="" placeholder="Requisitos" placeholder="Requisito"></br>
+Sueldo: <input type="number" name="sueldo" value="" placeholder="Sueldo"></br>
 Funciones: <input type="text" name="funciones" value="" placeholder="Trabajo a realizar"></br>
 Ofrece: <input type="text" name="ofrece" value="" placeholder="Complementos..."></br>
-Resumen: <input type="text" name="resumen" required></br>
+Resumen: <input type="text" name="resumen" placeholder="Resumen"></br>
 
 Familia: <select name="id_familia" onfocus="saber()">
 				<?php
@@ -31,17 +28,6 @@ Familia: <select name="id_familia" onfocus="saber()">
 			</select>
 			
 <input type="button"onclick="showHide()" value="Añadir"></br>
-<!--
-<div id="etiquetas" style="display:none">
-	
-		Etiquetas:<select name="etiqueta" multiple="">
-						<?php
-						foreach ($etiquetas as $etiqueta) {
-							echo '<option value="' . $etiqueta['nombre'] . '">' . $etiqueta['nombre'] . '</option>';
-						}
-						?>
-				</select></br>
-</div>-->
 <div style="border:1px solid" id="etiquetas">
 			<h3>Etiquetas</h3>       
             <div ng-controller="etiquetaCtrl" ng-repeat = "etiqueta in etiquetas | filter: {id_familia_laboral : familiaSeleccionada}">
@@ -57,14 +43,14 @@ Familia: <select name="id_familia" onfocus="saber()">
                 <input type="text" ng-model="etiquetaAng" /><button ng-click="anadirEtiqueta()">Añadir</button>
             </div>
        </div>
-Correo: <input type="email" name="correo" value=""/></br>
-Horario: <input type="text" name="horario"  value=""/></br>
-Oculto: <input type="checkbox"  name="oculto" value=""/><br/>
+Correo: <input type="email" name="correo" value="" placeholder="Correo"/></br>
+Horario: <input type="text" name="horario"  value="" placeholder="Horario"/></br>
+Oculto: <input type="checkbox"  name="oculto" value="""/><br/>
 
 
 
 <input type="submit"name="Publicar" value="Publicar"/>
-<input type="button" name="Cancelar" value="Cancelar" onclick="window.location='Resumenempresa_controller'" />
+<input type="button" name="Cancelar" value="Cancelar" onclick="window.location='Resumen_empresa_controller'" />
 <?php if (isset($mensaje)) echo $mensaje ?>
 		<?php echo validation_errors(); ?>
 </form>	

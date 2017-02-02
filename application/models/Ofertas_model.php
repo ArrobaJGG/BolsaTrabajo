@@ -14,6 +14,13 @@ class Ofertas_model extends CI_Model{
 		    }
 		    return null;
 	}
+	public function traer_familia($id_familia){
+		$sql = "select nombre from familia_laboral where id_familia_laboral = $id_familia";
+		$query = $this->db->query($sql);
+		$familia=  $query->result_array();
+		return $familia;
+		
+	}
 	public function get_ofertas($limite){
 		$sql = " SELECT * FROM oferta ORDER BY id_oferta DESC  LIMIT $limite";
 		$query = $this->db->query($sql);
