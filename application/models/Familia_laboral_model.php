@@ -51,5 +51,6 @@ class Familia_laboral_model extends CI_Model{
 		$sql ="DELETE FROM familia_laboral WHERE id_familia_laboral = '$id'";
 		return $this->db->query($sql);
 	}
+	
 }
 ?>

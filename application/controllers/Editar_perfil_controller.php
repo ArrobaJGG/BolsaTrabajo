@@ -13,7 +13,7 @@ class Editar_perfil_controller extends SuperController{
 		$this->load->library('session');
 		$this->load->library('upload');
 		$this->load->library('image_lib');
-		
+		$this->removeCache();
 	}
 
 	
@@ -82,7 +82,7 @@ class Editar_perfil_controller extends SuperController{
 						"nivelescrito" => $nivelescrito,
 						"nivelhablado" => $nivelhablado
 						);
-					$parametros_familia= array( "familia" => $familia,
+					$parametros_familia_alumno= array( "familia" => $familia,
 						"id_login" => $id_login);
 					$parametros_alumno_idioma= array( "idioma" => $idioma);
 					
@@ -106,6 +106,7 @@ class Editar_perfil_controller extends SuperController{
     				$config['image_library'] = 'gd2';
      				$config['source_image'] = $img_full_path;
      				$config['maintain_ratio'] = TRUE;
+					$config['create_thumb']  = TRUE; //crea miniatura 
      				$config['overwrite'] = TRUE;
      				$config['width'] = 275;
      				$config['height'] = 250;
@@ -148,7 +149,7 @@ class Editar_perfil_controller extends SuperController{
 }
 
 
-//redirect('/resumenalumno_controller');
+redirect('/resumen_alumno_controller');
 }
 $datos_alumnos = $this->alumno_model->id_login($id_login);
 $datos_alumnos['cursos'] = $this->alumno_model->alumno_curso($id_login);
@@ -162,7 +163,6 @@ $data['niveleshablados']=$this->idioma_model->nivelhablado();
 $data['nivelesescritos']=$this->idioma_model->nivelescrito();
 $data['familias']=$this->familia_laboral_model->familia();
 $data['alumnos_cursos']=$this->curso_model->get_curso($id_login);
-
 
 $this->load->view("includes/header",$data);
 $this->load->view("Editar_perfil_view", $datos_alumnos);
