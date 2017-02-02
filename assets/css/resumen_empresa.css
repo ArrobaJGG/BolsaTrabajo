@@ -1,9 +1,16 @@
-#cuadro{
+.cuadro{
 	border: black 1px solid;
-	background-color: black;
+	height: 40%;
+	width: 40%;
+	margin: auto;
 }
 
-#cuadro h1{
+.cuadro h1{
 	border: green 1px solid;
 }
-
+#oferta{
+	width: 80%;
+}
+#botones{
+	margin-left:45%;
+}

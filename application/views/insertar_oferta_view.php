@@ -17,7 +17,7 @@ Sueldo: <input type="number" name="sueldo" value="" placeholder="Sueldo"></br>
 Funciones: <input type="text" name="funciones" value="" placeholder="Trabajo a realizar"></br>
 Ofrece: <input type="text" name="ofrece" value="" placeholder="Complementos..."></br>
 Resumen: <input type="text" name="resumen" placeholder="Resumen"></br>
-
+Duracion del contrato: <input type="text" name="duracion" value="" placeholder="Duracion" /></br>
 Familia: <select name="id_familia" onfocus="saber()">
 				<?php
 				foreach ($familias as $familia) {
