@@ -11,7 +11,7 @@ $this->load->helper('form');
 	<h2>Requisitos: </h2></br>
 	<p><?php if ($requisitos==null){echo "";}else{echo $requisitos;}  ?></p></br>
 	<?php //TODO cambiar el nombre porque aparece el id ?>
-	<p>Familia Laboral: <?php echo $id_familia ?></p>
+	<p>Familia Laboral: <?php echo $nombre_familia ?></p>
 	
 	<h2>Contacto: </h2>
 	<p>Empresa: <?php if ($nombre_empresa==null){echo "";}else{echo $nombre_empresa;} ?> </p>
@@ -23,5 +23,6 @@ $this->load->helper('form');
 	<p>Salario: <?php if ($sueldo==null){echo "";}else{echo $sueldo;}   ?></p>
 	<p>Lugar: <?php if ($lugar==null){echo "";}else{echo $lugar;} ?></p>
 	<p>Fecha Expiracion: <?php  if ($fecha_expiracion=="0000-00-00"){echo "Sin fecha final";}else{ echo $fecha_expiracion;} ?></p>
+	<p>Duracion del contrato: </p>
 	<input type="button" value="Volver" onclick="window.location='../../Resumen_empresa_controller'">
 </div>

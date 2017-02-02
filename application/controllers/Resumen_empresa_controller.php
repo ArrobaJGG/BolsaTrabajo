@@ -26,7 +26,7 @@ class Resumen_empresa_controller extends CI_Controller{
 				//echo($this->session->$correo);
  				$data['libreria'] = array();
  				$data["titulo"]="Resumen Empresa";
-				$data['css'] = array("/BolsaTrabajo/assets/css/cabecera.css");
+				$data['css'] = array("/BolsaTrabajo/assets/css/cabecera.css","/BolsaTrabajo/assets/css/resumen_empresa.css");
 				$data["javascript"]="assets/js/resumen_empresa.js";
 				$this->load->view("includes/header",$data);
 				$this->load->view('resumen_empresa_view', $ofertas);

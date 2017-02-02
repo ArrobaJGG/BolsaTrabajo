@@ -14,6 +14,13 @@ class Ofertas_model extends CI_Model{
 		    }
 		    return null;
 	}
+	public function traer_familia($id_familia){
+		$sql = "select nombre from familia_laboral where id_familia_laboral = $id_familia";
+		$query = $this->db->query($sql);
+		$familia=  $query->result_array();
+		return $familia;
+		
+	}
 	public function get_ofertas($limite){
 		$sql = " SELECT * FROM oferta ORDER BY id_oferta DESC  LIMIT $limite";
 		$query = $this->db->query($sql);
@@ -39,7 +46,7 @@ class Ofertas_model extends CI_Model{
 
 	
 	 public function insertar($parametros,$id_login){
-	 	 $sql = "INSERT INTO oferta SET id_login=$id_login, id_familia='$parametros[id_familia]', nombre_empresa='$parametros[nombre]', fecha_creacion='$parametros[fechac]' , fecha_expiracion='$parametros[fechae]', lugar='$parametros[lugar]', resumen='$parametros[resumen]', funciones='$parametros[funciones]', ofrece='$parametros[ofrece]', sueldo='$parametros[sueldo]', requisitos='$parametros[requisito]', horario='$parametros[horario]', titulo='$parametros[titulo]', correo='$parametros[correo]', telefono='$parametros[telefono]', oculto='$parametros[oculto]'";
+	 	 $sql = "INSERT INTO oferta SET id_login=$id_login, id_familia='$parametros[id_familia]', nombre_empresa='$parametros[nombre]', fecha_creacion='$parametros[fechac]' , fecha_expiracion='$parametros[fechae]', lugar='$parametros[lugar]', resumen='$parametros[resumen]', funciones='$parametros[funciones]', ofrece='$parametros[ofrece]', sueldo='$parametros[sueldo]', requisitos='$parametros[requisito]', horario='$parametros[horario]', titulo='$parametros[titulo]', correo='$parametros[correo]', telefono='$parametros[telefono]', oculto='$parametros[oculto]', duracion='$parametros[duracion]'";
 	 	 $query = $this->db->query($sql);
 	 }
 	

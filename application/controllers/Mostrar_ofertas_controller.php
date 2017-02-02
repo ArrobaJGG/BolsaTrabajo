@@ -14,7 +14,9 @@
 	//TODO cuando se mete un id que no corresponde peta
 	public function index($id_oferta){
 					$datos_oferta = $this->Ofertas_model->datos_una_oferta($id_oferta);
-					//$familia = $this->Ofertas_model->familia($id_familia);
+					$id_familia = $datos_oferta->id_familia;
+					$familia = $this->Ofertas_model->traer_familia($id_familia);
+					$data['nombre_familia'] = $familia[0]['nombre'];
 					$data['familias'] = $this->Familia_laboral_model->familia();	
 					$data['etiquetas'] = $this->Ofertas_model->etiqueta();
 					$data['libreria'] = array();

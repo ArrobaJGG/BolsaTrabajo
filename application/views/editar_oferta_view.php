@@ -15,8 +15,8 @@ Sueldo: <input type="number" name="sueldo" value="<?php if ($sueldo==null){echo 
 Funciones: <input type="text" name="funciones" value="<?php if ($funciones==null){echo "";}else{echo $funciones;}  ?>" placeholder="Trabajo a realizar"></br>
 Ofrece: <input type="text" name="ofrece" value="<?php if ($ofrece==null){echo "";}else{echo $ofrece;}  ?>" placeholder="Complementos..."></br>
 Resumen: <input type="text" name="resumen" value="<?php if ($resumen==null){echo "";}else{echo $resumen;}   ?>" required></br>
-
-Familia: <select name="id_familia"> onfocus="saber()">
+Duracion del contrato: <input type="text" name="duracion" value="<?php if ($duracion==null){echo "";}else{echo $duracion;}   ?>" placeholder="Duracion" /></br>
+Familia: <select name="id_familia"> <!--onfocus="saber()">-->
 				<?php
 				foreach ($familias as $familia) {
 					echo '<option value="' . $familia['id_familia_laboral'] . '">' . $familia['nombre'] . '</option>';
@@ -25,7 +25,7 @@ Familia: <select name="id_familia"> onfocus="saber()">
 				?>
 			</select>
 			
-<input type="button"onclick="showHide()" value="Añadir"></br>
+<!--<input type="button"onclick="showHide()" value="Añadir"></br>-->
 Correo: <input type="email" name="correo" value="<?php if ($correo==null){echo "";}else{echo $correo;}   ?>" placeholder="Correo"/></br>
 Horario: <input type="text" name="horario"  value="<?php if ($horario==null){echo "";}else{echo $horario;}   ?>" placeholder="Horario"/></br>
 Oculto: <input type="checkbox"  name="oculto" value=""/><br/>

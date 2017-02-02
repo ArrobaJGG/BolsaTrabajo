@@ -31,6 +31,7 @@ public function index(){
 						$this->form_validation->set_rules('funciones', 'funciones', 'min_length[3]');
 						$this->form_validation->set_rules('ofrece', 'ofrece', 'min_length[3]');
 						$this->form_validation->set_rules('resumen', 'resumen', 'required|min_length[3]');
+						$this->form_validation->set_rules('duracion', 'duracion');
 						$this->form_validation->set_rules('id_familia', 'id_familia');
 						$this->form_validation->set_rules('etiquetas', 'etiquetas');
 						$this->form_validation->set_rules('correo', 'correo', 'valid_email');
@@ -63,6 +64,7 @@ public function index(){
 							$correo  = ($this->input->post('correo')) ? $this->input->post('correo') : null ;
 							$horario = ($this->input->post('horario')) ? $this->input->post('horario') : null ;
 							$oculto = ($this->input->post('oculto')) ? $this->input->post('oculto') : FALSE;
+							$duracion = ($this->input->post('duracion')) ? $this->input->post('duracion') : null;
 							
 							$parametros = array ( 
 													"titulo" => $titulo,
@@ -81,6 +83,7 @@ public function index(){
 													"resumen" => $resumen,
 													"oculto" => $oculto,
 													"fechac" => date('Y/m/d'),
+													"duracion" => $duracion
 													
 													);
 						$insertaroferta = $this->Ofertas_model->insertar($parametros,$id_login);
