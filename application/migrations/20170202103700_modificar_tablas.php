@@ -7,7 +7,7 @@ class Migration_modificar_tablas extends CI_Migration {
 	public function up()
     {
 		$this->db->query("ALTER TABLE oferta ADD duracion VARCHAR(100)");
-		$this->db->query("ALTER TABLE alumno ADD validado BOOLEAN");
+		$this->db->query("ALTER TABLE alumno ADD validado BOOLEAN DEFAULT FALSE");
 	}
 	public function down()
     {

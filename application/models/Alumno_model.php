@@ -41,7 +41,7 @@ class Alumno_model extends CI_Model{
 	}
 
 	public function get_alumnos($limite = PHP_INT_MAX,$desplazamiento = 0){
-		$sql = "SELECT * FROM alumno WHERE estado = true ORDER BY id_login DESC LIMIT $desplazamiento, $limite";
+		$sql = "SELECT * FROM alumno WHERE validado = true ORDER BY id_login DESC LIMIT $desplazamiento, $limite";
 		$query = $this->db->query($sql);
 		$devolver = isset($query) ? $query->result_array() : false;
 		return $devolver;
