@@ -1,7 +1,7 @@
 .cuadro{
 	border: black 1px solid;
-	height: 40%;
-	width: 40%;
+	height: 55%;
+	width: 55%;
 	margin: auto;
 	/*background-color: #259B51;*/
 	background: rgba(37, 155, 81,0.2);
@@ -9,7 +9,7 @@
 }
 
 .cuadro h1{
-	border: green 1px solid;
+	border: green 2px solid;
 }
 #oferta{
 	width: 80%;
@@ -45,4 +45,6 @@
   color: #FFFFFF;
   border-color: #FBFFAD;
   }
-  
+  #grande{
+  	margin-bottom: 15%;
+  }
