@@ -1,9 +1,38 @@
-<div class="divNgView" style="border: 1px solid black">
-	<div class="elementoRepetible">
-		<div  ng-repeat="alumno in alumnos" ng-controller="borrarAlumnoCtrl">
+<div class="divNgView">
+	<div class="titulo">
+		<h4>Dar baja Alumno</h4>
+		<div class="paginas">
+			<div>
+				<i ng-click="anteriorPagina()" ng-show="pagina>0"class="fa fa-arrow-left"></i>
+			</div>
+			<div>pagina {{pagina+1}} de {{numeroPaginas}}</div>
+			<div>
+				<i ng-show="pagina<numeroPaginas-1" ng-click="siguientePagina()" class="fa fa-arrow-right"></i>
+			</div>
+		</div>
+		
+	</div>
+	
+	<div class="elementoRepetible alumno">
+		<div class="elementoAlumno animate-repeat-horizontal" ng-controller="borrarAlumnoCtrl" name="buscar">
+			<div class="iconoAlumno">
+				<i class="fa fa-search">Buscar</i>
+			</div>
+			<div class="buscadorAlumno">
+				<span>Nombre:</span> <input ng-model="nombreAng" input type="text"><br>
+			</div>
+			<div class="buscadorAlumno">
+				<span>Apellidos: </span><input ng-model="apellidoAng" type="text"><br>
+			</div>
+			
+			<span ng-show="usuarioBorrado"><br>{{mensaje}}</span>
+		</div>
+		<div class="elementoAlumno animate-repeat-horizontal" ng-repeat="alumno in alumnos" ng-controller="borrarAlumnoCtrl">
+			<div class="iconoAlumno">
+				<i class="fa fa-times" ng-click="borrar(alumnos,$index)"></i>
+			</div>
 			Nombre: {{alumno.nombre}}<br>
-			Apellido: {{alumno.apellidos}}<br>
-			DNI: {{alumno.dni}}<button ng-click="borrar($event)" value="{{alumno.id_login}}">Eliminar</button>
+			Apellidos: {{alumno.apellidos}}<br>
 			<span ng-show="usuarioBorrado"><br>{{mensaje}}</span>
 		</div>
 	</div>

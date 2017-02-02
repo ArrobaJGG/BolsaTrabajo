@@ -60,8 +60,10 @@ class Notificaciones_controller extends CI_Controller{
 		$nuevas_altas = $this->empresa_model->get_nuevas_altas($limit) ? $this->empresa_model->get_nuevas_altas($limit) : array();
 		echo json_encode($nuevas_altas);
 	}
-	protected function alumnos($limite=PHP_MAX_INT){
-		$alumnos = $this->alumno_model->get_alumnos($limite)? $this->alumno_model->get_alumnos($limite):array();
+	protected function alumnos($limite=PHP_MAX_INT,$offset = 0){
+  		$offset =  $this->uri->segment(5);
+		$offset = $offset+0;//TODO mirra esto
+		$alumnos = $this->alumno_model->get_alumnos($limite,$offset)? $this->alumno_model->get_alumnos($limite,$offset):array();
 		echo json_encode($alumnos);
 	}
 	protected function borrar_alumno(){
@@ -565,6 +567,10 @@ class Notificaciones_controller extends CI_Controller{
 			$mensajes['error'] = true;
 		}
 		echo json_encode($mensajes);
+	}
+	protected function numero_alumnos(){
+		$numero = $this->alumno_model->numero_alumnos_totales();
+		echo $numero;
 	}
 }
 ?>

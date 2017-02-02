@@ -71,10 +71,12 @@ a{
 	min-width:300px;
 	text-align:center;
 	margin:2px;
+
 	
 }
 .titulo{
 	border-bottom: 5px solid;
+	width:100%;
 	text-align:center;
 	background: rgba(255,255,255,1);
 	-moz-linear-border-image: -moz-linear-gradient(left, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 7%, rgba(0,172,212,1) 51%, rgba(255,255,255,1) 93%, rgba(255,255,255,1) 100%);
@@ -91,12 +93,16 @@ a{
 	position:relative;
 	justify-content:space-around;
 }
-.elementoRepetible >div{
+.elementoRepetible >div,.elementoRepetible >form{
 	margin-top:1px;
 	padding-bottom:3px;
 	border: 4px solid;
 }
-.elementoRepetible> div:nth-child(8n+1){
+.elementoRepetible>form{
+	background-color: #63B32E;
+	border-color: #489317;
+}
+.elementoRepetible> div:nth-child(8n+1),.elementoRepetible >form:nth-child(8n+1){
 	background-color: #63B32E;
 	border-color: #489317;
 }
@@ -161,6 +167,74 @@ i:hover{
   max-height:200px;
 }
 .animate-repeat.ng-enter-stagger {
+  transition-delay: 0.3s;
+  animation-delay: 0.3s;
+}
+
+/**Dar baja Alumno**/
+.alumno{
+	display:flex;
+	flex-wrap:wrap;
+	width:100%;
+}
+.elementoAlumno{
+	flex:1 1;
+	min-width:250px;
+	max-width: 100%;
+}
+.iconoAlumno{
+	width:100%;
+	display:flex;
+	justify-content:flex-end;
+}
+.animate-repeat-horizontal {
+  line-height:30px;
+  list-style:none;
+  box-sizing:border-box;
+}
+form.elementoAlumno{
+	display: flex;
+	flex-wrap:wrap;
+	padding:3px;
+	border: 4px solid;
+}
+.buscadorAlumno{
+	width:100%;
+	display:flex;
+}
+.buscadorAlumno > *{
+	flex:1;
+	border:none;
+	background-color:#63B32E;
+}
+.buscadorAlumno > input{
+	border:1px solid #489317;
+}
+.paginas{
+	display:flex;
+	justify-content:space-between;
+	width:100%;
+}
+.animate-repeat-horizontal.ng-move,
+.animate-repeat-horizontal.ng-enter,
+.animate-repeat-horizontal.ng-leave {
+  transition:all linear 0.3s;
+}
+
+.animate-repeat-horizontal.ng-leave.ng-leave-active,
+.animate-repeat-horizontal.ng-move,
+.animate-repeat-horizontal.ng-enter {
+  opacity:0;
+  max-width:0;
+}
+
+.animate-repeat-horizontal.ng-leave,
+.animate-repeat-horizontal.ng-move.ng-move-active,
+.animate-repeat-horizontal.ng-enter.ng-enter-active {
+  opacity:1;
+  max-width:800px;
+}
+.animate-repeat-horizontal.ng-enter-stagger {
   transition-delay: 0.3s;
   animation-delay: 0.3s;
 }

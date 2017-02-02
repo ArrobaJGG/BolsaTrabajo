@@ -47,13 +47,14 @@ myApp.controller('notiCtrl', ['$scope', '$http', function ($scope, $http) {
 	$scope.ir = function(){
 		window.location.assign('#!/notificaciones');
 	};
+	$scope.remove = function(array, index){
+    	array.splice(index, 1);
+	};
 }]);
 myApp.controller('notificacionesCtrl', ['$scope', '$http', function ($scope, $http) {
 	$scope.estaCargando = true;
 	$scope.estaCargandoNuevasAltas = true;
-	$scope.remove = function(array, index){
-    	array.splice(index, 1);
-	};
+	
 	$scope.actualizarReportes = function(){
 		$http.get('/BolsaTrabajo/notificaciones_controller/validar/reportes')
 		.then(
@@ -147,27 +148,57 @@ myApp.controller('darAltaUnaEmpresaCtrl',['$scope','$http',function ($scope,$htt
 	};
 }]);
 myApp.controller('darBajaAlumnoCtrl',['$scope','$http',function($scope,$http){
+	$scope.buscar = function(){
+		$scope.mensaje="cargando";
+		$scope.pagina = 0;
+	};
+	$scope.pagina = 0;
 	$scope.usuarioBorrado = false;
-	$http.get('/BolsaTrabajo/notificaciones_controller/validar/alumnos/10')
+	$scope.numeroPaginas = 0;
+	$scope.siguientePagina = function(){
+		$scope.pagina++;
+		$scope.get_alumnos();
+	};
+	$scope.anteriorPagina = function(){
+		$scope.pagina--;
+		$scope.get_alumnos();
+	};
+	$http.get('/BolsaTrabajo/notificaciones_controller/validar/numero_alumnos')
+	.then(
+		//TODO volver a poner a 10 al terminar las pruebas
+		function correcto(response){
+			$scope.numeroPaginas = Math.ceil(response.data/2);
+		}
+		,function incorrecto(response){
+			console.log(response.data);
+		}
+	);
+	$scope.get_alumnos = function(){
+		var aplazado = $scope.pagina*2;
+		$http.get('/BolsaTrabajo/notificaciones_controller/validar/alumnos/2/'+aplazado)
 		.then(
 			function successCallback(response){
-				console.log(response.data);
+				//console.log(response.data);
 				$scope.alumnos = response.data;
 			}
 			,function errorCallback(response){
 				console.log(response.data);
 			}
 		);
+	};
+	$scope.get_alumnos($scope.pagina);
 }]);
 myApp.controller('borrarAlumnoCtrl',['$scope','$http',function($scope,$http){
-	$scope.borrar = function($event){
+	$scope.borrar = function(array,index){
 		$scope.mensaje = "cargando";
 		$scope.usuarioBorrado = true;
-		$http.post('/BolsaTrabajo/notificaciones_controller/validar/borrar_alumno',"id="+$event.target.value,{'headers':{'content-type': 'application/x-www-form-urlencoded'}})
+		$http.post('/BolsaTrabajo/notificaciones_controller/validar/borrar_alumno',
+		"id="+$scope.$parent.alumno.id_login,
+		{'headers':{'content-type': 'application/x-www-form-urlencoded'}})
 		.then(
 			function successCallback(response){
 				$scope.mensaje = response.data.mensaje;
-				if(!response.data.error) $event.target.parentElement.remove();
+				if(response.data.error) $scope.remove(array,index);
 			},
 			function errorCallback(response) {
 				    // called asynchronously if an error occurs
@@ -891,5 +922,4 @@ myApp.controller('categoriaCtrl',['$scope','$http',function($scope,$http){
   		);
   	};
 }]);
-
 

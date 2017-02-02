@@ -127,5 +127,12 @@ class Alumno_model extends CI_Model{
 		$sql = "UPDATE alumno SET perfil_oculto = '$perfil' WHERE id_login = '$id'";
 		return $this->db->query($sql);
 	}
+	public function numero_alumnos_totales(){
+		$sql = "SELECT COUNT(*) numero FROM ALUMNO";
+		$query = $this->db->query($sql);
+        $row = $query->row();
+        $devolver = $row ? $row->numero : false;
+        return $devolver;
+	}
 }
 ?>

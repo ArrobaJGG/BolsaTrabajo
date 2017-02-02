@@ -50,7 +50,7 @@ class Login_model extends CI_Model{
 		return $this->db->query($sql);
 	}
 	public function validar_login($correo){
-		$sql = "UPDATE login SET validado = 1 WHERE correo = '$correo'";
+		$sql = "UPDATE login SET validado = true WHERE correo = '$correo'";
 		return $this->db->query($sql);
 	}
 	public function existe_correo($hash){
