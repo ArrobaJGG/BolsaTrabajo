@@ -54,8 +54,9 @@ class Registro_controller extends CI_Controller {
 			}
 
 		}
-		$data['javascript'] = array('assets/js/registro_controller.js');
+		$data['javascript'] = '/assets/js/registro_controller.js';
 		$data['libreria'] = array();
+        $data['css'] = array("/BolsaTrabajo/assets/css/cabecera.css");
 		$data['titulo'] = "Registrarse";
 		$this -> load -> view("includes/header", $data);
 		$this -> load -> view("registro_view", $informacion);

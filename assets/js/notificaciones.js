@@ -1,6 +1,6 @@
 /*/
 alert('yyy');//*/
-angular.module("myDirectivas",[]);
+angular.module("myDirectivas",['ngAnimate']);
 var myApp = angular.module("my-app", ['myDirectivas','ngRoute']);
 
 myApp.config(function($routeProvider) {
@@ -43,6 +43,11 @@ myApp.config(function($routeProvider) {
     }
     );
 });
+myApp.controller('notiCtrl', ['$scope', '$http', function ($scope, $http) {
+	$scope.ir = function(){
+		window.location.assign('#!/notificaciones');
+	};
+}]);
 myApp.controller('notificacionesCtrl', ['$scope', '$http', function ($scope, $http) {
 	$scope.estaCargando = true;
 	$scope.estaCargandoNuevasAltas = true;
@@ -54,6 +59,9 @@ myApp.controller('notificacionesCtrl', ['$scope', '$http', function ($scope, $ht
 			    // when the response is available
 			    //console.log(response);
 			    $scope.reportes = response.data;
+			    if($scope.reportes.length ==0){
+					$scope.mensajeReportes = "No hay reportes";
+				}
 			    $scope.estaCargando = false;
 		    },
 			function errorCallback(response) {
@@ -64,13 +72,18 @@ myApp.controller('notificacionesCtrl', ['$scope', '$http', function ($scope, $ht
 	  		});
 	};
 	$scope.actualizarReportes();
-	$http.get('/BolsaTrabajo/notificaciones_controller/validar/nuevas_altas/10')
+	
+	$scope.actualizarNuevasAltas = function(){
+		$http.get('/BolsaTrabajo/notificaciones_controller/validar/nuevas_altas/10')
 		.then(
 			function successCallback(response) {
 			    // this callback will be called asynchronously
 			    // when the response is available
 			   // console.log(response);
 			    $scope.nuevasAltas = response.data;
+			    if($scope.nuevasAltas.length ==0){
+					$scope.mensajeNuevasAltas = "No hay nuevas altas";
+				}
 			    $scope.estaCargandoNuevasAltas = false;
 		    },
 	     	function errorCallback(response) {
@@ -79,6 +92,9 @@ myApp.controller('notificacionesCtrl', ['$scope', '$http', function ($scope, $ht
 			    console.log('hola');
 			    $scope.estaCargandoNuevasAltas = true;
 	  		});
+	};
+	$scope.actualizarNuevasAltas();
+	
  
 }]);
 myApp.controller('darAltaUnAlumnoCtrl',['$scope','$http',function ($scope,$http){
@@ -724,11 +740,12 @@ myApp.controller('nuevaAltaCtrl',['$scope','$http',function($scope,$http){
 	$scope.validarEmpresa = function($event){
 		$scope.mensaje = "Cargando...";
 		$http.post('/BolsaTrabajo/notificaciones_controller/validar/validar_empresa'
-		,"id="+$event.target.value
+		,"id="+$scope.$parent.nueva.id_login
 		,{'headers':{'content-type': 'application/x-www-form-urlencoded'}})
 		.then(
 			function successCallback(response){
 				$scope.mensaje = response.data.mensaje;
+				$scope.actualizarNuevasAltas();
 			},
 			function errorCallback(response) {
 			    // called asynchronously if an error occurs
@@ -740,7 +757,7 @@ myApp.controller('nuevaAltaCtrl',['$scope','$http',function($scope,$http){
 	};
 	$scope.borrarEmpresa = function($event){
 		$http.post('/BolsaTrabajo/notificaciones_controller/validar/borrar_empresa'
-		,"id="+$event.target.value
+		,"id="+$scope.$parent.nueva.id_login
 		,{'headers':{'content-type': 'application/x-www-form-urlencoded'}})
 		.then(
 			function successCallback(response){
@@ -767,7 +784,8 @@ myApp.controller('reporteCtrl',['$scope','$http',function($scope,$http){
 			function successCallback(response){
 				$scope.mensaje = response.data.mensaje;
 				if(response.data.error ==false){
-					$event.target.parentElement.remove();
+					//TODO mirar el destroy 
+					$scope.$destroy();
 				}
 			},
 			function errorCallback(response) {
@@ -787,6 +805,7 @@ myApp.controller('reporteCtrl',['$scope','$http',function($scope,$http){
 		.then(
 			function successCallback(response){
 				$scope.mensaje = response.data.mensaje;
+				$scope.actualizarReportes();
 			},
 			function errorCallback(response) {
 			    // called asynchronously if an error occurs
