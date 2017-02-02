@@ -11,10 +11,21 @@ class Profesor_model extends CI_Model{
 				('$datos[id_login]','$datos[nombre]','$datos[apellidos]','$datos[id_familia_laboral]','$datos[activo]')";
 		return $this->db->query($sql);
 	}	
-	public function get_profesores($limit){
-		$sql = "SELECT * FROM profesor ORDER BY id_login DESC LIMIT $limit";
+	public function get_profesores($datos){
+		$sql = "SELECT * FROM profesor,login WHERE
+              profesor.id_login = login.id_login
+              AND nombre COLLATE utf8_general_ci LIKE '%$datos[nombre]%' COLLATE utf8_general_ci 
+              AND correo COLLATE utf8_general_ci LIKE '%$datos[correo]%' COLLATE utf8_general_ci
+              AND validado = true 
+          ORDER BY profesor.id_login DESC LIMIT $datos[offset], $datos[limite]";
 		$query = $this->db->query($sql);
-		$devolver = isset($query) ? $query->result_array() : false;
+		$devolver['profesores'] = isset($query) ? $query->result_array() : false;
+        $devolver['numero_lineas'] = $this->db->query("SELECT count(profesor.id_login) numero_lineas FROM profesor,login WHERE
+              profesor.id_login = login.id_login
+              AND nombre COLLATE utf8_general_ci LIKE '%$datos[nombre]%' COLLATE utf8_general_ci 
+              AND correo COLLATE utf8_general_ci LIKE '%$datos[correo]%' COLLATE utf8_general_ci
+              AND validado = true 
+          ORDER BY profesor.id_login")->row()->numero_lineas;
 		return $devolver;
 	}
 	public function borrar_profesor($id){

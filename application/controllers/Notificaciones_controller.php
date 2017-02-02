@@ -136,26 +136,36 @@ class Notificaciones_controller extends CI_Controller{
 		echo json_encode($familias);
 	}
 	protected function profesores($limite = PHP_MAX_INT){
-		$profesores = $this->profesor_model->get_profesores($limite)? $this->profesor_model->get_profesores($limite):array();
-		foreach ($profesores as $key => $value) {
-			$profesores[$key]['correo'] = $this->login_model->get_correo($value['id_login']);
-			$profesores[$key]['estado'] = $this->login_model->esta_validado($profesores[$key]['correo']);
-		}
+	    $rest_json = file_get_contents("php://input");
+        $_POST = json_decode($rest_json, true);
+        $limite = $this->input->post('numero_alumnos');
+        $offset = $this->input->post('desplazamiento');
+        $nombre = $this->input->post('nombre') ? $this->input->post('nombre') : '%';
+        $correo = $this->input->post('correo') ? $this->input->post('correo')  : '%';
+        $datos = array(
+            'nombre' => $nombre,
+            'correo' => $correo,
+            'limite' => $limite,
+            'offset' => $offset
+        );
+		$profesores = $this->profesor_model->get_profesores($datos)? $this->profesor_model->get_profesores($datos):array();
 		echo json_encode($profesores);
 	}
 	protected function borrar_profesor(){
 		$this->form_validation->set_rules('id', 'id', 'numeric|required|trim');
 		$id = $this->input->post('id');
+        $mensaje['error'] = false;
 		if ($this -> form_validation -> run() != false){
 		    $this->ofertas_model->borrar_ofertas_id_login($id);
 			$this->profesor_model->borrar_profesor($id);
 			$this->login_model->borrar_usuario($id);
-			$mensaje = "Alumno borrado correctamente";
+			$mensaje['mensaje'] = "mensaje";
 		}
 		else{
-			$mensaje = "Datos invalidos";
+			$mensaje['mensaje'] = "Datos invalidos";
+            $mensaje['error'] = true;
 		}
-		echo $mensaje;
+		echo json_encode($mensaje);
 	}
 	protected function get_idiomas(){
 		$idiomas = $this->idioma_model->idioma();
