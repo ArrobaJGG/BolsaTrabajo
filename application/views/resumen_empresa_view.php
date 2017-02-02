@@ -15,7 +15,7 @@ $this->load->helper('form');
 				<h3> <a href='./Mostrar_ofertas_controller/index/<?php echo $ofertas[0]['id_oferta']; ?>'"><?php echo $ofertas[0]['titulo']; ?></a></h3>
 				<p><?php  echo $ofertas[0]['resumen']; ?></p>
 										<!--index/<?php echo $ofertas[0]['id_oferta']; ?>'-->
-				<input type="button" value="Editar Oferta" onclick="window.location='./Editar_oferta_controller/index/<?php echo $ofertas[0]['id_oferta']; ?>'" />
+				<input type="button"class="button" value="Editar Oferta" onclick="window.location='./Editar_oferta_controller/index/<?php echo $ofertas[0]['id_oferta']; ?>'" />
 				
 			
 			<?php } else{ ?>
@@ -29,8 +29,8 @@ $this->load->helper('form');
 	</div>
 	<div id="botones">
 		
-		<input type="button" value="Ver Mas" ng-click="vermas()">
-		<input type="button"  value="Instertar Oferta" onclick="window.location='Insertar_oferta_controller';" >
+		<input type="button" class="button" value="Ver Mas" ng-click="vermas()">
+		<input type="button"  class="button" value="Instertar Oferta" onclick="window.location='Insertar_oferta_controller';" >
 	
 	</div>
 </div>

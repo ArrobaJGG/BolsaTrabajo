@@ -39,6 +39,7 @@ var myApp = angular.module("my-app",[]);
 						midiv.setAttribute("class","cuadro");
 						
 						boton.setAttribute("value","Editar Oferta");
+						boton.setAttribute("class", "button");
 						
 						boton.setAttribute("onclick", "window.location='./Editar_oferta_controller/index/"+$scope.ofertas[contador].id_oferta+"'");
 						
