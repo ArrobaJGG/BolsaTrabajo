@@ -5,7 +5,7 @@ var myApp = angular.module("my-app",[]);
 			myApp.controller('nuevaoferta',['$scope','$http',function($scope,$http){
 			
 			var indice = 0;
-			$http.get('/BolsaTrabajo/Resumenempresa_controller/traerofertas')
+			$http.get('/BolsaTrabajo/Resumen_empresa_controller/traerofertas')
 				.then(
 					function successCallback(response){
 						console.log(response.data);

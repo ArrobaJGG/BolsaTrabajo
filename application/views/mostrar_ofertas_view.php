@@ -23,5 +23,5 @@ $this->load->helper('form');
 	<p>Salario: <?php if ($sueldo==null){echo "";}else{echo $sueldo;}   ?></p>
 	<p>Lugar: <?php if ($lugar==null){echo "";}else{echo $lugar;} ?></p>
 	<p>Fecha Expiracion: <?php  if ($fecha_expiracion=="0000-00-00"){echo "Sin fecha final";}else{ echo $fecha_expiracion;} ?></p>
-	<input type="button" value="Volver" onclick="window.location='../../Resumenempresa_controller'">
+	<input type="button" value="Volver" onclick="window.location='../../Resumen_empresa_controller'">
 </div>

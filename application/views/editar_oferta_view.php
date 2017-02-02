@@ -32,7 +32,7 @@ Oculto: <input type="checkbox"  name="oculto" value=""/><br/>
 
 
 <input type="submit" name="Actualizar" value="Actualizar" />
-<input type="button" name="Cancelar" value="Cancelar" onclick="window.location='../../Resumenempresa_controller'" />
+<input type="button" name="Cancelar" value="Cancelar" onclick="window.location='../../Resumen_empresa_controller'" />
 <?php if (isset($mensaje)) echo $mensaje ?>
 		<?php echo validation_errors(); ?>
 </form>	

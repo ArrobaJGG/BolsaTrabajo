@@ -84,13 +84,14 @@ public function index(){
 													
 													);
 						$insertaroferta = $this->Ofertas_model->insertar($parametros,$id_login);
-						redirect('/Resumenempresa_controller');
+						redirect('/Resumen_empresa_controller');
 						}
 				
 				
 				$data['libreria'] = array();
 				$data['titulo'] = "Insertar Oferta";
 				$data["javascript"]="assets/js/Insertar_oferta.js";
+				$data['css'] = array("/BolsaTrabajo/assets/css/cabecera.css");
 				$this->load->view("includes/header",$data);
 				$this->load->view("Insertar_oferta_view",$data);
 				$this->load->view("includes/footer",$data);

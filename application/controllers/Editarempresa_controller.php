@@ -95,6 +95,7 @@ public function index(){
 				//echo($this->session->$correo);
  				$data['libreria'] = array();
  				$data["titulo"]="Editar Empresa";
+				$data['css'] = array("/BolsaTrabajo/assets/css/cabecera.css");
 				$data["javascript"]="assets/js/editar_empresa.js";
 				$this->load->view("includes/header",$data);
 				$this->load->view("editarempresa_view",$datos_empresa);

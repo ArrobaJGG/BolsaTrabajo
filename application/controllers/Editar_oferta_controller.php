@@ -108,7 +108,7 @@ $this->load->library('form_validation');
 													
 													);
 									$actualizardatos = $this->Ofertas_model->actualizar($parametros,$id_login);
-									redirect('../../Resumenempresa_controller');
+									redirect('../../Resumen_empresa_controller');
 						}
 		
 	}
