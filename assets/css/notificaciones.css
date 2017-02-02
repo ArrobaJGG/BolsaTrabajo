@@ -27,6 +27,7 @@ a{
     transition: height 0.5s;
     height:70px;
 	max-height:auto;
+	/*border:1px solid black;*/
 }
 .contenedorElementos{
 	-webkit-transition: height 0.5s; /* Safari */
@@ -74,6 +75,7 @@ a{
 }
 .titulo{
 	border-bottom: 5px solid;
+	text-align:center;
 	background: rgba(255,255,255,1);
 	-moz-linear-border-image: -moz-linear-gradient(left, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 7%, rgba(0,172,212,1) 51%, rgba(255,255,255,1) 93%, rgba(255,255,255,1) 100%);
 	-webkit-border-image: -webkit-gradient(left top, right top, color-stop(0%, rgba(255,255,255,1)), color-stop(0%, rgba(255,255,255,1)), color-stop(7%, rgba(255,255,255,1)), color-stop(51%, rgba(0,172,212,1)), color-stop(93%, rgba(255,255,255,1)), color-stop(100%, rgba(255,255,255,1)));
@@ -86,38 +88,49 @@ a{
 }
 .iconos{
 	display:flex;
+	position:relative;
 	justify-content:space-around;
 }
-.elementoNotificacion div{
+.elementoRepetible >div{
 	margin-top:1px;
 	padding-bottom:3px;
+	border: 4px solid;
 }
-.elementoNotificacion> div:nth-child(8n+1){
+.elementoRepetible> div:nth-child(8n+1){
 	background-color: #63B32E;
+	border-color: #489317;
 }
-.elementoNotificacion >div:nth-child(8n+2){
+.elementoRepetible >div:nth-child(8n+2){
 	background-color: #009B3E;
+	border-color: #007E33;
 }
-.elementoNotificacion> div:nth-child(8n+3){
+.elementoRepetible> div:nth-child(8n+3){
 	background-color: #5C2684;
+	border-color: #46156A;
 }
-.elementoNotificacion >div:nth-child(8n+4){
+.elementoRepetible >div:nth-child(8n+4){
 	background-color: #B7398E;
+	border-color: #AB197B;
 }
-.elementoNotificacion >div:nth-child(8n+5){
+.elementoRepetible >div:nth-child(8n+5){
 	background-color: #E6007C;
+	border-color: #D10072;
 }
-.elementoNotificacion >div:nth-child(8n+6){
+.elementoRepetible >div:nth-child(8n+6){
 	background-color: #E4013B;
+	border-color: #B2002D;
 }
-.elementoNotificacion >div:nth-child(8n+7){
+.elementoRepetible >div:nth-child(8n+7){
 	background-color: #EC612B;
+	border-color: #C5420E;
 }
-.elementoNotificacion >div:nth-child(8n+8){
+.elementoRepetible >div:nth-child(8n+8){
 	background-color: #F9B000;
+	border-color: #C38A00;
 }
 i:hover{
 	cursor:pointer;
+	transform: scale(1.2);
 }
 
 /***Animaiciones***/
@@ -131,7 +144,7 @@ i:hover{
 .animate-repeat.ng-move,
 .animate-repeat.ng-enter,
 .animate-repeat.ng-leave {
-  transition:all linear 0.5s;
+  transition:all linear 0.3s;
 }
 
 .animate-repeat.ng-leave.ng-leave-active,
@@ -148,6 +161,6 @@ i:hover{
   max-height:200px;
 }
 .animate-repeat.ng-enter-stagger {
-  transition-delay: 0.5s;
+  transition-delay: 0.3s;
   animation-delay: 0.3s;
 }
