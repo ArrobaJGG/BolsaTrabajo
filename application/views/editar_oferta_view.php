@@ -2,7 +2,7 @@
 $this->load->helper('form');
  ?>
  
-<form action="<?php echo base_url("../../Editar_oferta_controller/actualiza/$id_oferta")?>" method="post" onsubmit="return comprobar()" novalidate enctype="multipart/form-data">
+<form action="<?php echo base_url("../../Editar_oferta_controller/actualiza/$id_oferta")?>" name"oferta" method="post"  novalidate enctype="multipart/form-data">
 
 
 Titulo: <input type="text" name="titulo" value="<?php if ($titulo==null){echo "";}else{echo $titulo;} ?>" placeholder="Titulo" required></br>
