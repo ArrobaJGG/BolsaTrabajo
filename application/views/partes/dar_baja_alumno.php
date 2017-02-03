@@ -11,7 +11,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="elementoRepetible alumno">
+	<div class="elementoRepetible categorias">
 		<div class="elementoInterno animate-repeat-horizontal">
             <form name="buscarForm" ng-submit="buscar(nombreAng,apellidoAng)">
                 <div class="iconoInterno">
@@ -30,9 +30,11 @@
 			<div class="iconoInterno">
 				<i class="fa fa-times" ng-click="borrar(alumnos,$index)"></i>
 			</div>
-			Nombre: {{alumno.nombre}}<br>
-			Apellidos: {{alumno.apellidos}}<br>
-			<span ng-show="usuarioBorrado"><br>{{mensaje}}</span>
+			<div>
+				Nombre: {{alumno.nombre}}<br>
+				Apellidos: {{alumno.apellidos}}<br>
+				<span ng-show="usuarioBorrado"><br>{{mensaje}}</span>
+			</div>
 		</div>
     </div>
 	 <div class="compartimento" ng-show="alumnos.length==0">

@@ -780,13 +780,14 @@ myApp.controller('familiaCtrl',['$scope','$http',function($scope,$http){
 	  		}
 		);
 	};
-	$scope.borrarFamilia = function($event){
+	$scope.borrarFamilia = function($event,array,index){
 		$scope.numero = "";
 		$scope.mensaje = "";
 		$scope.error = false;
 		$event.stopPropagation();
+		console.log($scope);
 		$http.post('/BolsaTrabajo/notificaciones_controller/validar/numero_familia_borrado'
-		,"id="+$event.target.value
+		,"id="+$scope.$parent.familia.id_familia_laboral
 		,{'headers':{'content-type': 'application/x-www-form-urlencoded'}})
 			.then(
 				function successCallback(response){
@@ -810,14 +811,14 @@ myApp.controller('familiaCtrl',['$scope','$http',function($scope,$http){
 							if(confirm("El numero de etiquetas que se borrarian por estar asociadas es: "+response.data.etiqueta
 							+"¿desea continuar?")){
 								$http.post('/BolsaTrabajo/notificaciones_controller/validar/borrar_familia',
-								"id="+$event.target.value,
+								"id="+$scope.$parent.familia.id_familia_laboral,
 								{'headers':{'content-type': 'application/x-www-form-urlencoded'}})
 								.then(
 									function successCallback(response){
 										$scope.mensaje = response.data.mensaje;
 										$scope.error = response.data.error;
 										if(response.data.error ==false){
-											$event.target.parentElement.parentElement.remove();
+											$scope.remove(array,index);
 										}
 									},
 									function errorCallback(response) {

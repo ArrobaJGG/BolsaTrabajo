@@ -21,11 +21,11 @@
 				</form>
 			</div>
 			<div class="elementoInterno animate-repeat-horizontal"  ng-repeat="idioma in idiomas" ng-controller="idiomaCtrl">
-				<div  ng-show="!modoEditor">
+				<div class="ponerAbajo"  ng-show="!modoEditor">
 				<div class="iconoInterno">
 					<i class="fa fa-times" ng-click="borrar(idiomas,$index)"></i>
 				</div>
-					<div class="iconoInternoCentro">{{idioma.nombre}}</div>
+					<div >{{idioma.nombre}}</div>
 					<div class="iconoInternoCentro">
 						<i class="fa fa-pencil-square-o" ng-click="editar()"></i> 
 					</div>

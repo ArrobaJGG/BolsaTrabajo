@@ -95,6 +95,7 @@ a{
 	justify-content:space-around;
 }
 .elementoRepetible{
+	display:flex;
 	color:white;
 	padding-left:10px;
 }
@@ -180,7 +181,7 @@ i:hover{
 }
 
 /**Dar baja Alumno**/
-.alumno,.empresa,.idiomas{
+.alumno,.empresa,.idiomas, .familias, .categoria{
 	display:flex;
 	flex-wrap:wrap;
 	min-width:200px;
@@ -191,8 +192,14 @@ i:hover{
 	display:flex;
 	flex-direction:column;
 }
+.familias .elementoInterno{
+	min-width:100px;
+	display:flex;
+	flex-direction:column;
+}
 .elementoInterno{
 	flex:1 ;
+	
 	min-width:250px;
 	max-width: 100%;
 	padding-left:3px;
@@ -200,6 +207,7 @@ i:hover{
 .empresa .elementoInterno{
 	min-width:290px;
 }
+
 .iconoInterno{
 	width:100%;
 	display:flex;
@@ -208,11 +216,20 @@ i:hover{
 .iconoInternoCentro{
 	width:100%;
 	display:flex;
+	bottom:0;
+	align-self:flex-end;
 	justify-content:center;
+}
+.ponerAbajo{
+	display:flex;
+	flex-direction:column;
+	justify-content:space-between;
+	height:100%;
 }
 .iconoInternoAbajo{
 	/*width:auto;
 	margin:auto;*/
+	
 	display:flex;
 	flex-direction:column;
 	
@@ -252,7 +269,7 @@ form.elementoInterno{
 	display:flex;
 	flex-wrap:wrap;
 }
-.dosPartes > idiomas{
+.dosPartes > idiomas,.dosPartes >div{
 	flex:1;
 }
 .agregarIdiomas{
@@ -264,7 +281,6 @@ form.elementoInterno{
 }
 .agregarIdiomas input{
 	border:none;
-	
 	border-bottom:1px solid black;
 }
 .animate-repeat-horizontal.ng-move,
