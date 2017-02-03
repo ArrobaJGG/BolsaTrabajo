@@ -1,0 +1,42 @@
+#bloque{
+	/*ancho*/
+	width: 200px;
+	/*alto*/
+	height 300px;
+	margin-left: auto;
+  	margin-right: auto;
+  	padding-top: 10px;
+    padding-right: 50px;
+    padding-bottom: 30px;
+    padding-left: 50px;
+  	border: 3px #618ACB solid;
+}
+#bloque p{
+	font-weight: bold;
+	color: red;
+	font-size:small;
+}
+
+form input:required {
+ border:2px solid #FF6645;
+ 
+}
+form textarea:required{
+	border:2px solid #FF6645;
+ 
+}
+
+
+form input[type="email"]:valid{
+ border:2px solid green;
+ 
+}
+
+form input[type="email"]:focus:invalid{
+ border:2px solid #FF6645;
+
+}
+#botones{
+	margin-left: 40%;
+  	margin-right: 50%;
+}

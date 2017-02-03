@@ -37,6 +37,7 @@ var myApp = angular.module("my-app",[]);
 						var boton = document.createElement("button");
 						
 						midiv.setAttribute("class","cuadro");
+						midiv.setAttribute("id", "nueva");
 						
 						boton.setAttribute("value","Editar Oferta");
 						boton.setAttribute("class", "button");

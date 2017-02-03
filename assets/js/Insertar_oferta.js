@@ -34,6 +34,7 @@ function verificar(){
 		if (titulo>=3 && resumen>=3) {
 			document.insertar.Publicar.disabled = false;
 			
+			
 		}
 		
 	

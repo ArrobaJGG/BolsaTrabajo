@@ -7,6 +7,10 @@
 	background: rgba(37, 155, 81,0.2);
 	
 }
+#nueva{
+	height: 100px;
+}
+
 
 .cuadro h1{
 	border: green 2px solid;
@@ -14,6 +18,9 @@
 #oferta{
 	width: 80%;
 	
+}
+#oferta a, #nueva a{
+	text-decoration:none;
 }
 #botones{
 	margin-left:45%;
@@ -23,7 +30,7 @@
   border: 1px solid #DBE1EB;
   font-size: 13px;
   font-family: Arial, Verdana;
- 
+  position: bottom;
   border-radius: 4px;
   -moz-border-radius: 4px;
   -webkit-border-radius: 4px;
