@@ -52,6 +52,7 @@ class Alumno_model extends CI_Model{
               nombre COLLATE utf8_general_ci LIKE '%$datos[nombre]%' COLLATE utf8_general_ci 
               AND apellidos COLLATE utf8_general_ci LIKE '%$datos[apellidos]%' COLLATE utf8_general_ci
               AND validado = true ")->row()->numero_lineas;
+		
 		return $devolver;
 	}
 	public function get_alumnos_familia_laboral($id,$limite = PHP_INT_MAX){

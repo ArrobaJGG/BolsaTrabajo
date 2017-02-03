@@ -168,24 +168,31 @@ class Notificaciones_controller extends CI_Controller{
 		echo json_encode($mensaje);
 	}
 	protected function get_idiomas(){
-		$idiomas = $this->idioma_model->idioma();
+		$rest_json = file_get_contents("php://input");
+        $_POST = json_decode($rest_json, true);
+		$nombre = $this->input->post('nombre')?$this->input->post('nombre'):'%';
+		$idiomas = $this->idioma_model->idioma($nombre);
 		$idiomas = $idiomas?$idiomas:array();
 		echo json_encode($idiomas);
 	}
 	protected function agregar_idioma(){
 		$this->form_validation->set_rules('nombre', 'Nombre', 'required|trim|regex_match[/^([a-z,A-Z,á,é,í,ó,ú,â,ê,ô,ã,õ,ç,Á,É,Í,Ó,Ú,Â,Ê,Ô,Ã,Õ,Ç,ü,ñ,Ü,Ñ," "]+)$/]');
 		$idioma = $this->input->post('nombre');
+		$mensaje['error'] = true;
 		if ($this -> form_validation -> run() != false){
-			if($this->idioma_model->agregar_idioma($idioma)){
-				echo "Idioma agregado correctamente";
+			if($id = $this->idioma_model->agregar_idioma($idioma)){
+				$mensaje['id'] = $id;
+				$mensaje['error'] = false;
+				$mensaje['mensaje'] = "Idioma agregado correctamente";
 			}
 			else{
-				echo "Idioma ya existente";
+				$mensaje['mensaje'] = "Idioma ya existente";
 			}
 		}
 		else{
-			echo "Nombre invalido";
+			$mensaje['mensaje'] = "Nombre invalido";
 		}
+		echo json_encode($mensaje);
 	}
 	protected function editar_idioma(){
 		$this->form_validation->set_rules('nombre', 'Nombre', 'required|trim|regex_match[/^([a-z,A-Z,á,é,í,ó,ú,â,ê,ô,ã,õ,ç,Á,É,Í,Ó,Ú,Â,Ê,Ô,Ã,Õ,Ç,ü,ñ,Ü,Ñ," "]+)$/]');

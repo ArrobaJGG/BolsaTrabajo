@@ -95,6 +95,7 @@ a{
 	justify-content:space-around;
 }
 .elementoRepetible{
+	display:flex;
 	color:white;
 	padding-left:10px;
 }
@@ -107,37 +108,40 @@ a{
 	background-color: #63B32E;
 	border-color: #489317;
 }
-.elementoRepetible> div:nth-child(8n+1),.elementoRepetible >form:nth-child(8n+1){
+.elementoRepetible> div:nth-child(8n+1),.elementoRepetible >div:nth-child(8n+1) input{
 	background-color: #63B32E;
 	border-color: #489317;
 }
-.elementoRepetible >div:nth-child(8n+2){
+.elementoRepetible >div:nth-child(8n+2),.elementoRepetible >div:nth-child(8n+2) input{
 	background-color: #009B3E;
 	border-color: #007E33;
 }
-.elementoRepetible> div:nth-child(8n+3){
+.elementoRepetible> div:nth-child(8n+3),.elementoRepetible >div:nth-child(8n+3) input{
 	background-color: #5C2684;
 	border-color: #46156A;
 }
-.elementoRepetible >div:nth-child(8n+4){
+.elementoRepetible >div:nth-child(8n+4),.elementoRepetible >div:nth-child(8n+4) input{
 	background-color: #B7398E;
 	border-color: #AB197B;
 }
-.elementoRepetible >div:nth-child(8n+5){
+.elementoRepetible >div:nth-child(8n+5),.elementoRepetible >div:nth-child(8n+5) input{
 	background-color: #E6007C;
 	border-color: #D10072;
 }
-.elementoRepetible >div:nth-child(8n+6){
+.elementoRepetible >div:nth-child(8n+6),.elementoRepetible >div:nth-child(8n+6) input{
 	background-color: #E4013B;
 	border-color: #B2002D;
 }
-.elementoRepetible >div:nth-child(8n+7){
+.elementoRepetible >div:nth-child(8n+7),.elementoRepetible >div:nth-child(8n+7) input{
 	background-color: #EC612B;
 	border-color: #C5420E;
 }
-.elementoRepetible >div:nth-child(8n+8){
+.elementoRepetible >div:nth-child(8n+8),.elementoRepetible >div:nth-child(8n+8) input{
 	background-color: #F9B000;
 	border-color: #C38A00;
+}
+.elementoInterno input{
+	color:white;
 }
 i:hover{
 	cursor:pointer;
@@ -177,14 +181,25 @@ i:hover{
 }
 
 /**Dar baja Alumno**/
-.alumno,.empresa{
+.alumno,.empresa,.idiomas, .familias, .categoria{
 	display:flex;
 	flex-wrap:wrap;
-	width:100%;
+	min-width:200px;
+	flex:1;
 }
-
+.idiomas .elementoInterno{
+	min-width: auto;
+	display:flex;
+	flex-direction:column;
+}
+.familias .elementoInterno{
+	min-width:100px;
+	display:flex;
+	flex-direction:column;
+}
 .elementoInterno{
-	flex:1 1;
+	flex:1 ;
+	
 	min-width:250px;
 	max-width: 100%;
 	padding-left:3px;
@@ -192,10 +207,32 @@ i:hover{
 .empresa .elementoInterno{
 	min-width:290px;
 }
+
 .iconoInterno{
 	width:100%;
 	display:flex;
 	justify-content:flex-end;
+}
+.iconoInternoCentro{
+	width:100%;
+	display:flex;
+	bottom:0;
+	align-self:flex-end;
+	justify-content:center;
+}
+.ponerAbajo{
+	display:flex;
+	flex-direction:column;
+	justify-content:space-between;
+	height:100%;
+}
+.iconoInternoAbajo{
+	/*width:auto;
+	margin:auto;*/
+	
+	display:flex;
+	flex-direction:column;
+	
 }
 .animate-repeat-horizontal {
   line-height:30px;
@@ -224,6 +261,27 @@ form.elementoInterno{
 	display:flex;
 	justify-content:space-between;
 	width:100%;
+}
+
+/**idiomas**/
+.dosPartes{
+	width:100%;
+	display:flex;
+	flex-wrap:wrap;
+}
+.dosPartes > idiomas,.dosPartes >div{
+	flex:1;
+}
+.agregarIdiomas{
+	display:inline-block;
+	margin:30px 0 auto 10px;
+	border-radius: 10px;
+	overflow:hidden;
+	padding-top:7px;
+}
+.agregarIdiomas input{
+	border:none;
+	border-bottom:1px solid black;
 }
 .animate-repeat-horizontal.ng-move,
 .animate-repeat-horizontal.ng-enter,
