@@ -18,7 +18,8 @@ class Curso_model extends CI_Model{
     }
     public function agregar_categoria($nombre){
         $sql= "INSERT INTO categoria (nombre) VALUES ('$nombre')";
-        return $this->db->query($sql);
+        $this->db->query($sql);
+        return $this->db->insert_id();
     }
     public function editar_categoria($id,$nombre){
         $sql = "UPDATE categoria SET nombre = '$nombre' WHERE id_categoria='$id' ";

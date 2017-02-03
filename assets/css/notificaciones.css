@@ -97,7 +97,7 @@ a{
 .elementoRepetible{
 	display:flex;
 	color:white;
-	padding-left:10px;
+	
 }
 .elementoRepetible >div,.elementoRepetible >form{
 	margin-top:1px;
@@ -108,39 +108,55 @@ a{
 	background-color: #63B32E;
 	border-color: #489317;
 }
-.elementoRepetible> div:nth-child(8n+1),.elementoRepetible >div:nth-child(8n+1) input{
+.elementoRepetible> div:nth-child(8n+1),
+.elementoRepetible >div:nth-child(8n+1) input,
+.elementoRepetible >div:nth-child(8n+1) select{
 	background-color: #63B32E;
 	border-color: #489317;
 }
-.elementoRepetible >div:nth-child(8n+2),.elementoRepetible >div:nth-child(8n+2) input{
+.elementoRepetible >div:nth-child(8n+2),
+.elementoRepetible >div:nth-child(8n+2) input,
+.elementoRepetible >div:nth-child(8n+2) select{
 	background-color: #009B3E;
 	border-color: #007E33;
 }
-.elementoRepetible> div:nth-child(8n+3),.elementoRepetible >div:nth-child(8n+3) input{
+.elementoRepetible> div:nth-child(8n+3),
+.elementoRepetible >div:nth-child(8n+3) input,
+.elementoRepetible >div:nth-child(8n+3) select{
 	background-color: #5C2684;
 	border-color: #46156A;
 }
-.elementoRepetible >div:nth-child(8n+4),.elementoRepetible >div:nth-child(8n+4) input{
+.elementoRepetible >div:nth-child(8n+4),
+.elementoRepetible >div:nth-child(8n+4) input,
+.elementoRepetible >div:nth-child(8n+4) select{
 	background-color: #B7398E;
 	border-color: #AB197B;
 }
-.elementoRepetible >div:nth-child(8n+5),.elementoRepetible >div:nth-child(8n+5) input{
+.elementoRepetible >div:nth-child(8n+5),
+.elementoRepetible >div:nth-child(8n+5) input,
+.elementoRepetible >div:nth-child(8n+5) select{
 	background-color: #E6007C;
 	border-color: #D10072;
 }
-.elementoRepetible >div:nth-child(8n+6),.elementoRepetible >div:nth-child(8n+6) input{
+.elementoRepetible >div:nth-child(8n+6),
+.elementoRepetible >div:nth-child(8n+6) input,
+.elementoRepetible >div:nth-child(8n+6) select{
 	background-color: #E4013B;
 	border-color: #B2002D;
 }
-.elementoRepetible >div:nth-child(8n+7),.elementoRepetible >div:nth-child(8n+7) input{
+.elementoRepetible >div:nth-child(8n+7),
+.elementoRepetible >div:nth-child(8n+7) input,
+.elementoRepetible >div:nth-child(8n+7) select{
 	background-color: #EC612B;
 	border-color: #C5420E;
 }
-.elementoRepetible >div:nth-child(8n+8),.elementoRepetible >div:nth-child(8n+8) input{
+.elementoRepetible >div:nth-child(8n+8),
+.elementoRepetible >div:nth-child(8n+8) input
+.elementoRepetible >div:nth-child(8n+8) select{
 	background-color: #F9B000;
 	border-color: #C38A00;
 }
-.elementoInterno input{
+.elementoInterno input,.elementoInterno select{
 	color:white;
 }
 i:hover{
@@ -193,7 +209,7 @@ i:hover{
 	flex-direction:column;
 }
 .familias .elementoInterno{
-	min-width:100px;
+	min-width:auto;
 	display:flex;
 	flex-direction:column;
 }
@@ -226,6 +242,7 @@ i:hover{
 	justify-content:space-between;
 	height:100%;
 }
+
 .iconoInternoAbajo{
 	/*width:auto;
 	margin:auto;*/

@@ -11,7 +11,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="elementoRepetible categorias">
+	<div class="elementoRepetible alumno">
 		<div class="elementoInterno animate-repeat-horizontal">
             <form name="buscarForm" ng-submit="buscar(nombreAng,apellidoAng)">
                 <div class="iconoInterno">

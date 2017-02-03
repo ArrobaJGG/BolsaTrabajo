@@ -20,7 +20,9 @@ class Notificaciones_controller extends CI_Controller{
 		if($this->session->userdata('rol')=='administrador'){
 			$data['notificaciones'] = array();
 			$data['javascript'] = 'assets/js/directivas.js';
-			$data['libreria'] = array("http://ajax.googleapis.com/ajax/libs/angularjs/1.6.0/angular-route.js","https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-animate.js",base_url('assets/js/notificaciones.js'));		
+			$data['libreria'] = array("http://ajax.googleapis.com/ajax/libs/angularjs/1.6.0/angular-route.js",
+			 "https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-animate.js",
+			 base_url('assets/js/notificaciones.js'));		
 			$data['titulo'] = "Notificaciones";
 			$data['css'] = array("/BolsaTrabajo/assets/css/cabecera.css",
                 "/BolsaTrabajo/assets/css/notificaciones.css",
@@ -400,7 +402,7 @@ class Notificaciones_controller extends CI_Controller{
         $mensajes['error'] = false; 
         $this->form_validation->set_rules('nombre', 'Nombre', 'required|trim|regex_match[/^([a-z,A-Z,á,é,í,ó,ú,â,ê,ô,ã,õ,ç,Á,É,Í,Ó,Ú,Â,Ê,Ô,Ã,Õ,Ç,ü,ñ,Ü,Ñ," "]+)$/]');
         if ($this -> form_validation -> run() != false){
-            $this->familia_laboral_model->agregar_familia($this->input->post('nombre'));
+            $mensajes['id'] = $this->familia_laboral_model->agregar_familia($this->input->post('nombre'));
             $mensajes['mensaje'] = "Familia agregada correctamente";
         }
         else{
@@ -484,7 +486,7 @@ class Notificaciones_controller extends CI_Controller{
         $mensajes['error'] = false; 
         $this->form_validation->set_rules('nombre', 'Nombre', 'required|trim|regex_match[/^([a-z,A-Z,á,é,í,ó,ú,â,ê,ô,ã,õ,ç,Á,É,Í,Ó,Ú,Â,Ê,Ô,Ã,Õ,Ç,ü,ñ,Ü,Ñ," "]+)$/]');
         if ($this -> form_validation -> run() != false){
-            $this->curso_model->agregar_categoria($this->input->post('nombre'));
+            $mensajes['id'] = $this->curso_model->agregar_categoria($this->input->post('nombre'));
             $mensajes['mensaje'] = "Categoria agregada correctamente";
         }
         else{
