@@ -280,7 +280,8 @@ form.elementoInterno{
 	width:100%;
 }
 
-/**idiomas**/
+
+
 .dosPartes{
 	width:100%;
 	display:flex;
@@ -296,10 +297,12 @@ form.elementoInterno{
 	overflow:hidden;
 	padding-top:7px;
 }
+
 .agregarIdiomas input{
 	border:none;
 	border-bottom:1px solid black;
 }
+
 .animate-repeat-horizontal.ng-move,
 .animate-repeat-horizontal.ng-enter,
 .animate-repeat-horizontal.ng-leave {
