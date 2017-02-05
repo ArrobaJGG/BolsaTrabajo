@@ -8,10 +8,10 @@ var myApp = angular.module('my-app', []);
 
 
 
-function quitar(){
+/*function quitar(){
 	document.oferta.Actualizar.disabled = true;
 }
-window.onload = quitar;
+window.onload = quitar;*/
 function comprobar(){
 		var todo_correcto = true;
 		

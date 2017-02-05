@@ -1,0 +1,16 @@
+#oferta{
+	margin-left:30%;
+	border: 1px solid #000000;
+	margin-right: 30%;	
+	background: rgba(37, 155, 81,0.2);	
+}
+#oferta h1{
+	border: 4px solid green;
+	font-family: cursive;
+}
+#oferta p{
+	font-style: oblique;
+}
+.curve{
+	font-weight: bold;
+}
