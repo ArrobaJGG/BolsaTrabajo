@@ -44,8 +44,8 @@ myApp.config(function($routeProvider) {
     );
 });
 myApp.controller('notiCtrl', ['$scope', '$http', function ($scope, $http) {
-	$scope.ir = function(){
-		window.location.assign('#!/notificaciones');
+	$scope.ir = function(direccion){
+		window.location.assign(direccion);
 	};
 	$scope.remove = function(array, index){
     	array.splice(index, 1);

@@ -34,6 +34,9 @@ myApp.controller('resumenProfesorCtrl',['$scope','$compile','$timeout',function(
 		//$($event.srcElement).attr("ng-click","enviar("+id+")");
 		$compile($($event.srcElement))($scope);
 	};
+	$scope.ir = function(direccion){
+		window.location.assign(direccion);
+	};
 }]);
 myApp.controller('resumenCtrl',['$scope','$http',function($scope,$http){
 	$http.get('/BolsaTrabajo/resumen_profesor_controller/validar/get_info_resumen')
@@ -59,15 +62,33 @@ myApp.controller('misOfertasCtrl',['$scope','$http',function($scope,$http){
 	);
 }]);
 myApp.controller('todasOfertasCtrl',['$scope','$http',function($scope,$http){
-	$http.get('/BolsaTrabajo/resumen_profesor_controller/validar/get_todas_ofertas')
-	.then(
-		function correcto(response){
-			$scope.ofertas = response.data.ofertas;
-		},
-		function incorrecto(response){
-			console.log(response.data);
-		}
-	);
+	$scope.pagina = 0;
+	$scope.siguientePagina = function(){
+		$scope.pagina++;
+		$scope.get_ofertas();
+	};
+	$scope.anteriorPagina = function(){
+		$scope.pagina--;
+		$scope.get_ofertas();
+	};
+	$scope.get_ofertas = function(){
+		var aplazado = $scope.pagina*10;
+		var datos = {
+			numero_alumnos: 10,
+			desplazamiento : aplazado,
+		};
+		$http.post('/BolsaTrabajo/resumen_profesor_controller/validar/get_todas_ofertas',datos)
+		.then(
+			function correcto(response){
+				$scope.ofertas = response.data.ofertas;
+				$scope.numeroPaginas = Math.ceil(response.data.numero_lineas/10);
+			},
+			function incorrecto(response){
+				console.log(response.data);
+			}
+		);
+	};
+	$scope.get_ofertas();
 }]);
 myApp.controller('misAlumnosCtrl',['$scope','$http',function($scope,$http){
 	$http.get('/BolsaTrabajo/resumen_profesor_controller/validar/get_mis_alumnos')

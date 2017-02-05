@@ -1,6 +1,8 @@
 <div ng-controller="notiCtrl">
 	<div class="navegador">
-		<div class="contenedor" ng-click="ir()"><div id="notificaciones" class="selector">Notificaciones</div></div>
+		<div class="contenedor" ng-click="ir('#!/notificaciones')">
+		    <div class="selector seleccionableNav">Notificaciones</div>
+	    </div>
 		<div class="contenedor">
 		    <div class="selector">Dar alta</div>
 			<div class="contenedorElementos">
