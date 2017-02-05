@@ -10,6 +10,7 @@ a{
 	width:80%;
 	margin:Auto;
 	height:40px;
+	z-index:999;
 	align-items:center;
 	justify-content:center;
 }
@@ -20,6 +21,7 @@ a{
 	margin:2px;
 	position:relative;
 	text-align:center;
+	z-index:9999;
 	
 }
 .contenedor:hover .contenedorElementos{
@@ -31,6 +33,7 @@ a{
 	/*border:1px solid black;*/
 }
 .contenedorElementos{
+	z-index:9999;
 	-webkit-transition: height 0.5s; /* Safari */
     transition: height 0.5s;
 	width:100%;
@@ -110,54 +113,78 @@ a{
 }
 .elementoRepetible> div:nth-child(8n+1),
 .elementoRepetible >div:nth-child(8n+1) input,
-.elementoRepetible >div:nth-child(8n+1) select{
+.elementoRepetible >div:nth-child(8n+1) select,
+.elementoRepetible >div:nth-child(8n+1) textarea,
+.agregarEntidad,
+.agregarEntidad input,
+.agregarEntidad select,
+.agregarEntidad textarea{
 	background-color: #63B32E;
 	border-color: #489317;
+	color:white;
 }
 .elementoRepetible >div:nth-child(8n+2),
 .elementoRepetible >div:nth-child(8n+2) input,
-.elementoRepetible >div:nth-child(8n+2) select{
+.elementoRepetible >div:nth-child(8n+2) select,
+.elementoRepetible >div:nth-child(8n+2) textarea{
 	background-color: #009B3E;
 	border-color: #007E33;
 }
 .elementoRepetible> div:nth-child(8n+3),
 .elementoRepetible >div:nth-child(8n+3) input,
-.elementoRepetible >div:nth-child(8n+3) select{
+.elementoRepetible >div:nth-child(8n+3) select,
+.elementoRepetible >div:nth-child(8n+3) textarea{
 	background-color: #5C2684;
 	border-color: #46156A;
 }
 .elementoRepetible >div:nth-child(8n+4),
 .elementoRepetible >div:nth-child(8n+4) input,
-.elementoRepetible >div:nth-child(8n+4) select{
+.elementoRepetible >div:nth-child(8n+4) select,
+.elementoRepetible >div:nth-child(8n+4) textarea{
 	background-color: #B7398E;
 	border-color: #AB197B;
 }
 .elementoRepetible >div:nth-child(8n+5),
 .elementoRepetible >div:nth-child(8n+5) input,
-.elementoRepetible >div:nth-child(8n+5) select{
+.elementoRepetible >div:nth-child(8n+5) select,
+.elementoRepetible >div:nth-child(8n+5) textarea{
 	background-color: #E6007C;
 	border-color: #D10072;
 }
 .elementoRepetible >div:nth-child(8n+6),
 .elementoRepetible >div:nth-child(8n+6) input,
-.elementoRepetible >div:nth-child(8n+6) select{
+.elementoRepetible >div:nth-child(8n+6) select,
+.elementoRepetible >div:nth-child(8n+6) textarea{
 	background-color: #E4013B;
 	border-color: #B2002D;
 }
 .elementoRepetible >div:nth-child(8n+7),
 .elementoRepetible >div:nth-child(8n+7) input,
-.elementoRepetible >div:nth-child(8n+7) select{
+.elementoRepetible >div:nth-child(8n+7) select,
+.elementoRepetible >div:nth-child(8n+7) textarea{
 	background-color: #EC612B;
 	border-color: #C5420E;
 }
 .elementoRepetible >div:nth-child(8n+8),
 .elementoRepetible >div:nth-child(8n+8) input
-.elementoRepetible >div:nth-child(8n+8) select{
+.elementoRepetible >div:nth-child(8n+8) select,
+.elementoRepetible >div:nth-child(8n+8) textarea{
 	background-color: #F9B000;
 	border-color: #C38A00;
 }
-.elementoInterno input,.elementoInterno select{
+.elementoInterno input,.elementoInterno select,.elementoInterno textarea{
 	color:white;
+}
+textarea{
+	width:400px;
+}
+.agregarEntidad{
+	margin-top:10px;
+	border: 4px solid #489317;
+	color:white;
+}
+.agregarEntidad form{
+	padding: 5px 0 0 5px;
 }
 i:hover{
 	cursor:pointer;
@@ -229,6 +256,15 @@ i:hover{
 	display:flex;
 	justify-content:flex-end;
 }
+.iconoInternoEspaciado{
+	width:100%;
+	display:flex;
+	justify-content:space-around;
+}
+.centrado{
+	text-align:center;
+	width: 100%;
+}
 .iconoInternoCentro{
 	width:100%;
 	display:flex;
@@ -241,6 +277,7 @@ i:hover{
 	flex-direction:column;
 	justify-content:space-between;
 	height:100%;
+	padding:0 5px 0 0;
 }
 
 .iconoInternoAbajo{
@@ -251,6 +288,7 @@ i:hover{
 	flex-direction:column;
 	
 }
+
 .animate-repeat-horizontal {
   line-height:30px;
   list-style:none;
@@ -302,7 +340,48 @@ form.elementoInterno{
 	border:none;
 	border-bottom:1px solid black;
 }
+/***csv****/
 
+
+.formatoCsv{
+	text-align: left;
+	border-width:1px 1px 0 1px; 
+	border-style:solid;
+	border-color:gray;
+	position:relative;
+}
+.esquinaSuperior{
+	position:absolute;
+	top:-1px;right:-1px;
+	font-size: 0px; line-height: 0%; width: 0px;
+	border-top: 20px solid white;
+	border-bottom: 20px solid gray;
+	border-left: 20px solid gray;
+	border-right: 20px solid white;
+}
+
+/**profesores **/
+	
+	
+.centrarElementos{
+	display:flex
+	align-items:center;
+	justify-content:center;
+	
+}
+.centrarElementos form{
+	margin-top:10px;
+	display: flex;
+	flex-flow:column;
+}
+.mitad{
+	flex:1;
+}
+.dosPartesdos{
+	display:flex;
+	flex-wrap:nowrap;
+	justify-content:space-between;
+}
 .animate-repeat-horizontal.ng-move,
 .animate-repeat-horizontal.ng-enter,
 .animate-repeat-horizontal.ng-leave {

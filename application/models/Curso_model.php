@@ -37,7 +37,8 @@ class Curso_model extends CI_Model{
     }
 	public function agregar_curso($nombre,$id,$id_familia){
 		$sql= "INSERT INTO curso (nombre,id_categoria,id_familia) VALUES ('$nombre','$id','$id_familia')";
-        return $this->db->query($sql);
+        $this->db->query($sql);
+        return $this->db->insert_id();
 	}
 	public function editar_curso($datos){
         $sql = "UPDATE curso SET nombre = '$datos[nombre]', id_categoria = '$datos[id_categoria]',id_familia='$datos[id_familia]'  WHERE id_curso='$datos[id_curso]' ";

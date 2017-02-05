@@ -26,7 +26,8 @@ class Notificaciones_controller extends CI_Controller{
 			$data['titulo'] = "Notificaciones";
 			$data['css'] = array("/BolsaTrabajo/assets/css/cabecera.css",
                 "/BolsaTrabajo/assets/css/notificaciones.css",
-                "assets/font-awesome/css/font-awesome.min.css"
+                "assets/font-awesome/css/font-awesome.min.css",
+                "/BolsaTrabajo/assets/css/directivas.css",
             );
 			
 			$this->load->view("includes/header", $data);
@@ -259,13 +260,13 @@ class Notificaciones_controller extends CI_Controller{
         $nombre = $this->input->post('nombre');
         $this->load->model('ofertas_model');
         if($this -> form_validation -> run() != false){
-            if($this->ofertas_model->agregar_etiqueta($nombre,$familia)){
-                $mensaje ="Etiqueta agregada correctamente";
-            }
-            else{
-                $mensaje ="error";
-            }
+            $mensajes['mensaje']="Etiqueta agregada correctamente";
+            $mensajes['id'] = $this->ofertas_model->agregar_etiqueta($nombre,$familia);            
         } 
+        else{
+                $mensajes['mensaje'] ="Nombre invalido";
+            }
+        echo json_encode($mensajes);
     }
 	protected function editar_etiqueta(){
 		$this->load->model('ofertas_model');
@@ -544,7 +545,7 @@ class Notificaciones_controller extends CI_Controller{
 		$this->form_validation->set_rules('id_familia', 'id_familia', 'numeric|required|trim');
         $this->form_validation->set_rules('nombre', 'Nombre', 'required|trim|regex_match[/^([a-z,A-Z,á,é,í,ó,ú,â,ê,ô,ã,õ,ç,Á,É,Í,Ó,Ú,Â,Ê,Ô,Ã,Õ,Ç,ü,ñ,Ü,Ñ," "]+)$/]');
         if ($this -> form_validation -> run() != false){
-            $this->curso_model->agregar_curso($this->input->post('nombre'),$this->input->post('id_categoria'),$this->input->post('id_familia'));
+            $mensajes['id'] = $this->curso_model->agregar_curso($this->input->post('nombre'),$this->input->post('id_categoria'),$this->input->post('id_familia'));
             $mensajes['mensaje'] = "Categoria agregada correctamente";
         }
         else{
