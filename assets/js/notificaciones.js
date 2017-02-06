@@ -50,6 +50,12 @@ myApp.controller('notiCtrl', ['$scope', '$http', function ($scope, $http) {
 	$scope.remove = function(array, index){
     	array.splice(index, 1);
 	};
+	$scope.backupBaseDatos = function(){
+		window.location.assign('/BolsaTrabajo/backup');
+	};
+	$scope.backupImagenes =  function(){
+		window.location.assign('/BolsaTrabajo/backup/zip');
+	};
 }]);
 myApp.controller('notificacionesCtrl', ['$scope', '$http', function ($scope, $http) {
 	$scope.estaCargando = true;
