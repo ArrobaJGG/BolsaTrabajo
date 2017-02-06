@@ -33,21 +33,15 @@
   border-color: #FBFFAD;
   }
  /* los input del formulario*/
-#bloque{
+.bloque{
 	/*ancho*/
-	width: 200px;
-	/*alto*/
-	height 300px;
-	margin-left: auto;
-  	margin-right: auto;
-  	padding-top: 10px;
-    padding-right: 50px;
-    padding-bottom: 30px;
-    padding-left: 50px;
-  	border: 3px green solid;
-  	background-color: #BCF5A9;
+	
+  	display:flex;
+	align-items:space-around;
+	flex-flow:column;
+	flex:1;
 }
-#bloque p{
+.bloque p{
 	font-weight: bold;
 	color: red;
 	font-size:small;
@@ -65,12 +59,47 @@ form textarea:required{
 
 form input[type="email"]:valid{
  border:2px solid green;
- 
+ width: 350px;
 }
 
 form input[type="email"]:focus:invalid{
  border:2px solid #FF6645;
-
+ width: 350px;
+}
+form input[type="text"]{
+	width: 350px;
+	
+}
+form input[type="number"]{
+	width: 350px;
+	
+}
+form input[type="date"]{
+	width: 350px;
+	
+}
+form textarea{
+	width: 350px;
+	
+}
+form select{
+	width: 350px;
+	
+}
+.grande{
+	display:flex;
+	flex-wrap:wrap;
+	width: 80%;
+	/*alto*/
+	height auto;
+	margin-left: auto;
+  	margin-right: auto;
+  	padding-top: 10px;
+    padding-right: 50px;
+    padding-bottom: 30px;
+    padding-left: 50px;
+  	border: 3px green solid;
+  	background-color: #BCF5A9;
 }
 
 

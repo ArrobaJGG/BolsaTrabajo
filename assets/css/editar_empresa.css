@@ -1,5 +1,9 @@
-#bloque{
-	
+
+.salida input[type="text"]{
+	width: 350px;
+}
+.salida input[type="number"]{
+	width: 350px;
 }
 #tabla{
 	border: solid 1px green;
