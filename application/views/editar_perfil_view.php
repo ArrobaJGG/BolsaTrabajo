@@ -2,7 +2,7 @@
 $this -> load -> helper('form');
 ?>
 <div ng-controller="UserController">
-	<form name="userForm" ng-submit="submit($event)"  action="./Editar_perfil_controller" method="post" enctype="multipart/form-data" novalidate>
+		<form name="userForm" ng-submit="submit($event)"  action="./Editar_perfil_controller" method="post" enctype="multipart/form-data" novalidate>
 		Nombre: <input name="nombre"  type="text" ng-model="nombre"  ng-init = "nombre='<?php if ($nombre==NULL){ echo " campo vacio "; } else {echo $nombre;} ?>'" required />
 		<span class="messages" ng-show="userForm.$submitted || userForm.nombre.$touched">
 			<span ng-show="userForm.nombre.$error.required">El campo es obligatorio.</span>
@@ -120,8 +120,9 @@ $this -> load -> helper('form');
 					<img src="http://localhost/BolsaTrabajo/img/imgr/<?php echo $id_login ?>.jpg";  onerror="this.src='./img/pordefecto.jpg'";>
 				   
 				</div></td></br>
+
+</div>	
 <input type="submit" value="Enviar" name="Enviar"/>
 	<p><?php if(isset($mensaje)) echo $mensaje; ?></p>
 	<?php echo validation_errors(); ?><!--mostrar los errores de validación-->
 </form>	
-</div>
