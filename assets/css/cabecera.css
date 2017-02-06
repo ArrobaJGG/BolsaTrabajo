@@ -1,6 +1,7 @@
 *{
 	margin:0;
 	padding: 0;
+	
 }
 header{
 	display: flex;
@@ -16,6 +17,7 @@ header{
 	background-position: -400px 40px;
 	width: 500px;
 	height: 153px;
+	
 }
 #idiomas a{
 	text-decoration: none;

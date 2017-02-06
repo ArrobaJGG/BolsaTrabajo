@@ -37,6 +37,6 @@ $this->load->helper('form');
 			<input type="button" class="button" name="Cancelar" value="Cancelar" onclick="window.location='../../Resumen_empresa_controller'" />
 		</div>
 </div>
-<?php if (isset($mensaje)) echo $mensaje ?>
+		<?php if (isset($mensaje)) echo $mensaje ?>
 		<?php echo validation_errors(); ?>
 </form>	

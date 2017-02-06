@@ -15,6 +15,7 @@
 
 /* padre de cuadro */
 #mediano{
+	flex-flow:column;
 	 display: flex;
   	justify-content: center;
  	 align-items: center;
@@ -27,9 +28,7 @@
 	border: black 1px solid;
 	height: 55%;
 	width: 55%;
-	/*margin: auto;*/
-	/*background-color: #259B51;*/
-	background: rgba(37, 155, 81,0.2);
+	background-color: #BCF5A9;
 	
 }
 
