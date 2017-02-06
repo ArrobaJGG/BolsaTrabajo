@@ -66,7 +66,7 @@ public function index(){
     $data["titulo"]="Login";
 	$data["javascript"]="assets/js/login_controller.js";
 	$data['libreria'] = array();
-	$data['css'] = array("/BolsaTrabajo/assets/css/cabecera.css");
+	$data['css'] = array("/BolsaTrabajo/assets/css/cabecera.css","/BolsaTrabajo/assets/css/login.css");
 	$this->load->view("includes/header",$data);
 	$this->load->view("login_view",$datos);
 	$this->load->view("includes/footer");

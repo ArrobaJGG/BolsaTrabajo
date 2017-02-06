@@ -21,11 +21,11 @@
  	 align-items: center;
   	 /*margin-left: auto;
  	 margin-right: auto;*/
- 	 border: solid 1px black;
+ 	 
 }
 
 .cuadro{
-	border: black 1px solid;
+	
 	height: 55%;
 	width: 55%;
 	background-color: #BCF5A9;
@@ -49,24 +49,7 @@
 	vertical-align: bottom;
  	text-align: center;
 }
-/*
- .button
-  {
-  border: 1px solid #DBE1EB;
-  font-size: 13px;
-  font-family: Arial, Verdana;
-  position: bottom;
-  border-radius: 4px;
-  -moz-border-radius: 4px;
-  -webkit-border-radius: 4px;
-  -o-border-radius: 4px;
-  background: #4972B5;
-  background: linear-gradient(left, #4972B5, #618ACB);
-  background: -moz-linear-gradient(left, #4972B5, #618ACB);
-  background: -webkit-linear-gradient(left, #4972B5, #618ACB);
-  background: -o-linear-gradient(left, #4972B5, #618ACB);
-  color: #FFFFFF;
-  } */
+
   
  
  .button{ 
