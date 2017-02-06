@@ -12,7 +12,7 @@ $this->load->library("session");
 $this->load->library('form_validation');
 
 }
-	// TODO falta editar cada oferta y que no casque cuando no hay una id_oferta
+	// TODO falta que no casque cuando no hay una id_oferta
 	public function index($id_oferta = null){
 		
 			if ($this->session->userdata('rol')=='empresa'||$this->session->userdata('rol')=='profesor') {
