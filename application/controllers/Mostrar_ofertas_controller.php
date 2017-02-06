@@ -21,7 +21,7 @@
 					$data['etiquetas'] = $this->Ofertas_model->etiqueta();
 					$data['libreria'] = array();
 					$data["titulo"]="Oferta";
-					$data['css'] = array("/BolsaTrabajo/assets/css/cabecera.css");
+					$data['css'] = array("/BolsaTrabajo/assets/css/cabecera.css","/BolsaTrabajo/assets/css/mostrar_ofertas.css");
 					$data["javascript"]="assets/js/editar_oferta.js";
 					$this->load->view("includes/header",$data);
 					$this->load->view("mostrar_ofertas_view",$datos_oferta,$data);

@@ -94,7 +94,7 @@ public function index(){
 				$data['libreria'] = array();
 				$data['titulo'] = "Insertar Oferta";
 				$data["javascript"]="assets/js/Insertar_oferta.js";
-				$data['css'] = array("/BolsaTrabajo/assets/css/cabecera.css");
+				$data['css'] = array("/BolsaTrabajo/assets/css/cabecera.css","/BolsaTrabajo/assets/css/insertar_oferta.css");
 				$this->load->view("includes/header",$data);
 				$this->load->view("Insertar_oferta_view",$data);
 				$this->load->view("includes/footer",$data);

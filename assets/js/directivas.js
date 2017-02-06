@@ -7,7 +7,7 @@ angular.module("myDirectivas")
         	upload : "=objetoUpload"
         },
         require: '?ngModel',
-        template: '<div class="asset-upload">subir archivo csv</div>',
+        templateUrl: '/BolsaTrabajo/api/cargar_partes/cargar/subir_csv',
         link: function(scope, element, attrs, ngModel) {
             // Code goes here
             element.on('dragover', function(e) {
@@ -66,7 +66,7 @@ angular.module("myDirectivas")
 .directive('miBuscador',['$http',function($http){
 	return {
         restrict: 'E',
-        replace: true,
+        replace: false,
         scope: {},
         require: '?ngModel',
         templateUrl: '/BolsaTrabajo/api/cargar_partes/cargar/buscador',

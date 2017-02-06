@@ -11,10 +11,10 @@ $this->load->helper('form');
 	<h2>Requisitos: </h2></br>
 	<p><?php if ($requisitos==null){echo "";}else{echo $requisitos;}  ?></p></br>
 	<?php //TODO cambiar el nombre porque aparece el id ?>
-	<p>Familia Laboral: <?php echo $nombre_familia ?></p>
+	<p class="curve">Familia Laboral:</p> <p><?php echo $nombre_familia ?></p>
 	
 	<h2>Contacto: </h2>
-	<p>Empresa: <?php if ($nombre_empresa==null){echo "";}else{echo $nombre_empresa;} ?> </p>
+	<p class="curve">Empresa: </p><p><?php if ($nombre_empresa==null){echo "";}else{echo $nombre_empresa;} ?> </p>
 	<p>Telefono: <?php if ($telefono==null){echo "";}else{echo $telefono;}  ?></p>
 	<p>Email: <?php if ($correo==null){echo "";}else{echo $correo;}   ?></p>
 	

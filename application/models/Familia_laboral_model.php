@@ -45,7 +45,8 @@ class Familia_laboral_model extends CI_Model{
     }
 	public function agregar_familia($nombre){
 		$sql= "INSERT INTO familia_laboral (nombre) VALUES ('$nombre')";
-        return $this->db->query($sql);
+        $this->db->query($sql);
+        return $this->db->insert_id();
 	}
 	public function borrar_familia($id){
 		$sql ="DELETE FROM familia_laboral WHERE id_familia_laboral = '$id'";

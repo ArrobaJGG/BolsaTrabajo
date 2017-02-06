@@ -21,14 +21,13 @@ class Ofertas_model extends CI_Model{
 		return $familia;
 		
 	}
-	public function get_ofertas($limite){
-		$sql = " SELECT * FROM oferta ORDER BY id_oferta DESC  LIMIT $limite";
+	public function get_ofertas($datos){
+		$sql = " SELECT * FROM oferta ORDER BY id_oferta DESC  LIMIT $datos[offset],$datos[limite]";
 		$query = $this->db->query($sql);
-		if ($query->num_rows() > 0){
-		           $todo = $query->result_array();	
-						return $todo;
-		    }
-		    return null;
+        $devolver['ofertas'] = isset($query) ? $query->result_array() : false;	
+	    $devolver['numero_lineas'] = $this->db->query("SELECT count(id_oferta) numero_lineas FROM 
+	       oferta ORDER BY id_oferta ")->row()->numero_lineas;
+        return $devolver;
 	}
 	public function datos_una_oferta($id_oferta){
 		$sql = " SELECT * FROM oferta WHERE id_oferta=$id_oferta";
@@ -53,7 +52,8 @@ class Ofertas_model extends CI_Model{
 
 	public function agregar_etiqueta($nombre,$familia){
 	    $sql = "INSERT INTO etiqueta(nombre,id_familia_laboral) VALUES ('$nombre','$familia')";
-        return $this->db->query($sql);
+        $this->db->query($sql);
+        return $this->db->insert_id();
 	}
 	public function actualizar($parametros,$id_oferta){
 		$sql = "UPDATE oferta SET  id_familia='$parametros[id_familia]', nombre_empresa='$parametros[nombre]' , fecha_expiracion='$parametros[fechae]', lugar='$parametros[lugar]', resumen='$parametros[resumen]', funciones='$parametros[funciones]', ofrece='$parametros[ofrece]', sueldo='$parametros[sueldo]', requisitos='$parametros[requisito]', horario='$parametros[horario]', titulo='$parametros[titulo]', correo='$parametros[correo]', telefono='$parametros[telefono]', oculto='$parametros[oculto]' WHERE id_oferta=$id_oferta";

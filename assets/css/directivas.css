@@ -1,0 +1,19 @@
+.upload{
+	overflow:hidden;
+	border-radius:10px;
+	border:4px dashed #00487B;
+	background-color: #19D0FB;
+	position:relative;
+	height: 100px;
+	display:flex;
+	flex-direction:column;
+	justify-content: center;
+	align-items: center; 
+}
+.upload i{
+	color:#00487B;
+}
+.upload i:hover{
+	cursor:default;
+	transform:scale(1);
+}

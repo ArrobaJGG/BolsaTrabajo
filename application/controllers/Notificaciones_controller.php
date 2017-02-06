@@ -20,11 +20,14 @@ class Notificaciones_controller extends CI_Controller{
 		if($this->session->userdata('rol')=='administrador'){
 			$data['notificaciones'] = array();
 			$data['javascript'] = 'assets/js/directivas.js';
-			$data['libreria'] = array("http://ajax.googleapis.com/ajax/libs/angularjs/1.6.0/angular-route.js","https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-animate.js",base_url('assets/js/notificaciones.js'));		
+			$data['libreria'] = array("http://ajax.googleapis.com/ajax/libs/angularjs/1.6.0/angular-route.js",
+			 "https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-animate.js",
+			 base_url('assets/js/notificaciones.js'));		
 			$data['titulo'] = "Notificaciones";
 			$data['css'] = array("/BolsaTrabajo/assets/css/cabecera.css",
                 "/BolsaTrabajo/assets/css/notificaciones.css",
-                "assets/font-awesome/css/font-awesome.min.css"
+                "assets/font-awesome/css/font-awesome.min.css",
+                "/BolsaTrabajo/assets/css/directivas.css",
             );
 			
 			$this->load->view("includes/header", $data);
@@ -60,8 +63,22 @@ class Notificaciones_controller extends CI_Controller{
 		$nuevas_altas = $this->empresa_model->get_nuevas_altas($limit) ? $this->empresa_model->get_nuevas_altas($limit) : array();
 		echo json_encode($nuevas_altas);
 	}
-	protected function alumnos($limite=PHP_MAX_INT){
-		$alumnos = $this->alumno_model->get_alumnos($limite)? $this->alumno_model->get_alumnos($limite):array();
+	protected function alumnos(){
+	    $rest_json = file_get_contents("php://input");
+        $_POST = json_decode($rest_json, true);
+        $limite = $this->input->post('numero_alumnos');
+        $offset = $this->input->post('desplazamiento');
+        $nombre = $this->input->post('nombre') ? $this->input->post('nombre') : '%';
+        $apellidos = $this->input->post('apellido') ? $this->input->post('apellido')  : '%';
+        $datos = array(
+            'nombre' => $nombre,
+            'apellidos' => $apellidos,
+            'limite' => $limite,
+            'offset' => $offset
+        );
+        /*var_dump($datos);
+        var_dump($this->input->post());//*/
+		$alumnos = $this->alumno_model->get_alumnos($datos)? $this->alumno_model->get_alumnos($datos):array();
 		echo json_encode($alumnos);
 	}
 	protected function borrar_alumno(){
@@ -85,10 +102,19 @@ class Notificaciones_controller extends CI_Controller{
 		echo json_encode($mensajes);
 	}
 	protected function empresas($limite = PHP_MAX_INT){
-		$empresas = $this->empresa_model->get_empresas($limite)? $this->empresa_model->get_empresas($limite):array();
-		foreach ($empresas as $key => $value) {
-			$empresas[$key]['correo'] = $this->login_model->get_correo($value['id_login']);
-		}
+	    $rest_json = file_get_contents("php://input");
+        $_POST = json_decode($rest_json, true);
+        $limite = $this->input->post('numero_alumnos');
+        $offset = $this->input->post('desplazamiento');
+        $nombre = $this->input->post('nombre') ? $this->input->post('nombre') : '%';
+        $correo = $this->input->post('correo') ? $this->input->post('correo')  : '%';
+        $datos = array(
+            'nombre' => $nombre,
+            'correo' => $correo,
+            'limite' => $limite,
+            'offset' => $offset
+        );
+		$empresas = $this->empresa_model->get_empresas($datos)? $this->empresa_model->get_empresas($datos):array();
 		echo json_encode($empresas);
 	}
 	protected function borrar_empresa(){
@@ -113,46 +139,63 @@ class Notificaciones_controller extends CI_Controller{
 		echo json_encode($familias);
 	}
 	protected function profesores($limite = PHP_MAX_INT){
-		$profesores = $this->profesor_model->get_profesores($limite)? $this->profesor_model->get_profesores($limite):array();
-		foreach ($profesores as $key => $value) {
-			$profesores[$key]['correo'] = $this->login_model->get_correo($value['id_login']);
-			$profesores[$key]['estado'] = $this->login_model->esta_validado($profesores[$key]['correo']);
-		}
+	    $rest_json = file_get_contents("php://input");
+        $_POST = json_decode($rest_json, true);
+        $limite = $this->input->post('numero_alumnos');
+        $offset = $this->input->post('desplazamiento');
+        $nombre = $this->input->post('nombre') ? $this->input->post('nombre') : '%';
+        $correo = $this->input->post('correo') ? $this->input->post('correo')  : '%';
+        $datos = array(
+            'nombre' => $nombre,
+            'correo' => $correo,
+            'limite' => $limite,
+            'offset' => $offset
+        );
+		$profesores = $this->profesor_model->get_profesores($datos)? $this->profesor_model->get_profesores($datos):array();
 		echo json_encode($profesores);
 	}
 	protected function borrar_profesor(){
 		$this->form_validation->set_rules('id', 'id', 'numeric|required|trim');
 		$id = $this->input->post('id');
+        $mensaje['error'] = false;
 		if ($this -> form_validation -> run() != false){
 		    $this->ofertas_model->borrar_ofertas_id_login($id);
 			$this->profesor_model->borrar_profesor($id);
 			$this->login_model->borrar_usuario($id);
-			$mensaje = "Alumno borrado correctamente";
+			$mensaje['mensaje'] = "mensaje";
 		}
 		else{
-			$mensaje = "Datos invalidos";
+			$mensaje['mensaje'] = "Datos invalidos";
+            $mensaje['error'] = true;
 		}
-		echo $mensaje;
+		echo json_encode($mensaje);
 	}
 	protected function get_idiomas(){
-		$idiomas = $this->idioma_model->idioma();
+		$rest_json = file_get_contents("php://input");
+        $_POST = json_decode($rest_json, true);
+		$nombre = $this->input->post('nombre')?$this->input->post('nombre'):'%';
+		$idiomas = $this->idioma_model->idioma($nombre);
 		$idiomas = $idiomas?$idiomas:array();
 		echo json_encode($idiomas);
 	}
 	protected function agregar_idioma(){
 		$this->form_validation->set_rules('nombre', 'Nombre', 'required|trim|regex_match[/^([a-z,A-Z,á,é,í,ó,ú,â,ê,ô,ã,õ,ç,Á,É,Í,Ó,Ú,Â,Ê,Ô,Ã,Õ,Ç,ü,ñ,Ü,Ñ," "]+)$/]');
 		$idioma = $this->input->post('nombre');
+		$mensaje['error'] = true;
 		if ($this -> form_validation -> run() != false){
-			if($this->idioma_model->agregar_idioma($idioma)){
-				echo "Idioma agregado correctamente";
+			if($id = $this->idioma_model->agregar_idioma($idioma)){
+				$mensaje['id'] = $id;
+				$mensaje['error'] = false;
+				$mensaje['mensaje'] = "Idioma agregado correctamente";
 			}
 			else{
-				echo "Idioma ya existente";
+				$mensaje['mensaje'] = "Idioma ya existente";
 			}
 		}
 		else{
-			echo "Nombre invalido";
+			$mensaje['mensaje'] = "Nombre invalido";
 		}
+		echo json_encode($mensaje);
 	}
 	protected function editar_idioma(){
 		$this->form_validation->set_rules('nombre', 'Nombre', 'required|trim|regex_match[/^([a-z,A-Z,á,é,í,ó,ú,â,ê,ô,ã,õ,ç,Á,É,Í,Ó,Ú,Â,Ê,Ô,Ã,Õ,Ç,ü,ñ,Ü,Ñ," "]+)$/]');
@@ -217,13 +260,13 @@ class Notificaciones_controller extends CI_Controller{
         $nombre = $this->input->post('nombre');
         $this->load->model('ofertas_model');
         if($this -> form_validation -> run() != false){
-            if($this->ofertas_model->agregar_etiqueta($nombre,$familia)){
-                $mensaje ="Etiqueta agregada correctamente";
-            }
-            else{
-                $mensaje ="error";
-            }
+            $mensajes['mensaje']="Etiqueta agregada correctamente";
+            $mensajes['id'] = $this->ofertas_model->agregar_etiqueta($nombre,$familia);            
         } 
+        else{
+                $mensajes['mensaje'] ="Nombre invalido";
+            }
+        echo json_encode($mensajes);
     }
 	protected function editar_etiqueta(){
 		$this->load->model('ofertas_model');
@@ -360,7 +403,7 @@ class Notificaciones_controller extends CI_Controller{
         $mensajes['error'] = false; 
         $this->form_validation->set_rules('nombre', 'Nombre', 'required|trim|regex_match[/^([a-z,A-Z,á,é,í,ó,ú,â,ê,ô,ã,õ,ç,Á,É,Í,Ó,Ú,Â,Ê,Ô,Ã,Õ,Ç,ü,ñ,Ü,Ñ," "]+)$/]');
         if ($this -> form_validation -> run() != false){
-            $this->familia_laboral_model->agregar_familia($this->input->post('nombre'));
+            $mensajes['id'] = $this->familia_laboral_model->agregar_familia($this->input->post('nombre'));
             $mensajes['mensaje'] = "Familia agregada correctamente";
         }
         else{
@@ -444,7 +487,7 @@ class Notificaciones_controller extends CI_Controller{
         $mensajes['error'] = false; 
         $this->form_validation->set_rules('nombre', 'Nombre', 'required|trim|regex_match[/^([a-z,A-Z,á,é,í,ó,ú,â,ê,ô,ã,õ,ç,Á,É,Í,Ó,Ú,Â,Ê,Ô,Ã,Õ,Ç,ü,ñ,Ü,Ñ," "]+)$/]');
         if ($this -> form_validation -> run() != false){
-            $this->curso_model->agregar_categoria($this->input->post('nombre'));
+            $mensajes['id'] = $this->curso_model->agregar_categoria($this->input->post('nombre'));
             $mensajes['mensaje'] = "Categoria agregada correctamente";
         }
         else{
@@ -502,7 +545,7 @@ class Notificaciones_controller extends CI_Controller{
 		$this->form_validation->set_rules('id_familia', 'id_familia', 'numeric|required|trim');
         $this->form_validation->set_rules('nombre', 'Nombre', 'required|trim|regex_match[/^([a-z,A-Z,á,é,í,ó,ú,â,ê,ô,ã,õ,ç,Á,É,Í,Ó,Ú,Â,Ê,Ô,Ã,Õ,Ç,ü,ñ,Ü,Ñ," "]+)$/]');
         if ($this -> form_validation -> run() != false){
-            $this->curso_model->agregar_curso($this->input->post('nombre'),$this->input->post('id_categoria'),$this->input->post('id_familia'));
+            $mensajes['id'] = $this->curso_model->agregar_curso($this->input->post('nombre'),$this->input->post('id_categoria'),$this->input->post('id_familia'));
             $mensajes['mensaje'] = "Categoria agregada correctamente";
         }
         else{
@@ -565,6 +608,10 @@ class Notificaciones_controller extends CI_Controller{
 			$mensajes['error'] = true;
 		}
 		echo json_encode($mensajes);
+	}
+	protected function numero_alumnos(){
+		$numero = $this->alumno_model->numero_alumnos_totales();
+		echo $numero;
 	}
 }
 ?>

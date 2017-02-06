@@ -4,6 +4,7 @@
 }
 header{
 	display: flex;
+	justify-content:space-between;
 }
 #logo{
 	background-image: url(../imgs/Logo_cabecera.png);

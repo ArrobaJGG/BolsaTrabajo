@@ -21,7 +21,9 @@ class Resumen_profesor_controller extends CI_Controller{
             $data['javascript'] = 'assets/js/resumen_profesor.js';
             $data['libreria'] = array("http://ajax.googleapis.com/ajax/libs/angularjs/1.6.0/angular-route.js","https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js");     
             $data['titulo'] = "Resumen profesor";
-            $data['css'] = array("/BolsaTrabajo/assets/css/cabecera.css");
+            $data['css'] = array("/BolsaTrabajo/assets/css/cabecera.css",
+                "assets/font-awesome/css/font-awesome.min.css",
+                "/BolsaTrabajo/assets/css/notificaciones.css");
 			
             $this->load->view("includes/header", $data);
             $this->load->view("resumen_profesor_view");
@@ -47,7 +49,15 @@ class Resumen_profesor_controller extends CI_Controller{
 		echo json_encode($datos);
 	}
 	protected function get_todas_ofertas(){
-		$datos['ofertas'] = $this->ofertas_model->get_ofertas(10);
+	    $rest_json = file_get_contents("php://input");
+        $_POST = json_decode($rest_json, true);
+        $limite = $this->input->post('numero_alumnos');
+        $offset = $this->input->post('desplazamiento');
+        $datos = array(
+            'limite' => $limite,
+            'offset' => $offset
+        );
+		$datos = $this->ofertas_model->get_ofertas($datos);
 		echo json_encode($datos);
 	}
 	protected function get_mis_alumnos(){
@@ -56,7 +66,17 @@ class Resumen_profesor_controller extends CI_Controller{
 		echo json_encode($datos);
 	}
     protected function get_todos_alumnos(){
-        $datos['alumnos'] = $this->alumno_model->get_alumnos(10);
+        $offset = 0;
+        $limite = 10;
+        $nombre = '';
+        $apellidos = '';
+        $dato = array(
+            'nombre' => $nombre,
+            'apellidos' => $apellidos,
+            'limite' => $limite,
+            'offset' => $offset
+        );
+        $datos = $this->alumno_model->get_alumnos($dato);
         echo json_encode($datos);
     }
 	protected function editar_perfil_oculto(){

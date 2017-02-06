@@ -35,10 +35,21 @@ class Empresa_model extends CI_Model{
 		return $this->db->query($sql);
 	}
 	
-	public function get_empresas($limit,$offset = 0){
-		$sql = "SELECT * FROM empresa,login WhERE empresa.id_login = login.id_login AND validado = true ORDER BY empresa.id_login DESC LIMIT $offset, $limit";
+	public function get_empresas($datos){
+		$sql = "SELECT * FROM empresa,login WHERE
+		      empresa.id_login = login.id_login
+              AND nombre COLLATE utf8_general_ci LIKE '%$datos[nombre]%' COLLATE utf8_general_ci 
+              AND correo COLLATE utf8_general_ci LIKE '%$datos[correo]%' COLLATE utf8_general_ci
+              AND validado = true 
+          ORDER BY empresa.id_login DESC LIMIT $datos[offset], $datos[limite]";
 		$query = $this->db->query($sql);
-		$devolver = isset($query) ? $query->result_array() : false;
+		$devolver['empresas'] = isset($query) ? $query->result_array() : false;
+        $devolver['numero_lineas'] = $this->db->query("SELECT count(empresa.id_login) numero_lineas FROM empresa,login WHERE
+              empresa.id_login = login.id_login
+              AND nombre COLLATE utf8_general_ci LIKE '%$datos[nombre]%' COLLATE utf8_general_ci 
+              AND correo COLLATE utf8_general_ci LIKE '%$datos[correo]%' COLLATE utf8_general_ci
+              AND validado = true 
+          ORDER BY empresa.id_login")->row()->numero_lineas;
 		return $devolver;
 	}
 	public function borrar_empresa($id){

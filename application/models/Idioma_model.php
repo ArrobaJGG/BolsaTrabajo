@@ -4,9 +4,11 @@ class idioma_model extends CI_Model{
 	{
 		$this->load->database();
 	}
-	public function idioma()
+	public function idioma($nombre = '%')
 	{
-		$query = $this->db->query('SELECT * FROM idioma');
+		$query = $this->db->query("SELECT * FROM idioma WHERE
+				nombre COLLATE utf8_general_ci LIKE '%$nombre%' COLLATE utf8_general_ci 
+      		ORDER BY id_idioma");
 		$row = $query->result_array();
 		$idioma = $row ? $row : false;
 		return $idioma;
@@ -34,7 +36,8 @@ class idioma_model extends CI_Model{
 	}
 	public function agregar_idioma($nombre){
 		$sql = "INSERT INTO idioma (nombre) VALUES ('$nombre')";
-		return $this->db->query($sql);
+		$this->db->query($sql);
+		return $this->db->insert_id();
 	}
 	public function editar_idioma($id,$nombre){
 		$sql = "UPDATE idioma SET nombre = '$nombre' WHERE id_idioma='$id' ";

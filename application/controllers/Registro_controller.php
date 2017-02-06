@@ -89,7 +89,7 @@ class Registro_controller extends CI_Controller {
 				$contrasena_codificada = password_hash($this -> input -> post('contrasena'), PASSWORD_DEFAULT);
 				if ($this -> login_model -> set_contrasena($this -> session -> userdata('usuario'), $contrasena_codificada)) {
 					$this -> alumno_model -> crear_alumno($this -> session -> userdata('id_login'));
-					$this -> login_model -> validar_login($correo);
+					$this -> login_model -> validar_login($this -> session -> userdata('usuario'));
 					$this->session->unset_userdata('tipo');
 					$this->session->userdata['rol'] = 'alumno';
 					redirect('../resumenalumno_controller');
@@ -183,7 +183,7 @@ class Registro_controller extends CI_Controller {
 				$contrasena_codificada = password_hash($this -> input -> post('contrasena'), PASSWORD_DEFAULT);
 				if ($this -> login_model -> set_contrasena($this -> session -> userdata('usuario'), $contrasena_codificada)) {
 					$this->session->unset_userdata('tipo');
-					$this -> login_model -> validar_login($correo);
+					$this -> login_model -> validar_login($this -> session -> userdata('usuario'));
 					$this->session->userdata['rol'] = 'empresa';
 					redirect('../../resumenempresa_controller');
 				}
