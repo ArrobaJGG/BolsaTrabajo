@@ -25,6 +25,13 @@
     			<a href="#!/administrar-idiomas"><div class="elemento">Idiomas</div></a>
     			<a href="#!/administrar-cursos-familias-etiquetas"><div class="elemento">Cursos, familias y etiquetas</div></a>
 			</div>
+		</div>
+		<div class="contenedor" ng-click="backup()">
+			<div class="selector">Backup</div>
+			<div class="contenedorElementos">
+				<div class="elemento seleccionableNav" ng-click="backupBaseDatos()">Backup base datos</div>
+				<div class="elemento seleccionableNav" ng-click="backupImagenes()">Backup imagenes </div>
+			</div>
 		</div>	
 	</div>
 	<div>

@@ -43,6 +43,10 @@ class Resumen_empresa_controller extends CI_Controller{
 			$ofertas = $this->Ofertas_model->datos_oferta($id_login);
 			echo json_encode($ofertas);	
 			}
+	function borraroferta($id){
+		$this->Ofertas_model->borrar_oferta($id);
+		header("location:/BolsaTrabajo/Resumen_empresa_controller");
+	}
 
 
 }

@@ -5,6 +5,11 @@
 	color: #229954;
 	margin-bottom: 7px;
 }
+#padre{
+	width: 80%;
+	padding-left: 10%;
+	
+}
 
 #botones{
 	vertical-align: bottom;
@@ -31,12 +36,26 @@
   color: #FFFFFF;
   border-color: #FBFFAD;
   }
-  #bloque {
+  .bloque {
   	margin-left: 30%;
   	/*ancho*/
 	width: 200px;
 	/*alto*/
 	height 300px;
+	margin-left: 25px;
+  	margin-right: auto;
+  	padding-top: 25px;
+    padding-right: 50px;
+    padding-bottom: 30px;
+    padding-left: 0px;
+  	background-color: #BCF5A9;
+  }
+  .grande{
+	display:flex;
+	flex-wrap:wrap;
+	width: 80%;
+	/*alto*/
+	height auto;
 	margin-left: auto;
   	margin-right: auto;
   	padding-top: 10px;
@@ -45,4 +64,51 @@
     padding-left: 50px;
   	border: 3px green solid;
   	background-color: #BCF5A9;
-  }
+}
+form input:required {
+ border:2px solid #FF6645;
+ 
+}
+form textarea:required{
+	border:2px solid #FF6645;
+ 
+}
+
+
+form input[type="email"]:valid{
+ border:2px solid green;
+ width: 350px;
+}
+
+form input[type="email"]:focus:invalid{
+ border:2px solid #FF6645;
+ width: 350px;
+}
+form input[type="text"]{
+	width: 350px;
+	padding-bottom: 5px;
+	
+}
+form input[type="number"]{
+	width: 350px;
+	padding-bottom: 5px;
+	
+}
+form input[type="date"]{
+	width: 350px;
+	padding-bottom: 5px;
+	
+}
+form textarea{
+	width: 350px;
+	padding-bottom: 5px;
+	
+}
+form select{
+	width: 350px;
+	padding-bottom: 5px;
+	
+}
+#izquierda{
+	padding-left:1px;
+}
