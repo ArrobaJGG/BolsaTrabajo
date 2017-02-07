@@ -27,5 +27,6 @@ $this->load->helper('form');
 	<div id="boton" id="boton">
 		<input type="button"  class="button" value="Volver" onclick="window.location='../../Resumen_empresa_controller'">
 		<input type="button" class="button" value="Editar Oferta" onclick="window.location='../../Editar_oferta_controller/index/<?php echo $id_oferta?>'"/>
+		<input type="button" class="button" value="Borrar Oferta"  onclick="window.location='../../Resumen_empresa_controller/borraroferta/<?php echo $id_oferta?>'">
 	</div>
 </div>
