@@ -92,21 +92,20 @@ class Backup extends CI_Controller{
 	function zip(){
 		$zip = new ZipArchive();
 			
-			$filename = 'assets/test.zip';
+			$filename = 'assets/copiaImagenes.zip';
 			
 			if($zip->open($filename,ZIPARCHIVE::CREATE)===true) {
 			        $zip->addGlob('img/*.*');
 			        $zip->close();
-					
-					$fichero = 'assets/test.zip';
+	
 			        header('Content-Description: File Transfer');
 				    header('Content-Type: application/octet-stream');
-				    header('Content-Disposition: attachment; filename="'.basename($fichero).'"');
+				    header('Content-Disposition: attachment; filename="'.basename($filename).'"');
 				    header('Expires: 0');
 				    header('Cache-Control: must-revalidate');
 				    header('Pragma: public');
-				    header('Content-Length: ' . filesize($fichero));
-				    readfile($fichero);
+				    header('Content-Length: ' . filesize($filename));
+				    readfile($filename);
 				    exit;
 			}
 			else {

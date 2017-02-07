@@ -18,7 +18,7 @@ myApp.config(function($routeProvider){
     	controller: 'misAlumnosCtrl'
     })
     .when("/ver-todos-alumnos", {
-    	templateUrl : "/BolsaTrabajo/api/cargar_partes/cargar/mis_alumnos",
+    	templateUrl : "/BolsaTrabajo/api/cargar_partes/cargar/todos_alumnos",
     	controller: 'todosAlumnosCtrl'
     });
 });
@@ -106,6 +106,7 @@ myApp.controller('todosAlumnosCtrl',['$scope','$http',function($scope,$http){
 	.then(
 		function correcto(response){
 			$scope.alumnos = response.data.alumnos;
+			$scope.numeroPaginas = Math.ceil(response.data.numero_lineas/10);
 		},
 		function incorrecto(response){
 			console.log(response.data);
@@ -128,7 +129,8 @@ myApp.directive('miEditorPerfil',['$compile','$http',function($compile,$http){
 	    	scope.modoEditor = false;
 	    	scope.activar= true;
 			scope.mensajeBoton = "Editar perfil";	    	
-	    	scope.hacer =  function(){
+	    	scope.hacer =  function($event){
+	    		$event.stopPropagation();
 	    		if(scope.modoEditor){
 	    			scope.enviar();
 	    			scope.modoEditor =  false;
@@ -140,7 +142,8 @@ myApp.directive('miEditorPerfil',['$compile','$http',function($compile,$http){
 	    			scope.mensajeBoton = "Enviar";
 	    		}
 	    	};
-	    	scope.editar = function($event){
+	    	scope.editar = function(){
+	    		
 	    		activar= false;
 	    		$http.get('/BolsaTrabajo/resumen_profesor_controller/validar/perfil_oculto/'+scope.alumno)
 	    		.then(
