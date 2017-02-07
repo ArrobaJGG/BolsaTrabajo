@@ -35,20 +35,26 @@ var myApp = angular.module("my-app",[]);
 					
 						var midiv = document.createElement("div");
 						var boton = document.createElement("button");
+						var borrar = document.createElement("button");
 						
 						midiv.setAttribute("class","cuadro");
 						midiv.setAttribute("id", "nueva");
 						
+						
 						boton.setAttribute("value","Editar Oferta");
 						boton.setAttribute("class", "button");
+						borrar.setAttribute("value", "Borrar Oferta");
+						borrar.setAttribute("class", "button");
 						
 						boton.setAttribute("onclick", "window.location='./Editar_oferta_controller/index/"+$scope.ofertas[contador].id_oferta+"'");
-						
+						borrar.setAttribute("onclick","window.location='./Resumen_empresa_controller/borraroferta/"+$scope.ofertas[contador].id_oferta+"'");
 						
 						
 						midiv.innerHTML = "<h3><a href='/BolsaTrabajo/Mostrar_ofertas_controller/index/"+$scope.ofertas[contador].id_oferta+"'>"+$scope.ofertas[contador].titulo+"</a></h3><p>"+$scope.ofertas[contador].resumen+"</p>";
 						boton.innerHTML= "Editar Oferta";
+						borrar.innerHTML= "Borrar Oferta";
 						midiv.appendChild(boton);
+						midiv.appendChild(borrar);
 						document.getElementById('mediano').appendChild(midiv); // Lo pones en "body", si quieres ponerlo dentro de algún id en concreto usas document.getElementById('donde lo quiero poner').appendChild(midiv);
 												
 						contador++;

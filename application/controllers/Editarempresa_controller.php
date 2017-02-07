@@ -25,7 +25,7 @@ public function index(){
 				$this->form_validation->set_rules('cif', 'Cif', 'required|trim|required|max_length[9]'); // max_length solo sirve para letras
 				$this->form_validation->set_rules('telefono', 'Telefono', 'trim|required|numeric|integer');
 				$this->form_validation->set_rules('telefono2', 'Telefono2', 'trim|numeric|integer|required');
-				$this->form_validation->set_rules('persona_contacto', 'persona_contacto', 'required|callback_letras');
+				$this->form_validation->set_rules('persona_contacto', 'persona_contacto', 'required');
 				$this->form_validation->set_rules('logo','logo');
 					// mensaje de errores
 					$this->form_validation->set_message('required','El campo %s es obligatorio'); 
