@@ -2,8 +2,7 @@
 $this->load->helper('form');
  ?>
 
-	
-	
+<mi-login></mi-login>
 <div id="grande" ng-controller="nuevaoferta">
 	<div id="mediano">
 		<div class="cuadro" >

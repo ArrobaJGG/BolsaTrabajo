@@ -108,6 +108,17 @@ angular.module("myDirectivas")
         }
       };
 }])
+.directive('miLogin',['$http',function($http){
+	return{
+		restrict: 'E',
+	    replace: false,
+	    scope: {},
+	    require: '?ngModel',
+	    templateUrl: '/BolsaTrabajo/api/info_login',
+	    link: function(scope, element, attrs) {
+	    }
+  };
+}])
 .controller('elementoCtrl',['$scope','$timeout',function($scope,$timeout){
 	$scope.mostrar = false;
 	$scope.seleccionarTipo =  function(){
@@ -150,5 +161,10 @@ angular.module("myDirectivas")
 .controller('contenedorBotonesCtrl',['$scope',function($scope){
 	$scope.mostrar = false;
 	$scope.seleccionado = "todos";
+}])
+.controller('infoLoginCtrl',['$scope',function($scope){
+	$scope.clicar = function(){
+		window.location.assign('/BolsaTrabajo/login_controller/cerrar_sesion');
+	};
 }]);
 

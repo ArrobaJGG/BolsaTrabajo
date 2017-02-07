@@ -73,6 +73,13 @@ public function index(){
 	
 	
 	    }
+	    
+        public function cerrar_sesion(){
+            if($this->session->userdata('id_login')){
+                $this->session->sess_destroy();
+            }
+            header('location:/BolsaTrabajo/login_controller');
+        }
 }
 
 ?>

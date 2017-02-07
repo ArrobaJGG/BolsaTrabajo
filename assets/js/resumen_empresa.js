@@ -1,7 +1,7 @@
 		
 var contador = 1;
-
-var myApp = angular.module("my-app",[]);
+angular.module("myDirectivas",['ngAnimate']);
+var myApp = angular.module("my-app",['myDirectivas']);
 			myApp.controller('nuevaoferta',['$scope','$http',function($scope,$http){
 			
 			var indice = 0;

@@ -22,6 +22,7 @@
             <a href="/BolsaTrabajo/cambiar_credenciales_controller"><div class="selector seleccionableNav">Cambiar credenciales</div></a>
         </div>
     </div>
+    <mi-login></mi-login>
     <div>
         <div ng-view></div>
     </div>

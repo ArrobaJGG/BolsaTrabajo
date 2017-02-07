@@ -34,6 +34,7 @@
 			</div>
 		</div>	
 	</div>
+	<mi-login></mi-login>
 	<div>
 		<div ng-view></div>
 	</div>
