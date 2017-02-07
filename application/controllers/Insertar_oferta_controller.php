@@ -87,7 +87,14 @@ public function index(){
 													
 													);
 						$insertaroferta = $this->Ofertas_model->insertar($parametros,$id_login);
-						redirect('/Resumen_empresa_controller');
+						if ($this->session->userdata('rol')=='empresa') {
+							redirect('/Resumen_empresa_controller');
+						} 
+						if($this->session->userdata('rol')=='profesor') {
+							redirect('/Resumen_profesor_controller');
+						}
+						
+								
 						}
 				
 				

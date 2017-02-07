@@ -46,6 +46,7 @@ var myApp = angular.module("my-app",[]);
 						borrar.setAttribute("value", "Borrar Oferta");
 						borrar.setAttribute("class", "button");
 						
+						
 						boton.setAttribute("onclick", "window.location='./Editar_oferta_controller/index/"+$scope.ofertas[contador].id_oferta+"'");
 						borrar.setAttribute("onclick","window.location='./Resumen_empresa_controller/borraroferta/"+$scope.ofertas[contador].id_oferta+"'");
 						
