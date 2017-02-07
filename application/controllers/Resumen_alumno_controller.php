@@ -26,7 +26,7 @@ class Resumen_alumno_controller extends CI_Controller{
  				$data['libreria'] = array();
  				$data["titulo"]="Resumen Alumno";
 				$data["javascript"]="assets/js/editar_alumno.js";
-				$data['css'] = array("/BolsaTrabajo/assets/css/cabecera.css");
+				$data['css'] = array("/BolsaTrabajo/assets/css/cabecera.css","/BolsaTrabajo/assets/css/resumen_alumno.css");
 				$this->load->view("includes/header",$data);
 				$this->load->view('Resumen_alumno_view',$ofertas);
 				$this->load->view("includes/footer", $data);
