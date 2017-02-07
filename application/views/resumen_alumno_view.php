@@ -14,6 +14,6 @@ $this->load->helper('form');
 			<?php } else{ ?>
 				<h3>NO hay ofertas</h3>				
 			<?php }?>
-			
+			<input type="submit" value="Ir a editar perfil" ng-click="window.location.assign('/BolsaTrabajo/application/controllers/editar_perfil_controller')/>
 				</div>
 </div>
