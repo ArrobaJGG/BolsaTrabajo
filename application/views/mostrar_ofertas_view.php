@@ -1,8 +1,12 @@
 <?php 
 $this->load->helper('form');
  ?>
+ <div id="titulo">
+ 	<h1>Oferta De Trabajo</h1>
+ </div>
  
 <div id="oferta">
+	
 	<h1><?php if ($titulo==null){echo "Oferta Expiro";}else{echo $titulo;} ?></h1></br>
 	
 	<h2>Oferta:</h2>
@@ -26,7 +30,10 @@ $this->load->helper('form');
 	<p><b class="curve">Duracion del contrato: </b><?php if ($duracion==null){echo "";}else{echo $duracion;}   ?></p>
 	<div id="boton" id="boton">
 		<input type="button"  class="button" value="Volver" onclick="window.location='../../<?php echo $volver; ?>'">
-		<input type="button" class="button" value="Editar Oferta" onclick="window.location='../../Editar_oferta_controller/index/<?php echo $id_oferta?>'"/>
-		<input type="button" class="button" value="Borrar Oferta"  onclick="window.location='../../Resumen_empresa_controller/borraroferta/<?php echo $id_oferta?>'">
+		<?php if ($esmia>0) {?>
+			<input type="button" class="button" value="Editar Oferta" onclick="window.location='../../Editar_oferta_controller/index/<?php echo $id_oferta?>'"/>
+			<input type="button" class="button" value="Borrar Oferta"  onclick="window.location='../../Resumen_empresa_controller/borraroferta/<?php echo $id_oferta?>'">
+		<?php } ?>
+		
 	</div>
 </div>

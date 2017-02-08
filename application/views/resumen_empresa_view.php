@@ -12,8 +12,8 @@ $this->load->helper('form');
 			<div id="oferta">
 				
 				<h3> <a href='./Mostrar_ofertas_controller/index/<?php echo $ofertas[0]['id_oferta']; ?>'"><?php echo $ofertas[0]['titulo']; ?></a></h3>
-				<p><?php  echo $ofertas[0]['resumen']; ?></p>
-										<!--index/<?php echo $ofertas[0]['id_oferta']; ?>'-->
+				<input type="button" class="button" value="Ver Oferta" onclick="window.location='./Mostrar_ofertas_controller/index/<?php echo $ofertas[0]['id_oferta']; ?>'"/>	
+				<p><?php  echo $ofertas[0]['resumen']; ?></p>								
 				<input type="button" class="button" value="Editar Oferta" onclick="window.location='./Editar_oferta_controller/index/<?php echo $ofertas[0]['id_oferta']; ?>'" />
 				<input type="button" class="button" value="Borrar Oferta" onclick="window.location='./Resumen_empresa_controller/borraroferta/<?php echo $ofertas[0]['id_oferta']; ?>'">
 				

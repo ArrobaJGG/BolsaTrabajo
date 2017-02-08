@@ -138,6 +138,13 @@ class Ofertas_model extends CI_Model{
             return true;
         }
     }
+	public function comprobar($id_oferta,$id_login){
+		$sql = "select id_oferta from oferta where id_oferta= $id_oferta and id_login=$id_login";
+		$query = $this->db->query($sql);
+		$numerofilas = $query->num_rows();
+		return $numerofilas;
+		
+	}
 
 }
 ?>

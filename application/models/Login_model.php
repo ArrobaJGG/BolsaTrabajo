@@ -16,7 +16,7 @@ class Login_model extends CI_Model{
 		return $this->db->query($sql);
 	}	
 	public function get_contrasena($correo){
-		$sql = "SELECT contrasena FROM login WHERE correo='$correo'";
+		$sql = "SELECT contrasena FROM login WHERE upper(correo)=upper('$correo') and validado=TRUE";
 		$query = $this->db->query($sql);
 		$row = $query->row();
 		$devolver = isset($row) ? $row->contrasena : false;

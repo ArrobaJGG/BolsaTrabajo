@@ -14,6 +14,7 @@
 	//TODO cuando se mete un id que no corresponde peta
 	public function index($id_oferta){
 					$datos_oferta = $this->Ofertas_model->datos_una_oferta($id_oferta);
+					$id_login = $this->session->userdata('id_login');
 					$id_familia = $datos_oferta->id_familia;
 					$familia = $this->Ofertas_model->traer_familia($id_familia);
 					$data['nombre_familia'] = $familia[0]['nombre'];
@@ -23,6 +24,9 @@
 					$data["titulo"]="Oferta";
 					$data['css'] = array("/BolsaTrabajo/assets/css/cabecera.css","/BolsaTrabajo/assets/css/mostrar_ofertas.css");
 					$data["javascript"]="assets/js/editar_oferta.js";
+					$esmia = $this->Ofertas_model->comprobar($id_oferta,$id_login);
+					//var_dump($esmia);
+					$data["esmia"]= $esmia;
 					switch ($this->session->userdata('rol')) {
 						case 'empresa':
 								$data['volver'] = "Resumen_empresa_controller";

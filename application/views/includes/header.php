@@ -14,7 +14,7 @@
 
 </head>
 <body ng-app="my-app">
-	<h1> <?php echo $titulo; ?></h1>
+	
 	<header id="header" class="">
 		<div id="logo"></div>
 		<div id="eslogan"></div>

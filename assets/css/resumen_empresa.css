@@ -37,8 +37,10 @@
 	border: green 4px solid;	
 }
 
-#oferta{
-	width: 80%;
+#oferta, .raya{
+	/*width: 80%;*/
+	margin-top: 10px;
+	border: 2px solid green;
 	
 }
 #oferta a, #nueva a{
