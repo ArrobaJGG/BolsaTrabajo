@@ -46,12 +46,7 @@ class Resumen_alumno_controller extends CI_Controller{
 		}
 		
 	}
-	function traerofertas(){
-		$id_login = $this->session->userdata['id_login'];
-		// array con los datos
-		$datos['ofertas'] = $this->Ofertas_model->ofertas_alumno($id_login);
-		echo json_encode($datos);	
-	}
+	
 
 	
 }
