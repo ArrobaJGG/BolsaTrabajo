@@ -10,6 +10,12 @@ class Curso_model extends CI_Model{
 		$cursos_alumno = $row ? $row : false;
 		return $cursos_alumno;
 	}
+	public function get_curso_id_login($id_login){
+		$query=$this->db->query("SELECT id_curso FROM alumno_curso where id_login='$id_login'");
+		$row = $query->row();
+		$cursos_alumno = $row ? $row->id_curso : false;
+		return $cursos_alumno;
+	}
     public function get_categoria(){
         $query=$this->db->query("SELECT * FROM categoria");
         $row = $query->result_array();

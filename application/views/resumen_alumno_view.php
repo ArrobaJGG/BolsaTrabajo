@@ -4,7 +4,6 @@ $this->load->helper('form');
 <div ng-controller="myCtrl">
 
 	<div id="tabla">
-
 		<h1>Ofertas</h1>
 			<?php  if ($ofertas){
 				foreach ($ofertas as $oferta){?>

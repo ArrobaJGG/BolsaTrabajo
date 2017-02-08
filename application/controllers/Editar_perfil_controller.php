@@ -141,8 +141,10 @@ class Editar_perfil_controller extends SuperController{
      			
      			$actualizar_alumno = $this->alumno_model->actualizar_alumno($parametros_alumno,$id_login);
 				if($curso!="0"){
-     				if ($this->alumno_model->tiene_alumno_curso($curso,$id_login)==0){
+     				if ($this->alumno_model->tiene_alumno_curso($id_login)==0){
      					$actualizar_alumno = $this->alumno_model->insertar_alumno_curso($parametros_alumno_curso,$id_login);
+					}else{
+						$actualizar_alumno = $this->alumno_model->actualizar_alumno_curso($parametros_alumno_curso,$id_login);
 					}
 				}
 				
@@ -179,7 +181,8 @@ class Editar_perfil_controller extends SuperController{
      	$data['niveleshablados']=$this->idioma_model->nivelhablado();
      	$data['nivelesescritos']=$this->idioma_model->nivelescrito();
      	$data['familias']=$this->familia_laboral_model->familia();
-     	$data['alumnos_cursos']=$this->curso_model->get_curso($id_login);
+     	$data['alumnos_cursos']=$this->curso_model->get_curso();
+		$data['curso_alumno']=$this->curso_model->get_curso_id_login($id_login);
 
      	$this->load->view("includes/header",$data);
      	$this->load->view("Editar_perfil_view", $datos_alumnos);

@@ -46,48 +46,16 @@ $this -> load -> helper('form');
 						<span ng-show="userForm.descripcion.$error.maxlength">La descripcion no puede exceder de 1000 caracteres.</span>
 					</span></br>
 															
-					Idiomas: <select name="idioma" multiple>
-								<?php
-								foreach ($idiomas as $idioma) {
-									echo '<option value="' . $idioma['id_idioma'] . '">' . $idioma['nombre'] . '</option>';
-								}
-								?>
-							</select></br>
-					Nivel:<select name="nivelleido">
-										<?php
-										foreach ($niveles as $nivelleido) {
-											echo '<option value="' . $nivelleido['id_nivel'] . '">' . $nivelleido['titulacion'] . ' ' . $nivelleido['equivalencia'] . ' ' . $nivelleido['tipo'] . '</option>';
-										}
-										?>
-									</select>
-							<select name="nivelescrito">
-							<?php
-							foreach ($nivelesescritos as $nivelescrito) {
-								echo '<option value="' . $nivelescrito['id_nivel'] . '">' . $nivelescrito['titulacion'] . ' ' . $nivelescrito['equivalencia'] . ' ' . $nivelescrito['tipo'] . '</option>';
-							}
-							?>
-							</select>
-
-					
-						<select name="nivelhablado">
-							<?php
-							foreach ($niveleshablados as $nivelhablado) {
-								echo '<option value="' . $nivelhablado['id_nivel'] . '">' . $nivelhablado['titulacion'] . ' ' . $nivelhablado['equivalencia'] . ' ' . $nivelhablado['tipo'] . '</option>';
-							}
-							?>
-						</select>
-					</div>
 					<div class="bloque">
-						Curso: <select name="curso">
+						Curso: <select name="curso" >
 							 <option value="0">elija curso</option>
 							<?php
-							foreach ($alumnos_cursos as $alumno_curso) {
-								echo '<option value="' . $alumno_curso['id_curso'] . '">'. ' ' . $alumno_curso['nombre'] . '</option>';
-							}
+							foreach ($alumnos_cursos as $alumno_curso) {?>
+								<option <?php if($curso_alumno==$alumno_curso['id_curso'])echo "selected"; ?> value=" <?php echo $alumno_curso['id_curso']; ?>"> <?php echo $alumno_curso['nombre']; ?> </option>a;
+							<?php  }
 							?>
 							
 						</select></br>	
-						Titulado<input type="checkbox" name="titulado" value="titulado"></br>
 				Año Inicio: <input type="text" name="fecha_inicio" ng-model="fecha_inicio" ng-init = "fecha_inicio='<?php if ($cursos['fecha_inicio']==NULL){ echo " Campo Vacio  "; } else {echo $cursos['fecha_inicio'];} ?>'"/>
 					<span class="messages" ng-show="userForm.$submitted || userForm.ano_inicio.$touched">
 					<span ng-show="userForm.ano_inicio.$error.required">El campo es obligatorio.</span>
