@@ -69,7 +69,16 @@ class Alumno_model extends CI_Model{
 	public function actualizar_familia($parametros_familia,$id_login){
 		
 	}
-
+	public function insertar_alumno_curso($parametros_alumno_curso,$id_login){
+		$sql = "INSERT INTO alumno_curso (id_curso,id_login,fecha_inicio,fecha_final) VALUES ('$parametros_alumno_curso[id_curso]','$id_login','$parametros_alumno_curso[fecha_inicio]','$parametros_alumno_curso[fecha_final]')";
+		$query = $this->db->query($sql);
+	}
+	public function tiene_alumno_Curso($id_curso,$id_login){
+		$sql="SELECT count(id_curso) numero from alumno_curso where id_curso=$id_curso and id_login=$id_login";
+		$query= $this->db->query($sql);
+		return $query->row()->numero;
+	}
+	
 	public function actualizar_alumno_curso($parametros_alumno_curso,$id_login){
 		$sql = "UPDATE alumno_curso SET fecha_inicio='$parametros_alumno_curso[fecha_inicio]', fecha_final='$parametros_alumno_curso[fecha_final]'  WHERE id_login = $id_login";
 		$query = $this->db->query($sql);
@@ -142,6 +151,16 @@ class Alumno_model extends CI_Model{
         $row = $query->row();
         $devolver = $row ? $row->numero : false;
         return $devolver;
+	}
+	public function coger_datos($id){
+		$sql= "Select nombre,apellido from alumno where id_login=$id";
+		$query= $this->db->query($sql);
+		return $query->row();
+	}
+	public function contar_alumno($id){
+		$sql="Select count(id_curso) contar from alumno_curso where id_login=$id";
+		$query= $this->db->query($sql);
+		return $query->row()->contar;
 	}
 }
 ?>
