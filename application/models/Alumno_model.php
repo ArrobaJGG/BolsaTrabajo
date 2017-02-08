@@ -73,14 +73,14 @@ class Alumno_model extends CI_Model{
 		$sql = "INSERT INTO alumno_curso (id_curso,id_login,fecha_inicio,fecha_final) VALUES ('$parametros_alumno_curso[id_curso]','$id_login','$parametros_alumno_curso[fecha_inicio]','$parametros_alumno_curso[fecha_final]')";
 		$query = $this->db->query($sql);
 	}
-	public function tiene_alumno_Curso($id_curso,$id_login){
-		$sql="SELECT count(id_curso) numero from alumno_curso where id_curso=$id_curso and id_login=$id_login";
+	public function tiene_alumno_Curso($id_login){
+		$sql="SELECT count(id_curso) numero from alumno_curso where id_login=$id_login";
 		$query= $this->db->query($sql);
 		return $query->row()->numero;
 	}
 	
 	public function actualizar_alumno_curso($parametros_alumno_curso,$id_login){
-		$sql = "UPDATE alumno_curso SET fecha_inicio='$parametros_alumno_curso[fecha_inicio]', fecha_final='$parametros_alumno_curso[fecha_final]'  WHERE id_login = $id_login";
+		$sql = "UPDATE alumno_curso SET fecha_inicio='$parametros_alumno_curso[fecha_inicio]', fecha_final='$parametros_alumno_curso[fecha_final]' , id_curso='$parametros_alumno_curso[id_curso]' WHERE id_login = $id_login";
 		$query = $this->db->query($sql);
 	}
 	public function id_login($id_login){
