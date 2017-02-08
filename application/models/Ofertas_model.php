@@ -14,6 +14,12 @@ class Ofertas_model extends CI_Model{
 		    }
 		    return null;
 	}
+	public function ofertas_alumno($id_login){
+		$sql = "SELECT * FROM oferta WHERE id_familia IN (SELECT id_familia from curso c,alumno_curso a WHERE a.id_curso = c.id_curso AND id_login = '$id_login')";
+		$query = $this->db->query($sql);
+        $devolver = isset($query) ? $query->result_array() : false;	
+		return $devolver;
+	}
 	public function traer_familia($id_familia){
 		$sql = "select nombre from familia_laboral where id_familia_laboral = $id_familia";
 		$query = $this->db->query($sql);

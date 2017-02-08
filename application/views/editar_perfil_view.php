@@ -127,4 +127,5 @@ $this -> load -> helper('form');
 		<p><?php if(isset($mensaje)) echo $mensaje; ?></p>
 		<?php echo validation_errors(); ?><!--mostrar los errores de validación-->
 </div>
+<mi-login></mi-login>
 </form>

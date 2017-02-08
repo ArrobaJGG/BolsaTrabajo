@@ -154,10 +154,17 @@ class Editar_perfil_controller extends SuperController{
      	}
      	$datos_alumnos = $this->alumno_model->id_login($id_login);
      	$datos_alumnos['cursos'] = $this->alumno_model->alumno_curso($id_login);
-     	$data['libreria']=array();
+     	$data['javascript'] = 'assets/js/directivas.js';
+        $data['libreria'] = array("http://ajax.googleapis.com/ajax/libs/angularjs/1.6.0/angular-route.js",
+                     "https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-animate.js",
+                     base_url('assets/js/editar_perfil.js'));  
+		$data['css'] = array("/BolsaTrabajo/assets/css/cabecera.css",
+				    "/BolsaTrabajo/assets/css/editar_perfil.css",
+                    "/BolsaTrabajo/assets/css/directivas.css",
+                    "assets/font-awesome/css/font-awesome.min.css");
+		
+     	
      	$data['titulo'] = "Editar Perfil";
-     	$data['css'] = array("/BolsaTrabajo/assets/css/cabecera.css","/BolsaTrabajo/assets/css/editar_perfil.css");
-     	$data["javascript"]="assets/js/editar_perfil.js";
      	$data['idiomas']=$this->idioma_model->idioma();
      	$data['niveles']=$this->idioma_model->nivelleido();
      	$data['niveleshablados']=$this->idioma_model->nivelhablado();
