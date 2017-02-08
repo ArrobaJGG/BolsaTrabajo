@@ -8,8 +8,8 @@
     font-size:12px; 
     font-family:Verdana,Helvetica; 
     font-weight:bold; 
-    color:#0000FF; 
-    background:#A4C1FF; 
+    color:white; 
+    background:#FF8000; 
     border:0px; 
     width:120px; 
     height:25px; 
@@ -17,20 +17,20 @@
   
   .button:hover
   {
-  background: #365D9D;
-  background: linear-gradient(left, #365D9D, #436CAD);
-  background: -moz-linear-gradient(left, #365D9D, #436CAD);
-  background: -webkit-linear-gradient(left, #365D9D, #436CAD);
-  background: -o-linear-gradient(left, #365D9D, #436CAD);
+  background: #FF00FF;
+  background: linear-gradient(left, #FF00FF, #436CAD);
+  background: -moz-linear-gradient(left, #FF00FF, #436CAD);
+  background: -webkit-linear-gradient(left, #FF00FF, #436CAD);
+  background: -o-linear-gradient(left, #FF00FF, #436CAD);
   color: #FFFFFF;
   border-color: #FBFFAD;
   }
  #bloque{
  	vertical-align: middle;
- 	border: solid 1px black;
+ 	
  	
  } 
- #contenido, #reg{
+ #contenido{
  	border:solid 4px green;
  	vertical-align: middle;
  	margin-left: 25%;
@@ -44,6 +44,35 @@
 	-moz-box-shadow: 7px 9px 5px 0px rgba(0,0,0,0.75);
 	box-shadow: 7px 9px 5px 0px rgba(0,0,0,0.75);
 	
+ }
+ #reg{
+ 	border:solid 4px #0080FF;
+ 	vertical-align: middle;
+ 	margin-left: 25%;
+ 	margin-right: 25%;
+ 	text-align:center;
+ 	background-color: #A9E2F3;
+ 	border-radius: 200px 200px 200px 200px;
+	-moz-border-radius: 200px 200px 200px 200px;
+	-webkit-border-radius: 200px 200px 200px 200px;
+	-webkit-box-shadow: 7px 9px 5px 0px rgba(0,0,0,0.75);
+	-moz-box-shadow: 7px 9px 5px 0px rgba(0,0,0,0.75);
+	box-shadow: 7px 9px 5px 0px rgba(0,0,0,0.75);
+ }
+ #contenido{
+ 	padding: 0;
+  margin: 0;
+  list-style: none;  
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;  
+  -webkit-flex-flow: row wrap;
+  align-items:center;
+  justify-content: center;
+  border: 1px solid black;
+  flex-direction: row ;
  }
  .nueva{
  	align:right;
@@ -71,11 +100,15 @@
   -webkit-flex-flow: row wrap;
   align-items:center;
   justify-content: center;
-  border: 1px solid black;
-  flex-direction: row ; 
+  flex-direction: row ;
+  text-align: center; 
  }
  .hijo{
- 	order: ;
- 	
+ 	width: 500px;
+ 	height: 100px;
+ 	padding-top: 20px; 	
+ }
+ #separar{
+ 	padding-top:15px;
  }
  
