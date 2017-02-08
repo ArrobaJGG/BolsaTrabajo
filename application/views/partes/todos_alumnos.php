@@ -1,6 +1,6 @@
 <div class="divNgView">
 	<div class="titulo">
-        <h4>Ofertas</h4>
+        <h4>Todos los alumnos</h4>
     </div>
     <div class="paginas">
         <div>
