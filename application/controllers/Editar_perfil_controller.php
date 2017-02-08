@@ -89,7 +89,7 @@ class Editar_perfil_controller extends SuperController{
 					
 					
 					$mi_archivo = 'logo';
-					$config['upload_path'] ='./img/';
+					$config['upload_path'] ='./img/imgr/';
 					$config['allowed_types'] = 'gif|jpg|png|jpeg';
 					$config['max_size'] = '2048';
 					$config['overwrite'] = TRUE;
@@ -110,7 +110,7 @@ class Editar_perfil_controller extends SuperController{
      				$config['overwrite'] = TRUE;
      				$config['width'] = 275;
      				$config['height'] = 250;
-     				$config['new_image'] = './img/imgr/'. $data['upload_data']['file_name'];
+     				$config['new_image'] = './img/'. $data['upload_data']['file_name'];
      				$img_redim1 = $config['new_image'];
      				$this->load->library('image_lib', $config);
     				if (!$this->image_lib->resize()) {
@@ -125,8 +125,8 @@ class Editar_perfil_controller extends SuperController{
      				$config['maintain_ratio'] = TRUE;
 					$config['overwrite'] = TRUE;
      				$config['width'] = 100;
-     				$config['height'] = 50;
-     				$config['new_image'] = './img/imgr/'. $data['upload_data']['file_name'];
+     				$config['height'] = 100;
+     				$config['new_image'] = './img/'. $data['upload_data']['file_name'];
      				$this->image_lib->initialize($config); /// <<- IMPORTANTE
      				if (!$this->image_lib->resize()) {
           				@unlink($img_full_path);
