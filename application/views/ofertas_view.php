@@ -1,5 +1,7 @@
 <div class="divNgView">
-    
+    <div class="titulo">
+        <h4>Alumnos Apuntados</h4>
+    </div>
     <div class="elementoRepetible">
     <?php foreach ($alumnos as $alumno) { ?>
     	<div class="elementoInterno">
