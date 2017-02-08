@@ -38,7 +38,7 @@ class Resumen_alumno_controller extends CI_Controller{
                     "assets/font-awesome/css/font-awesome.min.css");
 
 				$this->load->view("includes/header",$data);
-				$this->load->view('Resumen_alumno_view',$ofertas);
+				$this->load->view('resumen_alumno_view',$ofertas);
 				$this->load->view("includes/footer", $data);
 					
 		}else{

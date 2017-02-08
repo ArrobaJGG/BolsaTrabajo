@@ -45,14 +45,7 @@ $this -> load -> helper('form');
 						<span ng-show="userForm.descripcion.$error.required">El campo es obligatorio.</span>
 						<span ng-show="userForm.descripcion.$error.maxlength">La descripcion no puede exceder de 1000 caracteres.</span>
 					</span></br>
-					Familia:<select name="familia">
-							<?php
-							foreach ($familias as $familia) {
-								echo '<option value="' . $familia['id_familia_laboral'] . '">' . $familia['nombre'] . '</option>';
-							}
-							?>
-					</select></br>
-										
+															
 					Idiomas: <select name="idioma" multiple>
 								<?php
 								foreach ($idiomas as $idioma) {
@@ -86,6 +79,7 @@ $this -> load -> helper('form');
 					</div>
 					<div class="bloque">
 						Curso: <select name="curso">
+							 <option value="0">elija curso</option>
 							<?php
 							foreach ($alumnos_cursos as $alumno_curso) {
 								echo '<option value="' . $alumno_curso['id_curso'] . '">'. ' ' . $alumno_curso['nombre'] . '</option>';
