@@ -114,7 +114,9 @@ $this -> load -> helper('form');
 				
 				Foto: <input type="file" name="logo" accept="image/*" value="http://localhost/BolsaTrabajo/img/imgr/<?php echo $id_login ?>.jpg" onerror="this.src='./img/pordefecto.jpg'"/>
 							<div id="imgalumno">
+								<div>
 								<img src="http://localhost/BolsaTrabajo/img/<?php echo $id_login ?>.jpg"; width="80" height="80"  onerror="this.src='./img/pordefecto.jpg'";>							   
+								</div>
 							</div>
 				</div>
 		</div>
@@ -124,5 +126,5 @@ $this -> load -> helper('form');
 		<input type="button" class="button" name="Cancelar" value="Cancelar" onclick="window.location='Resumen_alumno_controller'" />
 		<p><?php if(isset($mensaje)) echo $mensaje; ?></p>
 		<?php echo validation_errors(); ?><!--mostrar los errores de validación-->
-	</div>
+</div>
 </form>

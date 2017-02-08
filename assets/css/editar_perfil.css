@@ -39,9 +39,7 @@ margin-bottom: 7px;
 form input, input[type="text"],textarea{
 	width: 200px;
 }
-#imgalumno{
-	float: right;
-}
+
 #botones{
 	vertical-align: bottom;
  	text-align: center;
@@ -67,4 +65,21 @@ form input, input[type="text"],textarea{
   background: -o-linear-gradient(left, #365D9D, #436CAD);
   color: #FFFFFF;
   border-color: #FBFFAD;
+  }
+  #imgalumno img{
+  	margin-right: 1px;
+  	border: solid 2px green;
+  	
+  }
+  #imgalumno{
+  	border: solid 1px blue;
+  	position:relative;
+  	width:100%;
+  	display:flex;
+  	justify-content:flex-end;
+  	flex-direction:row;
+  }
+  #imgalumno div{
+  	width:auto;
+  
   }
