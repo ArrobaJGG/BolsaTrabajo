@@ -75,6 +75,7 @@
   flex-direction: row ; 
  }
  .hijo{
- 	order: <integer>;
+ 	order: ;
+ 	
  }
  

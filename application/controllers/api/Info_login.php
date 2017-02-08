@@ -14,7 +14,7 @@ class Info_login extends CI_Controller{
             $data['existeImagen'] = true;
             $data['rutaImagen'] = file_exists('img/'.$this->session->userdata('id_login').".jpg")?'/BolsaTrabajo/img/'.$this->session->userdata('id_login').".jpg":'/BolsaTrabajo/img/pordefecto.jpg';
         	if($rol=="empresa"){
-        		$data['rutaEditar'] = 'editar_empresa_controller';
+        		$data['rutaEditar'] = 'editarempresa_controller';
         	}
 			if($rol == "alumno"){
 				$data['rutaEditar'] = 'editar_perfil_controller';
