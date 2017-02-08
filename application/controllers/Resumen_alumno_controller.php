@@ -25,10 +25,9 @@ class Resumen_alumno_controller extends CI_Controller{
 				//echo($this->session->$correo);
  			
  				$data["titulo"]="Resumen Alumno";
-<<<<<<< HEAD
-				$data["javascript"]="/assets/js/editar_alumno.js";
-				$data['css'] = array("/BolsaTrabajo/assets/css/cabecera.css");
-=======
+
+			
+
                 $data['javascript'] = 'assets/js/directivas.js';
                 $data['libreria'] = array("http://ajax.googleapis.com/ajax/libs/angularjs/1.6.0/angular-route.js",
                      "https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-animate.js",
@@ -37,7 +36,7 @@ class Resumen_alumno_controller extends CI_Controller{
 				    "/BolsaTrabajo/assets/css/resumen_alumno.css",
                     "/BolsaTrabajo/assets/css/directivas.css",
                     "assets/font-awesome/css/font-awesome.min.css");
->>>>>>> 196b1c661ec13eecd3cded281ff606ec7a4f89bb
+
 				$this->load->view("includes/header",$data);
 				$this->load->view('Resumen_alumno_view',$ofertas);
 				$this->load->view("includes/footer", $data);
