@@ -34,7 +34,7 @@ angular.module("myDirectivas")
         		,JSON.stringify({datos : scope.buscador}))
 	        	.then(
 	        		function correcto(response){
-	        			console.log(response.data);
+	        			//console.log(response.data);
 	        		},
 	        		function fallo(response){
 	        			console.log(response.data);
@@ -106,17 +106,17 @@ angular.module("myDirectivas")
             element.on('dragover', function(e) {
 			    e.preventDefault();
 			    e.stopPropagation();
-			    console.log(e);
+			    //console.log(e);
 			});
 			element.on('dragenter', function(e) {
 			    e.preventDefault();
 			    e.stopPropagation();
 			});
 			element.on('drop', function(e) {
-				console.log(scope.objetoUpload);
+				//console.log(scope.objetoUpload);
 			    e.preventDefault();
 			    e.stopPropagation();
-			    console.log(e.dataTransfer.files);
+			    //console.log(e.dataTransfer.files);
 			    if (e.dataTransfer){
 			        if (e.dataTransfer.files.length > 0) {
 			        	var comprobar = new RegExp("(.*?)\.("+scope.tipoArchivo+")");
@@ -138,7 +138,7 @@ angular.module("myDirectivas")
 			function upload(files,callback) {
 			    var data = new FormData();
 			    data.append("files",files[0]);
-				console.log(data.getAll(data));
+				//console.log(data.getAll(data));
 			    $http({
 			        method: 'POST',
 			        url: attrs.to,

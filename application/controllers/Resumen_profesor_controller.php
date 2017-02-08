@@ -25,7 +25,8 @@ class Resumen_profesor_controller extends CI_Controller{
             $data['titulo'] = "Resumen profesor";
             $data['css'] = array("/BolsaTrabajo/assets/css/cabecera.css",
                 "assets/font-awesome/css/font-awesome.min.css",
-                "/BolsaTrabajo/assets/css/notificaciones.css");
+                "/BolsaTrabajo/assets/css/notificaciones.css",
+				"/BolsaTrabajo/assets/css/directivas.css");
 			
             $this->load->view("includes/header", $data);
             $this->load->view("resumen_profesor_view");
