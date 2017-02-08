@@ -25,7 +25,7 @@ $this->load->helper('form');
 	<p><b class="curve">Fecha Expiracion:</b> <?php  if ($fecha_expiracion=="0000-00-00"){echo "Sin fecha final";}else{ echo $fecha_expiracion;} ?></p>
 	<p><b class="curve">Duracion del contrato: </b><?php if ($duracion==null){echo "";}else{echo $duracion;}   ?></p>
 	<div id="boton" id="boton">
-		<input type="button"  class="button" value="Volver" onclick="window.location='../../Resumen_empresa_controller'">
+		<input type="button"  class="button" value="Volver" onclick="window.location='../../<?php echo $volver; ?>'">
 		<input type="button" class="button" value="Editar Oferta" onclick="window.location='../../Editar_oferta_controller/index/<?php echo $id_oferta?>'"/>
 		<input type="button" class="button" value="Borrar Oferta"  onclick="window.location='../../Resumen_empresa_controller/borraroferta/<?php echo $id_oferta?>'">
 	</div>

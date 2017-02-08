@@ -4,12 +4,33 @@
 }
 #ofertas{
 	border:10px solid green;
-	background-color: white;	
+		
 }
 #tabla h1{
 	text-align: center;
 	font-family: fantasy;
-	color: #229954;
+	color: #0080FF;
 	margin-bottom: 7px;
 }
+.button{ 
+    font-size:12px; 
+    font-family:Verdana,Helvetica; 
+    font-weight:bold; 
+    color:#0000FF; 
+    background:#A4C1FF; 
+    border:0px; 
+    width:120px; 
+    height:25px; 
+}
+  
+  .button:hover
+  {
+  background: #365D9D;
+  background: linear-gradient(left, #365D9D, #436CAD);
+  background: -moz-linear-gradient(left, #365D9D, #436CAD);
+  background: -webkit-linear-gradient(left, #365D9D, #436CAD);
+  background: -o-linear-gradient(left, #365D9D, #436CAD);
+  color: #FFFFFF;
+  border-color: #FBFFAD;
+  }
 

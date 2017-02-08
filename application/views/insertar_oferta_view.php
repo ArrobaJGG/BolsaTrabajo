@@ -33,24 +33,7 @@ $this->load->helper('form');
 								}
 								?>
 						</select></br>
-				<!--			
-				<input type="button"onclick="showHide()" value="Añadir"></br>
-				<div style="border:1px solid" id="etiquetas">
-							<h3>Etiquetas</h3>       
-				            <div ng-controller="etiquetaCtrl" ng-repeat = "etiqueta in etiquetas | filter: {id_familia_laboral : familiaSeleccionada}">
-				            	<span ng-show="!modoEditarEtiqueta">
-				            		<span>{{etiqueta.nombre}}</span><button ng-click="editarEtiqueta()" >Editar</button> <button ng-click="borrarEtiqueta($event)" value="{{etiqueta.id_etiqueta}}">borrar</button>
-				            	</span>
-				            	<span ng-show="modoEditarEtiqueta">
-				            		<input type="text" ng-init="nombreEtiquetaAng=etiqueta.nombre" ng-model = "nombreEtiquetaAng"> <button value="{{etiqueta.id_etiqueta}}" ng-click="enviarEtiqueta($event)">Enviar</button>
-				            	</span>
-				            </div>
-				            <div ng-show="familiaSeleccionada" id="anadirEtiqueta">
-				                <span>Nueva etiqueta en la familia laboral <span ng-repeat="familia in familias | filter: {id_familia_laboral : familiaSeleccionada}">{{familia.nombre}}</span></span><br>
-				                <input type="text" ng-model="etiquetaAng" /><button ng-click="anadirEtiqueta()">Añadir</button>
-				            </div>
-				       </div>
-				      -->
+				
 				<b>Correo: </b><input type="email" id="correo" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"  name="correo" value="" placeholder="Correo"/></br>
 				<b>Horario: </b><input id="horario" type="text" name="horario"  value="" placeholder="Horario"/></br>
 				<b>Oculto: </b><input type="checkbox"  name="oculto" value=""/><br/>

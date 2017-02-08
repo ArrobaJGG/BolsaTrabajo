@@ -30,7 +30,7 @@ $this->load->helper('form');
 										?>
 						</select></br>
 									
-						<!--<input type="button"onclick="showHide()" value="Añadir"></br>-->
+						
 						<b>Correo: </b><input type="email" name="correo" value="<?php if ($correo==null){echo "";}else{echo $correo;}   ?>" placeholder="Correo"/></br>
 						<b>Horario: </b><input type="text" name="horario"  value="<?php if ($horario==null){echo "";}else{echo $horario;}   ?>" placeholder="Horario"/></br>
 						<b>Oculto: </b><input type="checkbox"  name="oculto" value=""/><br/>
@@ -40,6 +40,7 @@ $this->load->helper('form');
 			<div id="botones">
 				<input type="submit" class="button" name="Actualizar" value="Actualizar" />
 				<input type="button" class="button" name="Cancelar" value="Cancelar" onclick="window.location='../../Resumen_empresa_controller'" />
+				<input type="button" class="button" value="Borrar Oferta"  onclick="window.location='../../Resumen_empresa_controller/borraroferta/<?php echo $id_oferta?>'">
 			</div>
 	</div>
 		<?php if (isset($mensaje)) echo $mensaje ?>

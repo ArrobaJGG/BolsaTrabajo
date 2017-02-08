@@ -3,7 +3,7 @@
 	text-align: center;
 	font-family: fantasy;
 	color: #0080FF;
-margin-bottom: 7px;
+	margin-bottom: 7px;
 }
 #padre{
 	display:flex;
@@ -82,4 +82,14 @@ form input, input[type="text"],textarea{
   #imgalumno div{
   	width:auto;
   
+  }
+  	#botonfoto{
+  	 font-size:12px; 
+    font-family:Verdana,Helvetica; 
+    font-weight:bold; 
+    color:#0000FF; 
+    background:#A4C1FF; 
+    border:0px; 
+    width:400px; 
+    height:25px; 
   }

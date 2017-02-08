@@ -112,7 +112,7 @@ $this -> load -> helper('form');
 					<span ng-show="userForm.ano_inicio.$error.maxlength">el año de inicio no puede ser inferior de 1960.</span>
 				</span>
 				
-				Foto: <input type="file" name="logo" accept="image/*" value="http://localhost/BolsaTrabajo/img/imgr/<?php echo $id_login ?>.jpg" onerror="this.src='./img/pordefecto.jpg'"/>
+				Foto: <input type="file" id="botonfoto" name="logo" accept="image/*" value="http://localhost/BolsaTrabajo/img/imgr/<?php echo $id_login ?>.jpg" onerror="this.src='./img/pordefecto.jpg'"/>
 							<div id="imgalumno">
 								<div>
 								<img src="http://localhost/BolsaTrabajo/img/<?php echo $id_login ?>.jpg"; width="80" height="80"  onerror="this.src='./img/pordefecto.jpg'";>							   
