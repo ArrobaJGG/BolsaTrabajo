@@ -70,7 +70,7 @@ $this -> load -> helper('form');
 					
 					</div>
 					<div class="bloque">
-Nivel: <select name="nivelleido">
+							Nivel: <select name="nivelleido">
 							<?php
 							foreach ($niveles as $nivelleido) {
 								echo '<option value="' . $nivelleido['id_nivel'] . '">' . $nivelleido['titulacion'] . ' ' . $nivelleido['equivalencia'] . ' ' . $nivelleido['tipo'] . '</option>';
@@ -128,3 +128,4 @@ Nivel: <select name="nivelleido">
 		<p><?php if(isset($mensaje)) echo $mensaje; ?></p>
 		<?php echo validation_errors(); ?><!--mostrar los errores de validación-->
 	</div>
+</form>
