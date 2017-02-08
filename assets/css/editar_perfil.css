@@ -28,7 +28,7 @@ margin-bottom: 7px;
 	flex-flow:column;
 	flex:1;
 	padding-top: 10px;
-	border: 1px solid black;
+	
 	
 }
 
@@ -68,11 +68,11 @@ form input, input[type="text"],textarea{
   }
   #imgalumno img{
   	margin-right: 1px;
-  	border: solid 2px green;
+  	
   	
   }
   #imgalumno{
-  	border: solid 1px blue;
+  	
   	position:relative;
   	width:100%;
   	display:flex;
