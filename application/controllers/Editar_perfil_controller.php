@@ -90,7 +90,7 @@ class Editar_perfil_controller extends SuperController{
 					
 					$mi_archivo = 'logo';
 					$config['upload_path'] ='./img/imgr/';
-					$config['allowed_types'] = 'gif|jpg|png|jpeg';
+					$config['allowed_types'] = 'jpg';
 					$config['max_size'] = '2048';
 					$config['overwrite'] = TRUE;
 					$config['file_name'] = $id_login;
@@ -100,91 +100,92 @@ class Editar_perfil_controller extends SuperController{
 					if (!$this->upload->do_upload($mi_archivo)) {
      					//echo $this->upload->display_errors(); exit();
 					} else {     
-     					$data = array('upload_data' => $this->upload->data());
-    					$img_full_path = $config['upload_path'] . $data['upload_data']['file_name'];
-     
+						$data = array('upload_data' => $this->upload->data());
+						$img_full_path = $config['upload_path'] . $data['upload_data']['file_name'];
+						
     				// REDIMENSIONAMOS
-    				$config['image_library'] = 'gd2';
-     				$config['source_image'] = $img_full_path;
-     				$config['maintain_ratio'] = TRUE;
-     				$config['overwrite'] = TRUE;
-     				$config['width'] = 275;
-     				$config['height'] = 250;
-     				$config['new_image'] = './img/'. $data['upload_data']['file_name'];
-     				$img_redim1 = $config['new_image'];
-     				$this->load->library('image_lib', $config);
-    				if (!$this->image_lib->resize()) {
-          				@unlink($img_full_path);
-          				echo $this->image_lib->display_errors(); exit();
-     				}
-    				 $this->image_lib->clear();
+						$config['image_library'] = 'gd2';
+						$config['source_image'] = $img_full_path;
+						$config['maintain_ratio'] = TRUE;
+						$config['overwrite'] = TRUE;
+						$config['width'] = 275;
+						$config['height'] = 250;
+						$config['new_image'] = './img/'. $data['upload_data']['file_name'];
+						$img_redim1 = $config['new_image'];
+						$this->load->library('image_lib', $config);
+						if (!$this->image_lib->resize()) {
+							@unlink($img_full_path);
+							echo $this->image_lib->display_errors(); exit();
+						}
+						$this->image_lib->clear();
 
      				// REDIMENSIONAMOS DE NUEVO
-     				$config['image_library'] = 'gd2';
-     				$config['source_image'] = $img_full_path;
-     				$config['maintain_ratio'] = TRUE;
-					$config['overwrite'] = TRUE;
-     				$config['width'] = 100;
-     				$config['height'] = 100;
-     				$config['new_image'] = './img/'. $data['upload_data']['file_name'];
+						$config['image_library'] = 'gd2';
+						$config['source_image'] = $img_full_path;
+						$config['maintain_ratio'] = TRUE;
+						$config['overwrite'] = TRUE;
+						$config['width'] = 100;
+						$config['height'] = 100;
+						$config['new_image'] = './img/'. $data['upload_data']['file_name'];
      				$this->image_lib->initialize($config); /// <<- IMPORTANTE
      				if (!$this->image_lib->resize()) {
-          				@unlink($img_full_path);
-         				@unlink($img_redim1);
-          				echo $this->image_lib->display_errors(); exit();
+     					@unlink($img_full_path);
+     					@unlink($img_redim1);
+     					echo $this->image_lib->display_errors(); exit();
      				}
-				}
-				
-					
+     			}
+     			
+     			
 					   //$actualizar_alumno = $this->alumno_model->actualizar($parametros,$id_login);
- 
- $actualizar_alumno = $this->alumno_model->actualizar_alumno($parametros_alumno,$id_login);
- $actualizar_alumno = $this->alumno_model->actualizar_alumno_curso($parametros_alumno_curso,$id_login);
+     			
+     			$actualizar_alumno = $this->alumno_model->actualizar_alumno($parametros_alumno,$id_login);
+     			$actualizar_alumno = $this->alumno_model->actualizar_alumno_curso($parametros_alumno_curso,$id_login);
  //$actualizar_nivel  = $this->idioma_model->actualizar_idioma($parametros_idioma,$id_login);
- 
+     			
 					   //$actualizar_alumno=$this->alumno_model->actualizar($nombre,$apellidos,$telefono,$dni,$fecha,$codigo_postal,$descripcion,$experiencia);
- $datos["mensaje"] = "Validacion correcta";
- 
- 
-}
+     			$datos["mensaje"] = "Validacion correcta";
+     			
+				redirect('/resumen_alumno_controller');
+     			
+     		}
 
 
-redirect('/resumen_alumno_controller');
-}
-$datos_alumnos = $this->alumno_model->id_login($id_login);
-$datos_alumnos['cursos'] = $this->alumno_model->alumno_curso($id_login);
-$data['libreria']=array();
-$data['titulo'] = "Editar Perfil";
-$data['css'] = array("/BolsaTrabajo/assets/css/cabecera.css","/BolsaTrabajo/assets/css/editar_perfil.css");
-$data["javascript"]="assets/js/editar_perfil.js";
-$data['idiomas']=$this->idioma_model->idioma();
-$data['niveles']=$this->idioma_model->nivelleido();
-$data['niveleshablados']=$this->idioma_model->nivelhablado();
-$data['nivelesescritos']=$this->idioma_model->nivelescrito();
-$data['familias']=$this->familia_laboral_model->familia();
-$data['alumnos_cursos']=$this->curso_model->get_curso($id_login);
+     		
+     	}
+     	$datos_alumnos = $this->alumno_model->id_login($id_login);
+     	$datos_alumnos['cursos'] = $this->alumno_model->alumno_curso($id_login);
+     	$data['libreria']=array();
+     	$data['titulo'] = "Editar Perfil";
+     	$data['css'] = array("/BolsaTrabajo/assets/css/cabecera.css","/BolsaTrabajo/assets/css/editar_perfil.css");
+     	$data["javascript"]="assets/js/editar_perfil.js";
+     	$data['idiomas']=$this->idioma_model->idioma();
+     	$data['niveles']=$this->idioma_model->nivelleido();
+     	$data['niveleshablados']=$this->idioma_model->nivelhablado();
+     	$data['nivelesescritos']=$this->idioma_model->nivelescrito();
+     	$data['familias']=$this->familia_laboral_model->familia();
+     	$data['alumnos_cursos']=$this->curso_model->get_curso($id_login);
 
-$this->load->view("includes/header",$data);
-$this->load->view("Editar_perfil_view", $datos_alumnos);
-$this->load->view("includes/footer",$data );
+     	$this->load->view("includes/header",$data);
+     	$this->load->view("Editar_perfil_view", $datos_alumnos);
+     	$this->load->view("includes/footer",$data );
 
-	
-}
+     	
+     }
 
-else{
-	redirect('login_controller');
-}
-}
-public function letras($cadena){
-	if (!preg_match( '/[0-9]+$/i', $cadena ))
-	{
-		if(preg_match( '/^[a-z ,.]*$/i', $cadena ))
-			return TRUE;
-	}
-	else {
-		$this->form_validation->set_message('letras', 'el campo %s tiene que tener solo letras');
-		return FALSE;
-	}
-}
+     else{
+     	redirect('login_controller');
+     }
+ }
+ public function letras($cadena){
+ 	if (!preg_match( '/[0-9]+$/i', $cadena ))
+ 	{
+ 		if(preg_match( '/^[a-z ,.]*$/i', $cadena ))
+ 			return TRUE;
+ 	}
+ 	else {
+ 		$this->form_validation->set_message('letras', 'el campo %s tiene que tener solo letras');
+ 		return FALSE;
+ 	}
+ }
 }
 ?>
