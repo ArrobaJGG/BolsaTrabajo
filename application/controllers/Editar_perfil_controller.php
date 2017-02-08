@@ -75,7 +75,8 @@ class Editar_perfil_controller extends SuperController{
 						"resumen" => $resumen,
 						"experiencia" => $experiencia,
 						"logo" => $logo);
-					$parametros_alumno_curso= array("fecha_inicio" => $fecha_inicio,
+					$parametros_alumno_curso= array("id_curso"=> $curso,
+						"fecha_inicio" => $fecha_inicio,
 						"fecha_final" => $fecha_final,
 						"id_login" => $id_login
 						);
@@ -139,12 +140,20 @@ class Editar_perfil_controller extends SuperController{
 					   //$actualizar_alumno = $this->alumno_model->actualizar($parametros,$id_login);
      			
      			$actualizar_alumno = $this->alumno_model->actualizar_alumno($parametros_alumno,$id_login);
-     			$actualizar_alumno = $this->alumno_model->actualizar_alumno_curso($parametros_alumno_curso,$id_login);
- //$actualizar_nivel  = $this->idioma_model->actualizar_idioma($parametros_idioma,$id_login);
+				if($curso!="0"){
+     				if ($this->alumno_model->tiene_alumno_curso($curso,$id_login)==0){
+     					$actualizar_alumno = $this->alumno_model->insertar_alumno_curso($parametros_alumno_curso,$id_login);
+					}
+				}
+				
+ 				//$actualizar_nivel  = $this->idioma_model->actualizar_idioma($parametros_idioma,$id_login);
      			
-					   //$actualizar_alumno=$this->alumno_model->actualizar($nombre,$apellidos,$telefono,$dni,$fecha,$codigo_postal,$descripcion,$experiencia);
+				//$actualizar_alumno=$this->alumno_model->actualizar($nombre,$apellidos,$telefono,$dni,$fecha,$codigo_postal,$descripcion,$experiencia);
      			$datos["mensaje"] = "Validacion correcta";
-     			
+     			$cogerdatos=$this->alumno_model->coger_datos($id_login);
+				if($cogerdatos->nombre!=null&&$cogerdatos->apellido!=null&&$this->alumno_model->contar_alumno($id_login)!=0){
+					 $this->alumno_model->validar_alumno($id_login);			
+				}
 				redirect('/resumen_alumno_controller');
      			
      		}
