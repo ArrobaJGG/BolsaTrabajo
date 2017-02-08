@@ -95,7 +95,7 @@ class Registro_controller extends CI_Controller {
 					$this -> login_model -> validar_login($this -> session -> userdata('usuario'));
 					$this->session->unset_userdata('tipo');
 					$this->session->userdata['rol'] = 'alumno';
-					redirect('../resumenalumno_controller');
+					redirect('../../resumen_alumno_controller');
 				}
 			}
 			else{
