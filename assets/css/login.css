@@ -28,8 +28,9 @@
  #bloque{
  	vertical-align: middle;
  	border: solid 1px black;
+ 	
  } 
- #contenido{
+ #contenido, #reg{
  	border:solid 4px green;
  	vertical-align: middle;
  	margin-left: 25%;
@@ -42,6 +43,10 @@
 	-webkit-box-shadow: 7px 9px 5px 0px rgba(0,0,0,0.75);
 	-moz-box-shadow: 7px 9px 5px 0px rgba(0,0,0,0.75);
 	box-shadow: 7px 9px 5px 0px rgba(0,0,0,0.75);
+	
+ }
+ .nueva{
+ 	align:right;
  }
  form input[type="text"], input[type="password"]{
  	text-align:center;
@@ -52,5 +57,24 @@
 	font-family: fantasy;
 	color: #229954;
 	margin-bottom: 7px;
+ }
+ /* contiene los dos bloques*/
+ #contenedor{
+ 	padding: 0;
+  margin: 0;
+  list-style: none;  
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;  
+  -webkit-flex-flow: row wrap;
+  align-items:center;
+  justify-content: center;
+  border: 1px solid black;
+  flex-direction: row ; 
+ }
+ .hijo{
+ 	order: <integer>;
  }
  

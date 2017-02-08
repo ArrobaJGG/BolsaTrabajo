@@ -13,6 +13,9 @@ class Resumen_empresa_controller extends CI_Controller{
 	}
 	
 	public function index(){
+		if($this->session->userdata('rol')=='profesor'){
+			redirect('Resumen_profesor_controller');
+		}
 		if ($this->session->userdata('rol')=='empresa') {
 			$id_login = $this->session->userdata['id_login'];
 			// array con los datos

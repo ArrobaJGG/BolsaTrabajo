@@ -23,6 +23,24 @@
 					$data["titulo"]="Oferta";
 					$data['css'] = array("/BolsaTrabajo/assets/css/cabecera.css","/BolsaTrabajo/assets/css/mostrar_ofertas.css");
 					$data["javascript"]="assets/js/editar_oferta.js";
+					switch ($this->session->userdata('rol')) {
+						case 'empresa':
+								$data['volver'] = "Resumen_empresa_controller";
+							break;
+						
+						case 'profesor':
+								$data['volver'] = "Resumen_profesor_controller";
+							break;
+						
+						case 'alumno':
+								$data['volver'] = "Resumen_alumno_controller";
+							break;
+						case 'administrador':
+							$data['volver'] = "Notificaciones_controller";
+							break;
+					}
+					
+					
 					$this->load->view("includes/header",$data);
 					$this->load->view("mostrar_ofertas_view",$datos_oferta,$data);
 					$this->load->view("includes/footer", $data);
