@@ -20,7 +20,9 @@ class Cambiar_credenciales_controller extends CI_Controller{
             $data['libreria'] = array("http://ajax.googleapis.com/ajax/libs/angularjs/1.6.0/angular-route.js","https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js");     
             $data['titulo'] = "Resumen profesor";
             $data['correo'] = $this->session->userdata['correo'];
-            
+            $data['css'] = array("/BolsaTrabajo/assets/css/cabecera.css",
+            	"/BolsaTrabajo/assets/css/login.css");
+			
             $this->load->view("includes/header", $data);
             $this->load->view("cambiar_credenciales_view");
             $this->load->view("includes/footer", $data);

@@ -117,6 +117,8 @@ class Registro_controller extends CI_Controller {
 		}
 		$data['javascript'] = array();
 		$data['libreria'] = array();
+		$data['css'] = array("/BolsaTrabajo/assets/css/cabecera.css",
+            	"/BolsaTrabajo/assets/css/login.css");
 		$data['titulo'] = "Cambiar contraseña";
 		$data['hash'] = $hash;
 		$this -> load -> view("includes/header", $data);
@@ -138,7 +140,7 @@ class Registro_controller extends CI_Controller {
 					$this -> login_model -> validar_login($this -> session -> userdata('usuario'));
 					$this->session->unset_userdata('tipo');
 					$this->session->userdata['rol'] = 'profesor';
-					redirect('../resumenprofesor_controller');
+					redirect('../resumen_profesor_controller');
 				}
 			}
 			else{
@@ -164,6 +166,8 @@ class Registro_controller extends CI_Controller {
 		$data['libreria'] = array();
 		$data['titulo'] = "Cambiar contraseña";
 		$data['hash'] = $hash;
+		$data['css'] = array("/BolsaTrabajo/assets/css/cabecera.css",
+            	"/BolsaTrabajo/assets/css/login.css");
 		$this -> load -> view("includes/header", $data);
 		$this -> load -> view("cambiar_contrasena", $data);
 		$this -> load -> view("includes/footer", $data);
@@ -185,7 +189,7 @@ class Registro_controller extends CI_Controller {
 					$this->session->unset_userdata('tipo');
 					$this -> login_model -> validar_login($this -> session -> userdata('usuario'));
 					$this->session->userdata['rol'] = 'empresa';
-					redirect('../../resumenempresa_controller');
+					redirect('../../resumen_empresa_controller');
 				}
 			}
 			else{
@@ -211,6 +215,8 @@ class Registro_controller extends CI_Controller {
 		$data['javascript'] = array();
 		$data['libreria'] = array();
 		$data['titulo'] = "Cambiar contraseña";
+		$data['css'] = array("/BolsaTrabajo/assets/css/cabecera.css",
+            	"/BolsaTrabajo/assets/css/login.css");
 
 		$this -> load -> view("includes/header", $data);
 		$this -> load -> view("cambiar_contrasena", $data);

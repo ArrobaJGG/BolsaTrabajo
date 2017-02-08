@@ -18,8 +18,10 @@ class Resumen_profesor_controller extends CI_Controller{
     public function index(){
         if($this->session->userdata('rol')=='profesor'){
             $data['notificaciones'] = array();
-            $data['javascript'] = 'assets/js/resumen_profesor.js';
-            $data['libreria'] = array("http://ajax.googleapis.com/ajax/libs/angularjs/1.6.0/angular-route.js","https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js");     
+            $data['javascript'] = 'assets/js/directivas.js';
+            $data['libreria'] = array("http://ajax.googleapis.com/ajax/libs/angularjs/1.6.0/angular-route.js",
+             "https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-animate.js",
+             base_url('assets/js/resumen_profesor.js'));   
             $data['titulo'] = "Resumen profesor";
             $data['css'] = array("/BolsaTrabajo/assets/css/cabecera.css",
                 "assets/font-awesome/css/font-awesome.min.css",

@@ -32,6 +32,7 @@ class Backup extends CI_Controller{
 	        { 
 	            $target_tables = array_intersect( $target_tables, $tables); 
 	        }
+            $content = "SET FOREIGN_KEY_CHECKS=0;\n\n";
 	        foreach($target_tables as $table)
 	        {
 	            $result         =   $mysqli->query('SELECT * FROM '.$table);  
@@ -80,6 +81,7 @@ class Backup extends CI_Controller{
 	                }
 	            } $content .="\n\n\n";
 	        }
+            $content = $content."SET FOREIGN_KEY_CHECKS=1;";
 	        //$backup_name = $backup_name ? $backup_name : $name."___(".date('H-i-s')."_".date('d-m-Y').")__rand".rand(1,11111111).".sql";
 	        $backup_name = $backup_name ? $backup_name : $name.".sql";
 	        header('Content-Type: application/octet-stream');   

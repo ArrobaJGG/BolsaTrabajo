@@ -30,7 +30,7 @@
                    correo6@hotmail.com<hr>
                </section>
            </div>
-           <upload  objeto-upload="archivoSubidos"  to="./registro_controller/crear/alumno" ng-model="archivoSubido"></upload> 
+           <upload  objeto-upload="archivoSubidos" tipo-archivo="'csv'"  to="./registro_controller/crear/alumno" ng-model="archivoSubido"></upload> 
         </div>
         
     </div>

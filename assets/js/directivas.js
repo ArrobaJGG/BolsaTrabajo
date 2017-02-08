@@ -1,68 +1,4 @@
 angular.module("myDirectivas")
-.directive('upload', ['$http',function($http) {
-    return {
-        restrict: 'E',
-        replace: true,
-        scope: {
-        	upload : "=objetoUpload"
-        },
-        require: '?ngModel',
-        templateUrl: '/BolsaTrabajo/api/cargar_partes/cargar/subir_csv',
-        link: function(scope, element, attrs, ngModel) {
-            // Code goes here
-            element.on('dragover', function(e) {
-			    e.preventDefault();
-			    e.stopPropagation();
-			    console.log(e);
-			});
-			element.on('dragenter', function(e) {
-			    e.preventDefault();
-			    e.stopPropagation();
-			});
-			element.on('drop', function(e) {
-				console.log(scope.objetoUpload);
-			    e.preventDefault();
-			    e.stopPropagation();
-			    console.log(e.dataTransfer.files);
-			    if (e.dataTransfer){
-			        if (e.dataTransfer.files.length > 0) {
-			        	var comprobar = new RegExp("(.*?)\.(csv)");
-			        	if(comprobar.test(e.dataTransfer.files[0].name)){
-			        		scope.upload = {};
-			        		upload(e.dataTransfer.files,function(up){
-		        				scope.upload.mensajes =  up;
-		        				scope.upload.cargando = false;
-			        		});
-			        		scope.upload.cargando = true;
-			            }
-			            else{
-			            	console.log(comprobar.test(e.dataTransfer.files[0].name));
-			            }
-			        }
-			    }
-			    return false;
-			});
-			function upload(files,callback) {
-			    var data = new FormData();
-			    data.append("files",files[0]);
-				console.log(data.getAll(data));
-			    $http({
-			        method: 'POST',
-			        url: attrs.to,
-			        data: data,
-			        withCredentials: true,
-			        headers: {'Content-Type': undefined },
-			        transformRequest: angular.identity
-			    }).then(function(response) {
-			     	callback(response.data);
-			    },function(response) {
-			      	callback(response.data);
-			    });
-			};
-			
-        }
-    };
-}])
 .directive('miBuscador',['$http',function($http){
 	return {
         restrict: 'E',
@@ -108,6 +44,17 @@ angular.module("myDirectivas")
         }
       };
 }])
+.directive('miLogin',['$http',function($http){
+	return{
+		restrict: 'E',
+	    replace: false,
+	    scope: {},
+	    require: '?ngModel',
+	    templateUrl: '/BolsaTrabajo/api/info_login',
+	    link: function(scope, element, attrs) {
+	    }
+  };
+}])
 .controller('elementoCtrl',['$scope','$timeout',function($scope,$timeout){
 	$scope.mostrar = false;
 	$scope.seleccionarTipo =  function(){
@@ -144,11 +91,81 @@ angular.module("myDirectivas")
 	};
 	
 }])
+.directive('upload', ['$http',function($http) {
+    return {
+        restrict: 'E',
+        replace: true,
+        scope: {
+        	upload : "=objetoUpload",
+        	tipoArchivo : "="
+        },
+        require: '?ngModel',
+        templateUrl: '/BolsaTrabajo/api/cargar_partes/cargar/subir_csv',
+        link: function(scope, element, attrs, ngModel) {
+            // Code goes here
+            element.on('dragover', function(e) {
+			    e.preventDefault();
+			    e.stopPropagation();
+			    console.log(e);
+			});
+			element.on('dragenter', function(e) {
+			    e.preventDefault();
+			    e.stopPropagation();
+			});
+			element.on('drop', function(e) {
+				console.log(scope.objetoUpload);
+			    e.preventDefault();
+			    e.stopPropagation();
+			    console.log(e.dataTransfer.files);
+			    if (e.dataTransfer){
+			        if (e.dataTransfer.files.length > 0) {
+			        	var comprobar = new RegExp("(.*?)\.("+scope.tipoArchivo+")");
+			        	if(comprobar.test(e.dataTransfer.files[0].name)){
+			        		scope.upload = {};
+			        		upload(e.dataTransfer.files,function(up){
+		        				scope.upload.mensajes =  up;
+		        				scope.upload.cargando = false;
+			        		});
+			        		scope.upload.cargando = true;
+			            }
+			            else{
+			            	console.log(comprobar.test(e.dataTransfer.files[0].name));
+			            }
+			        }
+			    }
+			    return false;
+			});
+			function upload(files,callback) {
+			    var data = new FormData();
+			    data.append("files",files[0]);
+				console.log(data.getAll(data));
+			    $http({
+			        method: 'POST',
+			        url: attrs.to,
+			        data: data,
+			        withCredentials: true,
+			        headers: {'Content-Type': undefined },
+			        transformRequest: angular.identity
+			    }).then(function(response) {
+			     	callback(response.data);
+			    },function(response) {
+			      	callback(response.data);
+			    });
+			};
+			
+        }
+    };
+}])
 .controller('contenedorBotonesEtiquetasCtrl',['$scope',function($scope){
 	$scope.mostrar = false;
 }])
 .controller('contenedorBotonesCtrl',['$scope',function($scope){
 	$scope.mostrar = false;
 	$scope.seleccionado = "todos";
+}])
+.controller('infoLoginCtrl',['$scope',function($scope){
+	$scope.clicar = function(){
+		window.location.assign('/BolsaTrabajo/login_controller/cerrar_sesion');
+	};
 }]);
 

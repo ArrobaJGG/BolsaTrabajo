@@ -1,0 +1,1 @@
+<upload  objeto-upload="archivoSubidos" tipo-archivo="'sql'"  to="./restaurar_pagina_controller/subir" ng-model="archivoSubido"></upload> 

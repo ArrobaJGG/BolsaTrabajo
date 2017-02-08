@@ -1,7 +1,7 @@
 		
 var contador = 1;
-
-var myApp = angular.module("my-app",[]);
+angular.module("myDirectivas",['ngAnimate']);
+var myApp = angular.module("my-app",['myDirectivas']);
 			myApp.controller('nuevaoferta',['$scope','$http',function($scope,$http){
 			
 			var indice = 0;
@@ -45,6 +45,7 @@ var myApp = angular.module("my-app",[]);
 						boton.setAttribute("class", "button");
 						borrar.setAttribute("value", "Borrar Oferta");
 						borrar.setAttribute("class", "button");
+						
 						
 						boton.setAttribute("onclick", "window.location='./Editar_oferta_controller/index/"+$scope.ofertas[contador].id_oferta+"'");
 						borrar.setAttribute("onclick","window.location='./Resumen_empresa_controller/borraroferta/"+$scope.ofertas[contador].id_oferta+"'");

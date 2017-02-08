@@ -1,4 +1,5 @@
-var myApp = angular.module("my-app", ['ngRoute']);
+angular.module("myDirectivas",['ngAnimate']);
+var myApp = angular.module("my-app", ['myDirectivas','ngRoute']);
 myApp.config(function($routeProvider){
 	$routeProvider
 	.when("/resumen", {
