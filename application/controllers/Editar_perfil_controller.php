@@ -185,7 +185,7 @@ class Editar_perfil_controller extends SuperController{
 		$data['curso_alumno']=$this->curso_model->get_curso_id_login($id_login);
 
      	$this->load->view("includes/header",$data);
-     	$this->load->view("Editar_perfil_view", $datos_alumnos);
+     	$this->load->view("editar_perfil_view", $datos_alumnos);
      	$this->load->view("includes/footer",$data );
 
      	
