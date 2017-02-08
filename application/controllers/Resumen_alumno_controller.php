@@ -15,7 +15,7 @@ class Resumen_alumno_controller extends CI_Controller{
 		if ($this->session->userdata('rol')=='alumno') {
 			$id_login = $this->session->userdata['id_login'];
 			// array con los datos
-			$ofertas['ofertas'] = $this->Ofertas_model->datos_oferta($id_login);
+			$ofertas['ofertas'] = $this->Ofertas_model->ofertas_alumno($id_login);
 			
 			
 		
@@ -31,7 +31,7 @@ class Resumen_alumno_controller extends CI_Controller{
                 $data['javascript'] = 'assets/js/directivas.js';
                 $data['libreria'] = array("http://ajax.googleapis.com/ajax/libs/angularjs/1.6.0/angular-route.js",
                      "https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-animate.js",
-                     base_url('assets/js/editar_alumno.js'));  
+                     base_url('assets/js/resumen_alumno.js'));  
 				$data['css'] = array("/BolsaTrabajo/assets/css/cabecera.css",
 				    "/BolsaTrabajo/assets/css/resumen_alumno.css",
                     "/BolsaTrabajo/assets/css/directivas.css",
@@ -48,10 +48,10 @@ class Resumen_alumno_controller extends CI_Controller{
 	}
 	function traerofertas(){
 		$id_login = $this->session->userdata['id_login'];
-			// array con los datos
-			$ofertas = $this->Ofertas_model->datos_oferta($id_login);
-			echo json_encode($ofertas);	
-			}
+		// array con los datos
+		$datos['ofertas'] = $this->Ofertas_model->ofertas_alumno($id_login);
+		echo json_encode($datos);	
+	}
 
 	
 }
