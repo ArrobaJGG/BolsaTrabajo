@@ -103,16 +103,16 @@ class Alumno_model extends CI_Model{
 		$row = $query->row_array();	
 		return $row;
 	}
-	public function borrar_alumno($id){
-		$sql = "DELETE FROM alumno WHERE id_login = '$id'";
+	public function borrar_alumno($id_login){
+		$sql = "DELETE FROM alumno WHERE id_login = '$id_login'";
 		return $this->db->query($sql);
 	}
-	public function borrar_alumno_idioma($id){
-		$sql = "DELETE FROM alumno_idioma WHERE id_login = '$id'";
+	public function borrar_alumno_idioma($id_login){
+		$sql = "DELETE FROM alumno_idioma WHERE id_login = '$id_login'";
 		return $this->db->query($sql);
 	}
-	public function borrar_alumno_curso($id){
-		$sql = "DELETE FROM alumno_curso WHERE id_login = '$id'";
+	public function borrar_alumno_curso($id_login){
+		$sql = "DELETE FROM alumno_curso WHERE id_login = '$id_login'";
 		return $this->db->query($sql);
 	}
 	public function borrar_oferta_alumno($id){
@@ -153,7 +153,7 @@ class Alumno_model extends CI_Model{
         return $devolver;
 	}
 	public function coger_datos($id){
-		$sql= "Select nombre,apellido from alumno where id_login=$id";
+		$sql= "Select nombre,apellidos from alumno where id_login=$id";
 		$query= $this->db->query($sql);
 		return $query->row();
 	}
