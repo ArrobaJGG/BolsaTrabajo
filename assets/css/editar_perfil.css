@@ -23,11 +23,12 @@ margin-bottom: 7px;
 }
 .bloque{
 	/*ancho*/
-
   	display:flex;
 	align-items:space-around;
 	flex-flow:column;
 	flex:1;
+	padding-top: 10px;
+	border: 1px solid black;
 	
 }
 
