@@ -44,6 +44,9 @@ class Registro_controller extends CI_Controller {
 						$this -> email -> message('Para validar su correo vaya a esta direccion http://localhost/BolsaTrabajo/Registro_controller/validar/' . $datos['hash_validar']);
 						$this -> email -> send();
 						//*/
+						//TODO añado linea para redireccionar a login
+						redirect(Login_controller);
+						
 					} else {
 						echo "esto no deberia estar pasando";
 					}

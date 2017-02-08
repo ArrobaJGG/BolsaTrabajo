@@ -26,12 +26,39 @@
   border-color: #FBFFAD;
   }
  #bloque{
- 	vertical-align: middle;
- 	
- 	
+ 	vertical-align: middle; 	
  } 
  #contenido{
- 	border:solid 4px green;
+ 	/*border:solid 4px black;*/
+ 	border: solid 4px blue;
+ 	vertical-align: middle;
+ 	margin-left: 25%;
+ 	margin-right: 25%;
+ 	text-align:center; 	
+ 	background-color:#A9E2F3 ;
+ 	border-radius: 200px 200px 200px 200px;
+	-moz-border-radius: 200px 200px 200px 200px;
+	-webkit-border-radius: 200px 200px 200px 200px;
+	-webkit-box-shadow: 7px 9px 5px 0px rgba(0,0,0,0.75);
+	-moz-box-shadow: 7px 9px 5px 0px rgba(0,0,0,0.75);
+	box-shadow: 7px 9px 5px 0px rgba(0,0,0,0.75);
+	padding: 0;
+  margin: 0;
+  list-style: none;  
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;  
+  -webkit-flex-flow: row wrap;
+  align-items:center;
+  justify-content: center;
+  
+  flex-direction: row ;
+	
+ }
+ #reg{
+ 	border:solid 4px #229954;
  	vertical-align: middle;
  	margin-left: 25%;
  	margin-right: 25%;
@@ -43,36 +70,6 @@
 	-webkit-box-shadow: 7px 9px 5px 0px rgba(0,0,0,0.75);
 	-moz-box-shadow: 7px 9px 5px 0px rgba(0,0,0,0.75);
 	box-shadow: 7px 9px 5px 0px rgba(0,0,0,0.75);
-	
- }
- #reg{
- 	border:solid 4px #0080FF;
- 	vertical-align: middle;
- 	margin-left: 25%;
- 	margin-right: 25%;
- 	text-align:center;
- 	background-color: #A9E2F3;
- 	border-radius: 200px 200px 200px 200px;
-	-moz-border-radius: 200px 200px 200px 200px;
-	-webkit-border-radius: 200px 200px 200px 200px;
-	-webkit-box-shadow: 7px 9px 5px 0px rgba(0,0,0,0.75);
-	-moz-box-shadow: 7px 9px 5px 0px rgba(0,0,0,0.75);
-	box-shadow: 7px 9px 5px 0px rgba(0,0,0,0.75);
- }
- #contenido{
- 	padding: 0;
-  margin: 0;
-  list-style: none;  
-  display: -webkit-box;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex;  
-  -webkit-flex-flow: row wrap;
-  align-items:center;
-  justify-content: center;
-  border: 1px solid black;
-  flex-direction: row ;
  }
  .nueva{
  	align:right;
@@ -89,7 +86,7 @@
  }
  /* contiene los dos bloques*/
  #contenedor{
- 	padding: 0;
+  padding: 0;
   margin: 0;
   list-style: none;  
   display: -webkit-box;

@@ -17,7 +17,7 @@ $this->load->library('form_validation');
 		
 			if ($this->session->userdata('rol')=='empresa'||$this->session->userdata('rol')=='profesor') {
 					$id_login = $this->session->userdata['id_login'];
-					//$rol = $this->session->userdata['rol'];
+					
 					$datos_oferta = $this->Ofertas_model->datos_una_oferta($id_oferta);
 					$data['familias'] = $this->Familia_laboral_model->familia();	
 					$data['etiquetas'] = $this->Ofertas_model->etiqueta();
@@ -34,7 +34,7 @@ $this->load->library('form_validation');
 
 						
 			} else {
-					redirect('login_controller');
+					redirect('../../Login_controller');
 			}
 			
 	}

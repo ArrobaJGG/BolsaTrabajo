@@ -1,0 +1,40 @@
+#botones{
+	vertical-align: bottom;
+ 	text-align: center;
+  	
+}
+.button{ 
+    font-size:12px; 
+    font-family:Verdana,Helvetica; 
+    font-weight:bold; 
+    color:#FF0080; 
+    background:#A4C1FF; 
+    border:0px; 
+    width:120px; 
+    height:25px; 
+}
+  
+  .button:hover
+  {
+  background: #365D9D;
+  background: linear-gradient(left, #DF01D7, #436CAD);
+  background: -moz-linear-gradient(left, #DF01D7, #436CAD);
+  background: -webkit-linear-gradient(left, #DF01D7, #436CAD);
+  background: -o-linear-gradient(left, #DF01D7, #436CAD);
+  color: #FF0080;
+  border-color: #FBFFAD;
+  }
+  #registro{
+  	border: 3px solid #FF0080;
+  	background-color: #F8E0EC;
+  	width: 60%;
+  	height: 200px;
+  	margin-left: 20%;
+  	padding-left: 15%;	
+  }
+  #formulario h1{
+  	text-align: center;
+	font-family: fantasy;
+	color: #FF0080;
+	margin-bottom: 7px;
+  }
