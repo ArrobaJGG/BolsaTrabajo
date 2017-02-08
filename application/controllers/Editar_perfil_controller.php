@@ -11,15 +11,16 @@ class Editar_perfil_controller extends SuperController{
 		$this->load->helper(array('form','url'));
 		$this->load->library('form_validation'); 
 		$this->load->library('session');
+		$this->removeCache();
 		$this->load->library('upload');
 		$this->load->library('image_lib');
-		$this->removeCache();
+		
 	}
 
 	
 	public function index(){
 		
-		if ($this->session->userdata('rol')=='alumno') {		
+		if ($this->session->userdata('rol')=='alumno'){		
 			$id_login = $this->session->userdata['id_login'];
 			$rol = $this->session->userdata['rol'];
 			
@@ -106,7 +107,6 @@ class Editar_perfil_controller extends SuperController{
     				$config['image_library'] = 'gd2';
      				$config['source_image'] = $img_full_path;
      				$config['maintain_ratio'] = TRUE;
-					$config['create_thumb']  = TRUE; //crea miniatura 
      				$config['overwrite'] = TRUE;
      				$config['width'] = 275;
      				$config['height'] = 250;

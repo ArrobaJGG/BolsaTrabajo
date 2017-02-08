@@ -1,7 +1,7 @@
 <?php 
 $this->load->helper('form');
  ?>
-<div ng-controller="ofertaempresa">
+<div ng-controller="myCtrl">
 	<div id="tabla">
 		
 		<h1>Ofertas</h1>
@@ -14,6 +14,7 @@ $this->load->helper('form');
 			<?php } else{ ?>
 				<h3>NO hay ofertas</h3>				
 			<?php }?>
-			<input type="submit" value="Ir a editar perfil" ng-click="window.location.assign('/BolsaTrabajo/application/controllers/editar_perfil_controller')/>
+			<button onclick="window.location.assign('/BolsaTrabajo/editar_perfil_controller')">Ir a editar perfil</button>
 				</div>
+	</div>
 </div>
