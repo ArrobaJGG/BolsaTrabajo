@@ -46,7 +46,19 @@ class Resumen_alumno_controller extends CI_Controller{
 		}
 		
 	}
-	
+	public function agregar_oferta($id_oferta){
+	    $this->load->model('alumno_model');
+	    if($rol = $this->session->userdata('rol')){
+	        $id_login = $this->session->userdata('id_login');
+            if(!$this->alumno_model->esta_apuntado($id_oferta,$id_login)){             
+	            $this->alumno_model->apuntarse_oferta($id_oferta,$id_login);
+            }
+            redirect('../../resumen_alumno_controller');
+	    }
+        else{
+            redirect('BolsaTrabajo/login_controller');
+        }
+	}
 
 	
 }

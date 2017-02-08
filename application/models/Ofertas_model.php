@@ -145,6 +145,29 @@ class Ofertas_model extends CI_Model{
 		return $numerofilas;
 		
 	}
+    public function get_apuntados($id_oferta){
+        $sql = "SELECT a.nombre nombre ,apellidos,l.correo correo,c.nombre curso
+                FROM alumno a,alumno_curso ac, login l,curso c,oferta_alumno oa
+                WHERE
+                    c.id_curso = ac.id_curso
+                    AND 
+                    ac.id_login=a.id_login
+                    AND
+                    ac.id_login=l.id_login
+                    AND
+                    ac.id_login = oa.id_login
+                    AND
+                    l.id_login = a.id_login
+                    AND
+                    l.id_login = oa.id_login
+                    AND
+                    a.id_login = oa.id_login
+                    AND
+                    oa.id_oferta ='$id_oferta'";
+        $query = $this->db->query($sql);
+        $devolver = isset($query) ? $query->result_array() : false;
+        return $devolver;
+    }
 
 }
 ?>

@@ -33,7 +33,11 @@ $this->load->helper('form');
 		<?php if ($esmia>0) {?>
 			<input type="button" class="button" value="Editar Oferta" onclick="window.location='../../Editar_oferta_controller/index/<?php echo $id_oferta?>'"/>
 			<input type="button" class="button" value="Borrar Oferta"  onclick="window.location='../../Resumen_empresa_controller/borraroferta/<?php echo $id_oferta?>'">
-		<?php } ?>
+			<input type="button" class="button" value="Ver Apuntados"  onclick="window.location.assign('/BolsaTrabajo/ofertas_controller/apuntados/<?php echo $id_oferta?>')">
+		<?php }
+        if($botonAgregarse) {?>
+            <input type="button" class="button" value="Apuntarse"  onclick="window.location.assign('/BolsaTrabajo/resumen_alumno_controller/agregar_oferta/<?php echo $id_oferta?>')">
+            <?php } ?>
 		
 	</div>
 </div>

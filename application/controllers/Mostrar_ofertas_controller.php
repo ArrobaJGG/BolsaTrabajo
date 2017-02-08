@@ -27,6 +27,7 @@
 					$esmia = $this->Ofertas_model->comprobar($id_oferta,$id_login);
 					//var_dump($esmia);
 					$data["esmia"]= $esmia;
+                    $data['botonAgregarse'] =  false;
 					switch ($this->session->userdata('rol')) {
 						case 'empresa':
 								$data['volver'] = "Resumen_empresa_controller";
@@ -38,6 +39,7 @@
 						
 						case 'alumno':
 								$data['volver'] = "Resumen_alumno_controller";
+                                $data['botonAgregarse'] =  true;
 							break;
 						case 'administrador':
 							$data['volver'] = "Notificaciones_controller";

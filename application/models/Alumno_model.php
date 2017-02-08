@@ -162,5 +162,20 @@ class Alumno_model extends CI_Model{
 		$query= $this->db->query($sql);
 		return $query->row()->contar;
 	}
+    public function esta_apuntado($id_oferta,$id_login){
+        $sql = "SELECT count(id_oferta) numero FROM oferta_alumno WHERE id_oferta = '$id_oferta' AND id_login = '$id_login'";
+        $query= $this->db->query($sql);
+        $numero = $query->row()->numero;
+        if($numero==0){
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+    public function apuntarse_oferta($id_oferta,$id_login){
+        $sql = "INSERT INTO oferta_alumno (id_oferta,id_login) VALUES ('$id_oferta','$id_login')";
+        return $this->db->query($sql);
+    }
 }
 ?>
