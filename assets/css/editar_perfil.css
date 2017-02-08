@@ -1,3 +1,46 @@
+  /* titulo de la pagina */
+#grande h1{
+	text-align: center;
+	font-family: fantasy;
+	color: #0080FF;
+margin-bottom: 7px;
+}
+#padre{
+	display:flex;
+	flex-wrap:wrap;
+	width: 80%;
+	/*alto*/
+	height auto;
+	margin-left: auto;
+  	margin-right: auto;
+  	padding-top: 10px;
+    padding-right: 50px;
+    padding-bottom: 30px;
+    padding-left: 50px;
+  	border: 3px blue solid;
+  	/* fondo azul para alumnos */
+  	background-color: #A9E2F3;
+}
+.bloque{
+	/*ancho*/
+
+  	display:flex;
+	align-items:space-around;
+	flex-flow:column;
+	flex:1;
+	
+}
+
+
+#grande{
+			
+}
+form input, input[type="text"],textarea{
+	width: 200px;
+}
+#imgalumno{
+	float: right;
+}
 #botones{
 	vertical-align: bottom;
  	text-align: center;
@@ -24,26 +67,3 @@
   color: #FFFFFF;
   border-color: #FBFFAD;
   }
-  /* titulo de la pagina */
-#padre h1{
-	text-align: center;
-	font-family: fantasy;
-	color: #229954;
-	margin-bottom: 7px;
-}
-#padre{
-	border: 1px solid black;
-}
-.bloque{
-	/*ancho*/
-	
-  	display:flex;
-	align-items:space-around;
-	flex-flow:column;
-	
-}
-.bloque p{
-	font-weight: bold;
-	color: red;
-	font-size:small;
-}
