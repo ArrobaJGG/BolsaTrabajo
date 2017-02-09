@@ -42,9 +42,9 @@ $this->load->helper('form');
 					</tr>
 					<tr>
 						<td><b>Logo:</b></td>
-						<td><input type="file" name="logo"  accept="image/*" value="http://localhost/BolsaTrabajo/img/<?php echo $id_login ?>.jpg" onerror="this.src='./img/pordefecto.jpg'"/></td>
+						<td><input type="file" name="logo"  accept="image/*" value="/BolsaTrabajo/img/<?php echo $id_login ?>.jpg" onerror="this.src='./img/pordefecto.jpg'"/></td>
 						<td><div id="imgempresa">
-							<img src="http://localhost/BolsaTrabajo/img/<?php echo $id_login ?>.jpg"; width="80" height="80" onerror="this.src='./img/pordefecto.jpg'";>
+							<img src="/BolsaTrabajo/img/<?php echo $id_login ?>.jpg"; width="80" height="80" onerror="this.src='./img/pordefecto.jpg'";>
 						   
 						</div></td>
 						
