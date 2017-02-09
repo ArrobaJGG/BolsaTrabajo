@@ -404,3 +404,8 @@ form.elementoInterno{
 	border-bottom: 2px solid white;
 	text-align:center;
 }
+@media (max-width: 600px) {
+  .divNgView,.navegador{
+    width:100%;
+  }
+}
