@@ -1,4 +1,4 @@
-<form action="<?php echo base_url('./'.$hash) ?>" method="POST">
+<form action="<?php echo './'.$hash ?>" method="POST">
 	<div id="bloque">
 		<div id="contenido">
 			<?php if($error){?>

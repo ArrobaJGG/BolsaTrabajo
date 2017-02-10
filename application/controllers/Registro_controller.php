@@ -135,15 +135,18 @@ class Registro_controller extends CI_Controller {
 		$data['error'] = '';
 		$this -> load -> library('session');
 		//var_dump($this->session->userdata());
+		echo "juan tonto1";
 		if ($this -> session -> userdata('tipo')=='cambio'&&!$this->login_model->esta_validado($this->session->userdata('correo'))) {
 			$this -> form_validation -> set_rules('contrasena', 'contrasena', 'required|min_length[3]');
+			echo "juan aprende a escribir2";
 			if (!$this -> form_validation -> run() == false && $this -> input -> post('contrasena') == $this -> input -> post('repetirContrasena')) {
 				$contrasena_codificada = password_hash($this -> input -> post('contrasena'), PASSWORD_DEFAULT);
+				echo "juan juan3";
 				if ($this -> login_model -> set_contrasena($this -> session -> userdata('usuario'), $contrasena_codificada)) {
 					$this -> login_model -> validar_login($this -> session -> userdata('usuario'));
 					$this->session->unset_userdata('tipo');
 					$this->session->userdata['rol'] = 'profesor';
-					redirect('../resumen_profesor_controller');
+					redirect(base_url('resumen_profesor_controller'));
 				}
 			}
 			else{
@@ -154,15 +157,15 @@ class Registro_controller extends CI_Controller {
 			
 		} else {
 			if ($correo = $this -> login_model -> existe_correo($hash)) {
-				if($this->login_model->esta_validado($correo)) redirect('../../login_controller');
+				if($this->login_model->esta_validado($correo)) redirect(base_url('login_controller'));
 				$datos_sesion = array(
-					'usuario' => $correo,
+					'correo' => $correo,
 					'id_login' => $this -> login_model -> get_id($correo),
 					'tipo' => 'cambio');
 				$this -> session -> set_userdata($datos_sesion);
 				//var_dump($this->session->userdata());
 			} else {
-				redirect('../../login_controller');
+				redirect(base_url('login_controller'));
 			}
 		}
 		$data['javascript'] = array();
