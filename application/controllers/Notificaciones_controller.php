@@ -594,7 +594,6 @@ class Notificaciones_controller extends CI_Controller{
 		}
         echo json_encode($numero);
 	}
-	chan cha nc chan
 	protected function borrar_curso(){
 		$this->load->model('curso_model');
 		$this->form_validation->set_rules('id', 'id', 'numeric|required|trim');

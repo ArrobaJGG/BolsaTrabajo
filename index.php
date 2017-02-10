@@ -1,4 +1,8 @@
 <?php
+	define('APP_URL', ($_SERVER['SERVER_PORT'] == 443 ? 'https' : 'http') . "://{$_SERVER['SERVER_NAME']}".str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT_NAME'])); 
+
+
+
 /**
  * CodeIgniter
  *
@@ -53,6 +57,7 @@
  *
  * NOTE: If you change these, also change the error_reporting() code below
  */
+ 	
 	define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'development');
 
 /*
@@ -302,7 +307,7 @@ switch (ENVIRONMENT)
 		echo 'Your view folder path does not appear to be set correctly. Please open the following file and correct this: '.SELF;
 		exit(3); // EXIT_CONFIG
 	}
-
+	
 	define('VIEWPATH', $view_folder.DIRECTORY_SEPARATOR);
 
 /*

@@ -13,6 +13,7 @@ public function __construct(){
 }
 //	
 public function index(){
+	echo rtrim(APP_URL,'BolsaTrabajo/');
 	$datos=array();
 			 if($this->input->post("Enviar")){
             //Validaciones

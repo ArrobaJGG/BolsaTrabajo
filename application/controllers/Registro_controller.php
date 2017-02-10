@@ -41,7 +41,7 @@ class Registro_controller extends CI_Controller {
 						$this -> email -> from('arrobajgg@gmail.com', 'BolsaTrabajoFPTxurdinaga');
 						$this -> email -> to($datos['correo']);
 						$this -> email -> subject('Validacion Bolsa de trabajo FPTxurdinaga');
-						$this -> email -> message('Para validar su correo vaya a esta direccion http://hostpiberry.ddns.net/BolsaTrabajo/Registro_controller/validar/' . $datos['hash_validar']);
+						$this -> email -> message('Para validar su correo vaya a esta direccion'.base_url('Registro_controller/validar/').''. $datos['hash_validar']);
 						$this -> email -> send();
 						//*/
 						//TODO añado linea para redireccionar a login
@@ -252,7 +252,7 @@ class Registro_controller extends CI_Controller {
 								$this -> email -> from('arrobajgg@gmail.com', 'BolsaTrabajoFPTxurdinaga');
 								$this -> email -> to($datos['correo']);
 								$this -> email -> subject('Validacion Bolsa de trabajo FPTxurdinaga');
-								$this -> email -> message('Para validar su correo vaya a esta direccion http://hostpiberry.ddns.net/BolsaTrabajo/Registro_controller/cambiar_contrasena_alumno/' . $datos['hash_validar']);
+								$this -> email -> message('Para validar su correo vaya a esta direccion '.base_url('Registro_controller/cambiar_contrasena_alumno/').''.$datos['hash_validar']);
 								$this -> email -> send();
 								//*/
 							}
@@ -297,7 +297,7 @@ class Registro_controller extends CI_Controller {
 						$this -> email -> from('arrobajgg@gmail.com', 'BolsaTrabajoFPTxurdinaga');
 						$this -> email -> to($datos['correo']);
 						$this -> email -> subject('Validacion Bolsa de trabajo FPTxurdinaga');
-						$this -> email -> message('Para validar su correo vaya a esta direccion http://hostpiberry.ddns.net/BolsaTrabajo/Registro_controller/cambiar_contrasena_empresa/' . $datos['hash_validar']);
+						$this -> email -> message('Para validar su correo vaya a esta direccion '.base_url('Registro_controller/cambiar_contrasena_empresa/').''. $datos['hash_validar']);
 						$this -> email -> send();
 						//*/
 						echo "correo enviado";
@@ -342,7 +342,7 @@ class Registro_controller extends CI_Controller {
 						$this -> email -> from('arrobajgg@gmail.com', 'BolsaTrabajoFPTxurdinaga');
 						$this -> email -> to($datos['correo']);
 						$this -> email -> subject('Validacion Bolsa de trabajo FPTxurdinaga');
-						$this -> email -> message('Para validar su correo vaya a esta direccion http://hostpiberry.ddns.net/BolsaTrabajo/Registro_controller/cambiar_contrasena_profesor/' . $datos['hash_validar']);
+						$this -> email -> message('Para validar su correo vaya a esta direccion '.base_url('Registro_controller/cambiar_contrasena_profesor/').''. $datos['hash_validar']);
 						$this -> email -> send();
 						//*/
 						echo "correo enviado";
@@ -400,7 +400,7 @@ class Registro_controller extends CI_Controller {
 							$this -> email -> from('arrobajgg@gmail.com', 'BolsaTrabajoFPTxurdinaga');
 							$this -> email -> to($datos['correo']);
 							$this -> email -> subject('Validacion Bolsa de trabajo FPTxurdinaga');
-							$this -> email -> message('Para validar su correo vaya a esta direccion http://hostpiberry.ddns.net/BolsaTrabajo/Registro_controller/cambiar_contrasena_alumno/' . $datos['hash_validar']);
+							$this -> email -> message('Para validar su correo vaya a esta direccion '.base_url('Registro_controller/cambiar_contrasena_alumno/').''. $datos['hash_validar']);
 							$this -> email -> send();
 							//*/
 							$mensajes[$usuario]="Alumno creado y correo enviado";
