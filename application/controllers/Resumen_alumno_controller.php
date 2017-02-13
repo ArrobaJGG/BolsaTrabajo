@@ -53,7 +53,7 @@ class Resumen_alumno_controller extends CI_Controller{
             if(!$this->alumno_model->esta_apuntado($id_oferta,$id_login)){             
 	            $this->alumno_model->apuntarse_oferta($id_oferta,$id_login);
             }
-            redirect('../../resumen_alumno_controller');
+            redirect('/resumen_alumno_controller');
 	    }
         else{
             redirect('BolsaTrabajo/login_controller');
