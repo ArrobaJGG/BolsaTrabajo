@@ -7,10 +7,11 @@ class Instalacion extends CI_Controller{
 		$this->load->helper(array('form', 'url'));
 		$this->load->helper('form','url_helper');
 		$this->load->library('form_validation');
+		
 	}
 	
 	public function index(){
-		//error_reporting(0);
+		
 		$this->form_validation->set_rules('usuario', 'usuario', 'required|trim');
 		$this->form_validation->set_rules('contrasena', 'contrasena', 'required|trim');
 		$this->form_validation->set_rules('localizacion', 'localizacion', 'required|trim');
@@ -59,7 +60,8 @@ class Instalacion extends CI_Controller{
 				$configuracion = ltrim($configuracion,'$db[\'default\'] = array(');
 				$configuracion = rtrim($configuracion);
 				$configuracion = rtrim($configuracion,');');*/
-				
+			
+			error_reporting(0);
 			$enlace = mysqli_connect($localizacion, $usuario, $contrasena, $base_datos);
 			if(!$enlace){
 				echo "nope";
@@ -68,8 +70,9 @@ class Instalacion extends CI_Controller{
 				fclose($file);
 				$file = fopen($filename, 'w');
 				fwrite($file,$stringCambiado);
+				fclose($file);
+				redirect(base_url('/instalacion/backup'));
 			}
-			echo $stringCambiado;
 			
 	        
 		}
@@ -87,5 +90,47 @@ class Instalacion extends CI_Controller{
 		$this->load->view('instalacion_view');
 		$this->load->view("includes/footer", $data);
 	}
+	public function backup(){
+		
+		$data['titulo'] = "Instalacion";
+		$data['javascript'] = 'assets/js/directivas.js';
+        $data['libreria'] = array("http://ajax.googleapis.com/ajax/libs/angularjs/1.6.0/angular-route.js",
+             "https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-animate.js",
+             base_url('assets/js/instalacion.js'));  
+		$data['css'] = array("/BolsaTrabajo/assets/css/cabecera.css",
+		    "/BolsaTrabajo/assets/css/notificaciones.css",
+            "/BolsaTrabajo/assets/css/directivas.css"
+			);
+				
+		$this->load->view("includes/header",$data);
+		$this->load->view('instalacion_backup_view');
+		$this->load->view("includes/footer", $data);
+	}
+	public function correo(){
+		
+		$data['titulo'] = "Instalacion";
+		$data['javascript'] = 'assets/js/directivas.js';
+        $data['libreria'] = array("http://ajax.googleapis.com/ajax/libs/angularjs/1.6.0/angular-route.js",
+             "https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-animate.js",
+             base_url('assets/js/instalacion.js'));  
+		$data['css'] = array("/BolsaTrabajo/assets/css/cabecera.css",
+		    "/BolsaTrabajo/assets/css/resumen_alumno.css",
+            "/BolsaTrabajo/assets/css/directivas.css",
+            "assets/font-awesome/css/font-awesome.min.css"
+			);
+				
+		$this->load->view("includes/header",$data);
+		$this->load->view('instalacion_view');
+		$this->load->view("includes/footer", $data);
+	}
+	public function migracion()
+	        {
+	                $this->load->library('migration');
 	
+	                if ($this->migration->current() === FALSE)
+	                {
+	                        show_error($this->migration->error_string());
+	                }
+	        }
+
 }

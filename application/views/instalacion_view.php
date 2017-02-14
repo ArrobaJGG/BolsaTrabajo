@@ -1,5 +1,5 @@
 <div class ="divNgView">
-	<form name="usu" method="post" action="./instalacion">		
+	<form name="usu" method="post" action=" <?php echo base_url('/instalacion') ?>">		
 		<span>Usuario:</span>
 		<input name="usuario" type = "text" />
 		<br>
