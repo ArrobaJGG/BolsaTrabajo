@@ -112,7 +112,7 @@ $this->load->library('form_validation');
 									
 									$actualizardatos = $this->Ofertas_model->actualizar($parametros,$id_oferta);
 									if ($this->session->userdata('rol')=='empresa') {
-										redirect('../../Resumen_empresa_controller');
+										redirect('../BolsaTrabajo/Resumen_empresa_controller');
 									}
 									if ($this->session->userdata('rol')=='profesor') {
 										redirect('../../Resumen_profesor_controller');

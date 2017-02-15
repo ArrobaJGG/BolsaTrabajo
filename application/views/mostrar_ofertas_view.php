@@ -13,7 +13,7 @@ $this->load->helper('form');
 	<p><?php if ($resumen==null){echo "";}else{echo $resumen;} ?></p>
 	
 	<h2>Requisitos: </h2></br>
-	<p><?php if ($requisitos==null){echo "";}else{echo $requisitos;}  ?></p></br>
+	<p><b class="curve">Minimos: </b><?php if ($requisitos==null){echo "";}else{echo $requisitos;}  ?></p></br>
 	<?php //TODO cambiar el nombre porque aparece el id ?>
 	<p><b class="curve">Familia Laboral:</b> <?php echo $nombre_familia ?></p>
 	

@@ -48,7 +48,7 @@ var myApp = angular.module("my-app",['myDirectivas']);
 						borrar.setAttribute("value", "Borrar Oferta");
 						borrar.setAttribute("class", "button");
 						
-						oferta.setAttribute("class", "raya");
+						
 						oferta.setAttribute("class", "button");
 						oferta.setAttribute("value", "Ver Oferta");
 						

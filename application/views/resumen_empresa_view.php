@@ -7,7 +7,7 @@ $this->load->helper('form');
 	<div id="mediano">
 		<div class="cuadro" >
 			
-			<h1>Ofertas: </h1>
+			<h1>Mis Ofertas: </h1>
 			<?php if($ofertas){ ?>
 			<div id="oferta">
 				
