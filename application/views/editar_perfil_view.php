@@ -74,7 +74,7 @@ $this -> load -> helper('form');
 					<span ng-show="userForm.ano_inicio.$error.maxlength">el año de inicio no puede ser inferior de 1960.</span>
 				</span>
 				
-				Foto: <input type="file" id="botonfoto" name="logo" accept="image/*" value="/BolsaTrabajo/img/imgr/<?php echo $id_login ?>.jpg" onerror="this.src='./img/pordefecto.jpg'"/>
+				Foto: <input type="file" id="botonfoto" name="logo" accept="image/*" value="/BolsaTrabajo/imgr/img/<?php echo $id_login ?>.jpg" onerror="this.src='./img/pordefecto.jpg'"/>
 							<div id="imgalumno">
 								<div>
 								<img src="/BolsaTrabajo/img/<?php echo $id_login ?>.jpg"; width="80" height="80"  onerror="this.src='./img/pordefecto.jpg'";>							   
@@ -86,6 +86,7 @@ $this -> load -> helper('form');
 <div id="botones">
 		<input type="submit"  class="button"   value="Enviar" name="Enviar"/>
 		<input type="button" class="button" name="Cancelar" value="Cancelar" onclick="window.location='Resumen_alumno_controller'" />
+		<input type="button" class="button" name="cambiar" Value="cambiar contraseña" onclick="window.location='cambiar_credenciales_controller'"/>
 		<p><?php if(isset($mensaje)) echo $mensaje; ?></p>
 		<?php echo validation_errors(); ?><!--mostrar los errores de validación-->
 </div>

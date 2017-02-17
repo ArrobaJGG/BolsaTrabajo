@@ -153,10 +153,10 @@ class Editar_perfil_controller extends SuperController{
 				//$actualizar_alumno=$this->alumno_model->actualizar($nombre,$apellidos,$telefono,$dni,$fecha,$codigo_postal,$descripcion,$experiencia);
      			$datos["mensaje"] = "Validacion correcta";
      			$cogerdatos=$this->alumno_model->coger_datos($id_login);
-				if($cogerdatos->nombre!=null&&$cogerdatos->apellido!=null&&$this->alumno_model->contar_alumno($id_login)!=0){
+				if($cogerdatos->nombre!=null&&$cogerdatos->apellidos!=null&&$this->alumno_model->contar_alumno($id_login)!=0){
 					 $this->alumno_model->validar_alumno($id_login);			
 				}
-				redirect('/resumen_alumno_controller');
+				//redirect('/resumen_alumno_controller');
      			
      		}
 
