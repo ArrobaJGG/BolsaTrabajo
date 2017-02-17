@@ -96,6 +96,8 @@ class Ofertas_model extends CI_Model{
 		return $this->db->query($sql);
 	}
 	public function borrar_oferta($id){
+		$sql= "DELETE FROM oferta_alumno WHERE id_oferta= $id";
+		$this->db->query($sql);
 		$sql = "DELETE FROM oferta WHERE id_oferta = $id";
 		return $this->db->query($sql);
 	}

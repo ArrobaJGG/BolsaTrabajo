@@ -2,7 +2,7 @@
 $this->load->helper('form');
  ?>
  
-<form action="<?php echo base_url("../../Editar_oferta_controller/actualiza/$id_oferta")?>" name"oferta" method="post"  novalidate enctype="multipart/form-data">
+<form action="<?php echo base_url("/Editar_oferta_controller/actualiza/$id_oferta")?>" name"oferta" method="post"  novalidate enctype="multipart/form-data">
 	<div id="padre">
 		<h1>Editar Una Oferta</h1>
 		<div class="grande">
@@ -21,7 +21,7 @@ $this->load->helper('form');
 						<b>Sueldo: </b><input type="number" name="sueldo" value="<?php if ($sueldo==null){echo "";}else{echo $sueldo;}   ?>" placeholder="Sueldo"></br>
 						<b>Funciones: </b><input type="text" name="funciones" value="<?php if ($funciones==null){echo "";}else{echo $funciones;}  ?>" placeholder="Trabajo a realizar"></br>
 						<b>Duracion del contrato: </b><input type="text" name="duracion" value="<?php if ($duracion==null){echo "";}else{echo $duracion;}   ?>" placeholder="Duracion" /></br>
-						<b>Familia: </b><select name="id_familia"> <!--onfocus="saber()">-->
+						<b>Familia: </b><select name="id_familia"> 
 										<?php
 										foreach ($familias as $familia) {
 											echo '<option value="' . $familia['id_familia_laboral'] . '">' . $familia['nombre'] . '</option>';
@@ -41,8 +41,9 @@ $this->load->helper('form');
 				<input type="submit" class="button" name="Actualizar" value="Actualizar" />
 				<input type="button" class="button" name="Cancelar" value="Cancelar" onclick="window.location='../../Resumen_empresa_controller'" />
 				<input type="button" class="button" value="Borrar Oferta"  onclick="window.location='../../Resumen_empresa_controller/borraroferta/<?php echo $id_oferta?>'">
+				<p><b><?php if (isset($mensaje)) echo $mensaje ?></b></p>
+				<p><b><?php echo validation_errors(); ?></b></p>
 			</div>
 	</div>
-		<?php if (isset($mensaje)) echo $mensaje ?>
-		<?php echo validation_errors(); ?>
+		
 </form>	

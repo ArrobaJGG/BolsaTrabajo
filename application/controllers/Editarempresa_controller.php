@@ -22,9 +22,9 @@ public function index(){
 	if ($this->input->post('Actualizar')){
 		$this->load->library('form_validation');
 				$this->form_validation->set_rules('nombre', 'Nombre', 'required|min_length[3]');// el trim siempre delante
-				$this->form_validation->set_rules('cif', 'Cif', 'required|trim|required|max_length[9]'); // max_length solo sirve para letras
+				$this->form_validation->set_rules('cif', 'Cif', 'trim|max_length[9]'); // max_length solo sirve para letras
 				$this->form_validation->set_rules('telefono', 'Telefono', 'trim|required|numeric|integer');
-				$this->form_validation->set_rules('telefono2', 'Telefono2', 'trim|numeric|integer|required');
+				$this->form_validation->set_rules('telefono2', 'Telefono2', 'integer');
 				$this->form_validation->set_rules('persona_contacto', 'persona_contacto', 'required');
 				$this->form_validation->set_rules('logo','logo');
 					// mensaje de errores
@@ -36,13 +36,13 @@ public function index(){
 					$this->form_validation->set_message('integer','El campo %s debe contener solo numeros enteros');
                
 			    if($this->form_validation->run() ==false){
-			    	 //$datos["mensaje"] = "Validacion incorrecta";
+			    	 
 					
 				}else{
 					   $nombre = $this->input->post('nombre');
 					   $cif = $this->input->post('cif');
 					   $telefono = $this->input->post('telefono');
-					   $telefono2 = $this->input->post('telefono2');
+					   $telefono2 =$this->input->post('telefono2');
 					   $persona_contacto = $this->input->post('persona_contacto');
 					   $logo = $this->input->post('logo');
 					   $parametros = array( "nombre" => $nombre, 

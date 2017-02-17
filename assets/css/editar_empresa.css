@@ -49,6 +49,9 @@
   	vertical-align:bottom;
   	text-align:center;
   }
+  #boton p{
+  	color: red;
+  }
   #bloque h1{
   	text-align: center;
 	font-family: fantasy;

@@ -97,7 +97,8 @@ angular.module("myDirectivas")
         replace: true,
         scope: {
         	upload : "=objetoUpload",
-        	tipoArchivo : "="
+        	tipoArchivo : "=",
+        	irA : "="
         },
         require: '?ngModel',
         templateUrl: '/BolsaTrabajo/api/cargar_partes/cargar/subir_csv',
@@ -125,6 +126,10 @@ angular.module("myDirectivas")
 			        		upload(e.dataTransfer.files,function(up){
 		        				scope.upload.mensajes =  up;
 		        				scope.upload.cargando = false;
+		        				console.log(scope.irA);
+		        				if(scope.irA!=undefined){
+		        					window.location.assign(scope.irA);
+		        				}
 			        		});
 			        		scope.upload.cargando = true;
 			            }

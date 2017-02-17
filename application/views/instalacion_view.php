@@ -1,16 +1,17 @@
 <div class ="divNgView">
-	<form>		
+	<form name="usu" method="post" action=" <?php echo base_url('/instalacion') ?>">		
 		<span>Usuario:</span>
-		<input type = "text" />
+		<input name="usuario" type = "text" />
 		<br>
 		<span>Contraseña:</span>
-		<input type = "text" />
+		<input name="contrasena" type = "text" />
 		<br>
 		<span>Base datos:</span>
-		<input type = "text" />
+		<input name="base_datos" type = "text" />
 		<br>
 		<span>Localizacion base datos:</span>
-		<input type = "text" />
+		<input name="localizacion" type = "text" />
 		<br>
+		<button name="enviar" value="enviar">Enviar</button>
 	</form>
 </div>
