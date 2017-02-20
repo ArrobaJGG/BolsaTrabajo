@@ -16,15 +16,14 @@ class Instalacion extends CI_Controller{
 		$this->form_validation->set_rules('contrasena', 'contrasena', 'required|trim');
 		$this->form_validation->set_rules('localizacion', 'localizacion', 'required|trim');
 		$this->form_validation->set_rules('base_datos', 'base_datos', 'required|trim');
-		
+		$data['errores'] = array();
 		if($this->form_validation->run()!==false){
 			$localizacion = $this->input->post('localizacion')?$this->input->post('localizacion'):null;
 			$usuario = $this->input->post('usuario')?$this->input->post('usuario'):null;
 			$contrasena = $this->input->post('contrasena')?$this->input->post('contrasena'):null;
 			$base_datos = $this->input->post('base_datos')?$this->input->post('base_datos'):null;
 			
-			echo $localizacion;
-			echo "<br>";/*
+			/*
 			echo $usuario;
 			echo "<br>";
 			echo $contrasena;
@@ -64,7 +63,7 @@ class Instalacion extends CI_Controller{
 			error_reporting(0);
 			$enlace = mysqli_connect($localizacion, $usuario, $contrasena, $base_datos);
 			if(!$enlace){
-				echo "nope";
+				$data['errores']['conexion'] = 'Error de conexion';
 			}
 			else{
 				fclose($file);
