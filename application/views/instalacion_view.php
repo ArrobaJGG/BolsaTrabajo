@@ -1,17 +1,17 @@
 <div class ="divNgView">
 	<form name="usu" method="post" action=" <?php echo base_url('/instalacion') ?>">		
 		<span>Usuario:</span>
-		<input name="usuario" type = "text" />
+		<input required name="usuario" type = "text" />
 		<br>
 		<span>Contraseña:</span>
-		<input name="contrasena" type = "text" />
+		<input required name="contrasena" type = "text" />
 		<br>
 		<span>Base datos:</span>
-		<input name="base_datos" type = "text" />
+		<input required name="base_datos" type = "text" />
 		<br>
 		<span>Localizacion base datos:</span>
-		<input name="localizacion" type = "text" />
+		<input required name="localizacion" type = "text" />
 		<br>
-		<button name="enviar" value="enviar">Enviar</button>
+		<button ng-disabled="usu.$valid" name="enviar" value="enviar">Enviar</button>
 	</form>
 </div>
