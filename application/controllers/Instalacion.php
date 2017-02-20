@@ -164,7 +164,8 @@ class Instalacion extends CI_Controller{
 		$data['css'] = array("/BolsaTrabajo/assets/css/cabecera.css",
 		    "/BolsaTrabajo/assets/css/resumen_alumno.css",
             "/BolsaTrabajo/assets/css/directivas.css",
-            "/BolsaTrabajo/assets/font-awesome/css/font-awesome.min.css"
+            "/BolsaTrabajo/assets/font-awesome/css/font-awesome.min.css",
+            "/BolsaTrabajo/assets/css/correo.css"
 			);
 				
 		$this->load->view("includes/header",$data);
