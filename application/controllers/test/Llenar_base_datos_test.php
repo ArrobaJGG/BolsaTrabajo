@@ -9,8 +9,12 @@ class Llenar_base_datos_test extends CI_Controller {
 			$this->load->model('test/llenar_base_datos_model_test','usuarios');
         }
 		public function index(){
-			
-			$this->usuarios->usuarios();
+			try{
+			   $this->usuarios->usuarios(); 
+			}
+			catch(exception $exception){
+			    
+			}
             redirect(base_url('/login_controller'));
 		}
 }
