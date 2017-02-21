@@ -149,10 +149,17 @@ class Instalacion extends CI_Controller{
                 $configuracion = rtrim($configuracion,');');*/
             
             
+       
+            
+            
+			
             fclose($file);
             $file = fopen($filename, 'w');
             fwrite($file,$stringCambiado);
-            fclose($file);
+            fclose($file);	
+			
+			$this->migracion();
+			//redirect(base_url('/test/Llenar_base_datos_test/index'));		
             redirect(base_url('/login_controller'));
         }
         
